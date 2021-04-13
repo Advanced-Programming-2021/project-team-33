@@ -2,6 +2,6 @@
 ## Team 33
 
 ### Team Members:
-- Student1 99105718
+- Arsalan Masoudifard 99105718
 - Mohammad Rezaie 99105453
 - Student3 99105804
