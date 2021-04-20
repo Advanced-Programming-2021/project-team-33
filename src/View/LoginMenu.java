@@ -19,17 +19,6 @@ public class LoginMenu {
         login(ProgramController.getCommand(input, "s(d)"));
 
 
-        Player player1 = new Player("ali", "123", "ali");
-        Player player2 = new Player("reza", "123", "reza");
-        Card card1 = new Card("Monster", "sss", 3, CardType.MONSTER);
-        Deck deck1 = new Deck("player1");
-        deck1.addToMainDeck(card1);
-        player1.setActiveDeck(deck1);
-        player2.setActiveDeck(deck1);
-        GameMenu gameMenu = new GameMenu();
-        gameMenu.run(player1, player2);
-
-
     }
 
     private void register(Matcher matcher) {
