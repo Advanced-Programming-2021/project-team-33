@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ProgramController {
-    public static Scanner scanner = new Scanner(System.in);
+    public static Scanner scanner=new Scanner(System.in);
     public static String menu = "login";
 
     public static Matcher getCommand(String input, String regex) {
