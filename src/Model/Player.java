@@ -4,28 +4,32 @@ import java.util.ArrayList;
 
 public class Player {
     static ArrayList<Player> players = new ArrayList<>();
-    String username,password,nickname;
-    int money,score,lifePoint = 8000;
+    String username, password, nickname;
+    int money, score, lifePoint = 8000;
     ArrayList<Deck> listOfDecks = new ArrayList<>();
     Deck activeDeck;
     ArrayList<Card> listOfCards = new ArrayList<>();
 
-    public Player(String username,String password,String nickname){
+    public Player(String username, String password, String nickname) {
         this.username = username;
         this.password = password;
         this.nickname = nickname;
     }
 
-    public String getUsername(){
+    public String getUsername() {
         return this.username;
     }
 
-    public String getNickname(){
+    public String getNickname() {
         return this.nickname;
     }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public int getScore() {
@@ -52,15 +56,15 @@ public class Player {
         this.score += score;
     }
 
-    public void setNickname(String name){
+    public void setNickname(String name) {
         this.nickname = name;
     }
 
-    public void resetLifePoint(){
+    public void resetLifePoint() {
         lifePoint = 8000;
     }
 
-    public void increaseOrDecreaseLifePoint(int point){
+    public void increaseOrDecreaseLifePoint(int point) {
         lifePoint += point;
     }
 
@@ -68,7 +72,7 @@ public class Player {
         return lifePoint;
     }
 
-    public static Player getUserByUsername(String name){
+    public static Player getUserByUsername(String name) {
         for (Player player : players) {
             if (player.username.equals(name)) return player;
         }
