@@ -1,11 +1,12 @@
 import Controller.ProgramController;
-import View.LoginMenu;
+import View.MainMenu;
 
 
 public class Main {
 
     public static void main(String[] args) {
-        ProgramController programController = new ProgramController();
-        programController.enterMenus();
+        MainMenu mainMenu = new MainMenu();
+        mainMenu.enterMenus();
+
     }
 }

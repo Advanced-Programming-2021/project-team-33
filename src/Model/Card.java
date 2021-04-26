@@ -3,10 +3,11 @@ package Model;
 import java.util.ArrayList;
 
 public class Card {
+    boolean isSelected = false;
     String cardName, description;
     int price;
     CardType cardType;
-    CardStatus cardStatus = CardStatus.OUT;
+    CardStatus cardStatus;
     ArrayList<Card> cards = new ArrayList<>();
 
     public Card() {
@@ -22,6 +23,10 @@ public class Card {
 
     public String getCardName(){
         return cardName;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 
     public CardStatus getCardStatus() {

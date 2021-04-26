@@ -72,10 +72,16 @@ public class Player {
         return lifePoint;
     }
 
+    public void addToDeckList(String deckName){
+        listOfDecks.add(Deck.getDeckByName(deckName));
+    }
+
     public static Player getUserByUsername(String name) {
         for (Player player : players) {
             if (player.username.equals(name)) return player;
         }
         return null;
     }
+
+
 }

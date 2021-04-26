@@ -1,6 +1,7 @@
 package View;
 
 import Controller.ProgramController;
+import Controller.Util;
 import Model.Player;
 
 import java.util.Scanner;
@@ -10,15 +11,22 @@ import java.util.regex.Pattern;
 public class ProfileMenu {
     private static String playerName;
     public static Player player;
+    boolean checked = false;
 
-    ProfileMenu() {
+    public void run(String input) {
+        checked = false;
+
 
     }
 
-    public static void manage(String currentName) {
+    public ProfileMenu() {
+
+    }
+
+    public void manage(String currentName) {
         playerName = currentName;
-        ProgramController programController = new ProgramController();
-        Scanner scanner = programController.scanner;
+        MainMenu mainMenu = new MainMenu();
+        Scanner scanner = mainMenu.scanner;
         Pattern pattern;
         Matcher matcher;
         while (true) {
@@ -43,16 +51,16 @@ public class ProfileMenu {
         }
     }
 
-    public static Player getPlayer(String name) {
+    public Player getPlayer(String name) {
         return Player.getUserByUsername(name);
     }
 
-    public static boolean isNameExist(String name) {
+    public boolean isNameExist(String name) {
         if (player == null) return false;
         return true;
     }
 
-    public static void changeName(String newName) {
+    public void changeName(String newName) {
         player = getPlayer(newName);
         if (isNameExist(newName)) {
             System.out.println("user with nickname<" + newName + "> already exists");
