@@ -3,5 +3,6 @@ package Model;
 public enum CardStatus {
     ATTACK,
     DEFENCE,
-    SET
+    SET,
+    BACK
 }

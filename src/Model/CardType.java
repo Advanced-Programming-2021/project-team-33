@@ -1,8 +1,10 @@
 package Model;
 
 public enum CardType {
-    MONSTER,
-    EFFECT,
-    SPELL,
-    TRAP
+    NORMAL,
+    CONTINUES,
+    RITUAL,
+    QUICKPLAY,
+    FIELD,
+    EQUIP
 }

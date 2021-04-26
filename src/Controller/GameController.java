@@ -7,9 +7,9 @@ import Model.Player;
 
 public class GameController {
 
-    public Card selectedCard = null;
+    public static Card selectedCard = null;
 
-    public int selectCard(String cardPosition, int number, String opponent) {
+    public static int selectCard(String cardPosition, int number, String opponent) {
         if (cardPosition.equals("monster") && Board.getCardFromMonsterField(number) != null) {
             Board.getCardFromMonsterField(number).setSelected(true);
             selectedCard = Board.getCardFromMonsterField(number);
@@ -28,15 +28,15 @@ public class GameController {
         return -1;
     }
 
-    public void deSelectCard() {
+    public static void deSelectCard() {
         selectedCard.setSelected(false);
     }
 
-    public boolean isDeckActive(String user) {
+    public static boolean isDeckActive(String user) {
         return Player.getUserByUsername(user).getActiveDeck() != null;
     }
 
-    public boolean isDeckValid(String user) {
+    public static boolean isDeckValid(String user) {
         return Deck.getDeckValidation(Player.getUserByUsername(user).getActiveDeck());
     }
 

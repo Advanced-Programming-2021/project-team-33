@@ -3,21 +3,30 @@ package Model;
 import java.util.ArrayList;
 
 public class Card {
+    static int id = 0;
+    static ArrayList<Card> cards = new ArrayList<>();
+    ArrayList<String> functions = new ArrayList<>();
     boolean isSelected = false;
     String cardName, description;
     int price;
     CardType cardType;
+    CardCategory cardCategory;
+    int cardId;
     CardStatus cardStatus;
-    ArrayList<Card> cards = new ArrayList<>();
+    int limit;
 
     public Card() {
     }
 
-    public Card(String cardName, String description, int price, CardType cardType) {
+    public Card(String cardName, String description, int price, CardType cardType,
+                CardCategory cardCategory, int limit) {
         this.cardName = cardName;
         this.description = description;
         this.price = price;
         this.cardType = cardType;
+        this.cardCategory = cardCategory;
+        this.cardId = ++id;
+        this.limit = limit;
         cards.add(this);
     }
 

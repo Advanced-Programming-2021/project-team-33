@@ -9,11 +9,18 @@ import java.util.regex.Matcher;
 
 public class GameMenu {
     boolean checked = false;
-    GameController gameController = new GameController();
 
     public void run(String input) {
+        checked = false;
         selectCard(Util.getCommand(input, "select --(\\S+) --(\\D*) (\\d+)"));
         deSelectCard(Util.getCommand(input, "select -d"));
+        activeSpell(Util.getCommand(input, "activate effect"));
+    }
+
+    private void activeSpell(Matcher matcher) {
+        if (!checked && matcher.matches()) {
+            // GameController.selectedCard.run() ????
+        }
     }
 
     public void selectCard(Matcher matcher) {
@@ -22,7 +29,7 @@ public class GameMenu {
             String cardPosition = matcher.group(1);
             String opponent = matcher.group(2);
             int number = Integer.parseInt(matcher.group(3));
-            int massage = gameController.selectCard(cardPosition, number, opponent);
+            int massage = GameController.selectCard(cardPosition, number, opponent);
             if (massage == 1) System.out.println("card selected");
             if (massage == 0) System.out.println("no card found in the given position");
             else System.out.println("invalid selection");
@@ -32,9 +39,9 @@ public class GameMenu {
     public void deSelectCard(Matcher matcher) {
         if (!checked && matcher.matches()) {
             checked = true;
-            if(gameController.selectedCard == null) System.out.println("no card is selected yet");
+            if(GameController.selectedCard == null) System.out.println("no card is selected yet");
             else System.out.println("card deselected");
-            gameController.deSelectCard();
+            GameController.deSelectCard();
         }
     }
 

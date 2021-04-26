@@ -15,8 +15,6 @@ public class ProfileMenu {
 
     public void run(String input) {
         checked = false;
-
-
     }
 
     public ProfileMenu() {
@@ -26,7 +24,7 @@ public class ProfileMenu {
     public void manage(String currentName) {
         playerName = currentName;
         MainMenu mainMenu = new MainMenu();
-        Scanner scanner = mainMenu.scanner;
+        Scanner scanner = Util.scanner;
         Pattern pattern;
         Matcher matcher;
         while (true) {
@@ -71,7 +69,7 @@ public class ProfileMenu {
         }
     }
 
-    public static void changePassword(String currentPassword, String newPassword) {
+    public void changePassword(String currentPassword, String newPassword) {
         if (isPasswordTrue(currentPassword)) {
             if(isPasswordEqual(newPassword)){
                 System.out.println("please enter a new password");

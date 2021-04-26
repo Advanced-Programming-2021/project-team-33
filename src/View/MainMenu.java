@@ -1,5 +1,6 @@
 package View;
 
+import Controller.CardController;
 import Controller.GameController;
 import Controller.ProgramController;
 import Controller.Util;
@@ -8,17 +9,20 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 
 public class MainMenu {
+    public static String menu = "login";
     boolean checked = false;
     ProgramController programController = new ProgramController();
     GameController gameController = new GameController();
 
-    public void run(String input) {
-        checked = false;
-        startGame(Util.getCommand(input, "duel --new --second-player (\\S+) --rounds (\\d+)"));
+    public MainMenu() {
+        CardController.initialCards();
     }
 
-    public static Scanner scanner = new Scanner(System.in);
-    public static String menu = "login";
+    public void run(String input) {
+        checked = false;
+
+        startGame(Util.getCommand(input, "duel --new --second-player (\\S+) --rounds (\\d+)"));
+    }
 
     private void startGame(Matcher matcher) {
         if(!checked && matcher.matches()){
@@ -53,7 +57,7 @@ public class MainMenu {
         ShopMenu shopMenu = new ShopMenu();
         String input;
         while (true) {
-            input = scanner.nextLine();
+            input = Util.scanner.nextLine();
             input = input.trim();
             switch (menu) {
                 case "login" -> loginMenu.run(input);
