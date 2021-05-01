@@ -20,7 +20,6 @@ public class MainMenu {
 
     public void run(String input) {
         checked = false;
-
         startGame(Util.getCommand(input, "duel --new --second-player (\\S+) --rounds (\\d+)"));
     }
 
@@ -39,11 +38,11 @@ public class MainMenu {
             else if (round > 3 || round < 1)
                 System.out.println("number of rounds is not supported");
             else if (secondPlayerName.equals("ai")) duelWithAi();
+            else menu = "game";
         }
     }
 
     private void duelWithAi() {
-
     }
 
     public void enterMenus() {

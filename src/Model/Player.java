@@ -14,6 +14,7 @@ public class Player {
         this.username = username;
         this.password = password;
         this.nickname = nickname;
+        players.add(this);
     }
 
     public String getUsername() {
@@ -79,6 +80,13 @@ public class Player {
     public static Player getUserByUsername(String name) {
         for (Player player : players) {
             if (player.username.equals(name)) return player;
+        }
+        return null;
+    }
+
+    public static Player getUserByNickname(String name) {
+        for (Player player : players) {
+            if (player.nickname.equals(name)) return player;
         }
         return null;
     }
