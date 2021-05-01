@@ -12,7 +12,11 @@ public class Deck {
 
     public Deck(String deckName) {
         this.deckName = deckName;
-        decks.add(this);
+
+    }
+
+    public String getDeckName(){
+        return deckName;
     }
 
     public void addToMainDeck(Card card) {

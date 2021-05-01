@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Deck;
 import Model.Player;
 import View.*;
 import com.sun.tools.javac.Main;
@@ -17,6 +18,10 @@ public class ProgramController {
 
     public static boolean isNicknameExist(String name) {
         return Player.getUserByNickname(name) != null;
+    }
+
+    public static boolean isDeckExist(String deckName) {
+        return Player.thePlayer.getDeckByName(deckName) != null;
     }
 
     public static boolean isPasswordMatch(String name, String password) {
@@ -37,8 +42,6 @@ public class ProgramController {
         return menuName.equals("main") || menuName.equals("deck") ||
                 menuName.equals("scoreboard") || menuName.equals("profile") || menuName.equals("importExport");
     }
-
-
 
 
 }
