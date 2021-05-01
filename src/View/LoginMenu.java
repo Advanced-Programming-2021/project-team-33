@@ -39,11 +39,12 @@ public class LoginMenu {
             String username = matcher.group(1);
             String password = matcher.group(2);
             if (!ProgramController.isUserExist(username))
-                System.out.println("user with username " + username + " does not exists");
+                System.out.println("Username and password didn't match!");
             else if (!ProgramController.isPasswordMatch(username,password))
                 System.out.println("Username and password didn't match!");
             else {
-
+                ProgramController.setPlayer(username);
+                MainMenu.menu = "main";
                 System.out.println("user logged in successfully!");
             }
         }

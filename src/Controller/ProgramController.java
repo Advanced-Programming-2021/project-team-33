@@ -27,5 +27,9 @@ public class ProgramController {
         Player player = new Player(username, password, nickname);
     }
 
+    public static void setPlayer(String username){
+        Player.thePlayer = Player.getUserByUsername(username);
+    }
+
 
 }

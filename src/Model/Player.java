@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Player {
     static ArrayList<Player> players = new ArrayList<>();
+    public static Player thePlayer;
     String username, password, nickname;
     int money, score, lifePoint = 8000;
     ArrayList<Deck> listOfDecks = new ArrayList<>();

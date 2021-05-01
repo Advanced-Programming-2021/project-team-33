@@ -5,7 +5,6 @@ import Controller.GameController;
 import Controller.ProgramController;
 import Controller.Util;
 
-import java.util.Scanner;
 import java.util.regex.Matcher;
 
 public class MainMenu {
@@ -21,6 +20,7 @@ public class MainMenu {
     public void run(String input) {
         checked = false;
         startGame(Util.getCommand(input, "duel --new --second-player (\\S+) --rounds (\\d+)"));
+        logout(Util.getCommand(input, "user logout"));
     }
 
     private void startGame(Matcher matcher) {
@@ -28,7 +28,6 @@ public class MainMenu {
             checked = true;
             String secondPlayerName = matcher.group(1);
             int round = Integer.parseInt(matcher.group(2));
-
             if (!secondPlayerName.equals("ai") && !programController.isUserExist(secondPlayerName))
                 System.out.println("there is no player with this username");
             else if (!secondPlayerName.equals("ai") && !gameController.isDeckActive(secondPlayerName))
@@ -39,6 +38,14 @@ public class MainMenu {
                 System.out.println("number of rounds is not supported");
             else if (secondPlayerName.equals("ai")) duelWithAi();
             else menu = "game";
+        }
+    }
+
+    private void logout(Matcher matcher){
+        if(!checked && matcher.matches()){
+            checked = true;
+            System.out.println("user logged out successfully!");
+            menu = "login";
         }
     }
 
