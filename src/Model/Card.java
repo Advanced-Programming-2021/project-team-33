@@ -8,18 +8,16 @@ public class Card {
     ArrayList<String> functions = new ArrayList<>();
     boolean isSelected = false;
     String cardName, description;
-    int price;
     CardType cardType;
     CardCategory cardCategory;
-    int cardId;
+    int cardId, limit, price, level;
     CardStatus cardStatus;
-    int limit;
 
     public Card() {
     }
 
     public Card(String cardName, String description, int price, CardType cardType,
-                CardCategory cardCategory, int limit) {
+                CardCategory cardCategory, int limit, int level) {
         this.cardName = cardName;
         this.description = description;
         this.price = price;
@@ -27,10 +25,11 @@ public class Card {
         this.cardCategory = cardCategory;
         this.cardId = ++id;
         this.limit = limit;
+        this.level = level;
         cards.add(this);
     }
 
-    public String getCardName(){
+    public String getCardName() {
         return cardName;
     }
 
@@ -58,10 +57,14 @@ public class Card {
         return description;
     }
 
-    public void showCard(){
+    public CardCategory getCardCategory() {
+        return cardCategory;
     }
 
-    public static Card getCardByName(String name){
+    public void showCard() {
+    }
+
+    public static Card getCardByName(String name) {
         for (Card card : cards) {
             if (card.cardName.equals(name)) return card;
         }

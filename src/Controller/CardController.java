@@ -10,7 +10,7 @@ public class CardController {
 
     public static void initialCards() {
         Card monsterReborn = new Card("Monster Reborn", "nothing", 1,
-                CardType.NORMAL, CardCategory.SPELL, 1);
+                CardType.NORMAL, CardCategory.SPELL, 1, 0);
     }
 
     public static boolean isCardExist(String cardName) {

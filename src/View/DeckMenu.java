@@ -1,7 +1,6 @@
 package View;
 
 import Controller.Util;
-
 import java.util.regex.Matcher;
 
 public class DeckMenu {
@@ -17,6 +16,7 @@ public class DeckMenu {
     public void createDeck(Matcher matcher) {
         if (!MainMenu.checked && matcher.matches()) {
             MainMenu.checked = true;
+
         }
     }
 
