@@ -4,12 +4,17 @@ import java.util.ArrayList;
 
 public class Player {
     static ArrayList<Player> players = new ArrayList<>();
+    private ArrayList<Deck> listOfDecks = new ArrayList<>();
+    static ArrayList<Card> listOfCards = new ArrayList<>();
     public static Player thePlayer;
     String username, password, nickname;
     int money, score, lifePoint = 8000;
-    ArrayList<Deck> listOfDecks = new ArrayList<>();
+
     Deck activeDeck;
-    ArrayList<Card> listOfCards = new ArrayList<>();
+
+    public Player(){
+
+    }
 
     public Player(String username, String password, String nickname) {
         this.username = username;
@@ -74,8 +79,12 @@ public class Player {
         return lifePoint;
     }
 
-    public void addToDeckList(String deckName){
-        listOfDecks.add(Deck.getDeckByName(deckName));
+    public void addToDeckList(Deck deck) {
+        listOfDecks.add(deck);
+    }
+
+    public void deleteDeck(String name) {
+        listOfDecks.removeIf(deck -> deck.deckName.equals(name));
     }
 
     public static Player getUserByUsername(String name) {
@@ -91,6 +100,15 @@ public class Player {
         }
         return null;
     }
+
+    public Deck getDeckByName(String name) {
+        for (Deck deck : Player.thePlayer.listOfDecks) {
+            if (deck.deckName.equals(name)) return deck;
+        }
+        return null;
+    }
+
+
 
 
 }

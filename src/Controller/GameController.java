@@ -28,6 +28,16 @@ public class GameController {
         return -1;
     }
 
+    public static void createDeck(String deckName) {
+        Deck deck = new Deck(deckName);
+        Player.thePlayer.addToDeckList(deck);
+    }
+
+    public static void deleteDeck(String deckName) {
+        Player.thePlayer.deleteDeck(deckName);
+    }
+
+
     public static void deSelectCard() {
         selectedCard.setSelected(false);
     }
