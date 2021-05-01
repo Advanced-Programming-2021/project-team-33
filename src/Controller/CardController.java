@@ -9,7 +9,11 @@ import java.util.ArrayList;
 public class CardController {
 
     public static void initialCards() {
-        Card monsterReborn = new Card("Monster Reborn", "...", 1,
+        Card monsterReborn = new Card("Monster Reborn", "nothing", 1,
                 CardType.NORMAL, CardCategory.SPELL, 1);
+    }
+
+    public static boolean isCardExist(String cardName) {
+        return Card.getCardByName(cardName) != null;
     }
 }

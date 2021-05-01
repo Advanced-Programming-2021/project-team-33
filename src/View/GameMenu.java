@@ -12,6 +12,8 @@ public class GameMenu {
 
     public void run(String input) {
         checked = false;
+        MainMenu.showCurrentMenu(Util.getCommand(input, "menu show-current"));
+        CardMenu.showCard(Util.getCommand(input, "card show (.+)"));
         selectCard(Util.getCommand(input, "select --(\\S+) --(\\D*) (\\d+)"));
         deSelectCard(Util.getCommand(input, "select -d"));
         activeSpell(Util.getCommand(input, "activate effect"));

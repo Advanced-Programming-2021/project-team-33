@@ -61,7 +61,7 @@ public class Card {
     public void showCard(){
     }
 
-    public Card getCardByName(String name){
+    public static Card getCardByName(String name){
         for (Card card : cards) {
             if (card.cardName.equals(name)) return card;
         }

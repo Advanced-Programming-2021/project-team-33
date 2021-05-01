@@ -15,6 +15,7 @@ public class ProfileMenu {
 
     public void run(String input) {
         checked = false;
+        MainMenu.showCurrentMenu(Util.getCommand(input, "menu show-current"));
     }
 
     public ProfileMenu() {

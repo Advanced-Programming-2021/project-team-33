@@ -7,18 +7,18 @@ import Controller.Util;
 import java.util.regex.Matcher;
 
 public class LoginMenu {
-    boolean checked = false;
 
     public void run(String input) {
-        checked = false;
+        MainMenu.checked = false;
+        MainMenu.showCurrentMenu(Util.getCommand(input, "menu show-current"));
         register(Util.getCommand(input, "user create --username (\\S+)" +
                 " --nickname (\\S+) --password (\\S+)"));
         login(Util.getCommand(input, "user login --username (\\S+) --password (\\S+)"));
     }
 
     private void register(Matcher matcher) {
-        if (!checked && matcher.matches()) {
-            checked = true;
+        if (!MainMenu.checked && matcher.matches()) {
+            MainMenu.checked = true;
             String username = matcher.group(1);
             String nickname = matcher.group(2);
             String password = matcher.group(3);
@@ -34,8 +34,8 @@ public class LoginMenu {
     }
 
     private void login(Matcher matcher) {
-        if (!checked && matcher.matches()) {
-            checked = true;
+        if (!MainMenu.checked && matcher.matches()) {
+            MainMenu.checked = true;
             String username = matcher.group(1);
             String password = matcher.group(2);
             if (!ProgramController.isUserExist(username))

@@ -5,18 +5,20 @@ import Controller.Util;
 import java.util.regex.Matcher;
 
 public class DeckMenu {
-    boolean checked = false;
+
 
     public void run(String input) {
-        checked = false;
+        MainMenu.checked = false;
+        MainMenu.showCurrentMenu(Util.getCommand(input, "menu show-current"));
         createDeck(Util.getCommand(input, "deck create (\\S+)"));
+        CardMenu.showCard(Util.getCommand(input, "card show (.+)"));
     }
 
     public void createDeck(Matcher matcher) {
-        if (!checked && matcher.matches()) {
-            checked = true;
-
+        if (!MainMenu.checked && matcher.matches()) {
+            MainMenu.checked = true;
         }
     }
+
 
 }
