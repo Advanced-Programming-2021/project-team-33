@@ -27,11 +27,11 @@ public class GameController {
 
     public static void createDeck(String deckName) {
         Deck deck = new Deck(deckName);
-        Player.thePlayer.addToDeckList(deck);
+//        Player.thePlayer.addToDeckList(deck);
     }
 
     public static void deleteDeck(String deckName) {
-        Player.thePlayer.deleteDeck(deckName);
+//        Player.thePlayer.deleteDeck(deckName);
     }
 
 
