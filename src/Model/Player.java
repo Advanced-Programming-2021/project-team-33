@@ -5,11 +5,13 @@ import java.util.ArrayList;
 public class Player {
     static ArrayList<Player> players = new ArrayList<>();
     public static Player thePlayer;
+    public static Player currentPlayer, opponent;
     String username, password, nickname;
     int money, score, lifePoint = 8000;
     ArrayList<Deck> listOfDecks = new ArrayList<>();
     Deck activeDeck;
     ArrayList<Card> listOfCards = new ArrayList<>();
+    public Board board;
 
     public Player(String username, String password, String nickname) {
         this.username = username;

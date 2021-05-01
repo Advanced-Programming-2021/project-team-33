@@ -12,4 +12,10 @@ public class Util {
         Matcher matcher = pattern.matcher(input);
         return matcher;
     }
+
+    public static void printNCharacter(int n, String s) {
+        for (int i = 0; i < n; i++) {
+            System.out.print(s);
+        }
+    }
 }
