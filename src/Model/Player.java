@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class Player {
     static ArrayList<Player> players = new ArrayList<>();
-    private ArrayList<Deck> listOfDecks = new ArrayList<>();
-    static ArrayList<Card> listOfCards = new ArrayList<>();
+    public ArrayList<Deck> listOfDecks = new ArrayList<>();
+    public ArrayList<Card> listOfCards = new ArrayList<>();
     public Board board;
     public static Player thePlayer;
     public static Player currentPlayer, opponent;
@@ -13,7 +13,7 @@ public class Player {
     int money, score, lifePoint = 8000;
     Deck activeDeck;
 
-    public Player(){
+    public Player() {
 
     }
 
@@ -21,7 +21,12 @@ public class Player {
         this.username = username;
         this.password = password;
         this.nickname = nickname;
+        listOfCards.addAll(Card.cards);
         players.add(this);
+    }
+
+    public ArrayList<Deck> getListOfDecks() {
+        return listOfDecks;
     }
 
     public String getUsername() {
@@ -53,7 +58,11 @@ public class Player {
     }
 
     public Deck getActiveDeck() {
-        return activeDeck;
+        for (int i = 0; i < Player.thePlayer.listOfDecks.size(); i++) {
+            if(Player.thePlayer.listOfDecks.get(i).isDeckActive())
+                return Player.thePlayer.listOfDecks.get(i);
+        }
+        return null;
     }
 
     public void increaseMoney(int money) {
@@ -80,13 +89,50 @@ public class Player {
         return lifePoint;
     }
 
-    public void addToDeckList(String deckName){
-        listOfDecks.add(Deck.getDeckByName(deckName));
+    public void addToCardList(Card card) {
+        listOfCards.add(card);
+    }
+
+    public void removeFromCardList(Card card) {
+        listOfCards.remove(card);
+    }
+
+    public void addToDeckList(Deck deck) {
+        listOfDecks.add(deck);
+    }
+
+    public void deleteDeck(String deckName) {
+        for (int i = 0; i < listOfDecks.size(); i++) {
+            if (listOfDecks.get(i).getDeckName().equals(deckName))
+                listOfDecks.remove(i);
+        }
+    }
+
+    public static void deActiveDecks() {
+        for (Deck listOfDeck : thePlayer.listOfDecks) {
+            listOfDeck.setDeckActive(false);
+        }
     }
 
     public static Player getUserByUsername(String name) {
         for (Player player : players) {
             if (player.username.equals(name)) return player;
+        }
+        return null;
+    }
+
+    public static Deck getDeckByName(String deckName) {
+        for (Deck deck : thePlayer.listOfDecks) {
+            if (deck.deckName.equals(deckName)) return deck;
+        }
+        return null;
+    }
+
+
+
+    public static Card getCardByName(String name) {
+        for (Card card : thePlayer.listOfCards) {
+            if (card.cardName.equals(name)) return card;
         }
         return null;
     }

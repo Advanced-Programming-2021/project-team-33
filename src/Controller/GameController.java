@@ -27,11 +27,36 @@ public class GameController {
 
     public static void createDeck(String deckName) {
         Deck deck = new Deck(deckName);
-//        Player.thePlayer.addToDeckList(deck);
+        Player.thePlayer.addToDeckList(deck);
+        Player.deActiveDecks();
+        deck.setDeckActive(true);
     }
 
     public static void deleteDeck(String deckName) {
-//        Player.thePlayer.deleteDeck(deckName);
+        Player.thePlayer.deleteDeck(deckName);
+    }
+
+    public static void activateDeck(String deckName) {
+        Player.deActiveDecks();
+        Player.getDeckByName(deckName).setDeckActive(true);
+    }
+
+    public static void addCardToDeck(String deckName, String cardName, boolean isSide) {
+        if (!isSide) {
+            Player.getDeckByName(deckName).addToMainDeck(Card.getCardByName(cardName));
+        } else {
+            Player.getDeckByName(deckName).addToSideDeck(Card.getCardByName(cardName));
+        }
+        Player.thePlayer.removeFromCardList(Card.getCardByName(cardName));
+    }
+
+    public static void removeCardFromDeck(String deckName, String cardName, boolean isSide) {
+        if (!isSide) {
+            Player.getDeckByName(deckName).removeFromMainDeck(Card.getCardByName(cardName));
+        } else {
+            Player.getDeckByName(deckName).removeFromSideDeck(Card.getCardByName(cardName));
+        }
+        Player.thePlayer.addToCardList(Card.getCardByName(cardName));
     }
 
 
@@ -44,7 +69,7 @@ public class GameController {
     }
 
     public static boolean isDeckValid(String user) {
-        return Deck.getDeckValidation(Player.getUserByUsername(user).getActiveDeck());
+        return true;
     }
 
     public static void showBoard() {
@@ -81,7 +106,7 @@ public class GameController {
         System.out.println();
         System.out.print(Player.opponent.board.graveyard.size());
         Util.printNCharacter(5, "\t");
-        if (Player.opponent.board.fieldZone.size()==0) System.out.println("E");
+        if (Player.opponent.board.fieldZone.size() == 0) System.out.println("E");
         else System.out.println("O");
         System.out.println();
         Util.printNCharacter(26, "-");
@@ -89,7 +114,7 @@ public class GameController {
 
         //-----------------------------
 
-        if (Player.currentPlayer.board.fieldZone.size()==0) System.out.println("E");
+        if (Player.currentPlayer.board.fieldZone.size() == 0) System.out.println("E");
         else System.out.println("O");
         Util.printNCharacter(5, "\t");
         System.out.println(Player.currentPlayer.board.graveyard.size());

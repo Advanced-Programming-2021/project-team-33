@@ -13,7 +13,5 @@ public class CardController {
                 CardType.NORMAL, CardCategory.SPELL, 1, 0);
     }
 
-    public static boolean isCardExist(String cardName) {
-        return Card.getCardByName(cardName) != null;
-    }
+
 }

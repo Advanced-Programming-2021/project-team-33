@@ -29,6 +29,10 @@ public class Card {
         cards.add(this);
     }
 
+    public static ArrayList<Card> getCards() {
+        return cards;
+    }
+
     public String getCardName() {
         return cardName;
     }
