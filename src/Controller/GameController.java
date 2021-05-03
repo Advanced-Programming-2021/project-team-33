@@ -182,5 +182,10 @@ public class GameController {
         System.out.println(Player.currentPlayer.getNickname() + ":" + Player.currentPlayer.getLifePoint());
     }
 
+    public static void summonMonster() {
+        Player.currentPlayer.getBoard().getFieldCardsForMonsters().add(selectedCard);
+        selectedCard.setCardPosition(CardPosition.FRONT);
+    }
+
 
 }

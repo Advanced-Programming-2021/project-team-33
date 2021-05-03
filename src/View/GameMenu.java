@@ -2,6 +2,7 @@ package View;
 
 import Controller.GameController;
 import Controller.ProgramController;
+import Controller.RoundController;
 import Controller.Util;
 import Model.*;
 
@@ -15,7 +16,7 @@ public class GameMenu {
         checked = false;
         MainMenu.showCurrentMenu(Util.getCommand(input, "menu show-current"));
         CardMenu.showCard(Util.getCommand(input, "card show (.+)"));
-        summonCard(Util.getCommand(input, "summon"));
+        summonMonster(Util.getCommand(input, "summon"));
         selectCard(Util.getCommand(input, "select --(\\S+)( --\\D)* (\\d+)"));
         deSelectCard(Util.getCommand(input, "select -d"));
         activeSpell(Util.getCommand(input, "activate effect"));
@@ -51,7 +52,7 @@ public class GameMenu {
         }
     }
 
-    private void summonCard(Matcher matcher) {
+    private void summonMonster(Matcher matcher) {
         if (!checked && matcher.matches()) {
             checked = true;
             if (GameController.selectedCard == null) System.out.println("no card is selected yet");
@@ -63,8 +64,13 @@ public class GameMenu {
             else if (!Player.currentPlayer.getPhase().equals(Phase.MAIN1) &&
                     !Player.currentPlayer.getPhase().equals(Phase.MAIN2))
                 System.out.println("action not allowed in this phase");
-            else if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().size() > 5)
+            else if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().size() > 5) // E in board must be Null
                 System.out.println("monster card zone is full");
+            else if (RoundController.isSummoned) System.out.println("you already summoned/set on this turn");
+            else {
+                GameController.summonMonster();
+                System.out.println("summoned successfully");
+            }
 
         }
     }

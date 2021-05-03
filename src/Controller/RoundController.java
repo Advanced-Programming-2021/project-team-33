@@ -9,6 +9,7 @@ import java.util.Random;
 
 public class RoundController {
     static GameMenu gameMenu = new GameMenu();
+    public static boolean isSummoned = false;
 
     public static void setWhoPlayFirst(String firstPlayer, String secondPlayer) {
         Random random = new Random();
@@ -51,6 +52,7 @@ public class RoundController {
         Player.currentPlayer.setPhase(Phase.MAIN1);
         gameMenu.informPhase(Phase.MAIN1);
         GameController.showBoard();
+
     }
 
     public static void battlePhase() {
