@@ -29,6 +29,14 @@ public class Player {
         return listOfDecks;
     }
 
+    public void setBoard(Board board) {
+        this.board = board;
+    }
+
+    public Board getBoard() {
+        return board;
+    }
+
     public String getUsername() {
         return this.username;
     }
@@ -58,9 +66,9 @@ public class Player {
     }
 
     public Deck getActiveDeck() {
-        for (int i = 0; i < Player.thePlayer.listOfDecks.size(); i++) {
-            if(Player.thePlayer.listOfDecks.get(i).isDeckActive())
-                return Player.thePlayer.listOfDecks.get(i);
+        for (Deck listOfDeck : listOfDecks) {
+            if (listOfDeck.isDeckActive())
+                return listOfDeck;
         }
         return null;
     }

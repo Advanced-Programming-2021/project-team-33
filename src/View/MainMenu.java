@@ -5,6 +5,7 @@ import Controller.GameController;
 import Controller.ProgramController;
 import Controller.Util;
 import Model.Card;
+import Model.Player;
 
 import java.util.regex.Matcher;
 
@@ -30,16 +31,23 @@ public class MainMenu {
             checked = true;
             String secondPlayerName = matcher.group(1);
             int round = Integer.parseInt(matcher.group(2));
-            if (!secondPlayerName.equals("ai") && !programController.isUserExist(secondPlayerName))
-                System.out.println("there is no player with this username");
-            else if (!secondPlayerName.equals("ai") && !gameController.isDeckActive(secondPlayerName))
-                System.out.println(secondPlayerName + " has no active deck");
-            else if (!secondPlayerName.equals("ai") && !gameController.isDeckValid(secondPlayerName))
-                System.out.println(secondPlayerName + "'s deck is invalid");
-            else if (round > 3 || round < 1)
+            if (round > 3 || round < 1)
                 System.out.println("number of rounds is not supported");
-            else if (secondPlayerName.equals("ai")) duelWithAi();
-            else menu = "game";
+            if (!secondPlayerName.equals("ai")) {
+                if (!programController.isUserExist(secondPlayerName) ||
+                        secondPlayerName.equals(Player.thePlayer.getUsername()))
+                    System.out.println("there is no player with this username");
+                else if (!gameController.isDeckActive(Player.thePlayer.getUsername()))
+                    System.out.println(Player.thePlayer.getUsername() + " has no active deck");
+                else if (!gameController.isDeckActive(secondPlayerName))
+                    System.out.println(secondPlayerName + " has no active deck");
+                else if (!gameController.isDeckValid(secondPlayerName))
+                    System.out.println(secondPlayerName + "'s deck is invalid");
+                else {
+                    GameController.initiateGame(Player.thePlayer.getUsername(), secondPlayerName);
+                    menu = "game";
+                }
+            } else duelWithAi();
         }
     }
 
@@ -81,11 +89,11 @@ public class MainMenu {
     public void menu() {
         LoginMenu loginMenu = new LoginMenu();
         DeckMenu deckMenu = new DeckMenu();
-        GameMenu gameMenu = new GameMenu();
         ImportExportMenu importExportMenu = new ImportExportMenu();
         MainMenu mainMenu = new MainMenu();
         ProfileMenu profileMenu = new ProfileMenu();
         ScoreboardMenu scoreboardMenu = new ScoreboardMenu();
+        GameMenu gameMenu = new GameMenu();
         ShopMenu shopMenu = new ShopMenu();
         String input;
         while (true) {

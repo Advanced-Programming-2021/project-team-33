@@ -1,6 +1,10 @@
 package Controller;
 
 import Model.*;
+import View.GameMenu;
+
+import java.util.Collections;
+import java.util.Random;
 
 public class GameController {
 
@@ -60,7 +64,6 @@ public class GameController {
     }
 
 
-
     public static void deSelectCard() {
         selectedCard.setSelected(false);
     }
@@ -71,6 +74,32 @@ public class GameController {
 
     public static boolean isDeckValid(String user) {
         return true;
+    }
+
+    public static void initiateGame(String firstPlayer, String secondPlayer) {
+        RoundController.setWhoPlayFirst(firstPlayer, secondPlayer);
+        Board board1 = new Board(Player.currentPlayer);
+        Player.currentPlayer.setBoard(board1);
+        Board board2 = new Board(Player.opponent);
+        Player.opponent.setBoard(board2);
+        shuffleDeck(Player.currentPlayer);
+        shuffleDeck(Player.opponent);
+        for (int i = 0; i < 5; i++) {
+            drawCard(Player.currentPlayer);
+            drawCard(Player.opponent);
+        }
+        RoundController.drawPhase();
+    }
+
+    public static Card drawCard(Player player) {
+        Card card = player.getBoard().getDeck().get(0);
+        player.getBoard().getHand().add(player.getBoard().getDeck().get(0));
+        player.getBoard().getDeck().remove(card);
+        return card;
+    }
+
+    public static void shuffleDeck(Player player) {
+        Collections.shuffle(player.getBoard().getDeck());
     }
 
     public static void showBoard() {

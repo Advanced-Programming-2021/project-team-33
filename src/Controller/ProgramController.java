@@ -62,5 +62,11 @@ public class ProgramController {
                 menuName.equals("scoreboard") || menuName.equals("profile") || menuName.equals("importExport");
     }
 
+    public static int compare(int first, int second){
+        if(first > second) return 1;
+        if(first < second) return -1;
+        return 0;
+    }
+
 
 }

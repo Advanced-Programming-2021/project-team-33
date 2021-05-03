@@ -12,7 +12,7 @@ public class Board {
     public ArrayList<Card> fieldZone = new ArrayList<>();
 
     public Board(Player player) {
-        deck = player.activeDeck.mainDeck;
+        deck = player.getActiveDeck().getMainDeck();
     }
 
     public Player getPlayer() {
@@ -22,6 +22,15 @@ public class Board {
     public Card getCardFromMonsterField(int number) {
         if (fieldCardsForMonsters.get(number) != null) return fieldCardsForMonsters.get(number);
         return null;
+    }
+
+
+    public ArrayList<Card> getDeck() {
+        return deck;
+    }
+
+    public ArrayList<Card> getHand() {
+        return hand;
     }
 
     public Card getCardFromSpellField(int number) {
