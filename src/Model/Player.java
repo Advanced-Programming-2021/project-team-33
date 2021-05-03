@@ -1,11 +1,14 @@
 package Model;
 
+import View.Phase;
+
 import java.util.ArrayList;
 
 public class Player {
     static ArrayList<Player> players = new ArrayList<>();
     public ArrayList<Deck> listOfDecks = new ArrayList<>();
     public ArrayList<Card> listOfCards = new ArrayList<>();
+    public Phase phase;
     public Board board;
     public static Player thePlayer;
     public static Player currentPlayer, opponent;
@@ -35,6 +38,14 @@ public class Player {
 
     public Board getBoard() {
         return board;
+    }
+
+    public void setPhase(Phase phase) {
+        this.phase = phase;
+    }
+
+    public Phase getPhase() {
+        return phase;
     }
 
     public String getUsername() {

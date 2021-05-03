@@ -194,7 +194,7 @@ public class DeckMenu {
             }
             cardNameList.sort(Comparator.naturalOrder());
             for (int i = 0; i < cardNameList.size(); i++) {
-                System.out.println(cardNameList);
+                System.out.println(cardNameList.get(i));
             }
         }
 

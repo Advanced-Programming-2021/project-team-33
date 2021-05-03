@@ -24,6 +24,13 @@ public class Board {
         return null;
     }
 
+    public ArrayList<Card> getFieldCardsForMonsters() {
+        return fieldCardsForMonsters;
+    }
+
+    public ArrayList<Card> getFieldCardsForSpellTraps() {
+        return fieldCardsForSpellTraps;
+    }
 
     public ArrayList<Card> getDeck() {
         return deck;

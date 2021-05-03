@@ -32,6 +32,7 @@ public class RoundController {
     }
 
     public static void drawPhase() {
+        Player.currentPlayer.setPhase(Phase.DRAW);
         gameMenu.informPhase(Phase.DRAW);
         Card card = GameController.drawCard(Player.currentPlayer);
         gameMenu.drawCard(card);
@@ -40,13 +41,16 @@ public class RoundController {
     }
 
     private static void standByPhase() {
+        Player.currentPlayer.setPhase(Phase.STANDBY);
         //someCard...
         gameMenu.informPhase(Phase.STANDBY);
         mainPhase1();
     }
 
     public static void mainPhase1() {
+        Player.currentPlayer.setPhase(Phase.MAIN1);
         gameMenu.informPhase(Phase.MAIN1);
+        GameController.showBoard();
     }
 
     public static void battlePhase() {

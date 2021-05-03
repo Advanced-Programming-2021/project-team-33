@@ -18,12 +18,12 @@ public class GameController {
         } else if (cardPosition.equals("monster")) return 0;
         else if (cardPosition.equals("spell") && Player.currentPlayer.board.getCardFromSpellField(number) != null) {
             Player.currentPlayer.board.getCardFromSpellField(number).setSelected(true);
-            selectedCard = Player.currentPlayer.board.getCardFromMonsterField(number);
+            selectedCard = Player.currentPlayer.board.getCardFromSpellField(number);
             return 1;
         } else if (cardPosition.equals("spell")) return 0;
         else if (cardPosition.equals("hand") && Player.currentPlayer.board.getCardFromHand(number) != null) {
             Player.currentPlayer.board.getCardFromHand(number).setSelected(true);
-            selectedCard = Player.currentPlayer.board.getCardFromMonsterField(number);
+            selectedCard = Player.currentPlayer.board.getCardFromHand(number);
             return 1;
         } else if (cardPosition.equals("hand")) return 0;
         return -1;
@@ -66,6 +66,7 @@ public class GameController {
 
     public static void deSelectCard() {
         selectedCard.setSelected(false);
+        selectedCard = null;
     }
 
     public static boolean isDeckActive(String user) {
@@ -93,6 +94,7 @@ public class GameController {
 
     public static Card drawCard(Player player) {
         Card card = player.getBoard().getDeck().get(0);
+        card.setCardPosition(CardPosition.HAND);
         player.getBoard().getHand().add(player.getBoard().getDeck().get(0));
         player.getBoard().getDeck().remove(card);
         return card;
