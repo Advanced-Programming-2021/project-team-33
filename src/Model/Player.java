@@ -93,8 +93,11 @@ public class Player {
         listOfCards.add(card);
     }
 
-    public void removeFromCardList(Card card) {
-        listOfCards.remove(card);
+    public void removeFromCardList(String cardName) {
+        for (int i = 0; i < listOfCards.size(); i++) {
+            if (listOfCards.get(i).getCardName().equals(cardName))
+                listOfCards.remove(i);
+        }
     }
 
     public void addToDeckList(Deck deck) {

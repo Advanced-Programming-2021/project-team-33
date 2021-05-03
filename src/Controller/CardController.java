@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class CardController {
 
     public static void initialCards() {
-        Card monsterReborn = new Card("Monster Reborn", "nothing", 1,
+        Card monsterReborn = new Card("MonsterReborn", "nothing", 1,
                 CardType.NORMAL, CardCategory.SPELL, 1, 0);
     }
 

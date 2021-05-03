@@ -74,9 +74,9 @@ public class Deck {
         return null;
     }
 
-    public String getInvalidCard() {
+    public String getInvalidCard(String deckName) {
         for (int i = 0; i < Card.getCards().size(); i++) {
-            if (Collections.frequency(mainDeck, Card.getCards().get(i).cardName) == 3)
+            if (Collections.frequency(Player.getDeckByName(deckName).mainDeck, Card.getCards().get(i).cardName) == 3)
                 return Card.getCards().get(i).cardName;
         }
         return "";

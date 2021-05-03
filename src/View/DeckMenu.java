@@ -3,6 +3,7 @@ package View;
 import Controller.GameController;
 import Controller.ProgramController;
 import Controller.Util;
+import Model.Card;
 import Model.CardCategory;
 import Model.Deck;
 import Model.Player;
@@ -74,17 +75,18 @@ public class DeckMenu {
             String cardName = matcher.group(1);
             String deckName = matcher.group(2);
             boolean isSide = false;
-            if (!matcher.group(3).equals("")) isSide = true;
+            if (matcher.group(3) != null) isSide = true;
             if (!ProgramController.isDeckExist(deckName))
                 System.out.println("deck with name " + deckName + " does not exist");
-            else if (!ProgramController.isCardExist(cardName))
+            else if (!ProgramController.isCardExist(cardName) ||
+                    !Player.thePlayer.listOfCards.contains(Card.getCardByName(cardName)))
                 System.out.println("card with name " + cardName + " does not exist");
             else if (Player.getDeckByName(deckName).isMainDeckFull())
                 System.out.println("main deck is full");
             else if (Player.getDeckByName(deckName).isSideDeckFull())
                 System.out.println("side deck is full");
-            else if (!Player.getDeckByName(deckName).getInvalidCard().equals("")) {
-                String invalidCard = Player.getDeckByName(deckName).getInvalidCard();
+            else if (!Player.getDeckByName(deckName).getInvalidCard(deckName).equals("")) {
+                String invalidCard = Player.getDeckByName(deckName).getInvalidCard(deckName);
                 System.out.println("there are already three cards with name " + invalidCard +
                         " in deck " + deckName + "name>");
             } else {
@@ -100,7 +102,7 @@ public class DeckMenu {
             String cardName = matcher.group(1);
             String deckName = matcher.group(2);
             boolean isSide = false;
-            if (!matcher.group(3).equals("")) isSide = true;
+            if (matcher.group(3) != null) isSide = true;
             if (!ProgramController.isDeckExist(deckName))
                 System.out.println("deck with name " + deckName + " does not exist");
             else if (!ProgramController.isCardExistInMainDeck(cardName, deckName))
@@ -119,7 +121,7 @@ public class DeckMenu {
             MainMenu.checked = true;
             String deckName = matcher.group(1);
             boolean isSide = false;
-            if (!matcher.group(2).equals("")) isSide = true;
+            if (matcher.group(3) != null) isSide = true;
             if (!ProgramController.isDeckExist(deckName))
                 System.out.println("deck with name " + deckName + " does not exist");
             else if (!isSide) {

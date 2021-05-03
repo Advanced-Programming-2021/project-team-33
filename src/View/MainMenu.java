@@ -4,6 +4,7 @@ import Controller.CardController;
 import Controller.GameController;
 import Controller.ProgramController;
 import Controller.Util;
+import Model.Card;
 
 import java.util.regex.Matcher;
 
@@ -14,7 +15,6 @@ public class MainMenu {
     GameController gameController = new GameController();
 
     public MainMenu() {
-        CardController.initialCards();
     }
 
     public void run(String input) {

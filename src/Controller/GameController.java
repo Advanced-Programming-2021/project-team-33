@@ -47,7 +47,7 @@ public class GameController {
         } else {
             Player.getDeckByName(deckName).addToSideDeck(Card.getCardByName(cardName));
         }
-        Player.thePlayer.removeFromCardList(Card.getCardByName(cardName));
+        Player.thePlayer.removeFromCardList(cardName);
     }
 
     public static void removeCardFromDeck(String deckName, String cardName, boolean isSide) {
@@ -58,6 +58,7 @@ public class GameController {
         }
         Player.thePlayer.addToCardList(Card.getCardByName(cardName));
     }
+
 
 
     public static void deSelectCard() {
