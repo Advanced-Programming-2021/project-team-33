@@ -8,7 +8,7 @@ public class Card {
     ArrayList<String> functions = new ArrayList<>();
     boolean isSelected = false;
     String cardName, description;
-    CardType cardType;
+    ArrayList<CardType> cardTypes = new ArrayList<>();
     CardPosition cardPosition;
     CardCategory cardCategory;
     int cardId, limit, price, level;
@@ -17,12 +17,12 @@ public class Card {
     public Card() {
     }
 
-    public Card(String cardName, String description, int price, CardType cardType,
+    public Card(String cardName, String description, int price, ArrayList<CardType> cardTypes,
                 CardCategory cardCategory, int limit, int level) {
         this.cardName = cardName;
         this.description = description;
         this.price = price;
-        this.cardType = cardType;
+        this.cardTypes = cardTypes;
         this.cardCategory = cardCategory;
         this.cardId = ++id;
         this.limit = limit;
@@ -67,8 +67,8 @@ public class Card {
         return price;
     }
 
-    public CardType getCardType() {
-        return cardType;
+    public ArrayList<CardType> getCardType() {
+        return this.cardTypes;
     }
 
     public String getDescription() {

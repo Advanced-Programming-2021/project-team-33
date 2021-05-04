@@ -6,5 +6,22 @@ public enum CardType {
     RITUAL,
     QUICKPLAY,
     FIELD,
-    EQUIP
+    EQUIP,
+    // MONSTER TYPES
+    WARRIOR,
+    EFFECT,
+    BEASTWARRIOR,
+    FIEND,
+    AQUA,
+    BEAST,
+    PYRO,
+    SPELLCASTER,
+    THUNDER,
+    DRAGON,
+    MACHINE,
+    ROCK,
+    INSECT,
+    CYBERSE,
+    FAIRY,
+    SEASERPENT
 }
