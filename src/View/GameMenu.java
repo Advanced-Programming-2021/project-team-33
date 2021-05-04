@@ -20,8 +20,15 @@ public class GameMenu {
         selectCard(Util.getCommand(input, "select --(\\S+)( --\\D)* (\\d+)"));
         deSelectCard(Util.getCommand(input, "select -d"));
         activeSpell(Util.getCommand(input, "activate effect"));
+        showBoard(Util.getCommand(input, "showBoard"));
     }
 
+    private void showBoard(Matcher matcher) {
+        if (!checked && matcher.matches()) {
+            checked = true;
+            GameController.showBoard();
+        }
+    }
 
     public void rollDice(int first, int second, String currentPlayer, String firstPlayer, String secondPlayer) {
         System.out.println(firstPlayer + " get " + first);
@@ -55,11 +62,14 @@ public class GameMenu {
     private void summonMonster(Matcher matcher) {
         if (!checked && matcher.matches()) {
             checked = true;
-            if (GameController.selectedCard == null) System.out.println("no card is selected yet");
-            else if (!GameController.selectedCard.getCardPosition().equals(CardPosition.HAND) ||
+            if (GameController.selectedCard == null) {
+                System.out.println("no card is selected yet");
+                return;
+            }
+            boolean isSummonPossible = GameController.isSummonPossible();
+            if (!GameController.selectedCard.getCardStatus().equals(CardStatus.HAND) ||
                     (!GameController.selectedCard.getCardCategory().equals(CardCategory.MONSTER) &&
-                            !GameController.selectedCard.getCardCategory().equals(CardCategory.MONSTEREFFECT)) ||
-                    GameController.selectedCard.getLevel() > 4)
+                            !GameController.selectedCard.getCardCategory().equals(CardCategory.MONSTEREFFECT)))
                 System.out.println("you can’t summon this card");
             else if (!Player.currentPlayer.getPhase().equals(Phase.MAIN1) &&
                     !Player.currentPlayer.getPhase().equals(Phase.MAIN2))
@@ -67,9 +77,35 @@ public class GameMenu {
             else if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().size() > 5) // E in board must be Null
                 System.out.println("monster card zone is full");
             else if (RoundController.isSummoned) System.out.println("you already summoned/set on this turn");
-            else {
-                GameController.summonMonster();
-                System.out.println("summoned successfully");
+            else if (GameController.selectedCard.getLevel() > 4 && GameController.selectedCard.getLevel() < 7) {
+                if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().size() == 0) {
+                    System.out.println("there are not enough cards for tribute");
+                    return;
+                }
+                int tribute = Integer.parseInt(Communicate.input("Pick Monster for tribute"));
+                if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(tribute) == null) {
+                    System.out.println("there are no monsters on this address");
+                    return;
+                }
+                GameController.summonMonster(tribute, 0);
+                System.out.println("summoned successfully1");
+            } else if (GameController.selectedCard.getLevel() > 6 && GameController.selectedCard.getLevel() < 9) {
+                if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().size() < 2) {
+                    System.out.println("there are not enough cards for tribute");
+                    return;
+                }
+                int tribute = Integer.parseInt(Communicate.input("Pick Monster for tribute"));
+                int tribute1 = Integer.parseInt(Communicate.input("Pick another Monster for tribute"));
+                if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(tribute) == null ||
+                        Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(tribute1) == null) {
+                    System.out.println("there is no monster on one of these addresses");
+                    return;
+                }
+                GameController.summonMonster(tribute, tribute1);
+                System.out.println("summoned successfully2");
+            } else {
+                GameController.summonMonster(0, 0);
+                System.out.println("summoned successfully3");
             }
 
         }

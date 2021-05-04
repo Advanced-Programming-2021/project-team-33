@@ -4,5 +4,10 @@ public enum CardStatus {
     ATTACK,
     DEFENCE,
     SET,
-    BACK
+    BACK,
+    HAND,
+    GRAVEYARD,
+    FIELD,
+    OUT
+
 }

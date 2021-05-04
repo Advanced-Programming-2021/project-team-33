@@ -49,6 +49,7 @@ public class RoundController {
     }
 
     public static void mainPhase1() {
+        isSummoned = false;
         Player.currentPlayer.setPhase(Phase.MAIN1);
         gameMenu.informPhase(Phase.MAIN1);
         GameController.showBoard();

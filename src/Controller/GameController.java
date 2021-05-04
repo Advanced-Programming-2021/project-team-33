@@ -94,7 +94,7 @@ public class GameController {
 
     public static Card drawCard(Player player) {
         Card card = player.getBoard().getDeck().get(0);
-        card.setCardPosition(CardPosition.HAND);
+        card.setCardStatus(CardStatus.HAND);
         player.getBoard().getHand().add(player.getBoard().getDeck().get(0));
         player.getBoard().getDeck().remove(card);
         return card;
@@ -183,9 +183,32 @@ public class GameController {
         System.out.println(Player.currentPlayer.getNickname() + ":" + Player.currentPlayer.getLifePoint());
     }
 
-    public static void summonMonster() {
-        Player.currentPlayer.getBoard().getFieldCardsForMonsters().add(selectedCard);
-        selectedCard.setCardPosition(CardPosition.FRONT);
+    public static boolean isSummonPossible() {
+        if (selectedCard.getLevel() <= 4) return true;
+        else if (selectedCard.getLevel() > 4 && selectedCard.getLevel() < 7)
+            return Player.currentPlayer.getBoard().getFieldCardsForMonsters().size() != 0;
+        else return Player.currentPlayer.getBoard().getFieldCardsForMonsters().size() > 1;
+
+    }
+
+    public static void summonMonster(int firstTribute, int secondTribute) {
+        if (firstTribute != 0 && secondTribute == 0) {
+            Card tributeCard = Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(firstTribute);
+            Player.currentPlayer.getBoard().getGraveyard().add(tributeCard);
+            Player.currentPlayer.getBoard().getFieldCardsForMonsters().remove(firstTribute);
+        } else if(secondTribute != 0) {
+            Card tributeCard1 = Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(firstTribute);
+            Card tributeCard2 = Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(secondTribute);
+            Player.currentPlayer.getBoard().getGraveyard().add(tributeCard1);
+            Player.currentPlayer.getBoard().getGraveyard().add(tributeCard2);
+            Player.currentPlayer.getBoard().getFieldCardsForMonsters().remove(firstTribute);
+            Player.currentPlayer.getBoard().getFieldCardsForMonsters().remove(secondTribute);
+        }
+        Player.currentPlayer.getBoard().getFieldCardsForMonsters().set(3,selectedCard);
+        Player.currentPlayer.getBoard().getHand().remove(selectedCard);
+        selectedCard.setCardStatus(CardStatus.ATTACK);
+        System.out.println(Player.currentPlayer.getBoard().fieldCardsForMonsters.size());
+        RoundController.isSummoned = true;
     }
 
 

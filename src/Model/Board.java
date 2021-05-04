@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class Board {
     Player player;
-    public ArrayList<Card> fieldCardsForMonsters = new ArrayList<>(5);
-    public ArrayList<Card> fieldCardsForSpellTraps = new ArrayList<>(5);
+    public ArrayList<Card> fieldCardsForMonsters = new ArrayList<>();
+    public ArrayList<Card> fieldCardsForSpellTraps = new ArrayList<>();
     public ArrayList<Card> graveyard = new ArrayList<>();
     public ArrayList<Card> deck = new ArrayList<>();
     public ArrayList<Card> hand = new ArrayList<>();
@@ -26,6 +26,10 @@ public class Board {
     public Card getCardFromMonsterField(int number) {
         if (fieldCardsForMonsters.get(number) != null) return fieldCardsForMonsters.get(number);
         return null;
+    }
+
+    public ArrayList<Card> getGraveyard() {
+        return graveyard;
     }
 
     public ArrayList<Card> getFieldCardsForMonsters() {

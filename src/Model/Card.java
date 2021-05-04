@@ -9,7 +9,6 @@ public class Card {
     boolean isSelected = false;
     String cardName, description;
     ArrayList<CardType> cardTypes = new ArrayList<>();
-    CardPosition cardPosition;
     CardCategory cardCategory;
     int cardId, limit, price, level;
     CardStatus cardStatus;
@@ -38,13 +37,7 @@ public class Card {
         return cardName;
     }
 
-    public void setCardPosition(CardPosition cardPosition) {
-        this.cardPosition = cardPosition;
-    }
 
-    public CardPosition getCardPosition() {
-        return cardPosition;
-    }
 
     public void setSelected(boolean selected) {
         isSelected = selected;
