@@ -1,8 +1,27 @@
 package Model;
 
 public enum CardType {
-    MONSTER,
+    NORMAL,
+    CONTINUES,
+    RITUAL,
+    QUICKPLAY,
+    FIELD,
+    EQUIP,
+    // MONSTER TYPES
+    WARRIOR,
     EFFECT,
-    SPELL,
-    TRAP
+    BEASTWARRIOR,
+    FIEND,
+    AQUA,
+    BEAST,
+    PYRO,
+    SPELLCASTER,
+    THUNDER,
+    DRAGON,
+    MACHINE,
+    ROCK,
+    INSECT,
+    CYBERSE,
+    FAIRY,
+    SEASERPENT
 }

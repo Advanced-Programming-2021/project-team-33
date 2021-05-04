@@ -1,11 +1,13 @@
+import Controller.CardController;
 import Controller.ProgramController;
-import View.LoginMenu;
+import View.MainMenu;
 
 
 public class Main {
 
     public static void main(String[] args) {
-        ProgramController programController = new ProgramController();
-        programController.enterMenus();
+        CardController.initialCards();
+        MainMenu mainMenu = new MainMenu();
+        mainMenu.menu();
     }
 }
