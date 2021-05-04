@@ -1,5 +1,6 @@
 package View;
 
+import Controller.ProgramController;
 import Controller.Util;
 import Model.Player;
 
@@ -23,33 +24,24 @@ public class ProfileMenu {
 
     public void changeName(Matcher matcher) {
         if (!checked && matcher.matches()) {
-            player = getPlayer(matcher.group(1));
-            if (isNameExist()) {
+            player = ProgramController.getPlayerByNickname(matcher.group(1));
+            if (player != null) {
                 System.out.println("user with nickname " + matcher.group(1) + " already exists");
             } else {
                 System.out.println("nickname changed successfully!");
-                player.setNickname(matcher.group(1));
+                ProgramController.changePlayerNickname(matcher.group(1));
             }
         }
     }
 
-    public Player getPlayer(String name) {
-        return Player.getUserByNickname(name);
-    }
-
-    public boolean isNameExist() {
-        if (player == null) return false;
-        return true;
-    }
-
     public void changePassword(Matcher matcher) {
         if (!checked && matcher.matches()) {
-            if (isPasswordTrue(matcher.group(1))) {
-                if (isPasswordEqual(matcher.group(2))) {
+            if (ProgramController.isPasswordTrue(matcher.group(1))) {
+                if (ProgramController.isPasswordEqual(matcher.group(2))) {
                     System.out.println("please enter a new password");
                 } else {
                     System.out.println("password changed successfully!");
-                    player.setPassword(matcher.group(2));
+                    ProgramController.changePlayerPassword(matcher.group(2));
                 }
             } else {
                 System.out.println("current password is invalid");
@@ -57,23 +49,10 @@ public class ProfileMenu {
         }
     }
 
-    public static String getUserPassword() {
-        player = Player.thePlayer;
-        return player.getPassword();
-    }
-
-    public static boolean isPasswordTrue(String currentPassword) {
-        if (getUserPassword().equals(currentPassword))
-            return true;
-        return false;
-    }
-
-    public static boolean isPasswordEqual(String newPassword) {
-        if (newPassword.equals(getUserPassword())) return true;
-        return false;
-    }
-
-    public static void exitMenu(Matcher matcher) {
-        MainMenu.menu = "main";
+    public void exitMenu(Matcher matcher) {
+        if (!MainMenu.checked && matcher.matches()) {
+            MainMenu.checked = true;
+            MainMenu.menu = "main";
+        }
     }
 }

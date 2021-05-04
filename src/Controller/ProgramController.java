@@ -62,11 +62,37 @@ public class ProgramController {
                 menuName.equals("scoreboard") || menuName.equals("profile") || menuName.equals("importExport");
     }
 
-    public static int compare(int first, int second){
-        if(first > second) return 1;
-        if(first < second) return -1;
+    public static int compare(int first, int second) {
+        if (first > second) return 1;
+        if (first < second) return -1;
         return 0;
     }
 
+    public static boolean isPasswordTrue(String currentPassword) {
+        Player player = Player.thePlayer;
+        if (player.getPassword().equals(currentPassword))
+            return true;
+        return false;
+    }
+
+    public static boolean isPasswordEqual(String newPassword) {
+        Player player = Player.thePlayer;
+        if (newPassword.equals(player.getPassword())) return true;
+        return false;
+    }
+
+    public static Player getPlayerByNickname(String nickName) {
+        return Player.getUserByNickname(nickName);
+    }
+
+    public static void changePlayerNickname(String nickName) {
+        Player player = Player.thePlayer;
+        player.setNickname(nickName);
+    }
+
+    public static void changePlayerPassword(String password) {
+        Player player = Player.thePlayer;
+        player.setPassword(password);
+    }
 
 }
