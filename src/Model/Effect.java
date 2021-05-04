@@ -1,5 +1,5 @@
 package Model;
 
 public interface Effect {
-    public void run();
+    public void run(Card card);
 }

@@ -21,8 +21,8 @@ public class DeckMenu {
         createDeck(Util.getCommand(input, "deck create (\\S+)"));
         deleteDeck(Util.getCommand(input, "deck delete (\\S+)"));
         activateDeck(Util.getCommand(input, "deck set-activate (\\S+)"));
-        addCardToDeck(Util.getCommand(input, "deck add-card --card (\\S+) --deck (\\S+)( --side)?"));
-        removeCardFromDeck(Util.getCommand(input, "deck rm-card --card (\\S+) --deck (\\S+)( --side)?"));
+        addCardToDeck(Util.getCommand(input, "deck add-card --card (.+?) --deck (\\S+)( --side)?"));
+        removeCardFromDeck(Util.getCommand(input, "deck rm-card --card (.+?) --deck (\\S+)( --side)?"));
         showAllDecks(Util.getCommand(input, "deck show --all"));
         showDeck(Util.getCommand(input, "deck show --deck-name (\\S+)( --side)?"));
         showAllCards(Util.getCommand(input, "deck show --cards"));

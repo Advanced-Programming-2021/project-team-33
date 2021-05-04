@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Card {
     static int id = 0;
     static ArrayList<Card> cards = new ArrayList<>();
-    ArrayList<String> functions = new ArrayList<>();
+    ArrayList<Effect> effects = new ArrayList<>();
     boolean isSelected = false;
     String cardName, description;
     ArrayList<CardType> cardTypes = new ArrayList<>();
@@ -13,12 +13,14 @@ public class Card {
     CardCategory cardCategory;
     int cardId, limit, price, level;
     CardStatus cardStatus;
+    int attack;
+    int deffense;
 
     public Card() {
     }
 
     public Card(String cardName, String description, int price, ArrayList<CardType> cardTypes,
-                CardCategory cardCategory, int limit, int level) {
+                CardCategory cardCategory, int limit, int level, ArrayList<Effect> effects, int attack, int deffense) {
         this.cardName = cardName;
         this.description = description;
         this.price = price;
@@ -27,6 +29,9 @@ public class Card {
         this.cardId = ++id;
         this.limit = limit;
         this.level = level;
+        this.effects = effects;
+        this.attack = attack;
+        this.deffense = deffense;
         cards.add(this);
     }
 
@@ -78,6 +83,10 @@ public class Card {
     public CardCategory getCardCategory() {
         return cardCategory;
     }
+
+    public int getAttack() {return this.attack;}
+
+    public int getDeffense() {return this.deffense;}
 
     public void showCard() {
     }
