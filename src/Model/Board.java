@@ -4,14 +4,18 @@ import java.util.ArrayList;
 
 public class Board {
     Player player;
-    public ArrayList<Card> fieldCardsForMonsters = new ArrayList<>();
-    public ArrayList<Card> fieldCardsForSpellTraps = new ArrayList<>();
+    public ArrayList<Card> fieldCardsForMonsters = new ArrayList<>(5);
+    public ArrayList<Card> fieldCardsForSpellTraps = new ArrayList<>(5);
     public ArrayList<Card> graveyard = new ArrayList<>();
     public ArrayList<Card> deck = new ArrayList<>();
     public ArrayList<Card> hand = new ArrayList<>();
     public ArrayList<Card> fieldZone = new ArrayList<>();
 
     public Board(Player player) {
+        for (int i = 0; i < 5; i++) {
+            fieldCardsForMonsters.add(null);
+            fieldCardsForSpellTraps.add(null);
+        }
         deck = player.getActiveDeck().getMainDeck();
     }
 

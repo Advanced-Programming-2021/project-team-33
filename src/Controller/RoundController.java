@@ -27,9 +27,9 @@ public class RoundController {
     }
 
     public static void changeTurn() {
-        Player.thePlayer = Player.currentPlayer;
+        Player auxPlayer = Player.currentPlayer;
         Player.currentPlayer = Player.opponent;
-        Player.opponent = Player.thePlayer;
+        Player.opponent = auxPlayer;
     }
 
     public static void drawPhase() {

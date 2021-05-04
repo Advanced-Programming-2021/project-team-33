@@ -107,7 +107,7 @@ public class GameController {
     public static void showBoard() {
         System.out.println(Player.opponent.getNickname() + ":" + Player.opponent.getLifePoint());
         System.out.print("\t");
-        for (int i = 0; i < Player.opponent.board.hand.size(); i++) {
+        for (int i = 0; i < Player.opponent.getBoard().getHand().size(); i++) {
             System.out.print("c\t");
         }
         System.out.println();
