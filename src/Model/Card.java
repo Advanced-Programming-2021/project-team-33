@@ -6,7 +6,7 @@ public class Card {
     static int id = 0;
     static ArrayList<Card> cards = new ArrayList<>();
     ArrayList<Effect> effects = new ArrayList<>();
-    boolean isSelected = false;
+    boolean isSelected = false, isChanged = false, isSummoned = false;
     String cardName, description;
     ArrayList<CardType> cardTypes = new ArrayList<>();
     CardCategory cardCategory;
@@ -23,6 +23,7 @@ public class Card {
         this.cardName = cardName;
         this.description = description;
         this.price = price;
+        this.cardStatus = CardStatus.OUT;
         this.cardTypes = cardTypes;
         this.cardCategory = cardCategory;
         this.cardId = ++id;
@@ -43,11 +44,25 @@ public class Card {
     }
 
 
-
     public void setSelected(boolean selected) {
         isSelected = selected;
     }
 
+    public boolean isChanged() {
+        return isChanged;
+    }
+
+    public void setChanged(boolean changed) {
+        isChanged = changed;
+    }
+
+    public void setSummoned(boolean summoned) {
+        isSummoned = summoned;
+    }
+
+    public boolean isSummoned() {
+        return isSummoned;
+    }
 
     public int getLevel() {
         return level;
@@ -77,9 +92,13 @@ public class Card {
         return cardCategory;
     }
 
-    public int getAttack() {return this.attack;}
+    public int getAttack() {
+        return this.attack;
+    }
 
-    public int getDeffense() {return this.deffense;}
+    public int getDeffense() {
+        return this.deffense;
+    }
 
     public void showCard() {
     }

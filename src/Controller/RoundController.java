@@ -49,14 +49,16 @@ public class RoundController {
     }
 
     public static void mainPhase1() {
+        GameController.setAllCardsUnchanged();
+        GameController.setAllCardUnSummoned();
         isSummoned = false;
         Player.currentPlayer.setPhase(Phase.MAIN1);
         gameMenu.informPhase(Phase.MAIN1);
         GameController.showBoard();
-
     }
 
     public static void battlePhase() {
+        Player.currentPlayer.setPhase(Phase.BATTLE);
         gameMenu.informPhase(Phase.BATTLE);
     }
 
@@ -66,5 +68,7 @@ public class RoundController {
 
     public static void endPhase() {
         gameMenu.informPhase(Phase.END);
+        changeTurn();
+
     }
 }

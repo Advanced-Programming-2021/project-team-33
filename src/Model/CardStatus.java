@@ -8,6 +8,6 @@ public enum CardStatus {
     HAND,
     GRAVEYARD,
     FIELD,
-    OUT
+    OUT,
 
 }

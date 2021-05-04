@@ -11,6 +11,7 @@ public class GameController {
     public static Card selectedCard = null;
 
     public static int selectCard(String cardPosition, int number, String opponent) {
+        if (selectedCard != null) deSelectCard();
         if (cardPosition.equals("monster") && Player.currentPlayer.board.getCardFromMonsterField(number) != null) {
             Player.currentPlayer.board.getCardFromMonsterField(number).setSelected(true);
             selectedCard = Player.currentPlayer.board.getCardFromMonsterField(number);
@@ -27,6 +28,11 @@ public class GameController {
             return 1;
         } else if (cardPosition.equals("hand")) return 0;
         return -1;
+    }
+
+    public static void deSelectCard() {
+        selectedCard.setSelected(false);
+        selectedCard = null;
     }
 
     public static void createDeck(String deckName) {
@@ -63,11 +69,6 @@ public class GameController {
         Player.thePlayer.addToCardList(Card.getCardByName(cardName));
     }
 
-
-    public static void deSelectCard() {
-        selectedCard.setSelected(false);
-        selectedCard = null;
-    }
 
     public static boolean isDeckActive(String user) {
         return Player.getUserByUsername(user).getActiveDeck() != null;
@@ -183,12 +184,12 @@ public class GameController {
         System.out.println(Player.currentPlayer.getNickname() + ":" + Player.currentPlayer.getLifePoint());
     }
 
-    public static boolean isSummonPossible() {
-        if (selectedCard.getLevel() <= 4) return true;
-        else if (selectedCard.getLevel() > 4 && selectedCard.getLevel() < 7)
-            return Player.currentPlayer.getBoard().getFieldCardsForMonsters().size() != 0;
-        else return Player.currentPlayer.getBoard().getFieldCardsForMonsters().size() > 1;
-
+    public static boolean isMonsterFieldFull() {
+        int check = 0;
+        for (int i = 0; i < 5; i++) {
+            if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(i) != null) check++;
+        }
+        return check == 5;
     }
 
     public static void summonMonster(int firstTribute, int secondTribute) {
@@ -196,7 +197,7 @@ public class GameController {
             Card tributeCard = Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(firstTribute);
             Player.currentPlayer.getBoard().getGraveyard().add(tributeCard);
             Player.currentPlayer.getBoard().getFieldCardsForMonsters().remove(firstTribute);
-        } else if(secondTribute != 0) {
+        } else if (secondTribute != 0) {
             Card tributeCard1 = Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(firstTribute);
             Card tributeCard2 = Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(secondTribute);
             Player.currentPlayer.getBoard().getGraveyard().add(tributeCard1);
@@ -204,12 +205,60 @@ public class GameController {
             Player.currentPlayer.getBoard().getFieldCardsForMonsters().remove(firstTribute);
             Player.currentPlayer.getBoard().getFieldCardsForMonsters().remove(secondTribute);
         }
-        Player.currentPlayer.getBoard().getFieldCardsForMonsters().set(3,selectedCard);
         Player.currentPlayer.getBoard().getHand().remove(selectedCard);
         selectedCard.setCardStatus(CardStatus.ATTACK);
-        System.out.println(Player.currentPlayer.getBoard().fieldCardsForMonsters.size());
+        putMonsterOnField();
+        deSelectCard();
         RoundController.isSummoned = true;
     }
 
+    public static void setMonster() {
+        Player.currentPlayer.getBoard().getHand().remove(selectedCard);
+        selectedCard.setCardStatus(CardStatus.SET);
+        selectedCard.setSummoned(true);
+        putMonsterOnField();
+        deSelectCard();
+        RoundController.isSummoned = true;
+    }
+
+    public static void putMonsterOnField() {
+        if (Player.thePlayer.getBoard().getFieldCardsForMonsters().get(2) == null)
+            Player.currentPlayer.getBoard().getFieldCardsForMonsters().set(2, selectedCard);
+        else if (Player.thePlayer.getBoard().getFieldCardsForMonsters().get(3) == null)
+            Player.currentPlayer.getBoard().getFieldCardsForMonsters().set(3, selectedCard);
+        else if (Player.thePlayer.getBoard().getFieldCardsForMonsters().get(1) == null)
+            Player.currentPlayer.getBoard().getFieldCardsForMonsters().set(1, selectedCard);
+        else if (Player.thePlayer.getBoard().getFieldCardsForMonsters().get(4) == null)
+            Player.currentPlayer.getBoard().getFieldCardsForMonsters().set(4, selectedCard);
+        else
+            Player.currentPlayer.getBoard().getFieldCardsForMonsters().set(0, selectedCard);
+    }
+
+    public static void changeCardPosition(String cardStatus) {
+        if (cardStatus.equals("attack")) selectedCard.setCardStatus(CardStatus.ATTACK);
+        else selectedCard.setCardStatus(CardStatus.DEFENCE);
+        selectedCard.setChanged(true);
+        deSelectCard();
+    }
+
+    public static void flipSummon() {
+        selectedCard.setCardStatus(CardStatus.ATTACK);
+        selectedCard.setSummoned(true);
+        deSelectCard();
+    }
+
+    public static void setAllCardsUnchanged() {
+        for (int i = 0; i < 5; i++) {
+            if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(i) != null)
+                Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(i).setChanged(false);
+        }
+    }
+
+    public static void setAllCardUnSummoned() {
+        for (int i = 0; i < 5; i++) {
+            if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(i) != null)
+                Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(i).setSummoned(false);
+        }
+    }
 
 }
