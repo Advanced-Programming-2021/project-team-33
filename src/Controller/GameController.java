@@ -137,7 +137,7 @@ public class GameController {
         }
         System.out.println();
         System.out.print(Player.opponent.board.graveyard.size());
-        Util.printNCharacter(5, "\t");
+        Util.printNCharacter(6, "\t");
         if (Player.opponent.board.fieldZone.size() == 0) System.out.println("E");
         else System.out.println("O");
         System.out.println();
@@ -146,9 +146,9 @@ public class GameController {
 
         //-----------------------------
 
-        if (Player.currentPlayer.board.fieldZone.size() == 0) System.out.println("E");
-        else System.out.println("O");
-        Util.printNCharacter(5, "\t");
+        if (Player.currentPlayer.board.fieldZone.size() == 0) System.out.print("E");
+        else System.out.print("O");
+        Util.printNCharacter(6, "\t");
         System.out.println(Player.currentPlayer.board.graveyard.size());
         System.out.print("\t");
         for (Card card : Player.currentPlayer.board.fieldCardsForMonsters) {
@@ -163,6 +163,7 @@ public class GameController {
             }
         }
         System.out.println();
+        System.out.print("\t");
         for (Card card : Player.currentPlayer.board.fieldCardsForSpellTraps) {
             if (card == null) {
                 System.out.print("E\t");
