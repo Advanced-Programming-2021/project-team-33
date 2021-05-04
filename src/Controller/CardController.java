@@ -13,7 +13,31 @@ import java.util.List;
 public class CardController {
 
     public static void initialCards() {
-        //should have effect
+        initialMonsters();
+        initialSpells();
+        initialTraps();
+    }
+
+    private static void initialTraps() {
+
+    }
+
+    private static void initialSpells() {
+        Card monsterReborn = new Card("Monster Reborn", "nothing", 1,
+                new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.SPELL, 1, 0,
+                new ArrayList<>(List.of(new ChooseFromGraveyardAndSpecialSummon())), 0, 0);
+
+        Card terraforming = new Card("Terraforming", "nothing", 1,
+                new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.SPELL, 1, 0,
+                new ArrayList<>(List.of(new AddFieldSpellToMyHand())), 0, 0);
+
+        Card potOfGreed = new Card("Pot of Greed", "nothing", 1,
+                new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.SPELL, 1, 0,
+                new ArrayList<>(List.of(new PickTwoCardsFromTopOfDeck())), 0, 0);
+    }
+
+    private static void initialMonsters() {
+        //should has effect
         Card commandKnight = new Card("Command Knight", "Gain 400 ATK to all Warrior-Type monsters," +
                 " if you control another monster, monsters your opponent " +
                 "controls cannot target this card for an attack", 1,
@@ -32,7 +56,7 @@ public class CardController {
                 new ArrayList<>(List.of(CardType.FIEND)), CardCategory.MONSTER,
                 3, 4, null, 1300, 1000);
 
-        //should have effect
+        //should has effect
         Card yomiShip = new Card("Yomi Ship", "nothing", 1,
                 new ArrayList<>(List.of(CardType.AQUA, CardType.EFFECT)), CardCategory.MONSTEREFFECT,
                 3, 3, null, 800, 1400);
@@ -89,12 +113,12 @@ public class CardController {
                 new ArrayList<>(List.of(CardType.DRAGON)), CardCategory.MONSTER,
                 3, 8, null, 3000, 2500);
 
-        // should have something not effect
+        // should has something not effect
         Card crabTurtle = new Card("Crab Turtle", "nothing", 1,
                 new ArrayList<>(List.of(CardType.AQUA, CardType.RITUAL)), CardCategory.MONSTER,
                 3, 7, null, 2550, 2500);
 
-        // should have something not effect
+        // should has something not effect
         Card skullGuardian = new Card("Skull Guardian", "nothing", 1,
                 new ArrayList<>(List.of(CardType.WARRIOR, CardType.RITUAL)), CardCategory.MONSTER,
                 3, 7, null, 2050, 2500);
@@ -107,12 +131,12 @@ public class CardController {
                 new ArrayList<>(List.of(CardType.ROCK)), CardCategory.MONSTER,
                 3, 2, null, 500, 500);
 
-        // should have effect
+        // should has effect
         Card manEaterBug = new Card("Man-Eater Bug", "nothing", 1,
                 new ArrayList<>(List.of(CardType.INSECT, CardType.EFFECT)), CardCategory.MONSTEREFFECT,
                 3, 2, null, 450, 600);
 
-        // should have some shit
+        // should has some shit
         Card gateGuardian = new Card("Gate Guardian", "nothing", 1,
                 new ArrayList<>(List.of(CardType.WARRIOR, CardType.EFFECT)), CardCategory.MONSTEREFFECT,
                 3, 11, null, 3750, 3400);
@@ -126,17 +150,17 @@ public class CardController {
                 new ArrayList<>(List.of(CardType.CYBERSE)), CardCategory.MONSTER,
                 3, 2, null, 200, 2000);
 
-        // should have effect
+        // should has effect
         Card marshmallon = new Card("Marshmallon", "nothing", 1,
                 new ArrayList<>(List.of(CardType.FAIRY, CardType.EFFECT)), CardCategory.MONSTEREFFECT,
                 3, 3, null, 300, 500);
 
-        // should have effect
+        // should has effect
         Card beastKingBarbaros = new Card("Beast King Barbaros", "nothing", 1,
                 new ArrayList<>(List.of(CardType.BEASTWARRIOR, CardType.EFFECT)), CardCategory.MONSTEREFFECT,
                 3, 8, null, 3000, 1200);
 
-        // should have effect
+        // should has effect
         Card texchanger = new Card("Texchanger", "nothing", 1,
                 new ArrayList<>(List.of(CardType.CYBERSE, CardType.EFFECT)), CardCategory.MONSTEREFFECT,
                 3, 1, null, 100, 100);
@@ -145,7 +169,7 @@ public class CardController {
                 new ArrayList<>(List.of(CardType.CYBERSE)), CardCategory.MONSTER,
                 3, 4, null, 2000, 0);
 
-        // should have effect
+        // should has effect
         Card theCalculator = new Card("The Calculator", "nothing", 1,
                 new ArrayList<>(List.of(CardType.THUNDER, CardType.EFFECT)), CardCategory.MONSTEREFFECT,
                 3, 2, null, 0, 0);
@@ -154,17 +178,17 @@ public class CardController {
                 new ArrayList<>(List.of(CardType.DRAGON)), CardCategory.MONSTER,
                 3, 4, null, 2000, 100);
 
-        // should have effect
+        // should has effect
         Card mirageDragon = new Card("Mirage Dragon", "nothing", 1,
                 new ArrayList<>(List.of(CardType.DRAGON, CardType.EFFECT)), CardCategory.MONSTEREFFECT,
                 3, 4, null, 1600, 600);
 
-        // should have effect
+        // should has effect
         Card heraldOfCreation = new Card("Herald of Creation", "nothing", 1,
                 new ArrayList<>(List.of(CardType.SPELLCASTER, CardType.EFFECT)), CardCategory.MONSTEREFFECT,
                 3, 4, null, 1800, 600);
 
-        // should have effect
+        // should has effect
         Card exploderDragon = new Card("Exploder Dragon", "nothing", 1,
                 new ArrayList<>(List.of(CardType.DRAGON, CardType.EFFECT)), CardCategory.MONSTEREFFECT,
                 3, 3, null, 1000, 0);
@@ -181,12 +205,12 @@ public class CardController {
                 new ArrayList<>(List.of(CardType.DRAGON)), CardCategory.MONSTER,
                 3, 6, null, 2500, 1700);
 
-        // should have effect
+        // should has effect
         Card terratiger = new Card("Terratiger", "nothing", 1,
                 new ArrayList<>(List.of(CardType.WARRIOR, CardType.EFFECT)), CardCategory.MONSTEREFFECT,
                 3, 4, null, 1800, 1200);
 
-        // should have effect
+        // should has effect
         Card theTricky = new Card("The Tricky", "nothing", 1,
                 new ArrayList<>(List.of(CardType.SPELLCASTER, CardType.EFFECT)), CardCategory.MONSTEREFFECT,
                 3, 5, null, 2000, 1200);
@@ -195,22 +219,6 @@ public class CardController {
                 new ArrayList<>(List.of(CardType.SEASERPENT)), CardCategory.MONSTER,
                 3, 8, null, 2900, 2900);
 
-
-
-
-
-
-        Card monsterReborn = new Card("Monster Reborn", "nothing", 1,
-                new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.SPELL, 1, 0,
-                new ArrayList<>(List.of(new ChooseFromGraveyardAndSpecialSummon())), 0, 0);
-
-        Card terraforming = new Card("Terraforming", "nothing", 1,
-                new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.SPELL, 1, 0,
-                new ArrayList<>(List.of(new AddFieldSpellToMyHand())), 0, 0);
-
-        Card potOfGreed = new Card("Pot of Greed", "nothing", 1,
-                new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.SPELL, 1, 0,
-                new ArrayList<>(List.of(new PickTwoCardsFromTopOfDeck())), 0, 0);
     }
 
 
