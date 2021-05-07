@@ -15,7 +15,7 @@ public class ProfileMenu {
         MainMenu.showCurrentMenu(Util.getCommand(input, "menu show-current"));
         changeName(Util.getCommand(input, "profile change --nickname (\\S+)"));
         changePassword(Util.getCommand(input, "profile change --password --current (\\S+) --new (\\S+)"));
-        exitMenu(Util.getCommand(input, "exit menu"));
+        exitMenu(Util.getCommand(input, "menu exit"));
     }
 
     public ProfileMenu() {
@@ -50,7 +50,7 @@ public class ProfileMenu {
     }
 
     public void exitMenu(Matcher matcher) {
-        if (!MainMenu.checked && matcher.matches()) {
+        if (!checked && matcher.matches()) {
             MainMenu.checked = true;
             MainMenu.menu = "main";
         }

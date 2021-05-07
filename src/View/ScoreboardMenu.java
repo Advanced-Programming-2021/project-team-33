@@ -14,7 +14,7 @@ public class ScoreboardMenu {
         checked = false;
         MainMenu.showCurrentMenu(Util.getCommand(input, "menu show-current"));
         showScoreBoard(Util.getCommand(input, "scoreboard show"));
-        exitMenu(Util.getCommand(input, "exit menu"));
+        exitMenu(Util.getCommand(input, "menu exit"));
     }
 
     public void showScoreBoard(Matcher matcher) {
@@ -39,7 +39,7 @@ public class ScoreboardMenu {
 
 
     public void exitMenu(Matcher matcher) {
-        if (!MainMenu.checked && matcher.matches()) {
+        if (!checked && matcher.matches()) {
             MainMenu.checked = true;
             MainMenu.menu = "main";
         }
