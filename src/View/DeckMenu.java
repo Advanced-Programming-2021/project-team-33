@@ -26,7 +26,7 @@ public class DeckMenu {
         showAllDecks(Util.getCommand(input, "deck show --all"));
         showDeck(Util.getCommand(input, "deck show --deck-name (\\S+)( --side)?"));
         showAllCards(Util.getCommand(input, "deck show --cards"));
-        CardMenu.showCard(Util.getCommand(input, "card show (.+)"));
+        CardMenu.showCard(Util.getCommand(input, "card show (.+?)"));
         exitMenu(Util.getCommand(input, "menu exit"));
     }
 

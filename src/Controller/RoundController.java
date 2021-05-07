@@ -58,17 +58,19 @@ public class RoundController {
     }
 
     public static void battlePhase() {
+        GameController.setAllCardsUnAttacked();
         Player.currentPlayer.setPhase(Phase.BATTLE);
         gameMenu.informPhase(Phase.BATTLE);
     }
 
     public static void mainPhase2() {
+        Player.currentPlayer.setPhase(Phase.MAIN2);
         gameMenu.informPhase(Phase.MAIN2);
     }
 
     public static void endPhase() {
+        Player.currentPlayer.setPhase(Phase.END);
         gameMenu.informPhase(Phase.END);
         changeTurn();
-
     }
 }

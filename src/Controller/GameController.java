@@ -84,6 +84,8 @@ public class GameController {
         Player.currentPlayer.setBoard(board1);
         Board board2 = new Board(Player.opponent);
         Player.opponent.setBoard(board2);
+        Player.currentPlayer.resetLifePoint();
+        Player.opponent.resetLifePoint();
         shuffleDeck(Player.currentPlayer);
         shuffleDeck(Player.opponent);
         for (int i = 0; i < 5; i++) {
@@ -254,11 +256,75 @@ public class GameController {
         }
     }
 
+    public static void setAllCardsUnAttacked() {
+        for (int i = 0; i < 5; i++) {
+            if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(i) != null)
+                Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(i).setAttacked(false);
+        }
+    }
+
     public static void setAllCardUnSummoned() {
         for (int i = 0; i < 5; i++) {
             if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(i) != null)
                 Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(i).setSummoned(false);
         }
+    }
+
+    public static void attackMonster(int enemyMonsterIndex) {
+        selectedCard.setAttacked(true);
+        GameMenu gameMenu = new GameMenu();
+        Card enemyCard = Player.opponent.getBoard().getFieldCardsForMonsters().get(enemyMonsterIndex);
+        if (enemyCard.getCardStatus().equals(CardStatus.ATTACK)) {
+            if (enemyCard.getAttack() < selectedCard.getAttack()) {
+                putMonsterOnGraveYard(enemyCard, Player.opponent);
+                int damage = selectedCard.getAttack() - enemyCard.getAttack();
+                Player.opponent.increaseLifePoint(-1 * damage);
+                gameMenu.printMonsterAttacks(1, damage, enemyMonsterIndex);
+            } else if (enemyCard.getAttack() == selectedCard.getAttack()) {
+                putMonsterOnGraveYard(enemyCard, Player.opponent);
+                putMonsterOnGraveYard(selectedCard, Player.currentPlayer);
+                gameMenu.printMonsterAttacks(2, 0, enemyMonsterIndex);
+            } else if (enemyCard.getAttack() > selectedCard.getAttack()) {
+                putMonsterOnGraveYard(selectedCard, Player.currentPlayer);
+                int damage = enemyCard.getAttack() - selectedCard.getAttack();
+                Player.currentPlayer.increaseLifePoint(-1 * damage);
+                gameMenu.printMonsterAttacks(3, damage, enemyMonsterIndex);
+
+            }
+        } else {
+            if (enemyCard.getDefence() < selectedCard.getAttack()) {
+                putMonsterOnGraveYard(enemyCard, Player.opponent);
+                if (enemyCard.getCardStatus().equals(CardStatus.DEFENCE))
+                    gameMenu.printMonsterAttacks(4, 0, enemyMonsterIndex);
+                else gameMenu.printMonsterAttacks(7, 0, enemyMonsterIndex);
+            } else if (enemyCard.getDefence() == selectedCard.getAttack()) {
+                if (enemyCard.getCardStatus().equals(CardStatus.DEFENCE))
+                    gameMenu.printMonsterAttacks(5, 0, enemyMonsterIndex);
+                else gameMenu.printMonsterAttacks(8, 0, enemyMonsterIndex);
+            } else if (enemyCard.getDefence() > selectedCard.getAttack()) {
+                int damage = enemyCard.getDefence() - selectedCard.getAttack();
+                Player.currentPlayer.increaseLifePoint(-1 * damage);
+                if (enemyCard.getCardStatus().equals(CardStatus.DEFENCE))
+                    gameMenu.printMonsterAttacks(6, damage, enemyMonsterIndex);
+                else gameMenu.printMonsterAttacks(9, damage, enemyMonsterIndex);
+            }
+        }
+    }
+
+    public static void attackDirect() {
+        Player.opponent.increaseLifePoint(-1 * selectedCard.getAttack());
+    }
+
+    public static void putMonsterOnGraveYard(Card card, Player player) {
+        player.getBoard().getGraveyard().add(card);
+        player.getBoard().getFieldCardsForMonsters().remove(card);
+    }
+
+    public static boolean isEnemyMonsterFieldEmpty() {
+        for (int i = 0; i < 5; i++) {
+            if (Player.opponent.getBoard().getFieldCardsForMonsters().get(i) != null) return false;
+        }
+        return true;
     }
 
 }

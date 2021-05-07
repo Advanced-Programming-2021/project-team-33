@@ -119,6 +119,10 @@ public class Player {
         }
     }
 
+    public void increaseLifePoint(int lifePoint){
+        this.lifePoint += lifePoint;
+    }
+
     public void addToDeckList(Deck deck) {
         listOfDecks.add(deck);
     }
