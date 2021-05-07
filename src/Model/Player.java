@@ -32,6 +32,10 @@ public class Player {
         return listOfDecks;
     }
 
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+
     public void setBoard(Board board) {
         this.board = board;
     }
@@ -153,7 +157,6 @@ public class Player {
         }
         return null;
     }
-
 
 
     public static Card getCardByName(String name) {
