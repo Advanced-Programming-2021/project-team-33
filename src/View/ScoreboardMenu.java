@@ -17,7 +17,11 @@ public class ScoreboardMenu {
         exitMenu(Util.getCommand(input, "menu exit"));
     }
 
-    public void showScoreBoard(Matcher matcher) {
+    public ScoreboardMenu(){
+
+    }
+
+    private void showScoreBoard(Matcher matcher) {
         if (!checked && matcher.matches()) {
             int rank = 0, counter = 0, equal = 0, a = 0;
             Map<String, Integer> scoreBoard = ProgramController.createScoreBoard();
@@ -38,7 +42,7 @@ public class ScoreboardMenu {
     }
 
 
-    public void exitMenu(Matcher matcher) {
+    private void exitMenu(Matcher matcher) {
         if (!checked && matcher.matches()) {
             MainMenu.checked = true;
             MainMenu.menu = "main";

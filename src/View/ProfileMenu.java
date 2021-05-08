@@ -22,7 +22,7 @@ public class ProfileMenu {
 
     }
 
-    public void changeName(Matcher matcher) {
+    private void changeName(Matcher matcher) {
         if (!checked && matcher.matches()) {
             player = ProgramController.getPlayerByNickname(matcher.group(1));
             if (player != null) {
@@ -34,7 +34,7 @@ public class ProfileMenu {
         }
     }
 
-    public void changePassword(Matcher matcher) {
+    private void changePassword(Matcher matcher) {
         if (!checked && matcher.matches()) {
             if (ProgramController.isPasswordTrue(matcher.group(1))) {
                 if (ProgramController.isPasswordEqual(matcher.group(2))) {
@@ -49,7 +49,7 @@ public class ProfileMenu {
         }
     }
 
-    public void exitMenu(Matcher matcher) {
+    private void exitMenu(Matcher matcher) {
         if (!checked && matcher.matches()) {
             MainMenu.checked = true;
             MainMenu.menu = "main";
