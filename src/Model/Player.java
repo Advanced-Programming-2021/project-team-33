@@ -92,6 +92,10 @@ public class Player {
         this.money += money;
     }
 
+    public void decreaseMoney(int money) {
+        this.money -= money;
+    }
+
     public void increaseScore(int score) {
         this.score += score;
     }

@@ -1,11 +1,9 @@
 package View;
 
-import Controller.CardController;
 import Controller.GameController;
 import Controller.ProgramController;
 import Model.Card;
 import Model.CardCategory;
-import Model.CardType;
 
 import java.util.regex.Matcher;
 
