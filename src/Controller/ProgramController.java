@@ -53,8 +53,8 @@ public class ProgramController {
     }
 
     public static boolean isNavigationPossible(String menuName) {
-        return menuName.equals("main") || menuName.equals("deck") || menuName.equals("shop") ||
-                menuName.equals("scoreboard") || menuName.equals("profile") || menuName.equals("importExport");
+        return menuName.equals("main") || menuName.equals("deck") || menuName.equals("shop")
+                || menuName.equals("scoreboard") || menuName.equals("profile") || menuName.equals("importExport");
     }
 
     public static int compare(int first, int second) {

@@ -7,7 +7,6 @@ import Model.Player;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedHashMap;
 import java.util.regex.Matcher;
 
 public class ShopMenu {
@@ -40,13 +39,13 @@ public class ShopMenu {
         if (!MainMenu.checked && matcher.matches()) {
             ArrayList<Card> cards = Card.getCards();
             String[] cardName = new String[cards.size()];
-            for (int i=0;i<cards.size();i++){
-                cardName[i]= cards.get(i).getCardName();
+            for (int i = 0; i < cards.size(); i++) {
+                cardName[i] = cards.get(i).getCardName();
             }
             Arrays.sort(cardName);
-            for (int i=0;i<cards.size();i++){
+            for (int i = 0; i < cards.size(); i++) {
                 Card card = Card.getCardByName(cardName[i]);
-                System.out.println(card.getCardName()+":"+card.getDescription());
+                System.out.println(card.getCardName() + ":" + card.getDescription());
             }
         }
     }
