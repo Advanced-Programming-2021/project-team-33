@@ -44,7 +44,7 @@ public class MainMenu {
                 else if (!gameController.isDeckValid(secondPlayerName))
                     System.out.println(secondPlayerName + "'s deck is invalid");
                 else {
-                    GameController.initiateGame(Player.thePlayer.getUsername(), secondPlayerName);
+                    GameController.initiateGame(Player.thePlayer.getUsername(), secondPlayerName, round);
                     menu = "game";
                 }
             } else duelWithAi();
@@ -82,6 +82,7 @@ public class MainMenu {
                 case "scoreboard" -> System.out.println("Scoreboard Menu");
                 case "profile" -> System.out.println("Profile Menu");
                 case "importExport" -> System.out.println("ImportExport Menu");
+                case "Graveyard" -> System.out.println("Graveyard Menu");
             }
         }
     }
@@ -93,6 +94,7 @@ public class MainMenu {
         MainMenu mainMenu = new MainMenu();
         ProfileMenu profileMenu = new ProfileMenu();
         ScoreboardMenu scoreboardMenu = new ScoreboardMenu();
+        GraveyardMenu graveyardMenu = new GraveyardMenu();
         GameMenu gameMenu = new GameMenu();
         ShopMenu shopMenu = new ShopMenu();
         String input;
@@ -108,6 +110,7 @@ public class MainMenu {
                 case "scoreboard" -> scoreboardMenu.run(input);
                 case "profile" -> profileMenu.run(input);
                 case "importExport" -> importExportMenu.run(input);
+                case "Graveyard" -> graveyardMenu.run(input);
             }
         }
     }

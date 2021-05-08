@@ -5,6 +5,7 @@ import Controller.GameController;
 import Controller.ProgramController;
 import Model.Card;
 import Model.CardCategory;
+import Model.CardStatus;
 import Model.CardType;
 
 import java.util.regex.Matcher;
@@ -31,6 +32,9 @@ public class CardMenu {
         if (!MainMenu.checked && matcher.matches()) {
             MainMenu.checked = true;
             if (GameController.selectedCard == null) System.out.println("no card is selected yet");
+            else if (GameController.isOpponentCardSelected && (GameController.selectedCard.getCardStatus().equals(CardStatus.SET) ||
+                    GameController.selectedCard.getCardStatus().equals(CardStatus.BACK)))
+                System.out.println("card is not visible");
             else if (GameController.selectedCard.getCardCategory().equals(CardCategory.MONSTER) ||
                     GameController.selectedCard.getCardCategory().equals(CardCategory.MONSTEREFFECT)) {
                 printMonsterCard(GameController.selectedCard);
