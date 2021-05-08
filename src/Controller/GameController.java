@@ -2,35 +2,52 @@ package Controller;
 
 import Model.*;
 import View.GameMenu;
+import View.MainMenu;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
 public class GameController {
 
     public static Card selectedCard = null;
+    public static boolean isOpponentCardSelected = false;
+
 
     public static int selectCard(String cardPosition, int number, String opponent) {
+        Player player = Player.currentPlayer;
+        if (!opponent.equals("")) player = Player.opponent;
         if (selectedCard != null) deSelectCard();
-        if (cardPosition.equals("monster") && Player.currentPlayer.board.getCardFromMonsterField(number) != null) {
-            Player.currentPlayer.board.getCardFromMonsterField(number).setSelected(true);
-            selectedCard = Player.currentPlayer.board.getCardFromMonsterField(number);
+        if (cardPosition.equals("monster") && player.getBoard().getCardFromMonsterField(number) != null) {
+            player.getBoard().getCardFromMonsterField(number).setSelected(true);
+            selectedCard = player.getBoard().getCardFromMonsterField(number);
             return 1;
         } else if (cardPosition.equals("monster")) return 0;
-        else if (cardPosition.equals("spell") && Player.currentPlayer.board.getCardFromSpellField(number) != null) {
-            Player.currentPlayer.board.getCardFromSpellField(number).setSelected(true);
-            selectedCard = Player.currentPlayer.board.getCardFromSpellField(number);
+        else if (cardPosition.equals("spell") && player.getBoard().getCardFromSpellField(number) != null) {
+            player.getBoard().getCardFromSpellField(number).setSelected(true);
+            selectedCard = player.getBoard().getCardFromSpellField(number);
             return 1;
         } else if (cardPosition.equals("spell")) return 0;
-        else if (cardPosition.equals("hand") && Player.currentPlayer.board.getCardFromHand(number) != null) {
-            Player.currentPlayer.board.getCardFromHand(number).setSelected(true);
-            selectedCard = Player.currentPlayer.board.getCardFromHand(number);
+        else if (cardPosition.equals("hand") && player.getBoard().getCardFromHand(number) != null) {
+            player.getBoard().getCardFromHand(number).setSelected(true);
+            selectedCard = player.getBoard().getCardFromHand(number);
             return 1;
         } else if (cardPosition.equals("hand")) return 0;
         return -1;
     }
 
+    public static void selectCardFromGraveyard(int index) {
+        Player.currentPlayer.getBoard().getGraveyard().get(index).setSelected(true);
+        selectedCard = Player.currentPlayer.getBoard().getGraveyard().get(index);
+    }
+
+
+    public static void setIsOpponentCardSelected(boolean isOpponentCardSelected) {
+        GameController.isOpponentCardSelected = isOpponentCardSelected;
+    }
+
     public static void deSelectCard() {
+        setIsOpponentCardSelected(false);
         selectedCard.setSelected(false);
         selectedCard = null;
     }
@@ -78,7 +95,18 @@ public class GameController {
         return true;
     }
 
-    public static void initiateGame(String firstPlayer, String secondPlayer) {
+    public static void initiateGame(String firstPlayer, String secondPlayer, int round) {
+        RoundController.otherPlayer = Player.getUserByUsername(secondPlayer);
+        RoundController.setRound(round);
+        prepareGame(firstPlayer, secondPlayer);
+    }
+
+    public static void setNextGame(String firstPlayer, String secondPlayer) {
+        //changeDeck
+        prepareGame(firstPlayer, secondPlayer);
+    }
+
+    private static void prepareGame(String firstPlayer, String secondPlayer) {
         RoundController.setWhoPlayFirst(firstPlayer, secondPlayer);
         Board board1 = new Board(Player.currentPlayer);
         Player.currentPlayer.setBoard(board1);
@@ -95,12 +123,16 @@ public class GameController {
         RoundController.drawPhase();
     }
 
+
     public static Card drawCard(Player player) {
-        Card card = player.getBoard().getDeck().get(0);
-        card.setCardStatus(CardStatus.HAND);
-        player.getBoard().getHand().add(player.getBoard().getDeck().get(0));
-        player.getBoard().getDeck().remove(card);
-        return card;
+        if (player.getBoard().getHand().size() < 7) {
+            Card card = player.getBoard().getDeck().get(0);
+            card.setCardStatus(CardStatus.HAND);
+            player.getBoard().getHand().add(player.getBoard().getDeck().get(0));
+            player.getBoard().getDeck().remove(card);
+            return card;
+        }
+        return null;
     }
 
     public static void shuffleDeck(Player player) {
@@ -186,7 +218,22 @@ public class GameController {
         System.out.println(Player.currentPlayer.getNickname() + ":" + Player.currentPlayer.getLifePoint());
     }
 
+    public static void printGraveyardCards() {
+        for (int i = 0; i < Player.currentPlayer.getBoard().getGraveyard().size(); i++) {
+            System.out.println(Player.currentPlayer.getBoard().getGraveyard().get(i).getCardName() + ": " +
+                    Player.currentPlayer.getBoard().getGraveyard().get(i).getDescription());
+        }
+    }
+
     public static boolean isMonsterFieldFull() {
+        int check = 0;
+        for (int i = 0; i < 5; i++) {
+            if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(i) != null) check++;
+        }
+        return check == 5;
+    }
+
+    public static boolean isSpellTrapFieldFull() {
         int check = 0;
         for (int i = 0; i < 5; i++) {
             if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(i) != null) check++;
@@ -221,6 +268,28 @@ public class GameController {
         putMonsterOnField();
         deSelectCard();
         RoundController.isSummoned = true;
+    }
+
+    public static void setSpell() {
+        Player.currentPlayer.getBoard().getHand().remove(selectedCard);
+        selectedCard.setCardStatus(CardStatus.SET);
+        selectedCard.setSummoned(true);
+        putSpellTrapOnField();
+        deSelectCard();
+        RoundController.isSummoned = true;
+    }
+
+    public static void putSpellTrapOnField() {
+        if (Player.thePlayer.getBoard().getFieldCardsForSpellTraps().get(2) == null)
+            Player.currentPlayer.getBoard().getFieldCardsForSpellTraps().set(2, selectedCard);
+        else if (Player.thePlayer.getBoard().getFieldCardsForSpellTraps().get(3) == null)
+            Player.currentPlayer.getBoard().getFieldCardsForSpellTraps().set(3, selectedCard);
+        else if (Player.thePlayer.getBoard().getFieldCardsForSpellTraps().get(1) == null)
+            Player.currentPlayer.getBoard().getFieldCardsForSpellTraps().set(1, selectedCard);
+        else if (Player.thePlayer.getBoard().getFieldCardsForSpellTraps().get(4) == null)
+            Player.currentPlayer.getBoard().getFieldCardsForSpellTraps().set(4, selectedCard);
+        else
+            Player.currentPlayer.getBoard().getFieldCardsForSpellTraps().set(0, selectedCard);
     }
 
     public static void putMonsterOnField() {
@@ -309,10 +378,15 @@ public class GameController {
                 else gameMenu.printMonsterAttacks(9, damage, enemyMonsterIndex);
             }
         }
+        deSelectCard();
     }
 
     public static void attackDirect() {
         Player.opponent.increaseLifePoint(-1 * selectedCard.getAttack());
+    }
+
+    public static void activeSpell() {
+
     }
 
     public static void putMonsterOnGraveYard(Card card, Player player) {
@@ -326,5 +400,51 @@ public class GameController {
         }
         return true;
     }
+
+    public static void checkOpponentSpellTraps() {
+        ArrayList<Card> cardList = Player.opponent.getBoard().getFieldCardsForSpellTraps();
+        boolean isChecked = false;
+        for (int i = 0; i < 5; i++) {
+            //other things could happen in this if too
+            if (cardList.get(i).getCardType().equals(CardType.QUICKPLAY)) {
+                isChecked = true;
+                break;
+            }
+        }
+        if (isChecked) {
+            GameMenu gameMenu = new GameMenu();
+            gameMenu.printMiddleChange();
+            RoundController.changeTurn();
+            showBoard();
+            if (gameMenu.changePhaseInMiddle().equals("no")) {
+                gameMenu.printMiddleChange();
+                RoundController.changeTurn();
+                showBoard();
+            } else Player.currentPlayer.setInOpponentPhase(true);
+        }
+    }
+
+    public static void getBackFromMiddleChange() {
+        GameMenu gameMenu = new GameMenu();
+        gameMenu.printMiddleChange();
+        RoundController.changeTurn();
+    }
+
+    public static void setWinner(int lifePoint, Player winner, Player looser) {
+        int score;
+        if (lifePoint != -1) {
+            score = RoundController.rounds * 1000;
+            winner.increaseScore(score);
+            winner.increaseMoney(score + lifePoint * RoundController.rounds);
+        } else {
+            score = RoundController.rounds * 1000;
+            winner.increaseMoney(score);
+        }
+        looser.increaseMoney(RoundController.rounds * 100);
+        GameMenu gameMenu = new GameMenu();
+        gameMenu.informEndOfGame(winner, score);
+        MainMenu.menu = "main";
+    }
+
 
 }

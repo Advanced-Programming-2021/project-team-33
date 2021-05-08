@@ -12,6 +12,7 @@ public class Player {
     public Board board;
     public static Player thePlayer;
     public static Player currentPlayer, opponent;
+    boolean isInOpponentPhase;
     String username, password, nickname;
     int money, score, lifePoint = 8000;
     Deck activeDeck;
@@ -50,6 +51,14 @@ public class Player {
 
     public Phase getPhase() {
         return phase;
+    }
+
+    public void setInOpponentPhase(boolean inOpponentPhase) {
+        isInOpponentPhase = inOpponentPhase;
+    }
+
+    public boolean isInOpponentPhase() {
+        return isInOpponentPhase;
     }
 
     public String getUsername() {
@@ -102,6 +111,10 @@ public class Player {
 
     public void setNickname(String name) {
         this.nickname = name;
+    }
+
+    public void setLifePoint(int lifePoint) {
+        this.lifePoint = lifePoint;
     }
 
     public void resetLifePoint() {
