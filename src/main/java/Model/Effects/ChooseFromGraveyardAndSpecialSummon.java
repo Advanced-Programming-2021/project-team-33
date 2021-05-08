@@ -10,7 +10,12 @@ public class ChooseFromGraveyardAndSpecialSummon implements Effect {
     public void run(Card card) {
         String opponent = Communicate.input("Choose graveyard:" + "\n" +
                 "1-My graveyard \t 2-Opponent graveyard");
-        GameController.selectCard("graveyard", 0, opponent.equals("1") ? "" : "opponent");
+        if(opponent.equals("1")) {
+//            GameController.selectCardFromGraveyard();
+        } else {
+
+        }
+
         // specialSummon(GameController.selectedCard);
     }
 }

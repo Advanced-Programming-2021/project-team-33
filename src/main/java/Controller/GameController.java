@@ -258,8 +258,17 @@ public class GameController {
         Player.currentPlayer.getBoard().getHand().remove(selectedCard);
         selectedCard.setCardStatus(CardStatus.ATTACK);
         putMonsterOnField();
+        callEffects();
         deSelectCard();
         RoundController.isSummoned = true;
+    }
+
+    public static void callEffects() {
+        if (selectedCard.getCardTypes().contains(CardType.EFFECT)) {
+            for (Effect effect : selectedCard.getEffects()) {
+                effect.run(null);
+            }
+        }
     }
 
     public static void setMonster() {
@@ -315,6 +324,7 @@ public class GameController {
 
     public static void flipSummon() {
         selectedCard.setCardStatus(CardStatus.ATTACK);
+        callEffects();
         selectedCard.setSummoned(true);
         deSelectCard();
     }
@@ -345,7 +355,15 @@ public class GameController {
         GameMenu gameMenu = new GameMenu();
         Card enemyCard = Player.opponent.getBoard().getFieldCardsForMonsters().get(enemyMonsterIndex);
         if (enemyCard.getCardStatus().equals(CardStatus.ATTACK)) {
-            if (enemyCard.getAttack() < selectedCard.getAttack()) {
+            if (enemyCard.getCardTypes().contains(CardType.EFFECT)) {
+                if (enemyCard.getCardName().equals("Command Knight")) {
+                    for (Card fieldCardsForMonster : Player.opponent.getBoard().getFieldCardsForMonsters()) {
+                        if (fieldCardsForMonster != null &&
+                                !fieldCardsForMonster.getCardName().equals("Command Knight"))
+                            return;
+                    }
+                }
+            } else if (enemyCard.getAttack() < selectedCard.getAttack()) {
                 putMonsterOnGraveYard(enemyCard, Player.opponent);
                 int damage = selectedCard.getAttack() - enemyCard.getAttack();
                 Player.opponent.increaseLifePoint(-1 * damage);
@@ -408,7 +426,7 @@ public class GameController {
         if (cardList.get(0) != null) {
             for (int i = 0; i < 5; i++) {
                 //other things could happen in this if too
-                if (cardList.get(i).getCardType().equals(CardType.QUICKPLAY)) {
+                if (cardList.get(i).getCardTypes().equals(CardType.QUICKPLAY)) {
                     isChecked = true;
                     break;
                 }

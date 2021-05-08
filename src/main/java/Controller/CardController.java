@@ -37,12 +37,11 @@ public class CardController {
     }
 
     private static void initialMonsters() {
-        //should has effect
         Card commandKnight = new Card("Command Knight", "Gain 400 ATK to all Warrior-Type monsters," +
                 " if you control another monster, monsters your opponent " +
                 "controls cannot target this card for an attack", 1,
                 new ArrayList<>(List.of(CardType.WARRIOR, CardType.EFFECT)), CardCategory.MONSTEREFFECT,
-                3, 4, null, 1000, 1000);
+                3, 4, new ArrayList<>(List.of(new AddFieldSpellToMyHand())), 1000, 1000);
 
         Card battleOx = new Card("Battle Ox", "nothing", 1,
                 new ArrayList<>(List.of(CardType.BEASTWARRIOR)), CardCategory.MONSTER,

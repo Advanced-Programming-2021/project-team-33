@@ -96,6 +96,10 @@ public class Card {
         return level;
     }
 
+    public ArrayList<Effect> getEffects() {
+        return effects;
+    }
+
     public CardStatus getCardStatus() {
         return cardStatus;
     }
@@ -108,7 +112,7 @@ public class Card {
         return price;
     }
 
-    public ArrayList<CardType> getCardType() {
+    public ArrayList<CardType> getCardTypes() {
         return this.cardTypes;
     }
 
