@@ -1,5 +1,7 @@
 package Model;
 
 public interface Effect {
-    public void run(Card card);
+    public void enableEffect(Card card);
+
+    public void disableEffect(Card card);
 }

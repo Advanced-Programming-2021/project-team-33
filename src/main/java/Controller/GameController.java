@@ -6,7 +6,6 @@ import View.MainMenu;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Random;
 
 public class GameController {
 
@@ -266,7 +265,7 @@ public class GameController {
     public static void callEffects() {
         if (selectedCard.getCardTypes().contains(CardType.EFFECT)) {
             for (Effect effect : selectedCard.getEffects()) {
-                effect.run(null);
+                effect.enableEffect(null);
             }
         }
     }
@@ -355,24 +354,19 @@ public class GameController {
         GameMenu gameMenu = new GameMenu();
         Card enemyCard = Player.opponent.getBoard().getFieldCardsForMonsters().get(enemyMonsterIndex);
         if (enemyCard.getCardStatus().equals(CardStatus.ATTACK)) {
-            if (enemyCard.getCardTypes().contains(CardType.EFFECT)) {
-                if (enemyCard.getCardName().equals("Command Knight")) {
-                    for (Card fieldCardsForMonster : Player.opponent.getBoard().getFieldCardsForMonsters()) {
-                        if (fieldCardsForMonster != null &&
-                                !fieldCardsForMonster.getCardName().equals("Command Knight"))
-                            return;
-                    }
-                }
-            } else if (enemyCard.getAttack() < selectedCard.getAttack()) {
+            if (enemyCard.getAttack() < selectedCard.getAttack()) {
+                if (checkMonsterEffects(enemyCard)) return;
                 putMonsterOnGraveYard(enemyCard, Player.opponent);
                 int damage = selectedCard.getAttack() - enemyCard.getAttack();
                 Player.opponent.increaseLifePoint(-1 * damage);
                 gameMenu.printMonsterAttacks(1, damage, enemyMonsterIndex);
             } else if (enemyCard.getAttack() == selectedCard.getAttack()) {
+                if (checkMonsterEffects(enemyCard)) return;
                 putMonsterOnGraveYard(enemyCard, Player.opponent);
                 putMonsterOnGraveYard(selectedCard, Player.currentPlayer);
                 gameMenu.printMonsterAttacks(2, 0, enemyMonsterIndex);
             } else if (enemyCard.getAttack() > selectedCard.getAttack()) {
+                if (checkMonsterEffects(enemyCard)) return;
                 putMonsterOnGraveYard(selectedCard, Player.currentPlayer);
                 int damage = enemyCard.getAttack() - selectedCard.getAttack();
                 Player.currentPlayer.increaseLifePoint(-1 * damage);
@@ -381,15 +375,18 @@ public class GameController {
             }
         } else {
             if (enemyCard.getDefence() < selectedCard.getAttack()) {
+                if (checkMonsterEffects(enemyCard)) return;
                 putMonsterOnGraveYard(enemyCard, Player.opponent);
                 if (enemyCard.getCardStatus().equals(CardStatus.DEFENCE))
                     gameMenu.printMonsterAttacks(4, 0, enemyMonsterIndex);
                 else gameMenu.printMonsterAttacks(7, 0, enemyMonsterIndex);
             } else if (enemyCard.getDefence() == selectedCard.getAttack()) {
+                if (checkMonsterEffects(enemyCard)) return;
                 if (enemyCard.getCardStatus().equals(CardStatus.DEFENCE))
                     gameMenu.printMonsterAttacks(5, 0, enemyMonsterIndex);
                 else gameMenu.printMonsterAttacks(8, 0, enemyMonsterIndex);
             } else if (enemyCard.getDefence() > selectedCard.getAttack()) {
+                if (checkMonsterEffects(enemyCard)) return;
                 int damage = enemyCard.getDefence() - selectedCard.getAttack();
                 Player.currentPlayer.increaseLifePoint(-1 * damage);
                 if (enemyCard.getCardStatus().equals(CardStatus.DEFENCE))
@@ -404,8 +401,49 @@ public class GameController {
         Player.opponent.increaseLifePoint(-1 * selectedCard.getAttack());
     }
 
-    public static void activeSpell() {
+    public static boolean canDestroyMonster(Card enemyCard) {
+        if (enemyCard.getCardStatus().equals(CardStatus.ATTACK)) {
+            if (enemyCard.getAttack() < selectedCard.getAttack()) {
+                return true;
+            } else if (enemyCard.getAttack() == selectedCard.getAttack()) {
+                return true;
+            } else if (enemyCard.getAttack() > selectedCard.getAttack()) {
+                return false;
+            } else return false;
+        } else {
+            if (enemyCard.getDefence() < selectedCard.getAttack()) {
+                return true;
+            } else if (enemyCard.getDefence() == selectedCard.getAttack()) {
+                return false;
+            } else if (enemyCard.getDefence() > selectedCard.getAttack()) {
+                return false;
+            } else return false;
+        }
+    }
 
+    public static boolean checkMonsterEffects(Card enemyCard) {
+        if (enemyCard.getCardTypes().contains(CardType.EFFECT)) {
+            switch (enemyCard.getCardName()) {
+                case "Command Knight":
+                    for (Card fieldCardsForMonster : Player.opponent.getBoard().getFieldCardsForMonsters()) {
+                        if (fieldCardsForMonster != null &&
+                                !fieldCardsForMonster.getCardName().equals("Command Knight"))
+                            return true;
+                    }
+                    return false;
+                // not complete
+                case "Yomi Ship":
+                    if(canDestroyMonster(enemyCard)) {
+                        putMonsterOnGraveYard(selectedCard, Player.currentPlayer);
+                        return true;
+                    }
+                    return false;
+                default:
+                    return false;
+            }
+        } else {
+            return false;
+        }
     }
 
     public static void putMonsterOnGraveYard(Card card, Player player) {

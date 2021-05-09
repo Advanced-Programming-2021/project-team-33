@@ -3,9 +3,7 @@ package Controller;
 import Model.Card;
 import Model.CardCategory;
 import Model.CardType;
-import Model.Effects.AddFieldSpellToMyHand;
-import Model.Effects.ChooseFromGraveyardAndSpecialSummon;
-import Model.Effects.PickTwoCardsFromTopOfDeck;
+import Model.Effects.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,10 +21,11 @@ public class CardController {
     }
 
     private static void initialSpells() {
+        // not complete
         Card monsterReborn = new Card("Monster Reborn", "nothing", 1,
                 new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.SPELL, 1, 0,
                 new ArrayList<>(List.of(new ChooseFromGraveyardAndSpecialSummon())), 0, 0);
-
+// not complete
         Card terraforming = new Card("Terraforming", "nothing", 1,
                 new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.SPELL, 1, 0,
                 new ArrayList<>(List.of(new AddFieldSpellToMyHand())), 0, 0);
@@ -34,6 +33,19 @@ public class CardController {
         Card potOfGreed = new Card("Pot of Greed", "nothing", 1,
                 new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.SPELL, 1, 0,
                 new ArrayList<>(List.of(new PickTwoCardsFromTopOfDeck())), 0, 0);
+
+        Card raigeki = new Card("Raigeki", "nothing", 1,
+                new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.SPELL, 1, 0,
+                new ArrayList<>(List.of(new DestroyAllOpponentMonsters())), 0, 0);
+
+        // what the fuck
+        Card changeOfHeart = new Card("Change of Heart", "nothing", 1,
+                new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.SPELL, 1, 0,
+                null, 0, 0);
+
+        Card harpieFeatherDuster = new Card("Harpie’s Feather Duster", "nothing", 1,
+                new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.SPELL, 1, 0,
+                new ArrayList<>(List.of(new DestroyAllOpponentSpellTrap())), 0, 0);
     }
 
     private static void initialMonsters() {
@@ -41,7 +53,7 @@ public class CardController {
                 " if you control another monster, monsters your opponent " +
                 "controls cannot target this card for an attack", 1,
                 new ArrayList<>(List.of(CardType.WARRIOR, CardType.EFFECT)), CardCategory.MONSTEREFFECT,
-                3, 4, new ArrayList<>(List.of(new AddFieldSpellToMyHand())), 1000, 1000);
+                3, 4, new ArrayList<>(List.of(new IncreaseAttack())), 1000, 1000);
 
         Card battleOx = new Card("Battle Ox", "nothing", 1,
                 new ArrayList<>(List.of(CardType.BEASTWARRIOR)), CardCategory.MONSTER,
@@ -55,7 +67,6 @@ public class CardController {
                 new ArrayList<>(List.of(CardType.FIEND)), CardCategory.MONSTER,
                 3, 4, null, 1300, 1000);
 
-        //should has effect
         Card yomiShip = new Card("Yomi Ship", "nothing", 1,
                 new ArrayList<>(List.of(CardType.AQUA, CardType.EFFECT)), CardCategory.MONSTEREFFECT,
                 3, 3, null, 800, 1400);

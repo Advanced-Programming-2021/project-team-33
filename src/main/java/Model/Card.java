@@ -6,7 +6,7 @@ public class Card {
     static int id = 0;
     static ArrayList<Card> cards = new ArrayList<>();
     ArrayList<Effect> effects = new ArrayList<>();
-    boolean isSelected = false, isChanged = false, isSummoned = false, isAttacked = false, isActivated = false;
+    boolean isSelected = false, isChanged = false, isSummoned = false, isAttacked = false, isActivated = false, destroyed = false;
     String cardName, description;
     ArrayList<CardType> cardTypes = new ArrayList<>();
     CardCategory cardCategory;
@@ -98,6 +98,14 @@ public class Card {
 
     public ArrayList<Effect> getEffects() {
         return effects;
+    }
+
+    public void setDestroyed(boolean destroyed) {
+        this.destroyed = destroyed;
+    }
+
+    public boolean isDestroyed() {
+        return destroyed;
     }
 
     public CardStatus getCardStatus() {
