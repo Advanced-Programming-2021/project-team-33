@@ -118,7 +118,10 @@ public class GameMenu {
                 else {
                     if (GameController.selectedCard.getCardCategory().equals(CardCategory.TRAP))
                         System.out.println("trap activated");
-                    else System.out.println("spell activated");
+                    else {
+                        System.out.println("spell activated");
+                        GameController.activeSpell();
+                    }
                     GameController.getBackFromMiddleChange();
                 }
             } else {
@@ -134,6 +137,7 @@ public class GameMenu {
                     //else if( !isActivable) System.out.println("preparations of this spell are not done yet");
                 else {
                     System.out.println("spell activated");
+                    GameController.activeSpell();
                 }
             }
 

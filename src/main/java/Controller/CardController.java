@@ -46,6 +46,41 @@ public class CardController {
         Card harpieFeatherDuster = new Card("Harpie’s Feather Duster", "nothing", 1,
                 new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.SPELL, 1, 0,
                 new ArrayList<>(List.of(new DestroyAllOpponentSpellTrap())), 0, 0);
+
+        // what the fuck
+        Card swordsOfRevealingLight = new Card("Swords of Revealing Light", "nothing", 1,
+                new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.SPELL, 3, 0,
+                new ArrayList<>(List.of(new DestroyAllOpponentSpellTrap())), 0, 0);
+
+        Card darkHole = new Card("Dark Hole", "nothing", 1,
+                new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.SPELL, 3, 0,
+                new ArrayList<>(List.of(new DestroyAllMonsters())), 0, 0);
+        // what
+        Card supplySquad = new Card("Supply Squad", "nothing", 1,
+                new ArrayList<>(List.of(CardType.CONTINUES)), CardCategory.SPELL, 3, 0,
+                null, 0, 0);
+
+        Card spellAbsorption = new Card("Spell Absorption", "nothing", 1,
+                new ArrayList<>(List.of(CardType.CONTINUES)), CardCategory.SPELL, 3, 0,
+                null, 0, 0);
+
+        // not complete
+        Card messengerOfPeace = new Card("Messenger of peace", "nothing", 1,
+                new ArrayList<>(List.of(CardType.CONTINUES)), CardCategory.SPELL, 3, 0,
+                null, 0, 0);
+
+        // not complete
+        Card twinTwisters = new Card("Twin Twisters", "nothing", 1,
+                new ArrayList<>(List.of(CardType.QUICKPLAY)), CardCategory.SPELL, 3, 0,
+                null, 0, 0);
+        // same problem not solved
+        Card mysticalSpaceTyphoon = new Card("Mystical space typhoon", "nothing", 1,
+                new ArrayList<>(List.of(CardType.QUICKPLAY)), CardCategory.SPELL, 3, 0,
+                null, 0, 0);
+        // what
+        Card ringOfDefense = new Card("Ring of Defense", "nothing", 1,
+                new ArrayList<>(List.of(CardType.QUICKPLAY)), CardCategory.SPELL, 3, 0,
+                null, 0, 0);
     }
 
     private static void initialMonsters() {

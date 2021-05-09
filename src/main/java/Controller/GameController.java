@@ -35,6 +35,17 @@ public class GameController {
         return -1;
     }
 
+    public static void activeSpellsByName() {
+        EffectController.spellAbsorption();
+    }
+
+    public static void activeSpell() {
+        activeSpellsByName();
+        for (Effect effect : selectedCard.getEffects()) {
+            effect.enableEffect(null);
+        }
+    }
+
     public static void selectCardFromGraveyard(int index) {
         Player.currentPlayer.getBoard().getGraveyard().get(index).setSelected(true);
         selectedCard = Player.currentPlayer.getBoard().getGraveyard().get(index);
@@ -355,18 +366,18 @@ public class GameController {
         Card enemyCard = Player.opponent.getBoard().getFieldCardsForMonsters().get(enemyMonsterIndex);
         if (enemyCard.getCardStatus().equals(CardStatus.ATTACK)) {
             if (enemyCard.getAttack() < selectedCard.getAttack()) {
-                if (checkMonsterEffects(enemyCard)) return;
+                if (checkEffects(enemyCard)) return;
                 putMonsterOnGraveYard(enemyCard, Player.opponent);
                 int damage = selectedCard.getAttack() - enemyCard.getAttack();
                 Player.opponent.increaseLifePoint(-1 * damage);
                 gameMenu.printMonsterAttacks(1, damage, enemyMonsterIndex);
             } else if (enemyCard.getAttack() == selectedCard.getAttack()) {
-                if (checkMonsterEffects(enemyCard)) return;
+                if (checkEffects(enemyCard)) return;
                 putMonsterOnGraveYard(enemyCard, Player.opponent);
                 putMonsterOnGraveYard(selectedCard, Player.currentPlayer);
                 gameMenu.printMonsterAttacks(2, 0, enemyMonsterIndex);
             } else if (enemyCard.getAttack() > selectedCard.getAttack()) {
-                if (checkMonsterEffects(enemyCard)) return;
+                if (checkEffects(enemyCard)) return;
                 putMonsterOnGraveYard(selectedCard, Player.currentPlayer);
                 int damage = enemyCard.getAttack() - selectedCard.getAttack();
                 Player.currentPlayer.increaseLifePoint(-1 * damage);
@@ -375,18 +386,18 @@ public class GameController {
             }
         } else {
             if (enemyCard.getDefence() < selectedCard.getAttack()) {
-                if (checkMonsterEffects(enemyCard)) return;
+                if (checkEffects(enemyCard)) return;
                 putMonsterOnGraveYard(enemyCard, Player.opponent);
                 if (enemyCard.getCardStatus().equals(CardStatus.DEFENCE))
                     gameMenu.printMonsterAttacks(4, 0, enemyMonsterIndex);
                 else gameMenu.printMonsterAttacks(7, 0, enemyMonsterIndex);
             } else if (enemyCard.getDefence() == selectedCard.getAttack()) {
-                if (checkMonsterEffects(enemyCard)) return;
+                if (checkEffects(enemyCard)) return;
                 if (enemyCard.getCardStatus().equals(CardStatus.DEFENCE))
                     gameMenu.printMonsterAttacks(5, 0, enemyMonsterIndex);
                 else gameMenu.printMonsterAttacks(8, 0, enemyMonsterIndex);
             } else if (enemyCard.getDefence() > selectedCard.getAttack()) {
-                if (checkMonsterEffects(enemyCard)) return;
+                if (checkEffects(enemyCard)) return;
                 int damage = enemyCard.getDefence() - selectedCard.getAttack();
                 Player.currentPlayer.increaseLifePoint(-1 * damage);
                 if (enemyCard.getCardStatus().equals(CardStatus.DEFENCE))
@@ -421,7 +432,8 @@ public class GameController {
         }
     }
 
-    public static boolean checkMonsterEffects(Card enemyCard) {
+    public static boolean checkEffects(Card enemyCard) {
+        if (EffectController.messengerOfPeace()) return true;
         if (enemyCard.getCardTypes().contains(CardType.EFFECT)) {
             switch (enemyCard.getCardName()) {
                 case "Command Knight":
