@@ -8,11 +8,8 @@ import Model.Player;
 public class DestroySelectedMonster implements Effect {
     @Override
     public void enableEffect(Card card) {
-
             Player.opponent.getBoard().getGraveyard().add(GameController.lastSelectedCard);
             Player.opponent.getBoard().getHand().remove(GameController.lastSelectedCard);
-
-
     }
 
     @Override

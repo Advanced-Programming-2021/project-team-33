@@ -44,6 +44,18 @@ public class CardController {
         Card negateAttack = new Card("Negate Attack", "nothing", 1,
                 new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.TRAP, 3, 0,
                 new ArrayList<>(List.of(new EndBattlePhaseForOpponent())), 0, 0);
+
+        Card solemnWarning = new Card("Solemn Warning", "nothing", 1,
+                new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.TRAP, 3, 0,
+                new ArrayList<>(List.of(new GiveYourLife())), 0, 0);
+
+        Card magicJammer = new Card("Magic Jammer", "nothing", 1,
+                new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.TRAP, 3, 0,
+                new ArrayList<>(List.of(new DestroySpecificSpellCard())), 0, 0);
+
+        Card callOfTheHaunted = new Card("Call Of The Haunted", "nothing", 1,
+                new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.TRAP, 3, 0,
+                new ArrayList<>(List.of(new SummonFromGraveYard())), 0, 0);
     }
 
     private static void initialSpells() {

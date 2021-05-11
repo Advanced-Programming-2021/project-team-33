@@ -14,15 +14,15 @@ public class GameController {
     public static Card lastSelectedCard = null;
     public static boolean isOpponentCardSelected = false;
     public static boolean isAttackTrap = false;
+    public static boolean isSpellTrap = false;
     public static boolean isSummonTrap = false;
 
 
     public static int selectCard(String cardPosition, int number, String opponent) {
         Player player = Player.currentPlayer;
-        if (player.isInOpponentPhase() && isAttackTrap)
-            return selectAttackTrap(cardPosition, number);
-        if (player.isInOpponentPhase() && isSummonTrap)
-            return selectSummonTrap(cardPosition, number);
+        if (player.isInOpponentPhase() && isAttackTrap) return selectAttackTrap(cardPosition, number);
+        if (player.isInOpponentPhase() && isSummonTrap) return selectSummonTrap(cardPosition, number);
+        if (player.isInOpponentPhase() && isSpellTrap) return selectSpellTrap(cardPosition, number);
         if (!opponent.equals("")) player = Player.opponent;
         if (selectedCard != null) deSelectCard();
         if (cardPosition.equals("monster") && player.getBoard().getCardFromMonsterField(number) != null) {
@@ -52,10 +52,19 @@ public class GameController {
         return -1;
     }
 
+    public static int selectSpellTrap(String cardPosition, int number){
+        if (Player.currentPlayer.getBoard().getCardFromSpellField(number) == null) return 0;
+        String cardName = Player.currentPlayer.getBoard().getCardFromSpellField(number).getCardName();
+        if (cardPosition.equals("spell") && cardName.equals("Magic Jammer"))
+            return 1;
+        return -1;
+    }
+
     private static int selectSummonTrap(String cardPosition, int number) {
         if (Player.currentPlayer.getBoard().getCardFromSpellField(number) == null) return 0;
         String cardName = Player.currentPlayer.getBoard().getCardFromSpellField(number).getCardName();
-        if (cardPosition.equals("spell") && (cardName.equals("Trap Hole") || cardName.equals("Torrential Tribute")))
+        if (cardPosition.equals("spell") && (cardName.equals("Trap Hole") || cardName.equals("Torrential Tribute")) ||
+                cardName.equals("Solemn Warning"))
             return 1;
         return -1;
     }
@@ -65,6 +74,7 @@ public class GameController {
     }
 
     public static void activeSpell() {
+        if (isSpellTrap()) return;
         activeSpellsByName();
         for (Effect effect : selectedCard.getEffects()) {
             effect.enableEffect(null);
@@ -496,6 +506,16 @@ public class GameController {
         return false;
     }
 
+    public static boolean isSpellTrap() {
+        ArrayList<Card> trapList = Player.opponent.getBoard().getFieldCardsForSpellTraps();
+        if (trapList.contains(Card.getCardByName("Magic Jammer"))){
+            lastSelectedCard = selectedCard;
+            isSpellTrap = true;
+            return isChangedTurnInMiddle();
+        }
+        return false;
+    }
+
     public static boolean isSummonTrap() {
         ArrayList<Card> trapList = Player.opponent.getBoard().getFieldCardsForSpellTraps();
         if (selectedCard.getAttack() >= 1000 && trapList.contains(Card.getCardByName("Trap Hole"))) {
@@ -504,6 +524,10 @@ public class GameController {
             return isChangedTurnInMiddle();
         } else if (trapList.contains(Card.getCardByName("Torrential Tribute"))) {
             isSummonTrap = true;
+            return isChangedTurnInMiddle();
+        } else if (trapList.contains(Card.getCardByName("Solemn Warning"))) {
+            isSummonTrap = true;
+            lastSelectedCard = selectedCard;
             return isChangedTurnInMiddle();
         }
         return false;
