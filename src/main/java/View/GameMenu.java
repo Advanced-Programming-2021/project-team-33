@@ -29,6 +29,7 @@ public class GameMenu {
         goToNextPhase(Util.getCommand(input, "next phase"));
         showBoard(Util.getCommand(input, "showBoard"));
         surrender(Util.getCommand(input, "surrender"));
+        cancel(Util.getCommand(input, "cancel"));
         RoundController.checkEndOfRound();
     }
 
@@ -113,19 +114,19 @@ public class GameMenu {
                         !GameController.selectedCard.getCardCategory().equals(CardCategory.TRAP))
                     System.out.println("activate effect is only for spell cards.");
                     //other things needed for if blow
-                else if (!GameController.selectedCard.getCardStatus().equals(CardStatus.BACK))
+                else if (!GameController.selectedCard.getCardStatus().equals(CardStatus.BACK) &&
+                        !GameController.selectedCard.getCardStatus().equals(CardStatus.HAND))
                     System.out.println("you can't active this card");
                 else {
                     if (GameController.selectedCard.getCardCategory().equals(CardCategory.TRAP))
                         System.out.println("trap activated");
-                    else {
-                        System.out.println("spell activated");
-                        GameController.activeSpell();
-                    }
+                    else System.out.println("spell activated");
+                    GameController.activeSpell();
                     GameController.getBackFromMiddleChange();
                 }
             } else {
-                if (!GameController.selectedCard.getCardCategory().equals(CardCategory.SPELL))
+                if (!GameController.selectedCard.getCardCategory().equals(CardCategory.SPELL) &&
+                        !GameController.selectedCard.getCardCategory().equals(CardCategory.TRAP))
                     System.out.println("activate effect is only for spell cards.");
                 else if (!Player.currentPlayer.getPhase().equals(Phase.MAIN1) &&
                         !Player.currentPlayer.getPhase().equals(Phase.MAIN2))
@@ -165,7 +166,7 @@ public class GameMenu {
                     return;
                 }
                 String input = Communicate.input("Pick Monster for tribute");
-                if(input.equals("cancel")) return;
+                if (input.equals("cancel")) return;
                 int tribute = Integer.parseInt(Communicate.input("Pick Monster for tribute"));
                 if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(tribute) == null) {
                     System.out.println("there are no monsters on this address");
@@ -179,10 +180,10 @@ public class GameMenu {
                     return;
                 }
                 String input = Communicate.input("Pick Monster for tribute");
-                if(input.equals("cancel")) return;
+                if (input.equals("cancel")) return;
                 int tribute = Integer.parseInt(input);
                 input = Communicate.input("Pick another Monster for tribute");
-                if(input.equals("cancel")) return;
+                if (input.equals("cancel")) return;
                 int tribute1 = Integer.parseInt(input);
                 if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(tribute) == null ||
                         Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(tribute1) == null) {
@@ -362,6 +363,13 @@ public class GameMenu {
                 System.out.println("card deselected");
                 GameController.deSelectCard();
             }
+        }
+    }
+
+    private void cancel(Matcher matcher) {
+        if (!MainMenu.checked && matcher.matches()) {
+            MainMenu.checked = true;
+
         }
     }
 

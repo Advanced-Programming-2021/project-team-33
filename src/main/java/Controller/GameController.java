@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.*;
+import View.Communicate;
 import View.GameMenu;
 import View.MainMenu;
 
@@ -10,11 +11,18 @@ import java.util.Collections;
 public class GameController {
 
     public static Card selectedCard = null;
+    public static Card lastSelectedCard = null;
     public static boolean isOpponentCardSelected = false;
+    public static boolean isAttackTrap = false;
+    public static boolean isSummonTrap = false;
 
 
     public static int selectCard(String cardPosition, int number, String opponent) {
         Player player = Player.currentPlayer;
+        if (player.isInOpponentPhase() && isAttackTrap)
+            return selectAttackTrap(cardPosition, number);
+        if (player.isInOpponentPhase() && isSummonTrap)
+            return selectSummonTrap(cardPosition, number);
         if (!opponent.equals("")) player = Player.opponent;
         if (selectedCard != null) deSelectCard();
         if (cardPosition.equals("monster") && player.getBoard().getCardFromMonsterField(number) != null) {
@@ -35,6 +43,23 @@ public class GameController {
         return -1;
     }
 
+    private static int selectAttackTrap(String cardPosition, int number) {
+        if (Player.currentPlayer.getBoard().getCardFromSpellField(number) == null) return 0;
+        String cardName = Player.currentPlayer.getBoard().getCardFromSpellField(number).getCardName();
+        if (cardPosition.equals("spell") && (cardName.equals("Magic Cylinder") || cardName.equals("Mirror Force")) ||
+                cardName.equals("Negate Attack"))
+            return 1;
+        return -1;
+    }
+
+    private static int selectSummonTrap(String cardPosition, int number) {
+        if (Player.currentPlayer.getBoard().getCardFromSpellField(number) == null) return 0;
+        String cardName = Player.currentPlayer.getBoard().getCardFromSpellField(number).getCardName();
+        if (cardPosition.equals("spell") && (cardName.equals("Trap Hole") || cardName.equals("Torrential Tribute")))
+            return 1;
+        return -1;
+    }
+
     public static void activeSpellsByName() {
         EffectController.spellAbsorption();
     }
@@ -45,6 +70,7 @@ public class GameController {
             effect.enableEffect(null);
         }
     }
+
 
     public static void selectCardFromGraveyard(int index) {
         Player.currentPlayer.getBoard().getGraveyard().get(index).setSelected(true);
@@ -253,6 +279,7 @@ public class GameController {
     }
 
     public static void summonMonster(int firstTribute, int secondTribute) {
+        if (isSummonTrap()) return;
         if (firstTribute != 0 && secondTribute == 0) {
             Card tributeCard = Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(firstTribute);
             Player.currentPlayer.getBoard().getGraveyard().add(tributeCard);
@@ -333,6 +360,7 @@ public class GameController {
     }
 
     public static void flipSummon() {
+        if (isSummonTrap()) return;
         selectedCard.setCardStatus(CardStatus.ATTACK);
         callEffects();
         selectedCard.setSummoned(true);
@@ -364,20 +392,19 @@ public class GameController {
         selectedCard.setAttacked(true);
         GameMenu gameMenu = new GameMenu();
         Card enemyCard = Player.opponent.getBoard().getFieldCardsForMonsters().get(enemyMonsterIndex);
+        if (isAttackTrap()) return;
         if (enemyCard.getCardStatus().equals(CardStatus.ATTACK)) {
+            if (checkEffects(enemyCard)) return;
             if (enemyCard.getAttack() < selectedCard.getAttack()) {
-                if (checkEffects(enemyCard)) return;
                 putMonsterOnGraveYard(enemyCard, Player.opponent);
                 int damage = selectedCard.getAttack() - enemyCard.getAttack();
                 Player.opponent.increaseLifePoint(-1 * damage);
                 gameMenu.printMonsterAttacks(1, damage, enemyMonsterIndex);
             } else if (enemyCard.getAttack() == selectedCard.getAttack()) {
-                if (checkEffects(enemyCard)) return;
                 putMonsterOnGraveYard(enemyCard, Player.opponent);
                 putMonsterOnGraveYard(selectedCard, Player.currentPlayer);
                 gameMenu.printMonsterAttacks(2, 0, enemyMonsterIndex);
-            } else if (enemyCard.getAttack() > selectedCard.getAttack()) {
-                if (checkEffects(enemyCard)) return;
+            } else {
                 putMonsterOnGraveYard(selectedCard, Player.currentPlayer);
                 int damage = enemyCard.getAttack() - selectedCard.getAttack();
                 Player.currentPlayer.increaseLifePoint(-1 * damage);
@@ -385,19 +412,18 @@ public class GameController {
 
             }
         } else {
+            if (checkEffects(enemyCard)) return;
             if (enemyCard.getDefence() < selectedCard.getAttack()) {
-                if (checkEffects(enemyCard)) return;
                 putMonsterOnGraveYard(enemyCard, Player.opponent);
                 if (enemyCard.getCardStatus().equals(CardStatus.DEFENCE))
                     gameMenu.printMonsterAttacks(4, 0, enemyMonsterIndex);
                 else gameMenu.printMonsterAttacks(7, 0, enemyMonsterIndex);
             } else if (enemyCard.getDefence() == selectedCard.getAttack()) {
-                if (checkEffects(enemyCard)) return;
+
                 if (enemyCard.getCardStatus().equals(CardStatus.DEFENCE))
                     gameMenu.printMonsterAttacks(5, 0, enemyMonsterIndex);
                 else gameMenu.printMonsterAttacks(8, 0, enemyMonsterIndex);
             } else if (enemyCard.getDefence() > selectedCard.getAttack()) {
-                if (checkEffects(enemyCard)) return;
                 int damage = enemyCard.getDefence() - selectedCard.getAttack();
                 Player.currentPlayer.increaseLifePoint(-1 * damage);
                 if (enemyCard.getCardStatus().equals(CardStatus.DEFENCE))
@@ -445,7 +471,7 @@ public class GameController {
                     return false;
                 // not complete
                 case "Yomi Ship":
-                    if(canDestroyMonster(enemyCard)) {
+                    if (canDestroyMonster(enemyCard)) {
                         putMonsterOnGraveYard(selectedCard, Player.currentPlayer);
                         return true;
                     }
@@ -455,6 +481,37 @@ public class GameController {
             }
         } else {
             return false;
+        }
+    }
+
+    public static boolean isAttackTrap() {
+        ArrayList<Card> trapList = Player.opponent.getBoard().getFieldCardsForSpellTraps();
+        if (trapList.contains(Card.getCardByName("Magic Cylinder")) ||
+                trapList.contains(Card.getCardByName("Mirror Force")) ||
+                trapList.contains(Card.getCardByName("Negate Attack"))) {
+            lastSelectedCard = selectedCard;
+            isAttackTrap = true;
+            return isChangedTurnInMiddle();
+        }
+        return false;
+    }
+
+    public static boolean isSummonTrap() {
+        ArrayList<Card> trapList = Player.opponent.getBoard().getFieldCardsForSpellTraps();
+        if (selectedCard.getAttack() >= 1000 && trapList.contains(Card.getCardByName("Trap Hole"))) {
+            isSummonTrap = true;
+            lastSelectedCard = selectedCard;
+            return isChangedTurnInMiddle();
+        } else if (trapList.contains(Card.getCardByName("Torrential Tribute"))) {
+            isSummonTrap = true;
+            return isChangedTurnInMiddle();
+        }
+        return false;
+    }
+
+    private static void callTrapEffect(Card card) {
+        for (Effect effect : card.getEffects()) {
+            effect.enableEffect(null);
         }
     }
 
@@ -482,23 +539,31 @@ public class GameController {
                 }
             }
         }
-        if (isChecked) {
-            GameMenu gameMenu = new GameMenu();
+        if (isChecked) isChangedTurnInMiddle();
+    }
+
+    private static boolean isChangedTurnInMiddle() {
+        GameMenu gameMenu = new GameMenu();
+        gameMenu.printMiddleChange();
+        RoundController.changeTurn();
+        showBoard();
+        if (gameMenu.changePhaseInMiddle().equals("no")) {
             gameMenu.printMiddleChange();
             RoundController.changeTurn();
             showBoard();
-            if (gameMenu.changePhaseInMiddle().equals("no")) {
-                gameMenu.printMiddleChange();
-                RoundController.changeTurn();
-                showBoard();
-            } else Player.currentPlayer.setInOpponentPhase(true);
+            return false;
+        } else {
+            Player.currentPlayer.setInOpponentPhase(true);
+            return true;
         }
     }
 
     public static void getBackFromMiddleChange() {
         GameMenu gameMenu = new GameMenu();
+        Player.currentPlayer.setInOpponentPhase(false);
         gameMenu.printMiddleChange();
         RoundController.changeTurn();
+        showBoard();
     }
 
     public static void setWinner(int lifePoint, Player winner, Player looser) {

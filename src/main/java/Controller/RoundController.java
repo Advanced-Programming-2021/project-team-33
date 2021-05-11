@@ -9,10 +9,9 @@ import java.util.Random;
 
 public class RoundController {
     static GameMenu gameMenu = new GameMenu();
-    public static boolean isSummoned = false;
+    public static boolean isSummoned = false, isRoundFreeze = false;
     public static int remainingRounds, maxLp = 0, rounds;
     public static Player winnerOfFirstRound, otherPlayer;
-
 
     public static void setRound(int round) {
         rounds = round;
@@ -96,15 +95,20 @@ public class RoundController {
 
 
     public static void drawPhase() {
-        Player.currentPlayer.setPhase(Phase.DRAW);
-        gameMenu.informPhase(Phase.DRAW);
-        if (!isDrawPossible()) {
-            Player.currentPlayer.setLifePoint(0);
+        if(isRoundFreeze) {
+            isRoundFreeze = false;
+            endPhase();
         }
-        Card card = GameController.drawCard(Player.currentPlayer);
-        if (card != null) gameMenu.drawCard(card);
-
-        standByPhase();
+        else{
+            Player.currentPlayer.setPhase(Phase.DRAW);
+            gameMenu.informPhase(Phase.DRAW);
+            if (!isDrawPossible()) {
+                Player.currentPlayer.setLifePoint(0);
+            }
+            Card card = GameController.drawCard(Player.currentPlayer);
+            if (card != null) gameMenu.drawCard(card);
+            standByPhase();
+        }
     }
 
     private static void standByPhase() {

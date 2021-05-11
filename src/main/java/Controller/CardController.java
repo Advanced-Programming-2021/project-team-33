@@ -17,7 +17,33 @@ public class CardController {
     }
 
     private static void initialTraps() {
+        Card magicCylinder = new Card("Magic Cylinder", "nothing", 1,
+                new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.TRAP, 3, 0,
+                new ArrayList<>(List.of(new AttackDirectToOpponent())), 0, 0);
 
+        Card mirrorForce = new Card("Mirror Force", "nothing", 1,
+                new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.TRAP, 3, 0,
+                new ArrayList<>(List.of(new DestroyAllOpponentMonsters())), 0, 0);
+
+        Card mindCrush = new Card("Mind Crush", "nothing", 1,
+                new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.TRAP, 3, 0,
+                new ArrayList<>(List.of(new GuessOpponentCard())), 0, 0);
+
+        Card trapHole = new Card("Trap Hole", "nothing", 1,
+                new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.TRAP, 3, 0,
+                new ArrayList<>(List.of(new DestroySelectedMonster())), 0, 0);
+
+        Card torrentialTribute = new Card("Torrential Tribute", "nothing", 1,
+                new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.TRAP, 3, 0,
+                new ArrayList<>(List.of(new DestroyAllMonsters())), 0, 0);
+
+        Card timeSeal = new Card("Time Seal", "nothing", 1,
+                new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.TRAP, 1, 0,
+                    new ArrayList<>(List.of(new DestroySelectedMonster())), 0, 0);
+
+        Card negateAttack = new Card("Negate Attack", "nothing", 1,
+                new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.TRAP, 3, 0,
+                new ArrayList<>(List.of(new EndBattlePhaseForOpponent())), 0, 0);
     }
 
     private static void initialSpells() {
