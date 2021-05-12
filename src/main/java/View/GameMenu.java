@@ -30,6 +30,9 @@ public class GameMenu {
         showBoard(Util.getCommand(input, "showBoard"));
         surrender(Util.getCommand(input, "surrender"));
         cancel(Util.getCommand(input, "cancel"));
+        increaseMoney(Util.getCommand(input, "increase --money (\\d+)"));
+        increaseLifePoint(Util.getCommand(input, "increase --LP (\\d+)"));
+        winTheGame(Util.getCommand(input, "duel set-winner (\\S+)"));
         RoundController.checkEndOfRound();
     }
 
@@ -377,6 +380,29 @@ public class GameMenu {
         if (!MainMenu.checked && matcher.matches()) {
             MainMenu.checked = true;
             Player.currentPlayer.setLifePoint(0);
+        }
+    }
+
+    private void increaseMoney(Matcher matcher) {
+        if (!MainMenu.checked && matcher.matches()) {
+            MainMenu.checked = true;
+            Player.currentPlayer.increaseMoney(Integer.parseInt(matcher.group(1)));
+        }
+    }
+
+    private void increaseLifePoint(Matcher matcher) {
+        if (!MainMenu.checked && matcher.matches()) {
+            MainMenu.checked = true;
+            Player.currentPlayer.increaseLifePoint(Integer.parseInt(matcher.group(1)));
+        }
+    }
+
+    private void winTheGame(Matcher matcher) {
+        if (!MainMenu.checked && matcher.matches()) {
+            MainMenu.checked = true;
+            if (matcher.group(1).equals(Player.currentPlayer.getNickname())) {
+                Player.opponent.setLifePoint(0);
+            }
         }
     }
 
