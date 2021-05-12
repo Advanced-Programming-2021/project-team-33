@@ -39,7 +39,7 @@ public class CardController {
 
         Card timeSeal = new Card("Time Seal", "nothing", 1,
                 new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.TRAP, 1, 0,
-                    new ArrayList<>(List.of(new DestroySelectedMonster())), 0, 0);
+                new ArrayList<>(List.of(new DestroySelectedMonster())), 0, 0);
 
         Card negateAttack = new Card("Negate Attack", "nothing", 1,
                 new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.TRAP, 3, 0,
@@ -119,6 +119,43 @@ public class CardController {
         Card ringOfDefense = new Card("Ring of Defense", "nothing", 1,
                 new ArrayList<>(List.of(CardType.QUICKPLAY)), CardCategory.SPELL, 3, 0,
                 null, 0, 0);
+        // not sure
+        Card yami = new Card("Yami", "nothing", 1,
+                new ArrayList<>(List.of(CardType.FIELD)), CardCategory.SPELL, 3, 0,
+                new ArrayList<>(List.of(new ChangeAttackDeffenceForMonstersFieldSpellCaster())), 0, 0);
+
+        // not sure
+        Card forest = new Card("Forest", "nothing", 1,
+                new ArrayList<>(List.of(CardType.FIELD)), CardCategory.SPELL, 3, 0,
+                new ArrayList<>(List.of(new ChangeAttackDeffenceForMonstersInsectBeast())), 0, 0);
+
+        Card closedForest = new Card("Closed Forest", "nothing", 1,
+                new ArrayList<>(List.of(CardType.FIELD)), CardCategory.SPELL, 3, 0,
+                new ArrayList<>(List.of(new ChangeAttackOfMonsterBeastForEachGraveyard())), 0, 0);
+
+        Card umiiruka = new Card("UMIIRUKA", "nothing", 1,
+                new ArrayList<>(List.of(CardType.FIELD)), CardCategory.SPELL, 3, 0,
+                new ArrayList<>(List.of(new ChangeAttackDeffenceOfAqua())), 0, 0);
+
+        Card swordOfDarkDestruction = new Card("Sword of Dark Destruction", "nothing", 1,
+                new ArrayList<>(List.of(CardType.EQUIP)), CardCategory.SPELL, 3, 0,
+                new ArrayList<>(List.of(new ChangeEquipedMonstersAttackDeffence())), 0, 0);
+
+        Card blackPendant = new Card("Black Pendant", "nothing", 1,
+                new ArrayList<>(List.of(CardType.EQUIP)), CardCategory.SPELL, 3, 0,
+                new ArrayList<>(List.of(new ChangeAllEquipAttack())), 0, 0);
+
+        Card unitedWeStand = new Card("United We Stand", "nothing", 1,
+                new ArrayList<>(List.of(CardType.EQUIP)), CardCategory.SPELL, 3, 0,
+                new ArrayList<>(List.of(new ChangeMyEquipAttackDeffence())), 0, 0);
+
+        Card magnumShield = new Card("Magnum Shield", "nothing", 1,
+                new ArrayList<>(List.of(CardType.EQUIP)), CardCategory.SPELL, 3, 0,
+                new ArrayList<>(List.of(new ChangeWarriorAttackDeffenceReplace())), 0, 0);
+
+        Card advancedRitualArt = new Card("Advanced Ritual Art", "nothing", 1,
+                new ArrayList<>(List.of(CardType.RITUAL)), CardCategory.SPELL, 3, 0,
+                new ArrayList<>(List.of(new RitualSummon())), 0, 0);
     }
 
     private static void initialMonsters() {
