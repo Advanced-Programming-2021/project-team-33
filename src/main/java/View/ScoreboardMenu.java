@@ -16,12 +16,13 @@ public class ScoreboardMenu {
         exitMenu(Util.getCommand(input, "menu exit"));
     }
 
-    public ScoreboardMenu(){
+    public ScoreboardMenu() {
 
     }
 
     private void showScoreBoard(Matcher matcher) {
         if (!MainMenu.checked && matcher.matches()) {
+            MainMenu.checked = true;
             int rank = 0, counter = 0, equal = 0, a = 0;
             Map<String, Integer> scoreBoard = ProgramController.createScoreBoard();
             for (Map.Entry<String, Integer> en : scoreBoard.entrySet()) {

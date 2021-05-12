@@ -22,6 +22,7 @@ public class ShopMenu {
 
     private void buy(Matcher matcher) {
         if (!MainMenu.checked && matcher.matches()) {
+            MainMenu.checked = true;
             if (!ProgramController.isCardExist(matcher.group(1))) System.out.println("there is no card with this name");
             else {
                 Card card = Card.getCardByName(matcher.group(1));
@@ -37,6 +38,7 @@ public class ShopMenu {
 
     private void showAllOfCardsExistInShop(Matcher matcher) {
         if (!MainMenu.checked && matcher.matches()) {
+            MainMenu.checked = true;
             ArrayList<Card> cards = Card.getCards();
             String[] cardName = new String[cards.size()];
             for (int i = 0; i < cards.size(); i++) {
