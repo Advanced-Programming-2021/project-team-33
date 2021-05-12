@@ -8,10 +8,9 @@ import java.util.regex.Matcher;
 
 public class ProfileMenu {
     public static Player player;
-    boolean checked = false;
 
     public void run(String input) {
-        checked = false;
+        MainMenu.checked = false;
         MainMenu.showCurrentMenu(Util.getCommand(input, "menu show-current"));
         changeName(Util.getCommand(input, "profile change --nickname (\\S+)"));
         changePassword(Util.getCommand(input, "profile change --password --current (\\S+) --new (\\S+)"));
@@ -23,7 +22,7 @@ public class ProfileMenu {
     }
 
     private void changeName(Matcher matcher) {
-        if (!checked && matcher.matches()) {
+        if (!MainMenu.checked && matcher.matches()) {
             player = ProgramController.getPlayerByNickname(matcher.group(1));
             if (player != null) {
                 System.out.println("user with nickname " + matcher.group(1) + " already exists");
@@ -35,7 +34,7 @@ public class ProfileMenu {
     }
 
     private void changePassword(Matcher matcher) {
-        if (!checked && matcher.matches()) {
+        if (!MainMenu.checked && matcher.matches()) {
             if (ProgramController.isPasswordTrue(matcher.group(1))) {
                 if (ProgramController.isPasswordEqual(matcher.group(2))) {
                     System.out.println("please enter a new password");
@@ -50,7 +49,7 @@ public class ProfileMenu {
     }
 
     private void exitMenu(Matcher matcher) {
-        if (!checked && matcher.matches()) {
+        if (!MainMenu.checked && matcher.matches()) {
             MainMenu.checked = true;
             MainMenu.menu = "main";
         }

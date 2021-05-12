@@ -8,10 +8,9 @@ import java.util.regex.Matcher;
 
 public class ScoreboardMenu {
 
-    boolean checked = false;
 
     public void run(String input) {
-        checked = false;
+        MainMenu.checked = false;
         MainMenu.showCurrentMenu(Util.getCommand(input, "menu show-current"));
         showScoreBoard(Util.getCommand(input, "scoreboard show"));
         exitMenu(Util.getCommand(input, "menu exit"));
@@ -22,7 +21,7 @@ public class ScoreboardMenu {
     }
 
     private void showScoreBoard(Matcher matcher) {
-        if (!checked && matcher.matches()) {
+        if (!MainMenu.checked && matcher.matches()) {
             int rank = 0, counter = 0, equal = 0, a = 0;
             Map<String, Integer> scoreBoard = ProgramController.createScoreBoard();
             for (Map.Entry<String, Integer> en : scoreBoard.entrySet()) {
@@ -43,7 +42,7 @@ public class ScoreboardMenu {
 
 
     private void exitMenu(Matcher matcher) {
-        if (!checked && matcher.matches()) {
+        if (!MainMenu.checked && matcher.matches()) {
             MainMenu.checked = true;
             MainMenu.menu = "main";
         }

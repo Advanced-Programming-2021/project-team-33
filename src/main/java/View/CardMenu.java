@@ -46,7 +46,7 @@ public class CardMenu {
     private static void printMonsterCard(Card card) {
         System.out.println("Name: " + card.getCardName());
         System.out.println("Level: " + card.getLevel());
-        System.out.println("Type: " + card.getCardType());
+        System.out.println("Type: " + card.getCardTypes());
         System.out.println("ATK: " + card.getAttack());
         System.out.println("DEF: " + card.getDefence());
         System.out.println("Description: " + card.getDescription());
@@ -55,7 +55,7 @@ public class CardMenu {
     private static void printSpellTrapCard(Card card) {
         System.out.println("Name: " + card.getCardName());
         System.out.println(card.getCardCategory());
-        System.out.println("Type: " + card.getCardType());
+        System.out.println("Type: " + card.getCardTypes());
         System.out.println("Description: " + card.getDescription());
     }
 
