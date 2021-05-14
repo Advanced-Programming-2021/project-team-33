@@ -64,30 +64,23 @@ public class ProgramController {
     }
 
     public static boolean isPasswordTrue(String currentPassword) {
-        Player player = Player.thePlayer;
-        if (player.getPassword().equals(currentPassword))
+        if (Player.thePlayer.getPassword().equals(currentPassword)) {
             return true;
+        }
         return false;
     }
 
     public static boolean isPasswordEqual(String newPassword) {
-        Player player = Player.thePlayer;
-        if (newPassword.equals(player.getPassword())) return true;
+        if (newPassword.equals(Player.thePlayer.getPassword())) return true;
         return false;
     }
 
-    public static Player getPlayerByNickname(String nickName) {
-        return Player.getUserByNickname(nickName);
-    }
-
     public static void changePlayerNickname(String nickName) {
-        Player player = Player.thePlayer;
-        player.setNickname(nickName);
+        Player.thePlayer.setNickname(nickName);
     }
 
     public static void changePlayerPassword(String password) {
-        Player player = Player.thePlayer;
-        player.setPassword(password);
+        Player.thePlayer.setPassword(password);
     }
 
     public static Map<String, Integer> createScoreBoard() {

@@ -11,6 +11,10 @@ import java.util.regex.Matcher;
 
 public class ShopMenu {
 
+    public ShopMenu() {
+
+    }
+
     public void run(String input) {
         MainMenu.checked = false;
         MainMenu.showCurrentMenu(Util.getCommand(input, "menu show-current"));
@@ -31,7 +35,7 @@ public class ShopMenu {
                 } else {
                     Player.thePlayer.decreaseMoney(card.getPrice());
                     Player.thePlayer.addToCardList(card);
-                    System.out.println("You bought "+ card.getCardName());
+                    System.out.println("You bought " + card.getCardName());
                 }
             }
         }

@@ -7,7 +7,10 @@ import Model.Player;
 import java.util.regex.Matcher;
 
 public class ProfileMenu {
-    public static Player player;
+
+    public ProfileMenu() {
+
+    }
 
     public void run(String input) {
         MainMenu.checked = false;
@@ -17,14 +20,10 @@ public class ProfileMenu {
         MainMenu.exitMenu(Util.getCommand(input, "menu exit"));
     }
 
-    public ProfileMenu() {
-
-    }
-
     private void changeName(Matcher matcher) {
         if (!MainMenu.checked && matcher.matches()) {
             MainMenu.checked = true;
-            player = ProgramController.getPlayerByNickname(matcher.group(1));
+            Player player = Player.getUserByNickname(matcher.group(1));
             if (player != null) {
                 System.out.println("user with nickname " + matcher.group(1) + " already exists");
             } else {
