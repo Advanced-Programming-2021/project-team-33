@@ -16,6 +16,7 @@ public class ImportExportMenu {
         MainMenu.showCurrentMenu(Util.getCommand(input, "menu show-current"));
         importCard(Util.getCommand(input, "import card (.+)"));
         exportCard(Util.getCommand(input, "export card (.+)"));
+        MainMenu.exitMenu(Util.getCommand(input, "menu exit"));
     }
 
     public static void exportCard(Matcher matcher) {

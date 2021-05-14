@@ -2,6 +2,7 @@ package View;
 
 import Controller.ProgramController;
 import Controller.Util;
+import Model.Player;
 
 import java.util.*;
 import java.util.regex.Matcher;
@@ -13,7 +14,9 @@ public class ScoreboardMenu {
         MainMenu.checked = false;
         MainMenu.showCurrentMenu(Util.getCommand(input, "menu show-current"));
         showScoreBoard(Util.getCommand(input, "scoreboard show"));
-        exitMenu(Util.getCommand(input, "menu exit"));
+        MainMenu.exitMenu(Util.getCommand(input, "menu exit"));
+        Player.thePlayer.increaseScore(1);
+        Player.getUserByUsername("reza").increaseScore(1);
     }
 
     public ScoreboardMenu() {
@@ -42,10 +45,4 @@ public class ScoreboardMenu {
     }
 
 
-    private void exitMenu(Matcher matcher) {
-        if (!MainMenu.checked && matcher.matches()) {
-            MainMenu.checked = true;
-            MainMenu.menu = "main";
-        }
-    }
 }

@@ -4,6 +4,8 @@ import Model.Card;
 import Model.CardCategory;
 import Model.CardType;
 import Model.Effects.*;
+import Model.Player;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -338,6 +340,7 @@ public class CardController {
         Card spiralSerpent = new Card("Spiral Serpent", "nothing", 1,
                 new ArrayList<>(List.of(CardType.SEASERPENT)), CardCategory.MONSTER,
                 3, 8, null, 2900, 2900);
+
 
     }
 

@@ -1,9 +1,6 @@
 package View;
 
-import Controller.CardController;
-import Controller.GameController;
-import Controller.ProgramController;
-import Controller.Util;
+import Controller.*;
 import Model.Card;
 import Model.Player;
 
@@ -31,9 +28,9 @@ public class MainMenu {
             checked = true;
             String secondPlayerName = matcher.group(1);
             int round = Integer.parseInt(matcher.group(2));
-            if (round > 3 || round < 1)
+            if (!(round == 3 || round == 1))
                 System.out.println("number of rounds is not supported");
-            if (!secondPlayerName.equals("ai")) {
+            else if (!secondPlayerName.equals("ai")) {
                 if (!programController.isUserExist(secondPlayerName) ||
                         secondPlayerName.equals(Player.thePlayer.getUsername()))
                     System.out.println("there is no player with this username");
@@ -41,6 +38,8 @@ public class MainMenu {
                     System.out.println(Player.thePlayer.getUsername() + " has no active deck");
                 else if (!gameController.isDeckActive(secondPlayerName))
                     System.out.println(secondPlayerName + " has no active deck");
+                else if (!gameController.isDeckValid(Player.thePlayer.getUsername()))
+                    System.out.println(Player.thePlayer.getUsername() + "'s deck is invalid");
                 else if (!gameController.isDeckValid(secondPlayerName))
                     System.out.println(secondPlayerName + "'s deck is invalid");
                 else {
@@ -60,19 +59,23 @@ public class MainMenu {
     }
 
     private void duelWithAi() {
+        Ai.initiateGameWithAi(Player.thePlayer.getUsername(), 3);
     }
 
     private void enterMenu(Matcher matcher) {
         if (!checked && matcher.matches()) {
             checked = true;
             String menuName = matcher.group(1);
-            if (ProgramController.isNavigationPossible(menuName))
+            if (menuName.equals("game")) System.out.println("you have to set you opponent to enter this menu");
+            else if (ProgramController.isNavigationPossible(menuName))
                 menu = menuName;
+            else System.out.println("no such menu!");
         }
     }
 
     public static void showCurrentMenu(Matcher matcher) {
-        if (matcher.matches()) {
+        if (!checked && matcher.matches()) {
+            checked = true;
             switch (menu) {
                 case "login" -> System.out.println("Login Menu");
                 case "main" -> System.out.println("Main Menu");
@@ -84,6 +87,13 @@ public class MainMenu {
                 case "importExport" -> System.out.println("ImportExport Menu");
                 case "Graveyard" -> System.out.println("Graveyard Menu");
             }
+        }
+    }
+
+    public static void  exitMenu(Matcher matcher) {
+        if (!MainMenu.checked && matcher.matches()) {
+            MainMenu.checked = true;
+            MainMenu.menu = "main";
         }
     }
 
@@ -112,6 +122,7 @@ public class MainMenu {
                 case "importExport" -> importExportMenu.run(input);
                 case "Graveyard" -> graveyardMenu.run(input);
             }
+            if(!checked) System.out.println("invalid command!");
         }
     }
 

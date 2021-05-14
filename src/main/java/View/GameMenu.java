@@ -1,9 +1,6 @@
 package View;
 
-import Controller.GameController;
-import Controller.ProgramController;
-import Controller.RoundController;
-import Controller.Util;
+import Controller.*;
 import Model.*;
 
 import java.util.Random;
@@ -16,7 +13,7 @@ public class GameMenu {
         MainMenu.checked = false;
         MainMenu.showCurrentMenu(Util.getCommand(input, "menu show-current"));
         CardMenu.showSelectedCard(Util.getCommand(input, "card show --selected"));
-        selectCard(Util.getCommand(input, "select --(\\S+)( --\\D)* (\\d+)"));
+        selectCard(Util.getCommand(input, "select --(\\S+)( --opponent)? (\\d+)"));
         showGraveyard(Util.getCommand(input, "show graveyard"));
         deSelectCard(Util.getCommand(input, "select -d"));
         activeSpell(Util.getCommand(input, "activate effect"));
@@ -85,12 +82,17 @@ public class GameMenu {
     }
 
     public void informEndOfGame(Player winner, int score) {
-        System.out.println(winner.getUsername() + "won the whole match with score: " + score + "- 0");
+        System.out.println(winner.getUsername() + " won the whole match with score: " + score + " - 0\n\n");
     }
 
-    public void informEndOfRound(Player winner, int score) {
-        System.out.println(winner.getUsername() + "won the game with score: " + score + "- 0");
+    public void informEndOfRound(Player winner, int score, int remainingRounds) {
+        System.out.println("Round " + remainingRounds + " ended");
+        System.out.println(winner.getUsername() + " won the game with score: " + score + " - 0");
+        remainingRounds--;
+        if (remainingRounds != 1)
+            System.out.println("Now is time for round " + remainingRounds + "\n\n");
     }
+
 
     public void informPhase(Phase phase) {
         switch (phase) {

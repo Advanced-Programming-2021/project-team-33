@@ -63,7 +63,15 @@ public class Deck {
         return sideDeck.size() > 10;
     }
 
-    public boolean isDeckValid() {
+    public boolean isDeckValid(Deck deck) {
+        ArrayList<String> mainCardNames = new ArrayList<>();
+        for(int i = 0; i < deck.mainDeck.size(); i++){
+            mainCardNames.add(deck.mainDeck.get(i).getCardName());
+        }
+        for(int i = 0; i < deck.mainDeck.size(); i++){
+            if(Collections.frequency(mainCardNames,deck.mainDeck.get(i).getCardName()) > deck.mainDeck.get(i).getLimit())
+                return false;
+        }
         return true;
     }
 
@@ -74,12 +82,12 @@ public class Deck {
         return null;
     }
 
-    public String getInvalidCard(String deckName) {
-        for (int i = 0; i < Card.getCards().size(); i++) {
-            if (Collections.frequency(Player.getDeckByName(deckName).mainDeck, Card.getCards().get(i).cardName) == 3)
-                return Card.getCards().get(i).cardName;
+    public boolean getInvalidCard(String deckName, String cardName) {
+        ArrayList<String> cardNames = new ArrayList<>();
+        for(int i = 0; i < Player.thePlayer.getDeckByName(deckName).mainDeck.size(); i++){
+            cardNames.add(Player.thePlayer.getDeckByName(deckName).mainDeck.get(i).getCardName());
         }
-        return "";
+        return Collections.frequency(cardNames, cardName) == 3;
     }
 
     public static boolean getDeckActivation(Deck deck) {

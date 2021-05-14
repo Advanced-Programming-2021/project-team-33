@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.*;
+import View.ChangeCardsMenu;
 import View.Communicate;
 import View.GameMenu;
 import View.MainMenu;
@@ -23,7 +24,7 @@ public class GameController {
         if (player.isInOpponentPhase() && isAttackTrap) return selectAttackTrap(cardPosition, number);
         if (player.isInOpponentPhase() && isSummonTrap) return selectSummonTrap(cardPosition, number);
         if (player.isInOpponentPhase() && isSpellTrap) return selectSpellTrap(cardPosition, number);
-        if (!opponent.equals("")) player = Player.opponent;
+        if (opponent != null && !opponent.equals("")) player = Player.opponent;
         if (selectedCard != null) deSelectCard();
         if (cardPosition.equals("monster") && player.getBoard().getCardFromMonsterField(number) != null) {
             player.getBoard().getCardFromMonsterField(number).setSelected(true);
@@ -40,6 +41,11 @@ public class GameController {
             selectedCard = player.getBoard().getCardFromHand(number);
             return 1;
         } else if (cardPosition.equals("hand")) return 0;
+        else if (cardPosition.equals("field") && player.getBoard().getFieldZone().get(0) != null) {
+            player.getBoard().getFieldZone().get(0).setSelected(true);
+            selectedCard = player.getBoard().getFieldZone().get(0);
+            return 1;
+        } else if (cardPosition.equals("field")) return 0;
         return -1;
     }
 
@@ -52,7 +58,7 @@ public class GameController {
         return -1;
     }
 
-    public static int selectSpellTrap(String cardPosition, int number){
+    public static int selectSpellTrap(String cardPosition, int number) {
         if (Player.currentPlayer.getBoard().getCardFromSpellField(number) == null) return 0;
         String cardName = Player.currentPlayer.getBoard().getCardFromSpellField(number).getCardName();
         if (cardPosition.equals("spell") && cardName.equals("Magic Jammer"))
@@ -138,7 +144,7 @@ public class GameController {
     }
 
     public static boolean isDeckValid(String user) {
-        return true;
+        return Player.getUserByUsername(user).getActiveDeck().getMainDeck().size() >= 30;
     }
 
     public static void initiateGame(String firstPlayer, String secondPlayer, int round) {
@@ -148,7 +154,9 @@ public class GameController {
     }
 
     public static void setNextGame(String firstPlayer, String secondPlayer) {
-        //changeDeck
+        ChangeCardsMenu changeCardsMenu = new ChangeCardsMenu();
+        changeCardsMenu.changeDeck(firstPlayer);
+        changeCardsMenu.changeDeck(secondPlayer);
         prepareGame(firstPlayer, secondPlayer);
     }
 
@@ -166,7 +174,6 @@ public class GameController {
             drawCard(Player.currentPlayer);
             drawCard(Player.opponent);
         }
-        System.out.println(Player.currentPlayer.getBoard().getDeck().size());
         RoundController.drawPhase();
     }
 
@@ -508,7 +515,7 @@ public class GameController {
 
     public static boolean isSpellTrap() {
         ArrayList<Card> trapList = Player.opponent.getBoard().getFieldCardsForSpellTraps();
-        if (trapList.contains(Card.getCardByName("Magic Jammer"))){
+        if (trapList.contains(Card.getCardByName("Magic Jammer"))) {
             lastSelectedCard = selectedCard;
             isSpellTrap = true;
             return isChangedTurnInMiddle();
@@ -571,6 +578,7 @@ public class GameController {
         gameMenu.printMiddleChange();
         RoundController.changeTurn();
         showBoard();
+        if (Player.currentPlayer.equals(Player.theAi)) return true;
         if (gameMenu.changePhaseInMiddle().equals("no")) {
             gameMenu.printMiddleChange();
             RoundController.changeTurn();

@@ -20,51 +20,28 @@ public class RoundController {
 
     public static void checkEndOfRound() {
         GameMenu gameMenu = new GameMenu();
-        if (rounds != 2) {
-            if (Player.thePlayer.getLifePoint() <= 0) {
-                winnerOfFirstRound = otherPlayer;
-                remainingRounds--;
-                maxLp = Math.max(otherPlayer.getLifePoint(), maxLp);
-                if (remainingRounds == 0) GameController.setWinner(maxLp, otherPlayer, Player.thePlayer);
-                else if (remainingRounds == 1 && winnerOfFirstRound.equals(otherPlayer))
-                    GameController.setWinner(maxLp, otherPlayer, Player.thePlayer);
-                else GameController.setNextGame(Player.thePlayer.getUsername(),
-                            otherPlayer.getUsername());
-                gameMenu.informEndOfRound(otherPlayer, 1000);
-            } else if (otherPlayer.getLifePoint() <= 0) {
-                winnerOfFirstRound = Player.thePlayer;
-                remainingRounds--;
-                maxLp = Math.max(Player.thePlayer.getLifePoint(), maxLp);
-                if (remainingRounds == 0) GameController.setWinner(maxLp, Player.thePlayer, otherPlayer);
-                else if (remainingRounds == 1 && winnerOfFirstRound.equals(Player.thePlayer))
-                    GameController.setWinner(maxLp, Player.thePlayer, otherPlayer);
-                else GameController.setNextGame(otherPlayer.getUsername(),
-                            Player.thePlayer.getUsername());
-                gameMenu.informEndOfRound(Player.thePlayer, 1000);
-            }
-        } else {
-            if (Player.thePlayer.getLifePoint() <= 0) {
-                remainingRounds--;
-                maxLp = Math.max(otherPlayer.getLifePoint(), maxLp);
-                if (remainingRounds == 1) {
-                    winnerOfFirstRound = otherPlayer;
-                    GameController.setNextGame(Player.thePlayer.getUsername(),
-                            otherPlayer.getUsername());
-                } else if (remainingRounds == 0 && winnerOfFirstRound.equals(otherPlayer))
-                    GameController.setWinner(maxLp, otherPlayer, Player.thePlayer);
-                else if (remainingRounds == 0) GameController.setWinner(-1, otherPlayer, Player.thePlayer);
-            } else if (otherPlayer.getLifePoint() <= 0) {
-                remainingRounds--;
-                maxLp = Math.max(otherPlayer.getLifePoint(), maxLp);
-                if (remainingRounds == 1) {
-                    winnerOfFirstRound = Player.thePlayer;
-                    GameController.setNextGame(otherPlayer.getUsername(),
-                            Player.thePlayer.getUsername());
-                } else if (remainingRounds == 0 && winnerOfFirstRound.equals(Player.thePlayer))
-                    GameController.setWinner(maxLp, Player.thePlayer, otherPlayer);
-                else if (remainingRounds == 0) GameController.setWinner(-1, Player.thePlayer, otherPlayer);
-            }
+        if (Player.thePlayer.getLifePoint() <= 0) {
+            gameMenu.informEndOfRound(otherPlayer, 1000,remainingRounds);
+            winnerOfFirstRound = otherPlayer;
+            remainingRounds--;
+            maxLp = Math.max(otherPlayer.getLifePoint(), maxLp);
+            if (remainingRounds == 0) GameController.setWinner(maxLp, otherPlayer, Player.thePlayer);
+            else if (remainingRounds == 1 && winnerOfFirstRound.equals(otherPlayer))
+                GameController.setWinner(maxLp, otherPlayer, Player.thePlayer);
+            else GameController.setNextGame(Player.thePlayer.getUsername(),
+                        otherPlayer.getUsername());
+        } else if (otherPlayer.getLifePoint() <= 0) {
+            gameMenu.informEndOfRound(Player.thePlayer, 1000,remainingRounds);
+            winnerOfFirstRound = Player.thePlayer;
+            remainingRounds--;
+            maxLp = Math.max(Player.thePlayer.getLifePoint(), maxLp);
+            if (remainingRounds == 0) GameController.setWinner(maxLp, Player.thePlayer, otherPlayer);
+            else if (remainingRounds == 1 && winnerOfFirstRound.equals(Player.thePlayer))
+                GameController.setWinner(maxLp, Player.thePlayer, otherPlayer);
+            else GameController.setNextGame(otherPlayer.getUsername(),
+                        Player.thePlayer.getUsername());
         }
+
 
     }
 
@@ -91,15 +68,16 @@ public class RoundController {
         Player auxPlayer = Player.currentPlayer;
         Player.currentPlayer = Player.opponent;
         Player.opponent = auxPlayer;
+        if (Player.currentPlayer.equals(Player.theAi))
+            Ai.aiAction();
     }
 
 
     public static void drawPhase() {
-        if(isRoundFreeze) {
+        if (isRoundFreeze) {
             isRoundFreeze = false;
             endPhase();
-        }
-        else{
+        } else {
             Player.currentPlayer.setPhase(Phase.DRAW);
             gameMenu.informPhase(Phase.DRAW);
             if (!isDrawPossible()) {

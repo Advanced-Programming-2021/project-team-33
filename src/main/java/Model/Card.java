@@ -36,6 +36,10 @@ public class Card {
         cards.add(this);
     }
 
+    public int getLimit() {
+        return limit;
+    }
+
     public static ArrayList<Card> getCards() {
         return cards;
     }

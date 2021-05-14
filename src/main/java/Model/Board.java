@@ -7,16 +7,18 @@ public class Board {
     public ArrayList<Card> fieldCardsForMonsters = new ArrayList<>();
     public ArrayList<Card> fieldCardsForSpellTraps = new ArrayList<>();
     public ArrayList<Card> graveyard = new ArrayList<>();
-    public ArrayList<Card> deck = new ArrayList<>();
+    public ArrayList<Card> deck;
     public ArrayList<Card> hand = new ArrayList<>();
     public ArrayList<Card> fieldZone = new ArrayList<>();
 
     public Board(Player player) {
+        deck = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             fieldCardsForMonsters.add(null);
             fieldCardsForSpellTraps.add(null);
         }
-        deck = player.getActiveDeck().getMainDeck();
+        fieldZone.add(null);
+        deck.addAll(player.getActiveDeck().getMainDeck());
     }
 
     public Player getPlayer() {
@@ -26,6 +28,10 @@ public class Board {
     public Card getCardFromMonsterField(int number) {
         if (fieldCardsForMonsters.get(number) != null) return fieldCardsForMonsters.get(number);
         return null;
+    }
+
+    public ArrayList<Card> getFieldZone() {
+        return fieldZone;
     }
 
     public ArrayList<Card> getGraveyard() {

@@ -27,7 +27,7 @@ public class DeckMenu {
         showDeck(Util.getCommand(input, "deck show --deck-name (\\S+)( --side)?"));
         showAllCards(Util.getCommand(input, "deck show --cards"));
         CardMenu.showCard(Util.getCommand(input, "card show (.+?)"));
-        exitMenu(Util.getCommand(input, "menu exit"));
+        MainMenu.exitMenu(Util.getCommand(input, "menu exit"));
     }
 
     private void createDeck(Matcher matcher) {
@@ -85,10 +85,9 @@ public class DeckMenu {
                 System.out.println("main deck is full");
             else if (Player.getDeckByName(deckName).isSideDeckFull())
                 System.out.println("side deck is full");
-            else if (!Player.getDeckByName(deckName).getInvalidCard(deckName).equals("")) {
-                String invalidCard = Player.getDeckByName(deckName).getInvalidCard(deckName);
-                System.out.println("there are already three cards with name " + invalidCard +
-                        " in deck " + deckName + "name>");
+            else if (Player.getDeckByName(deckName).getInvalidCard(deckName, cardName)) {
+                System.out.println("there are already three cards with name " + cardName +
+                        " in deck " + deckName + "name");
             } else {
                 GameController.addCardToDeck(deckName, cardName, isSide);
                 System.out.println("card added to deck successfully");
@@ -116,23 +115,24 @@ public class DeckMenu {
         }
     }
 
-    private void showDeck(Matcher matcher) {
+    public static void showDeck(Matcher matcher) {
         if (!MainMenu.checked && matcher.matches()) {
             MainMenu.checked = true;
             String deckName = matcher.group(1);
+            if (deckName.equals("-activeDeck")) deckName = Player.currentPlayer.getActiveDeck().getDeckName();
             boolean isSide = false;
-            if (matcher.group(3) != null) isSide = true;
+            if (matcher.group(2) != null) isSide = true;
             if (!ProgramController.isDeckExist(deckName))
                 System.out.println("deck with name " + deckName + " does not exist");
             else if (!isSide) {
-                System.out.println("Deck: " + deckName + "\nMain Deck:\nMonsters:");
+                System.out.println("Deck: " + deckName + "\nMain Deck:\n\nMonsters:");
                 for (int i = 0; i < Player.getDeckByName(deckName).getMainDeck().size(); i++) {
                     if (Player.getDeckByName(deckName).getMainDeck().get(i).getCardCategory().equals(CardCategory.MONSTER) ||
                             Player.getDeckByName(deckName).getMainDeck().get(i).getCardCategory().equals(CardCategory.MONSTEREFFECT))
                         System.out.println(Player.getDeckByName(deckName).getMainDeck().get(i).getCardName() + ": " +
                                 Player.getDeckByName(deckName).getMainDeck().get(i).getDescription());
                 }
-                System.out.println("Spell and Traps:");
+                System.out.println("\nSpell and Traps:");
                 for (int i = 0; i < Player.getDeckByName(deckName).getMainDeck().size(); i++) {
                     if (Player.getDeckByName(deckName).getMainDeck().get(i).getCardCategory().equals(CardCategory.SPELL) ||
                             Player.getDeckByName(deckName).getMainDeck().get(i).getCardCategory().equals(CardCategory.TRAP))
@@ -140,14 +140,14 @@ public class DeckMenu {
                                 Player.getDeckByName(deckName).getMainDeck().get(i).getDescription());
                 }
             } else {
-                System.out.println("Deck: " + deckName + "\nSide Deck:\nMonsters:");
+                System.out.println("Deck: " + deckName + "\nSide Deck:\n\nMonsters:");
                 for (int i = 0; i < Player.getDeckByName(deckName).getSideDeck().size(); i++) {
                     if (Player.getDeckByName(deckName).getSideDeck().get(i).getCardCategory().equals(CardCategory.MONSTER) ||
                             Player.getDeckByName(deckName).getSideDeck().get(i).getCardCategory().equals(CardCategory.MONSTEREFFECT))
                         System.out.println(Player.getDeckByName(deckName).getSideDeck().get(i).getCardName() + ": " +
                                 Player.getDeckByName(deckName).getSideDeck().get(i).getDescription());
                 }
-                System.out.println("Spell and Traps:");
+                System.out.println("\nSpell and Traps:");
                 for (int i = 0; i < Player.getDeckByName(deckName).getSideDeck().size(); i++) {
                     if (Player.getDeckByName(deckName).getSideDeck().get(i).getCardCategory().equals(CardCategory.SPELL) ||
                             Player.getDeckByName(deckName).getSideDeck().get(i).getCardCategory().equals(CardCategory.TRAP))
@@ -166,7 +166,7 @@ public class DeckMenu {
             System.out.println("Decks:\nActive deck:");
             if (Player.thePlayer.getActiveDeck() != null) {
                 Deck activeDeck = Player.thePlayer.getActiveDeck();
-                if (activeDeck.isDeckValid()) valid = "valid";
+                if (activeDeck.isDeckValid(activeDeck)) valid = "valid";
                 System.out.println(activeDeck.getDeckName() + ": main deck " +
                         activeDeck.getMainDeck().size() + ", side deck " +
                         activeDeck.getSideDeck().size() + ", " + valid);
@@ -175,7 +175,7 @@ public class DeckMenu {
             for (int i = 0; i < Player.thePlayer.listOfDecks.size(); i++) {
                 if (!Player.thePlayer.listOfDecks.get(i).isDeckActive()) {
                     Deck otherDeck = Player.thePlayer.listOfDecks.get(i);
-                    if (otherDeck.isDeckValid()) valid = "valid";
+                    if (otherDeck.isDeckValid(otherDeck)) valid = "valid";
                     System.out.println(otherDeck.getDeckName() + ": main deck " +
                             otherDeck.getMainDeck().size() + ", side deck " +
                             otherDeck.getSideDeck().size() + ", " + valid);
@@ -198,14 +198,6 @@ public class DeckMenu {
             }
         }
 
-    }
-
-
-    public void exitMenu(Matcher matcher) {
-        if (!MainMenu.checked && matcher.matches()) {
-            MainMenu.checked = true;
-            MainMenu.menu = "main";
-        }
     }
 
 

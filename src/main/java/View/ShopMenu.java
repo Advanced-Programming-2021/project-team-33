@@ -16,7 +16,7 @@ public class ShopMenu {
         MainMenu.showCurrentMenu(Util.getCommand(input, "menu show-current"));
         buy(Util.getCommand(input, "shop buy (.+)"));
         showAllOfCardsExistInShop(Util.getCommand(input, "shop show -all"));
-        exitMenu(Util.getCommand(input, "menu exit"));
+        MainMenu.exitMenu(Util.getCommand(input, "menu exit"));
 
     }
 
@@ -31,6 +31,7 @@ public class ShopMenu {
                 } else {
                     Player.thePlayer.decreaseMoney(card.getPrice());
                     Player.thePlayer.addToCardList(card);
+                    System.out.println("You bought "+ card.getCardName());
                 }
             }
         }
@@ -52,10 +53,5 @@ public class ShopMenu {
         }
     }
 
-    private void exitMenu(Matcher matcher) {
-        if (!MainMenu.checked && matcher.matches()) {
-            MainMenu.checked = true;
-            MainMenu.menu = "main";
-        }
-    }
+
 }

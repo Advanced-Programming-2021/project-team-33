@@ -1,8 +1,10 @@
 package Model;
 
+import Model.Effects.IncreaseAttack;
 import View.Phase;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Player {
     static ArrayList<Player> players = new ArrayList<>();
@@ -10,14 +12,17 @@ public class Player {
     public ArrayList<Card> listOfCards = new ArrayList<>();
     public Phase phase;
     public Board board;
-    public static Player thePlayer;
+    public static Player thePlayer, theAi = new Player("Ai");
     public static Player currentPlayer, opponent;
     boolean isInOpponentPhase;
     String username, password, nickname;
-    int money, score, lifePoint = 8000;
+    int money = 3, score, lifePoint = 8000;
     Deck activeDeck;
 
-    public Player() {}
+    public Player(String username) {
+        listOfCards.addAll(Card.cards);
+        this.username = username;
+    }
 
     public Player(String username, String password, String nickname) {
         this.username = username;
@@ -25,6 +30,10 @@ public class Player {
         this.nickname = nickname;
         listOfCards.addAll(Card.cards);
         players.add(this);
+    }
+
+    public ArrayList<Card> getListOfCards() {
+        return listOfCards;
     }
 
     public ArrayList<Deck> getListOfDecks() {
@@ -134,7 +143,11 @@ public class Player {
     public void removeFromCardList(String cardName) {
         for (int i = 0; i < listOfCards.size(); i++) {
             if (listOfCards.get(i).getCardName().equals(cardName))
+            {
                 listOfCards.remove(i);
+                break;
+            }
+
         }
     }
 
