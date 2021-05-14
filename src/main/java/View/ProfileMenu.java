@@ -15,12 +15,13 @@ public class ProfileMenu {
     public void run(String input) {
         MainMenu.checked = false;
         MainMenu.showCurrentMenu(Util.getCommand(input, "menu show-current"));
-        changeName(Util.getCommand(input, "profile change --nickname (\\S+)"));
+        changeNickName(Util.getCommand(input, "profile change --nickname (\\S+)"));
+        changeUserName(Util.getCommand(input,"profile change --username (\\S+)"));
         changePassword(Util.getCommand(input, "profile change --password --current (\\S+) --new (\\S+)"));
         MainMenu.exitMenu(Util.getCommand(input, "menu exit"));
     }
 
-    private void changeName(Matcher matcher) {
+    private void changeNickName(Matcher matcher) {
         if (!MainMenu.checked && matcher.matches()) {
             MainMenu.checked = true;
             Player player = Player.getUserByNickname(matcher.group(1));
@@ -29,6 +30,19 @@ public class ProfileMenu {
             } else {
                 System.out.println("nickname changed successfully!");
                 ProgramController.changePlayerNickname(matcher.group(1));
+            }
+        }
+    }
+
+    private void changeUserName(Matcher matcher){
+        if(!MainMenu.checked&&matcher.matches()){
+            MainMenu.checked=true;
+            Player player = Player.getUserByUsername(matcher.group(1));
+            if (player != null) {
+                System.out.println("user with username " + matcher.group(1) + " already exists");
+            } else {
+                System.out.println("username changed successfully!");
+                ProgramController.changePlayerUserName(matcher.group(1));
             }
         }
     }

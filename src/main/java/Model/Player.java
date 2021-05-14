@@ -80,6 +80,10 @@ public class Player {
         this.password = password;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -142,8 +146,7 @@ public class Player {
 
     public void removeFromCardList(String cardName) {
         for (int i = 0; i < listOfCards.size(); i++) {
-            if (listOfCards.get(i).getCardName().equals(cardName))
-            {
+            if (listOfCards.get(i).getCardName().equals(cardName)) {
                 listOfCards.remove(i);
                 break;
             }
@@ -151,7 +154,7 @@ public class Player {
         }
     }
 
-    public void increaseLifePoint(int lifePoint){
+    public void increaseLifePoint(int lifePoint) {
         this.lifePoint += lifePoint;
     }
 

@@ -79,6 +79,10 @@ public class ProgramController {
         Player.thePlayer.setNickname(nickName);
     }
 
+    public static void changePlayerUserName(String username) {
+        Player.thePlayer.setUsername(username);
+    }
+
     public static void changePlayerPassword(String password) {
         Player.thePlayer.setPassword(password);
     }
