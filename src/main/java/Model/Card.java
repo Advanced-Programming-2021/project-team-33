@@ -17,10 +17,6 @@ public class Card {
     CardStatus cardStatus;
     int attack, defence;
 
-    public Card() {
-
-    }
-
     public Card(String cardName, String description, int price, ArrayList<CardType> cardTypes,
                 CardCategory cardCategory, int limit, int level, ArrayList<Effect> effects,
                 int attack, int defence) {
