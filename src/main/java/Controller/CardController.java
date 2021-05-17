@@ -177,7 +177,7 @@ public class CardController {
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
                 Pattern pattern = Pattern.compile("(.+),(\\d+),(.+),(.+),(.+),(\\d+),(\\d+),(.+),(\\d+)");
-                Matcher matcher = pattern.matcher(scanner.nextLine().replace("\"",""));
+                Matcher matcher = pattern.matcher(scanner.nextLine().replace("\"", ""));
                 ArrayList<CardType> cardTypes;
                 ArrayList<Effect> effects;
                 CardCategory cardCategory;
@@ -193,7 +193,11 @@ public class CardController {
                         cardCategory = CardCategory.MONSTEREFFECT;
                     }
                     cardTypes = new ArrayList<>();
-                    cardTypes.add(CardType.valueOf(matcher.group(5).toUpperCase()));
+                    if (matcher.group(4).equals("Beast-Warrior")) cardTypes.add(CardType.BEASTWARRIOR);
+                    else {
+                        if (matcher.group(4).equals("Sea Serpent")) cardTypes.add(CardType.SEASERPENT);
+                        else cardTypes.add(CardType.valueOf(matcher.group(4).toUpperCase()));
+                    }
                     Card card = new Card(
                             matcher.group(1),
                             matcher.group(8),

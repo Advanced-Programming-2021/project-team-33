@@ -23,5 +23,5 @@ public enum CardType {
     INSECT,
     CYBERSE,
     FAIRY,
-    SEASERPENT
+    SEASERPENT,
 }
