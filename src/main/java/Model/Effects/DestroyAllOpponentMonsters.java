@@ -15,8 +15,12 @@ public class DestroyAllOpponentMonsters implements Effect {
                 Player.opponent.getBoard().getFieldCardsForMonsters().set(i, null);
             }
         }
+        if (GameController.selectedCard.getCardName().equals("Mirror Force")) {
+            Player.currentPlayer.getBoard().getGraveyard().add(GameController.selectedCard);
+            int index = Player.currentPlayer.getBoard().getFieldCardsForSpellTraps().indexOf(GameController.selectedCard);
+            Player.currentPlayer.getBoard().getFieldCardsForSpellTraps().set(index , null);
+        }
         GameController.isAttackTrap = false;
-
 
     }
 

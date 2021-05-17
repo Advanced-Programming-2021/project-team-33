@@ -12,6 +12,7 @@ public class GraveyardMenu {
     public void run(String input) {
         MainMenu.checked = false;
         selectCard(Util.getCommand(input, "select --graveyard (\\d+)"));
+        CardMenu.showSelectedCard(Util.getCommand(input, "card show --selected"));
         backToGame(Util.getCommand(input, "back"));
         MainMenu.showCurrentMenu(Util.getCommand(input, "menu show-current"));
     }

@@ -1,10 +1,7 @@
 package Controller;
 
 import Model.*;
-import View.ChangeCardsMenu;
-import View.Communicate;
-import View.GameMenu;
-import View.MainMenu;
+import View.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,6 +23,17 @@ public class GameController {
         if (player.isInOpponentPhase() && isSpellTrap) return selectSpellTrap(cardPosition, number);
         if (opponent != null && !opponent.equals("")) player = Player.opponent;
         if (selectedCard != null) deSelectCard();
+        if (cardPosition.equals("hand") && player.getBoard().getCardFromHand(number) != null) {
+            player.getBoard().getCardFromHand(number).setSelected(true);
+            selectedCard = player.getBoard().getCardFromHand(number);
+            return 1;
+        } else if (cardPosition.equals("hand")) return 0;
+        else if (cardPosition.equals("field") && player.getBoard().getFieldZone().get(0) != null) {
+            player.getBoard().getFieldZone().get(0).setSelected(true);
+            selectedCard = player.getBoard().getFieldZone().get(0);
+            return 1;
+        } else if (cardPosition.equals("field")) return 0;
+        number = switchNumberForCurrent(number);
         if (cardPosition.equals("monster") && player.getBoard().getCardFromMonsterField(number) != null) {
             player.getBoard().getCardFromMonsterField(number).setSelected(true);
             selectedCard = player.getBoard().getCardFromMonsterField(number);
@@ -36,42 +44,55 @@ public class GameController {
             selectedCard = player.getBoard().getCardFromSpellField(number);
             return 1;
         } else if (cardPosition.equals("spell")) return 0;
-        else if (cardPosition.equals("hand") && player.getBoard().getCardFromHand(number) != null) {
-            player.getBoard().getCardFromHand(number).setSelected(true);
-            selectedCard = player.getBoard().getCardFromHand(number);
-            return 1;
-        } else if (cardPosition.equals("hand")) return 0;
-        else if (cardPosition.equals("field") && player.getBoard().getFieldZone().get(0) != null) {
-            player.getBoard().getFieldZone().get(0).setSelected(true);
-            selectedCard = player.getBoard().getFieldZone().get(0);
-            return 1;
-        } else if (cardPosition.equals("field")) return 0;
+
         return -1;
     }
 
+    public static int switchNumberForCurrent(int number) {
+        if (number == 1) return 2;
+        if (number == 2) return 3;
+        if (number == 3) return 1;
+        if (number == 4) return 4;
+        return 0;
+    }
+
+
     private static int selectAttackTrap(String cardPosition, int number) {
+        number = switchNumberForCurrent(number);
         if (Player.currentPlayer.getBoard().getCardFromSpellField(number) == null) return 0;
         String cardName = Player.currentPlayer.getBoard().getCardFromSpellField(number).getCardName();
         if (cardPosition.equals("spell") && (cardName.equals("Magic Cylinder") || cardName.equals("Mirror Force")) ||
-                cardName.equals("Negate Attack"))
+                cardName.equals("Negate Attack")) {
+            Player.currentPlayer.getBoard().getCardFromSpellField(number).setSelected(true);
+            selectedCard = Player.currentPlayer.getBoard().getCardFromSpellField(number);
             return 1;
+        }
+
         return -1;
     }
 
     public static int selectSpellTrap(String cardPosition, int number) {
+        number = switchNumberForCurrent(number);
         if (Player.currentPlayer.getBoard().getCardFromSpellField(number) == null) return 0;
         String cardName = Player.currentPlayer.getBoard().getCardFromSpellField(number).getCardName();
-        if (cardPosition.equals("spell") && cardName.equals("Magic Jammer"))
+        if (cardPosition.equals("spell") && cardName.equals("Magic Jammer")) {
+            Player.currentPlayer.getBoard().getCardFromSpellField(number).setSelected(true);
+            selectedCard = Player.currentPlayer.getBoard().getCardFromSpellField(number);
             return 1;
+        }
         return -1;
     }
 
     private static int selectSummonTrap(String cardPosition, int number) {
+        number = switchNumberForCurrent(number);
         if (Player.currentPlayer.getBoard().getCardFromSpellField(number) == null) return 0;
         String cardName = Player.currentPlayer.getBoard().getCardFromSpellField(number).getCardName();
         if (cardPosition.equals("spell") && (cardName.equals("Trap Hole") || cardName.equals("Torrential Tribute")) ||
-                cardName.equals("Solemn Warning"))
+                cardName.equals("Solemn Warning")) {
+            Player.currentPlayer.getBoard().getCardFromSpellField(number).setSelected(true);
+            selectedCard = Player.currentPlayer.getBoard().getCardFromSpellField(number);
             return 1;
+        }
         return -1;
     }
 
@@ -144,7 +165,7 @@ public class GameController {
     }
 
     public static boolean isDeckValid(String user) {
-        return Player.getUserByUsername(user).getActiveDeck().getMainDeck().size() >= 30;
+        return Player.getUserByUsername(user).getActiveDeck().getMainDeck().size() >= 0;
     }
 
     public static void initiateGame(String firstPlayer, String secondPlayer, int round) {
@@ -190,7 +211,7 @@ public class GameController {
     }
 
     public static void shuffleDeck(Player player) {
-        Collections.shuffle(player.getBoard().getDeck());
+        //Collections.shuffle(player.getBoard().getDeck());
     }
 
     public static void showBoard() {
@@ -202,7 +223,8 @@ public class GameController {
         System.out.println();
         System.out.println(Player.opponent.board.deck.size());
         System.out.print("\t");
-        for (Card card : Player.opponent.board.fieldCardsForSpellTraps) {
+        for (int i = 4; i >= 0; i--) {
+            Card card = Player.opponent.getBoard().getFieldCardsForSpellTraps().get(i);
             if (card == null) {
                 System.out.print("E\t");
             } else if (card.getCardStatus() == CardStatus.BACK) {
@@ -213,7 +235,8 @@ public class GameController {
         }
         System.out.println();
         System.out.print("\t");
-        for (Card card : Player.opponent.board.fieldCardsForMonsters) {
+        for (int i = 4; i >= 0; i--) {
+            Card card = Player.opponent.getBoard().getFieldCardsForMonsters().get(i);
             if (card == null) {
                 System.out.print("E\t");
             } else if (card.getCardStatus() == CardStatus.DEFENCE) {
@@ -227,7 +250,7 @@ public class GameController {
         System.out.println();
         System.out.print(Player.opponent.board.graveyard.size());
         Util.printNCharacter(6, "\t");
-        if (Player.opponent.board.fieldZone.size() == 0) System.out.println("E");
+        if (Player.opponent.getBoard().getFieldZone().get(0) == null) System.out.println("E");
         else System.out.println("O");
         System.out.println();
         Util.printNCharacter(26, "-");
@@ -235,7 +258,7 @@ public class GameController {
 
         //-----------------------------
 
-        if (Player.currentPlayer.board.fieldZone.size() == 0) System.out.print("E");
+        if (Player.currentPlayer.getBoard().getFieldZone().get(0) == null) System.out.print("E");
         else System.out.print("O");
         Util.printNCharacter(6, "\t");
         System.out.println(Player.currentPlayer.board.graveyard.size());
@@ -295,19 +318,19 @@ public class GameController {
         return check == 5;
     }
 
-    public static void summonMonster(int firstTribute, int secondTribute) {
-        if (isSummonTrap()) return;
+    public static int summonMonster(int firstTribute, int secondTribute) {
+        if (isSummonTrap()) return -1;
         if (firstTribute != 0 && secondTribute == 0) {
             Card tributeCard = Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(firstTribute);
             Player.currentPlayer.getBoard().getGraveyard().add(tributeCard);
-            Player.currentPlayer.getBoard().getFieldCardsForMonsters().remove(firstTribute);
+            Player.currentPlayer.getBoard().getFieldCardsForMonsters().set(firstTribute, null);
         } else if (secondTribute != 0) {
             Card tributeCard1 = Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(firstTribute);
             Card tributeCard2 = Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(secondTribute);
             Player.currentPlayer.getBoard().getGraveyard().add(tributeCard1);
             Player.currentPlayer.getBoard().getGraveyard().add(tributeCard2);
-            Player.currentPlayer.getBoard().getFieldCardsForMonsters().remove(firstTribute);
-            Player.currentPlayer.getBoard().getFieldCardsForMonsters().remove(secondTribute);
+            Player.currentPlayer.getBoard().getFieldCardsForMonsters().set(firstTribute, null);
+            Player.currentPlayer.getBoard().getFieldCardsForMonsters().set(secondTribute, null);
         }
         Player.currentPlayer.getBoard().getHand().remove(selectedCard);
         selectedCard.setCardStatus(CardStatus.ATTACK);
@@ -315,11 +338,22 @@ public class GameController {
         callEffects();
         deSelectCard();
         RoundController.isSummoned = true;
+        return 0;
     }
 
     public static void callEffects() {
         if (selectedCard.getCardTypes().contains(CardType.EFFECT)) {
             for (Effect effect : selectedCard.getEffects()) {
+                effect.enableEffect(null);
+            }
+        }
+        checkCommandKnight();
+    }
+
+    private static void checkCommandKnight() {
+        Card card = Card.getCardByName("Command Knight");
+        if(Player.currentPlayer.getBoard().getFieldCardsForMonsters().contains(card)) {
+            for (Effect effect : card.getEffects()) {
                 effect.enableEffect(null);
             }
         }
@@ -336,34 +370,40 @@ public class GameController {
 
     public static void setSpell() {
         Player.currentPlayer.getBoard().getHand().remove(selectedCard);
-        selectedCard.setCardStatus(CardStatus.SET);
+        selectedCard.setCardStatus(CardStatus.BACK);
         selectedCard.setSummoned(true);
-        putSpellTrapOnField();
+        if (selectedCard.getCardTypes().contains(CardType.FIELD) &&
+                Player.currentPlayer.getBoard().getFieldZone().get(0) == null) {
+            Player.currentPlayer.getBoard().getFieldZone().set(0, selectedCard);
+        } else if (selectedCard.getCardTypes().contains(CardType.FIELD)) {
+            Player.currentPlayer.getBoard().getGraveyard().add(Player.currentPlayer.getBoard().getFieldZone().get(0));
+            Player.currentPlayer.getBoard().getFieldZone().set(0, selectedCard);
+        } else putSpellTrapOnField();
         deSelectCard();
-        RoundController.isSummoned = true;
     }
 
     public static void putSpellTrapOnField() {
-        if (Player.thePlayer.getBoard().getFieldCardsForSpellTraps().get(2) == null)
+        if (Player.currentPlayer.getBoard().getFieldCardsForSpellTraps().get(2) == null)
             Player.currentPlayer.getBoard().getFieldCardsForSpellTraps().set(2, selectedCard);
-        else if (Player.thePlayer.getBoard().getFieldCardsForSpellTraps().get(3) == null)
+        else if (Player.currentPlayer.getBoard().getFieldCardsForSpellTraps().get(3) == null)
             Player.currentPlayer.getBoard().getFieldCardsForSpellTraps().set(3, selectedCard);
-        else if (Player.thePlayer.getBoard().getFieldCardsForSpellTraps().get(1) == null)
+        else if (Player.currentPlayer.getBoard().getFieldCardsForSpellTraps().get(1) == null)
             Player.currentPlayer.getBoard().getFieldCardsForSpellTraps().set(1, selectedCard);
-        else if (Player.thePlayer.getBoard().getFieldCardsForSpellTraps().get(4) == null)
+        else if (Player.currentPlayer.getBoard().getFieldCardsForSpellTraps().get(4) == null)
             Player.currentPlayer.getBoard().getFieldCardsForSpellTraps().set(4, selectedCard);
         else
             Player.currentPlayer.getBoard().getFieldCardsForSpellTraps().set(0, selectedCard);
+
     }
 
     public static void putMonsterOnField() {
-        if (Player.thePlayer.getBoard().getFieldCardsForMonsters().get(2) == null)
+        if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(2) == null)
             Player.currentPlayer.getBoard().getFieldCardsForMonsters().set(2, selectedCard);
-        else if (Player.thePlayer.getBoard().getFieldCardsForMonsters().get(3) == null)
+        else if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(3) == null)
             Player.currentPlayer.getBoard().getFieldCardsForMonsters().set(3, selectedCard);
-        else if (Player.thePlayer.getBoard().getFieldCardsForMonsters().get(1) == null)
+        else if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(1) == null)
             Player.currentPlayer.getBoard().getFieldCardsForMonsters().set(1, selectedCard);
-        else if (Player.thePlayer.getBoard().getFieldCardsForMonsters().get(4) == null)
+        else if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(4) == null)
             Player.currentPlayer.getBoard().getFieldCardsForMonsters().set(4, selectedCard);
         else
             Player.currentPlayer.getBoard().getFieldCardsForMonsters().set(0, selectedCard);
@@ -377,10 +417,10 @@ public class GameController {
     }
 
     public static void flipSummon() {
+        selectedCard.setSummoned(true);
         if (isSummonTrap()) return;
         selectedCard.setCardStatus(CardStatus.ATTACK);
         callEffects();
-        selectedCard.setSummoned(true);
         deSelectCard();
     }
 
@@ -451,8 +491,11 @@ public class GameController {
         deSelectCard();
     }
 
-    public static void attackDirect() {
+    public static int attackDirect() {
+        if (isAttackTrap()) return -1;
+        selectedCard.setAttacked(true);
         Player.opponent.increaseLifePoint(-1 * selectedCard.getAttack());
+        return selectedCard.getAttack();
     }
 
     public static boolean canDestroyMonster(Card enemyCard) {
@@ -482,8 +525,10 @@ public class GameController {
                 case "Command Knight":
                     for (Card fieldCardsForMonster : Player.opponent.getBoard().getFieldCardsForMonsters()) {
                         if (fieldCardsForMonster != null &&
-                                !fieldCardsForMonster.getCardName().equals("Command Knight"))
+                                !fieldCardsForMonster.getCardName().equals("Command Knight")) {
+                            CardMenu.printCardMassage("Command Knight");
                             return true;
+                        }
                     }
                     return false;
                 // not complete
@@ -525,16 +570,18 @@ public class GameController {
 
     public static boolean isSummonTrap() {
         ArrayList<Card> trapList = Player.opponent.getBoard().getFieldCardsForSpellTraps();
+        lastSelectedCard = selectedCard;
         if (selectedCard.getAttack() >= 1000 && trapList.contains(Card.getCardByName("Trap Hole"))) {
             isSummonTrap = true;
-            lastSelectedCard = selectedCard;
+
             return isChangedTurnInMiddle();
         } else if (trapList.contains(Card.getCardByName("Torrential Tribute"))) {
             isSummonTrap = true;
+
             return isChangedTurnInMiddle();
         } else if (trapList.contains(Card.getCardByName("Solemn Warning"))) {
             isSummonTrap = true;
-            lastSelectedCard = selectedCard;
+
             return isChangedTurnInMiddle();
         }
         return false;
@@ -548,7 +595,8 @@ public class GameController {
 
     public static void putMonsterOnGraveYard(Card card, Player player) {
         player.getBoard().getGraveyard().add(card);
-        player.getBoard().getFieldCardsForMonsters().remove(card);
+        int index = player.getBoard().getFieldCardsForMonsters().indexOf(card);
+        player.getBoard().getFieldCardsForMonsters().set(index, null);
     }
 
     public static boolean isEnemyMonsterFieldEmpty() {

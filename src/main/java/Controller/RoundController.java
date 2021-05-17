@@ -19,6 +19,7 @@ public class RoundController {
     }
 
     public static void checkEndOfRound() {
+        checkBuff();
         GameMenu gameMenu = new GameMenu();
         if (Player.thePlayer.getLifePoint() <= 0) {
             gameMenu.informEndOfRound(otherPlayer, 1000,remainingRounds);
@@ -42,6 +43,9 @@ public class RoundController {
                         Player.thePlayer.getUsername());
         }
 
+    }
+
+    private static void checkBuff(){
 
     }
 
@@ -83,9 +87,12 @@ public class RoundController {
             if (!isDrawPossible()) {
                 Player.currentPlayer.setLifePoint(0);
             }
-            Card card = GameController.drawCard(Player.currentPlayer);
-            if (card != null) gameMenu.drawCard(card);
-            standByPhase();
+            else{
+                Card card = GameController.drawCard(Player.currentPlayer);
+                if (card != null) gameMenu.drawCard(card);
+                standByPhase();
+            }
+
         }
     }
 
@@ -123,6 +130,9 @@ public class RoundController {
         Player.currentPlayer.setPhase(Phase.END);
         gameMenu.informPhase(Phase.END);
         changeTurn();
+        GameMenu gameMenu = new GameMenu();
+        gameMenu.endPhaseMassage();
+        RoundController.drawPhase();
     }
 
 }

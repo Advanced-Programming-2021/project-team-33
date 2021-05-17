@@ -19,7 +19,8 @@ public class LoginMenu {
         login(Util.getCommand(input, "user login --username (\\S+) --password (\\S+)"));
     }
 
-    private void register(Matcher matcher) {
+
+    public void register(Matcher matcher) {
         if (!MainMenu.checked && matcher.matches()) {
             MainMenu.checked = true;
             String username = matcher.group(1);

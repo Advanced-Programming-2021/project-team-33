@@ -41,10 +41,13 @@ public class GameMenu {
             else if (Player.currentPlayer.getPhase().equals(Phase.BATTLE)) RoundController.mainPhase2();
             else if (Player.currentPlayer.getPhase().equals(Phase.MAIN2)) {
                 RoundController.endPhase();
-                System.out.println("It's" + Player.currentPlayer.getUsername() + "'s turn");
-                RoundController.drawPhase();
+                System.out.println("It's " + Player.currentPlayer.getUsername() + "'s turn");
             }
         }
+    }
+
+    public void endPhaseMassage() {
+        System.out.println("It's " + Player.currentPlayer.getUsername() + "'s turn");
     }
 
     private void showGraveyard(Matcher matcher) {
@@ -74,7 +77,7 @@ public class GameMenu {
     }
 
     public void printMiddleChange() {
-        System.out.println("now it will be" + Player.opponent + "’s turn");
+        System.out.println("now it will be " + Player.opponent.getUsername() + "’s turn");
     }
 
     public String changePhaseInMiddle() {
@@ -171,35 +174,47 @@ public class GameMenu {
                     return;
                 }
                 String input = Communicate.input("Pick Monster for tribute");
-                if (input.equals("cancel")) return;
+                if (input.equals("cancel")) {
+                    System.out.println("Tribute Canceled");
+                    return;
+                }
                 int tribute = Integer.parseInt(Communicate.input("Pick Monster for tribute"));
+                tribute = GameController.switchNumberForCurrent(tribute);
                 if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(tribute) == null) {
                     System.out.println("there are no monsters on this address");
                     return;
                 }
-                GameController.summonMonster(tribute, 0);
-                System.out.println("summoned successfully1");
+                int command = GameController.summonMonster(tribute, 0);
+                if (command != -1) System.out.println("summoned successfully1");
             } else if (GameController.selectedCard.getLevel() > 6 && GameController.selectedCard.getLevel() < 9) {
                 if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().size() < 2) {
                     System.out.println("there are not enough cards for tribute");
                     return;
                 }
                 String input = Communicate.input("Pick Monster for tribute");
-                if (input.equals("cancel")) return;
+                if (input.equals("cancel")) {
+                    System.out.println("Tribute Canceled");
+                    return;
+                }
                 int tribute = Integer.parseInt(input);
+                tribute = GameController.switchNumberForCurrent(tribute);
                 input = Communicate.input("Pick another Monster for tribute");
-                if (input.equals("cancel")) return;
+                if (input.equals("cancel")) {
+                    System.out.println("Tribute Canceled");
+                    return;
+                }
                 int tribute1 = Integer.parseInt(input);
+                tribute1 = GameController.switchNumberForCurrent(tribute1);
                 if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(tribute) == null ||
                         Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(tribute1) == null) {
                     System.out.println("there is no monster on one of these addresses");
                     return;
                 }
-                GameController.summonMonster(tribute, tribute1);
-                System.out.println("summoned successfully2");
+                int command = GameController.summonMonster(tribute, tribute1);
+                if (command != -1) System.out.println("summoned successfully2");
             } else {
-                GameController.summonMonster(0, 0);
-                System.out.println("summoned successfully3");
+                int command = GameController.summonMonster(0, 0);
+                if (command != -1) System.out.println("summoned successfully3");
             }
 
         }
@@ -245,13 +260,13 @@ public class GameMenu {
                 else if (RoundController.isSummoned) System.out.println("you already summoned/set on this turn");
                 else {
                     GameController.setMonster();
-                    System.out.println("set successfully");
+                    System.out.println("set successfully1");
                 }
             } else {
                 if (GameController.isSpellTrapFieldFull()) System.out.println("spell card zone is full");
                 else {
                     GameController.setSpell();
-                    System.out.println("set successfully");
+                    System.out.println("set successfully2");
                 }
             }
         }
@@ -286,7 +301,7 @@ public class GameMenu {
     private void attackToMonster(Matcher matcher) {
         if (!MainMenu.checked && matcher.matches()) {
             MainMenu.checked = true;
-            int enemyMonsterIndex = Integer.parseInt(matcher.group(1));
+            int enemyMonsterIndex = GameController.switchNumberForCurrent(Integer.parseInt(matcher.group(1)));
             if (Player.currentPlayer.isInOpponentPhase())
                 System.out.println("it’s not your turn to play this kind of moves");
             else if (GameController.selectedCard == null) System.out.println("no card is selected yet");
@@ -341,7 +356,8 @@ public class GameMenu {
             else if (!GameController.isEnemyMonsterFieldEmpty())
                 System.out.println("you can’t attack the opponent directly");
             else {
-                GameController.attackDirect();
+                int damage = GameController.attackDirect();
+                if (damage != -1) System.out.println("your opponent receives " + damage + " battle damage");
             }
         }
     }
@@ -349,8 +365,9 @@ public class GameMenu {
     public void selectCard(Matcher matcher) {
         if (!MainMenu.checked && matcher.matches()) {
             MainMenu.checked = true;
+            String opponent = "";
             String cardPosition = matcher.group(1);
-            String opponent = matcher.group(2);
+            if (matcher.group(2) != null) opponent = matcher.group(2);
             int number = Integer.parseInt(matcher.group(3));
             int massage = GameController.selectCard(cardPosition, number, opponent);
             if (massage == 1) System.out.println("card selected");

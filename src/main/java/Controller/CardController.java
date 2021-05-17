@@ -12,6 +12,7 @@ import java.util.List;
 
 public class CardController {
 
+
     public static void initialCards() {
         initialMonsters();
         initialSpells();
@@ -19,19 +20,26 @@ public class CardController {
     }
 
     private static void initialTraps() {
-        Card magicCylinder = new Card("Magic Cylinder", "nothing", 1,
+        Card magicCylinder = new Card("Magic Cylinder",
+                "When an opponent's monster declares an attack: Target the attacking monster; negate the attack," +
+                        " and if you do, inflict damage to your opponent equal to its ATK.", 2000,
                 new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.TRAP, 3, 0,
                 new ArrayList<>(List.of(new AttackDirectToOpponent())), 0, 0);
 
-        Card mirrorForce = new Card("Mirror Force", "nothing", 1,
+        Card mirrorForce = new Card("Mirror Force",
+                "When an opponent's monster declares an attack: Destroy all your opponent's Attack Position monsters.", 2000,
                 new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.TRAP, 3, 0,
                 new ArrayList<>(List.of(new DestroyAllOpponentMonsters())), 0, 0);
 
-        Card mindCrush = new Card("Mind Crush", "nothing", 1,
+        Card mindCrush = new Card("Mind Crush",
+                "Declare 1 card name; if that card is in your opponent's hand," +
+                        " they must discard all copies of it, otherwise you discard 1 random card", 2000,
                 new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.TRAP, 3, 0,
                 new ArrayList<>(List.of(new GuessOpponentCard())), 0, 0);
 
-        Card trapHole = new Card("Trap Hole", "nothing", 1,
+        Card trapHole = new Card("Trap Hole",
+                "When your opponent Normal or Flip Summons 1 monster with 1000 or more ATK:" +
+                        " Target that monster; destroy that target.", 2000,
                 new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.TRAP, 3, 0,
                 new ArrayList<>(List.of(new DestroySelectedMonster())), 0, 0);
 
@@ -39,9 +47,9 @@ public class CardController {
                 new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.TRAP, 3, 0,
                 new ArrayList<>(List.of(new DestroyAllMonsters())), 0, 0);
 
-        Card timeSeal = new Card("Time Seal", "nothing", 1,
-                new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.TRAP, 1, 0,
-                new ArrayList<>(List.of(new DestroySelectedMonster())), 0, 0);
+        Card timeSeal = new Card("Time Seal", "Skip the Draw Phase of your opponent's next turn.",
+                2000, new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.TRAP, 1, 0,
+                new ArrayList<>(List.of(new TakeNextRoundFromOpponent())), 0, 0);
 
         Card negateAttack = new Card("Negate Attack", "nothing", 1,
                 new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.TRAP, 3, 0,
@@ -160,22 +168,27 @@ public class CardController {
                 new ArrayList<>(List.of(new RitualSummon())), 0, 0);
     }
 
+
+
     private static void initialMonsters() {
         Card commandKnight = new Card("Command Knight", "Gain 400 ATK to all Warrior-Type monsters," +
                 " if you control another monster, monsters your opponent " +
-                "controls cannot target this card for an attack", 1,
+                "controls cannot target this card for an attack", 2100,
                 new ArrayList<>(List.of(CardType.WARRIOR, CardType.EFFECT)), CardCategory.MONSTEREFFECT,
                 3, 4, new ArrayList<>(List.of(new IncreaseAttack())), 1000, 1000);
 
-        Card battleOx = new Card("Battle Ox", "nothing", 1,
+        Card battleOx = new Card("Battle Ox",
+                "A monster with tremendous power, it destroys enemies with a swing of its axe.", 2900,
                 new ArrayList<>(List.of(CardType.BEASTWARRIOR)), CardCategory.MONSTER,
                 3, 4, null, 1700, 1000);
 
-        Card axeRaider = new Card("Axe Raider", "nothing", 1,
+        Card axeRaider = new Card("Axe Raider",
+                "An axe-wielding monster of tremendous strength and agility.", 3100,
                 new ArrayList<>(List.of(CardType.WARRIOR)), CardCategory.MONSTER,
                 3, 4, null, 1700, 1150);
 
-        Card hornImp = new Card("Horn Imp", "nothing", 1,
+        Card hornImp = new Card("Horn Imp",
+                "A small fiend that dwells in the dark, its single horn makes it a formidable opponent.", 2500,
                 new ArrayList<>(List.of(CardType.FIEND)), CardCategory.MONSTER,
                 3, 4, null, 1300, 1000);
 
@@ -183,7 +196,8 @@ public class CardController {
                 new ArrayList<>(List.of(CardType.AQUA, CardType.EFFECT)), CardCategory.MONSTEREFFECT,
                 3, 3, null, 800, 1400);
 
-        Card silverFang = new Card("Silver Fang", "nothing", 1,
+        Card silverFang = new Card("Silver Fang",
+                "A snow wolf that's beautiful to the eye, but absolutely vicious in battle.", 1700,
                 new ArrayList<>(List.of(CardType.BEAST)), CardCategory.MONSTER,
                 3, 3, null, 1200, 800);
 
@@ -203,7 +217,8 @@ public class CardController {
                 new ArrayList<>(List.of(CardType.FIEND)), CardCategory.MONSTER,
                 3, 4, null, 1300, 1400);
 
-        Card darkMagician = new Card("Dark Magician", "nothing", 1,
+        Card darkMagician = new Card("Dark Magician",
+                "The ultimate wizard in terms of attack and defense.", 8300,
                 new ArrayList<>(List.of(CardType.SPELLCASTER)), CardCategory.MONSTER,
                 3, 7, null, 2500, 2100);
 

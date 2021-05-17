@@ -1,5 +1,6 @@
 package View;
 
+import Controller.CardController;
 import Controller.ProgramController;
 import Controller.Util;
 import Model.Card;
@@ -30,6 +31,8 @@ public class ShopMenu {
             if (!ProgramController.isCardExist(matcher.group(1))) System.out.println("there is no card with this name");
             else {
                 Card card = Card.getCardByName(matcher.group(1));
+
+
                 if (card.getPrice() > Player.thePlayer.getMoney()) {
                     System.out.println("not enough money");
                 } else {
@@ -37,6 +40,8 @@ public class ShopMenu {
                     Player.thePlayer.addToCardList(card);
                     System.out.println("You bought " + card.getCardName());
                 }
+
+
             }
         }
     }

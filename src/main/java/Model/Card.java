@@ -6,16 +6,19 @@ public class Card {
     static int id = 0;
     static ArrayList<Card> cards = new ArrayList<>();
     ArrayList<Effect> effects = new ArrayList<>();
-    boolean isSelected = false, isChanged = false, isSummoned = false, isAttacked = false, isActivated = false, destroyed = false;
+    boolean isSelected = false, isChanged = false, isSummoned = false,
+            isAttacked = false, isActivated = false, destroyed = false,
+            isBuffed = false;
+
     String cardName, description;
     ArrayList<CardType> cardTypes = new ArrayList<>();
     CardCategory cardCategory;
-
     int cardId, limit, price, level;
     CardStatus cardStatus;
-    int attack,defence;
+    int attack, defence;
 
     public Card() {
+
     }
 
     public Card(String cardName, String description, int price, ArrayList<CardType> cardTypes,
@@ -58,6 +61,14 @@ public class Card {
 
     public void setDefence(int defence) {
         this.defence = defence;
+    }
+
+    public boolean isBuffed() {
+        return isBuffed;
+    }
+
+    public void setBuffed(boolean buffed) {
+        isBuffed = buffed;
     }
 
     public void setAttack(int attack) {

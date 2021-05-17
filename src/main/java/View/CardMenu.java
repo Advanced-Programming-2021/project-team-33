@@ -13,6 +13,12 @@ import java.util.regex.Matcher;
 public class CardMenu {
 
 
+    public static void printCardMassage(String cardName) {
+        if(cardName.equals("Command Knight")) System.out.println("You can't attack this monster now");
+        if(cardName.equals("Mind Crush1")) System.out.println("Nice Guess!");
+        if(cardName.equals("Mind Crush2")) System.out.println("Wrong Guess!");
+    }
+
     public static void showCard(Matcher matcher) {
         if (!MainMenu.checked && matcher.matches()) {
             MainMenu.checked = true;
@@ -46,16 +52,19 @@ public class CardMenu {
     private static void printMonsterCard(Card card) {
         System.out.println("Name: " + card.getCardName());
         System.out.println("Level: " + card.getLevel());
-        System.out.println("Type: " + card.getCardTypes());
+        System.out.println("Type: " + card.getCardTypes().toString().replace("[", "")
+                .replace("]", "").replace("", ""));
         System.out.println("ATK: " + card.getAttack());
         System.out.println("DEF: " + card.getDefence());
         System.out.println("Description: " + card.getDescription());
+        System.out.println(card.getCardStatus().toString());
     }
 
     private static void printSpellTrapCard(Card card) {
         System.out.println("Name: " + card.getCardName());
         System.out.println(card.getCardCategory());
-        System.out.println("Type: " + card.getCardTypes());
+        System.out.println("Type: " + card.getCardTypes().toString().replace("[", "")
+                .replace("]", "").replace("", ""));
         System.out.println("Description: " + card.getDescription());
     }
 

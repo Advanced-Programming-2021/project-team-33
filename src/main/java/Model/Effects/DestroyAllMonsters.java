@@ -22,6 +22,14 @@ public class DestroyAllMonsters implements Effect {
                 }
             }
             GameController.isSummonTrap = false;
+            if(GameController.selectedCard.getCardName().equals("Torrential Tribute")) {
+                int index = Player.currentPlayer.getBoard().getFieldCardsForSpellTraps().indexOf(GameController.selectedCard);
+                Player.currentPlayer.getBoard().getGraveyard().add(GameController.selectedCard);
+                Player.currentPlayer.getBoard().getFieldCardsForSpellTraps().set(index, null);
+                Player.opponent.getBoard().getGraveyard().add(GameController.lastSelectedCard);
+                Player.opponent.getBoard().getHand().remove(GameController.lastSelectedCard);
+            }
+
 
 
     }

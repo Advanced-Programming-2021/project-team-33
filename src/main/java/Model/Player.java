@@ -16,7 +16,7 @@ public class Player {
     public static Player currentPlayer, opponent;
     boolean isInOpponentPhase;
     String username, password, nickname;
-    int money = 3, score, lifePoint = 8000;
+    int money = 10000, score, lifePoint = 8000;
     Deck activeDeck;
 
     public Player(String username) {
