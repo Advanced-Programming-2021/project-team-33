@@ -28,4 +28,9 @@ public class DestroyAllOpponentMonsters implements Effect {
     public void disableEffect(Card card) {
 
     }
+
+    @Override
+    public String getEffectName() {
+        return "DestroyAllOpponentMonsters";
+    }
 }

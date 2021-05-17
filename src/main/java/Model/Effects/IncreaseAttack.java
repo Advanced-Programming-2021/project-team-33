@@ -25,4 +25,9 @@ public class IncreaseAttack implements Effect {
             }
         }
     }
+
+    @Override
+    public String getEffectName() {
+        return "IncreaseAttack";
+    }
 }

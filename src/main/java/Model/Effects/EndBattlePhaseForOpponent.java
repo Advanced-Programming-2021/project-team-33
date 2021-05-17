@@ -15,4 +15,9 @@ public class EndBattlePhaseForOpponent implements Effect {
     public void disableEffect(Card card) {
 
     }
+
+    @Override
+    public String getEffectName() {
+        return "EndBattlePhaseForOpponent";
+    }
 }

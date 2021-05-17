@@ -27,4 +27,9 @@ public class DestroySpecificSpellCard implements Effect {
     public void disableEffect(Card card) {
 
     }
+
+    @Override
+    public String getEffectName() {
+        return "DestroySpecificSpellCard";
+    }
 }

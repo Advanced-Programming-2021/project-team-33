@@ -43,4 +43,9 @@ public class SummonFromGraveYard implements Effect {
     public void disableEffect(Card card) {
 
     }
+
+    @Override
+    public String getEffectName() {
+        return "SummonFromGraveYard";
+    }
 }

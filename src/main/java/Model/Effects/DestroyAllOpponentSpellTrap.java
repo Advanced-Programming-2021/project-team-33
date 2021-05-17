@@ -19,4 +19,9 @@ public class DestroyAllOpponentSpellTrap implements Effect {
     public void disableEffect(Card card) {
 
     }
+
+    @Override
+    public String getEffectName() {
+        return "DestroyAllOpponentSpellTrap";
+    }
 }

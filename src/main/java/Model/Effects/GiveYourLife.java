@@ -17,4 +17,9 @@ public class GiveYourLife implements Effect {
     public void disableEffect(Card card) {
 
     }
+
+    @Override
+    public String getEffectName() {
+        return "GiveYourLife";
+    }
 }

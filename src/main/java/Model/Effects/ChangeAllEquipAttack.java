@@ -18,6 +18,11 @@ public class ChangeAllEquipAttack implements Effect {
         changeAttackDeffence(Player.opponent, -500);
     }
 
+    @Override
+    public String getEffectName() {
+        return "ChangeAllEquipAttack";
+    }
+
     private void changeAttackDeffence(Player player, int attackAmount) {
         for (Card monster : player.getBoard().getFieldCardsForMonsters()) {
             if (monster != null) {

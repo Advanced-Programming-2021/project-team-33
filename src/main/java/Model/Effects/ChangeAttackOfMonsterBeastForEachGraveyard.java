@@ -13,6 +13,11 @@ public class ChangeAttackOfMonsterBeastForEachGraveyard implements Effect {
         changeAttackDeffence(-100);
     }
 
+    @Override
+    public String getEffectName() {
+        return "ChangeAttackOfMonsterBeastForEachGraveyard";
+    }
+
     private void changeAttackDeffence(int amount) {
         int numberOfCardsInGraveyard = 0;
         for (Card card : Player.currentPlayer.getBoard().getGraveyard()) {

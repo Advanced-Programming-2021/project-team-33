@@ -13,6 +13,11 @@ public class ChangeWarriorAttackDeffenceReplace implements Effect {
         changeAttackDeffence(-1);
     }
 
+    @Override
+    public String getEffectName() {
+        return "ChangeWarriorAttackDeffenceReplace";
+    }
+
     private void changeAttackDeffence(int zarib) {
         for (Card monster : Player.currentPlayer.getBoard().getFieldCardsForMonsters()) {
             if (monster != null && monster.getCardTypes().equals(CardType.WARRIOR)) {

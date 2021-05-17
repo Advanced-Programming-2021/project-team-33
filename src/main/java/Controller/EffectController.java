@@ -4,7 +4,10 @@ import Model.Card;
 import Model.Effect;
 import Model.Player;
 
+import java.util.ArrayList;
+
 public class EffectController {
+    public static ArrayList<Effect> effects = new ArrayList<>();
     public static void spellAbsorption() {
         Card card = getCardFromField(Player.currentPlayer, "Spell Absorption");
         if (card != null) {

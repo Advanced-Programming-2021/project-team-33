@@ -25,6 +25,11 @@ public class ChooseFromGraveyardAndSpecialSummon implements Effect {
 
     }
 
+    @Override
+    public String getEffectName() {
+        return "ChooseFromGraveyardAndSpecialSummon";
+    }
+
     public void chooseFromGraveYard(String output, Player player) {
         ArrayList<Card> graveYard = player.getBoard().getGraveyard();
         if (graveYard.size() == 0) {

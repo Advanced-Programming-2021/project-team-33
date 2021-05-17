@@ -39,6 +39,10 @@ public class Card {
         return limit;
     }
 
+    public int getCardId() {
+        return cardId;
+    }
+
     public static ArrayList<Card> getCards() {
         return cards;
     }

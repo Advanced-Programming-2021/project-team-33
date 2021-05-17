@@ -13,6 +13,11 @@ public class ChangeMyEquipAttackDeffence implements Effect {
         changeAttackDeffence(-800);
     }
 
+    @Override
+    public String getEffectName() {
+        return "ChangeMyEquipAttackDeffence";
+    }
+
     private void changeAttackDeffence(int amount) {
         for (Card monster : Player.currentPlayer.getBoard().getFieldCardsForMonsters()) {
             if (monster != null && monster.getCardStatus().equals(CardStatus.ATTACK)) {

@@ -18,6 +18,11 @@ public class ChangeAttackDeffenceOfAqua implements Effect {
         changeAttackDeffence(Player.opponent, -500, -400);
     }
 
+    @Override
+    public String getEffectName() {
+        return "ChangeAttackDeffenceOfAqua";
+    }
+
     private void changeAttackDeffence(Player player, int attackAmount, int deffenceAmount) {
         for (Card monster : player.getBoard().getFieldCardsForMonsters()) {
             if (monster != null) {

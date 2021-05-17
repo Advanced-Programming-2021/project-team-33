@@ -47,4 +47,9 @@ public class AddFieldSpellToMyHand implements Effect {
     public void disableEffect(Card card) {
 
     }
+
+    @Override
+    public String getEffectName() {
+        return "AddFieldSpellToMyHand";
+    }
 }

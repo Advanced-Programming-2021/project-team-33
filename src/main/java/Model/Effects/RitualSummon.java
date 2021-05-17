@@ -13,4 +13,9 @@ public class RitualSummon implements Effect {
     public void disableEffect(Card card) {
 
     }
+
+    @Override
+    public String getEffectName() {
+        return "RitualSummon";
+    }
 }

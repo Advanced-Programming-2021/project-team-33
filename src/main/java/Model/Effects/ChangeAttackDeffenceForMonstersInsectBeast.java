@@ -18,6 +18,11 @@ public class ChangeAttackDeffenceForMonstersInsectBeast implements Effect {
         changeAttackDeffence(Player.opponent, -200);
     }
 
+    @Override
+    public String getEffectName() {
+        return "ChangeAttackDeffenceForMonstersInsectBeast";
+    }
+
     private void changeAttackDeffence(Player player, int amount) {
         for (Card monster : player.getBoard().getFieldCardsForMonsters()) {
             if (monster != null) {
