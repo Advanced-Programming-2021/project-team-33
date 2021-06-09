@@ -1,6 +1,5 @@
 import Controller.CardController;
 import Controller.ProgramController;
-import Model.Card;
 import View.MainMenu;
 
 
@@ -11,4 +10,6 @@ public class Main {
         MainMenu mainMenu = new MainMenu();
         mainMenu.menu();
     }
+
+
 }

@@ -1,7 +1,9 @@
 package Controller;
 
 import Model.Card;
+import Model.CardType;
 import Model.Player;
+import View.Communicate;
 import View.GameMenu;
 import View.Phase;
 
@@ -19,33 +21,44 @@ public class RoundController {
     }
 
     public static void checkEndOfRound() {
-        checkBuff();
+        updateGame();
+
         GameMenu gameMenu = new GameMenu();
         if (Player.thePlayer.getLifePoint() <= 0) {
-            gameMenu.informEndOfRound(otherPlayer, 1000,remainingRounds);
+            gameMenu.informEndOfRound(otherPlayer, 1000, remainingRounds);
             winnerOfFirstRound = otherPlayer;
             remainingRounds--;
             maxLp = Math.max(otherPlayer.getLifePoint(), maxLp);
             if (remainingRounds == 0) GameController.setWinner(maxLp, otherPlayer, Player.thePlayer);
             else if (remainingRounds == 1 && winnerOfFirstRound.equals(otherPlayer))
                 GameController.setWinner(maxLp, otherPlayer, Player.thePlayer);
-            else GameController.setNextGame(Player.thePlayer.getUsername(),
-                        otherPlayer.getUsername());
+            else if (!otherPlayer.equals(Player.theAi)) GameController.setNextGame(Player.thePlayer.getUsername(),
+                    otherPlayer.getUsername());
+            else Ai.setNextGame();
         } else if (otherPlayer.getLifePoint() <= 0) {
-            gameMenu.informEndOfRound(Player.thePlayer, 1000,remainingRounds);
+            gameMenu.informEndOfRound(Player.thePlayer, 1000, remainingRounds);
             winnerOfFirstRound = Player.thePlayer;
             remainingRounds--;
             maxLp = Math.max(Player.thePlayer.getLifePoint(), maxLp);
             if (remainingRounds == 0) GameController.setWinner(maxLp, Player.thePlayer, otherPlayer);
             else if (remainingRounds == 1 && winnerOfFirstRound.equals(Player.thePlayer))
                 GameController.setWinner(maxLp, Player.thePlayer, otherPlayer);
-            else GameController.setNextGame(otherPlayer.getUsername(),
-                        Player.thePlayer.getUsername());
+            else if (!otherPlayer.equals(Player.theAi)) GameController.setNextGame(otherPlayer.getUsername(),
+                    Player.thePlayer.getUsername());
+            else Ai.setNextGame();
         }
 
     }
 
-    private static void checkBuff(){
+    private static void updateGame() {
+        checkFrozenTrap();
+    }
+
+    private static void checkFrozenTrap() {
+        boolean isCardExist = false;
+        if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().contains(Card.getCardByName("Mirage Dragon")))
+            isCardExist = true;
+        GameController.isTrapFrozen = isCardExist;
 
     }
 
@@ -72,8 +85,6 @@ public class RoundController {
         Player auxPlayer = Player.currentPlayer;
         Player.currentPlayer = Player.opponent;
         Player.opponent = auxPlayer;
-        if (Player.currentPlayer.equals(Player.theAi))
-            Ai.aiAction();
     }
 
 
@@ -86,8 +97,7 @@ public class RoundController {
             gameMenu.informPhase(Phase.DRAW);
             if (!isDrawPossible()) {
                 Player.currentPlayer.setLifePoint(0);
-            }
-            else{
+            } else {
                 Card card = GameController.drawCard(Player.currentPlayer);
                 if (card != null) gameMenu.drawCard(card);
                 standByPhase();
@@ -96,9 +106,11 @@ public class RoundController {
         }
     }
 
-    private static void standByPhase() {
+    public static void standByPhase() {
         Player.currentPlayer.setPhase(Phase.STANDBY);
-        //someCard...
+        if (GameController.isHeartActive) GameController.deActiveSpell();
+        if (GameController.isThreeLightActive) GameController.activeThreeLight();
+        checkContinuousSpells();
         gameMenu.informPhase(Phase.STANDBY);
         mainPhase1();
     }
@@ -107,6 +119,8 @@ public class RoundController {
         GameController.checkOpponentSpellTraps();
         GameController.setAllCardsUnchanged();
         GameController.setAllCardUnSummoned();
+
+        GameController.isCyberseActive = true;
         isSummoned = false;
         Player.currentPlayer.setPhase(Phase.MAIN1);
         gameMenu.informPhase(Phase.MAIN1);
@@ -132,7 +146,31 @@ public class RoundController {
         changeTurn();
         GameMenu gameMenu = new GameMenu();
         gameMenu.endPhaseMassage();
-        RoundController.drawPhase();
+        if (Player.currentPlayer.equals(Player.theAi))
+            Ai.aiAction();
+        else
+            RoundController.drawPhase();
+    }
+
+    private static void checkContinuousSpells() {
+        boolean isChecked = false;
+        for (int i = 0; i < 5; i++) {
+            if (Player.currentPlayer.getBoard().getFieldCardsForSpellTraps().get(i) != null &&
+                    Player.currentPlayer.getBoard().getFieldCardsForSpellTraps().get(i).getCardName().equals("Messenger of peace"))
+                isChecked = true;
+        }
+        if (isChecked) {
+            String input = Communicate.input("Do you want to active continuous effect of Messenger of peace? (yes/no)");
+            if (input.equals("yes")) {
+                Player.currentPlayer.setLifePoint(Player.currentPlayer.getLifePoint() - 100);
+                GameController.is1500Active = true;
+            } else {
+                GameController.is1500Active = false;
+                int index = Player.currentPlayer.getBoard().getFieldCardsForSpellTraps().indexOf(Card.getCardByName("Messenger of peace"));
+                Player.currentPlayer.getBoard().getFieldCardsForSpellTraps().set(index, null);
+                Player.currentPlayer.getBoard().getGraveyard().add(Card.getCardByName("Messenger of peace"));
+            }
+        }
     }
 
 }

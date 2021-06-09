@@ -34,12 +34,7 @@ public class DeckMenu {
         if (!MainMenu.checked && matcher.matches()) {
             MainMenu.checked = true;
             String deckName = matcher.group(1);
-            if (ProgramController.isDeckExist(deckName))
-                System.out.println("deck with name " + deckName + " already exists");
-            else {
-                GameController.createDeck(deckName);
-                System.out.println("deck created successfully!");
-            }
+            System.out.println(GameController.createDeck(deckName));
         }
     }
 

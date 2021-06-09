@@ -12,17 +12,13 @@ public class Player {
     public ArrayList<Card> listOfCards = new ArrayList<>();
     public Phase phase;
     public Board board;
-    public static Player thePlayer, theAi = new Player("Ai");
+    public static Player thePlayer, theAi;
     public static Player currentPlayer, opponent;
     boolean isInOpponentPhase;
     String username, password, nickname;
     int money = 10000, score, lifePoint = 8000;
     Deck activeDeck;
 
-    public Player(String username) {
-        listOfCards.addAll(Card.cards);
-        this.username = username;
-    }
 
     public Player(String username, String password, String nickname) {
         this.username = username;

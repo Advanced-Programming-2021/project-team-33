@@ -27,12 +27,12 @@ public class LoginMenu {
             String nickname = matcher.group(2);
             String password = matcher.group(3);
             if (ProgramController.isUserExist(username))
-                System.out.println("user with username " + username + " already exists");
+                Communicate.output("user with username " + username + " already exists");
             else if (ProgramController.isNicknameExist(nickname))
-                System.out.println("user with nickname " + nickname + " already exists");
+                Communicate.output("user with nickname " + nickname + " already exists");
             else {
                 ProgramController.createUser(username, nickname, password);
-                System.out.println("user created successfully!");
+                Communicate.output("user created successfully!");
             }
         }
     }
@@ -43,13 +43,13 @@ public class LoginMenu {
             String username = matcher.group(1);
             String password = matcher.group(2);
             if (!ProgramController.isUserExist(username))
-                System.out.println("Username and password didn't match!");
+                Communicate.output("Username and password didn't match!");
             else if (!ProgramController.isPasswordMatch(username,password))
-                System.out.println("Username and password didn't match!");
+                Communicate.output("Username and password didn't match!");
             else {
                 ProgramController.setPlayer(username);
                 MainMenu.menu = "main";
-                System.out.println("user logged in successfully!");
+                Communicate.output("user logged in successfully!");
             }
         }
     }

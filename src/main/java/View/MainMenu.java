@@ -59,6 +59,7 @@ public class MainMenu {
     }
 
     private void duelWithAi() {
+        menu = "game";
         Ai.initiateGameWithAi(Player.thePlayer.getUsername(), 3);
     }
 
