@@ -1,5 +1,8 @@
 package Model;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 import java.util.ArrayList;
 
 public class Card {
@@ -9,6 +12,7 @@ public class Card {
     boolean isSelected = false, isChanged = false, isSummoned = false,
             isAttacked = false, isActivated = false, destroyed = false,
             isBuffed = false;
+
 
     String cardName, description;
     ArrayList<CardType> cardTypes = new ArrayList<>();
@@ -34,6 +38,8 @@ public class Card {
         this.defence = defence;
         cards.add(this);
     }
+
+
 
     public int getLimit() {
         return limit;

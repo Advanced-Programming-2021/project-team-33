@@ -1,18 +1,111 @@
 package View;
 
 import Controller.*;
+import Main.Main;
 import Model.Card;
 import Model.Player;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.effect.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.TriangleMesh;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.regex.Matcher;
 
 public class MainMenu {
     public static String menu = "login";
     public static boolean checked = false;
+    public ImageView backgroundMain;
+    public VBox vBox;
+    public int layOutY = 1;
     ProgramController programController = new ProgramController();
     GameController gameController = new GameController();
 
     public MainMenu() {
+    }
+
+    public void start() throws Exception {
+        Stage primaryStage = ProgramController.getStage();
+        Parent root = FXMLLoader.load(getClass().getResource("mainMenuView.fxml"));
+        primaryStage.setTitle("Yu-Gi-Oh");
+        primaryStage.setScene(new Scene(root, 1280, 720));
+        primaryStage.show();
+    }
+
+    @FXML
+    public void initialize() {
+        backgroundMain.setImage(new Image(getClass().getResourceAsStream("/PNG/11025059.jpg")));
+        vBox.setAlignment(Pos.CENTER);
+        makeButton("Duel Menu");
+        makeButton("Deck Menu");
+        makeButton("Scoreboard Menu");
+        makeButton("Profile Menu");
+        makeButton("Shop Menu");
+        makeButton("Log out");
+    }
+
+    private void makeButton(String name) {
+        HBox hBox1 = new HBox();
+        hBox1.setMinHeight(20);
+        HBox hBox = new HBox();
+        hBox.setAlignment(Pos.CENTER);
+        Button button = getButton(name);
+        switch (name) {
+            case "Duel Menu" -> button.setOnMouseClicked(event -> System.out.println("Yes"));
+            case "Deck Menu" -> button.setOnMouseClicked(event -> new DeckMenu().start());
+            case "Scoreboard Menu" -> button.setOnMouseClicked(event -> {
+                try {
+                    new ScoreboardMenu().start();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+            case "Profile Menu" -> button.setOnMouseClicked(event -> new ProfileMenu().start());
+            case "Shop Menu" -> button.setOnMouseClicked(event -> {
+                try {
+                    new ShopMenu().start();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+            case "Log out" -> button.setOnMouseClicked(event -> {
+                try {
+                    new Main().start(ProgramController.getStage());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+        }
+        hBox.getChildren().add(button);
+        vBox.getChildren().addAll(hBox, hBox1);
+    }
+
+    private Button getButton(String name) {
+        Button button = new Button(name);
+        button.setShape(new Circle(5));
+        button.setFont(Font.font(22));
+        button.setOnMouseEntered(event -> {
+            button.setEffect(new DropShadow());
+        });
+        button.setOnMouseExited(event -> {
+            button.setEffect(null);
+        });
+        return button;
     }
 
     public void run(String input) {
@@ -59,7 +152,6 @@ public class MainMenu {
     }
 
     private void duelWithAi() {
-        menu = "game";
         Ai.initiateGameWithAi(Player.thePlayer.getUsername(), 3);
     }
 
@@ -91,14 +183,14 @@ public class MainMenu {
         }
     }
 
-    public static void  exitMenu(Matcher matcher) {
+    public static void exitMenu(Matcher matcher) {
         if (!MainMenu.checked && matcher.matches()) {
             MainMenu.checked = true;
             MainMenu.menu = "main";
         }
     }
 
-    public void menu() {
+    public void menu() throws Exception {
         LoginMenu loginMenu = new LoginMenu();
         DeckMenu deckMenu = new DeckMenu();
         ImportExportMenu importExportMenu = new ImportExportMenu();
@@ -108,24 +200,22 @@ public class MainMenu {
         GraveyardMenu graveyardMenu = new GraveyardMenu();
         GameMenu gameMenu = new GameMenu();
         ShopMenu shopMenu = new ShopMenu();
-        String input;
-        while (true) {
-            input = Util.scanner.nextLine();
-            input = input.trim();
-            switch (menu) {
-                case "login" -> loginMenu.run(input);
-                case "main" -> mainMenu.run(input);
-                case "game" -> gameMenu.run(input);
-                case "deck" -> deckMenu.run(input);
-                case "shop" -> shopMenu.run(input);
-                case "scoreboard" -> scoreboardMenu.run(input);
-                case "profile" -> profileMenu.run(input);
-                case "importExport" -> importExportMenu.run(input);
-                case "Graveyard" -> graveyardMenu.run(input);
-            }
-            if(!checked) System.out.println("invalid command!");
+        String input = "";
+
+        switch (menu) {
+            case "login" -> loginMenu.start();
+            case "main" -> mainMenu.run(input);
+            case "game" -> gameMenu.run(input);
+            case "deck" -> deckMenu.run(input);
+            case "shop" -> shopMenu.run(input);
+            case "scoreboard" -> scoreboardMenu.run(input);
+            case "profile" -> profileMenu.run(input);
+            case "importExport" -> importExportMenu.run(input);
+            case "Graveyard" -> graveyardMenu.run(input);
         }
     }
 
-
+    public void back(MouseEvent event) throws Exception {
+        new Main().start(ProgramController.getStage());
+    }
 }

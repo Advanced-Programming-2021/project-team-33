@@ -14,6 +14,10 @@ import java.util.regex.Matcher;
 
 public class DeckMenu {
 
+    public void start(){
+
+    }
+
 
     public void run(String input) {
         MainMenu.checked = false;
@@ -34,7 +38,12 @@ public class DeckMenu {
         if (!MainMenu.checked && matcher.matches()) {
             MainMenu.checked = true;
             String deckName = matcher.group(1);
-            System.out.println(GameController.createDeck(deckName));
+            if (ProgramController.isDeckExist(deckName))
+                System.out.println("deck with name " + deckName + " already exists");
+            else {
+                GameController.createDeck(deckName);
+                System.out.println("deck created successfully!");
+            }
         }
     }
 

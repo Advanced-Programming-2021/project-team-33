@@ -91,7 +91,7 @@ public class CardController {
                 new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.SPELL, 1, 0,
                 null, 0, 0);
 
-        Card harpieFeatherDuster = new Card("Harpie’s Feather Duster", "nothing", 1,
+        Card harpieFeatherDuster = new Card("Harpies Feather Duster", "nothing", 1,
                 new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.SPELL, 1, 0,
                 new ArrayList<>(List.of(new DestroyAllOpponentSpellTrap())), 0, 0);
 
@@ -246,7 +246,7 @@ public class CardController {
                 new ArrayList<>(List.of(CardType.SPELLCASTER)), CardCategory.MONSTER,
                 3, 3, null, 900, 100);
 
-        Card blueEyesWhiteDragon = new Card("Blue-Eyes White Dragon", "nothing", 1,
+        Card blueEyesWhiteDragon = new Card("Blue Eyes White Dragon", "nothing", 1,
                 new ArrayList<>(List.of(CardType.DRAGON)), CardCategory.MONSTER,
                 3, 8, null, 3000, 2500);
 
@@ -269,7 +269,7 @@ public class CardController {
                 3, 2, null, 500, 500);
 
         // should has effect
-        Card manEaterBug = new Card("Man-Eater Bug", "nothing", 1,
+        Card manEaterBug = new Card("Man Eater Bug", "nothing", 1,
                 new ArrayList<>(List.of(CardType.INSECT, CardType.EFFECT)), CardCategory.MONSTEREFFECT,
                 3, 2, null, 450, 600);
 

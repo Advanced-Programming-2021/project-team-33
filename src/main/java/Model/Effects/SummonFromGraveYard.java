@@ -1,7 +1,10 @@
 package Model.Effects;
 
 import Controller.GameController;
-import Model.*;
+import Model.Card;
+import Model.CardCategory;
+import Model.Effect;
+import Model.Player;
 import View.Communicate;
 
 import java.util.ArrayList;
@@ -15,31 +18,25 @@ public class SummonFromGraveYard implements Effect {
             System.out.println("empty graveyard");
             return;
         }
-
+        for (Card value : graveyard) {
+            if (value.getCardCategory().equals(CardCategory.MONSTER) ||
+                    value.getCardCategory().equals(CardCategory.MONSTEREFFECT)) {
+                check = 1;
+                break;
+            }
+        }
+        if (check == 0) return;
+        check = 0;
         while (check == 0) {
             String input = Communicate.input("Choose from graveyard by index");
             index = Integer.parseInt(input);
-            if (index > graveyard.size() - 1) System.out.println("invalid card");
-            else check = 1;
+            if (graveyard.get(index) != null &&
+                    (graveyard.get(index).getCardCategory().equals(CardCategory.MONSTEREFFECT)) ||
+                    graveyard.get(index).getCardCategory().equals(CardCategory.MONSTER)) check = 1;
+            else System.out.println("invalid card");
         }
-        Player.currentPlayer.getBoard().getGraveyard().add(GameController.selectedCard);
-        Player.currentPlayer.getBoard().getHand().remove(GameController.selectedCard);
-        GameController.selectedCard = graveyard.get(index);
-        if(GameController.selectedCard.getCardCategory().equals(CardCategory.MONSTEREFFECT)||
-                GameController.selectedCard.getCardCategory().equals(CardCategory.MONSTER))
-        GameController.putMonsterOnField();
-        else if ((GameController.selectedCard.getCardCategory().equals(CardCategory.SPELL)||
-                GameController.selectedCard.getCardCategory().equals(CardCategory.TRAP)) &&
-                        !GameController.selectedCard.getCardTypes().equals(CardType.FIELD))
-            GameController.putSpellTrapOnField();
-        else {
-            Player.currentPlayer.getBoard().getGraveyard().add(Player.currentPlayer.getBoard().getFieldZone().get(0));
-            Player.currentPlayer.getBoard().getFieldZone().set(0, GameController.selectedCard);
-        }
-
+        Player.currentPlayer.getBoard().getFieldCardsForMonsters().add(graveyard.get(index));
         graveyard.remove(index);
-
-
     }
 
     @Override

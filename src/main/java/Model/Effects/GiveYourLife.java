@@ -11,9 +11,6 @@ public class GiveYourLife implements Effect {
         Player.currentPlayer.setLifePoint(Player.currentPlayer.getLifePoint() - 2000);
         Player.opponent.getBoard().getGraveyard().add(GameController.lastSelectedCard);
         Player.opponent.getBoard().getHand().remove(GameController.lastSelectedCard);
-        Player.currentPlayer.getBoard().getGraveyard().add(GameController.selectedCard);
-        int index = Player.currentPlayer.getBoard().getFieldCardsForSpellTraps().indexOf(GameController.selectedCard);
-        Player.currentPlayer.getBoard().getFieldCardsForSpellTraps().set(index, null);
     }
 
     @Override

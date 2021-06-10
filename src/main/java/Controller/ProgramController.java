@@ -2,11 +2,15 @@ package Controller;
 
 import Model.Card;
 import Model.Player;
+import javafx.stage.Stage;
+
 
 
 import java.util.*;
 
 public class ProgramController {
+
+    private static Stage stage;
 
     public static boolean isUserExist(String user) {
         return Player.getUserByUsername(user) != null;
@@ -122,4 +126,11 @@ public class ProgramController {
         return temp;
     }
 
+    public static Stage getStage() {
+        return stage;
+    }
+
+    public static void setStage(Stage stage) {
+        ProgramController.stage = stage;
+    }
 }

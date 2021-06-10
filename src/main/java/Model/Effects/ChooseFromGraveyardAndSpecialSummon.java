@@ -50,12 +50,8 @@ public class ChooseFromGraveyardAndSpecialSummon implements Effect {
         try {
             int selectedCardIndex = Integer.parseInt(input) - 1;
             if (indexes.contains(selectedCardIndex)) {
-                GameController.selectedCard =  player.getBoard().getGraveyard().get(selectedCardIndex);
-                player.getBoard().getGraveyard().remove(GameController.selectedCard);
-                GameController.selectedCard.setCardStatus(CardStatus.ATTACK);
-                GameController.putMonsterOnField();
-                Communicate.output("Special summon done");
-                GameController.deSelectCard();
+                GameController.selectCardFromGraveyard(selectedCardIndex);
+                // specialSummon(GameController.selectedCard);
             } else {
                 Communicate.output("Your input is not valid");
             }

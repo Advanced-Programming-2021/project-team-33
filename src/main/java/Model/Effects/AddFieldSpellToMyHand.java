@@ -28,11 +28,12 @@ public class AddFieldSpellToMyHand implements Effect {
         try {
             int selectedCardIndex = Integer.parseInt(input) - 1;
             if (indexes.contains(selectedCardIndex)) {
-                Card card2 = Player.currentPlayer.getBoard().getDeck().get(selectedCardIndex);
+//                GameController.selectCard();
                 if (Player.currentPlayer.getBoard().getHand().size() < 6) {
                     Player.currentPlayer.getBoard().getDeck().remove(selectedCardIndex);
-                    Player.currentPlayer.getBoard().getHand().add(card2);
-                } else
+                    Player.currentPlayer.getBoard().getHand().add(GameController.selectedCard);
+                }
+                else
                     Communicate.output("Your hand is full");
             } else {
                 Communicate.output("Your input is not valid");

@@ -30,9 +30,6 @@ public class GameMenu {
         increaseMoney(Util.getCommand(input, "increase --money (\\d+)"));
         increaseLifePoint(Util.getCommand(input, "increase --LP (\\d+)"));
         winTheGame(Util.getCommand(input, "duel set-winner (\\S+)"));
-        selectCardForce(Util.getCommand(input, "select --hand (\\S+) --force"));
-        summonCardForce(Util.getCommand(input, "summon --force"));
-        putOnGraveyard(Util.getCommand(input, "graveyard --force"));
         RoundController.checkEndOfRound();
     }
 
@@ -136,10 +133,7 @@ public class GameMenu {
                     GameController.getBackFromMiddleChange();
                 }
             } else {
-                if (GameController.selectedCard.getCardName().equals("Herald of Creation") ||
-                        GameController.selectedCard.getCardName().equals("The Tricky")) {
-                    GameController.activeSpell();
-                } else if (!GameController.selectedCard.getCardCategory().equals(CardCategory.SPELL) &&
+                if (!GameController.selectedCard.getCardCategory().equals(CardCategory.SPELL) &&
                         !GameController.selectedCard.getCardCategory().equals(CardCategory.TRAP))
                     System.out.println("activate effect is only for spell cards.");
                 else if (!Player.currentPlayer.getPhase().equals(Phase.MAIN1) &&
@@ -149,7 +143,6 @@ public class GameMenu {
                     System.out.println("you have already activated this card");
                 else if (GameController.isSpellTrapFieldFull() //&& !isForFieldZone
                 ) System.out.println("spell card zone is full");
-
                     //else if( !isActivable) System.out.println("preparations of this spell are not done yet");
                 else {
                     System.out.println("spell activated");
@@ -160,7 +153,6 @@ public class GameMenu {
         }
     }
 
-
     private void summonMonster(Matcher matcher) {
         if (!MainMenu.checked && matcher.matches()) {
             MainMenu.checked = true;
@@ -169,77 +161,63 @@ public class GameMenu {
             else if (GameController.selectedCard == null) System.out.println("no card is selected yet");
             else if (!GameController.selectedCard.getCardStatus().equals(CardStatus.HAND) ||
                     (!GameController.selectedCard.getCardCategory().equals(CardCategory.MONSTER) &&
-                            !GameController.selectedCard.getCardCategory().equals(CardCategory.MONSTEREFFECT)) ||
-                    GameController.selectedCard.getCardTypes().contains(CardType.RITUAL))
+                            !GameController.selectedCard.getCardCategory().equals(CardCategory.MONSTEREFFECT)))
                 System.out.println("you can’t summon this card");
             else if (!Player.currentPlayer.getPhase().equals(Phase.MAIN1) &&
                     !Player.currentPlayer.getPhase().equals(Phase.MAIN2))
                 System.out.println("action not allowed in this phase");
             else if (GameController.isMonsterFieldFull()) System.out.println("monster card zone is full");
             else if (RoundController.isSummoned) System.out.println("you already summoned/set on this turn");
-            else if (GameController.selectedCard.getCardName().equals("Gate Guardian")) GameController.specialSummon();
-            else if (GameController.selectedCard.getCardName().equals("Beast King Barbaros")) summonBarbaros();
-            else if (GameController.selectedCard.getCardName().equals("The Tricky"))
-                System.out.println("you should activate its effect");
             else if (GameController.selectedCard.getLevel() > 4 && GameController.selectedCard.getLevel() < 7) {
-                tributeSummonoLowLevel();
+                if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().size() == 0) {
+                    System.out.println("there are not enough cards for tribute");
+                    return;
+                }
+                String input = Communicate.input("Pick Monster for tribute");
+                if (input.equals("cancel")) {
+                    System.out.println("Tribute Canceled");
+                    return;
+                }
+                int tribute = Integer.parseInt(Communicate.input("Pick Monster for tribute"));
+                tribute = GameController.switchNumberForCurrent(tribute);
+                if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(tribute) == null) {
+                    System.out.println("there are no monsters on this address");
+                    return;
+                }
+                int command = GameController.summonMonster(tribute, 0);
+                if (command != -1) System.out.println("summoned successfully1");
             } else if (GameController.selectedCard.getLevel() > 6 && GameController.selectedCard.getLevel() < 9) {
-                tributeSummonHighLevel();
+                if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().size() < 2) {
+                    System.out.println("there are not enough cards for tribute");
+                    return;
+                }
+                String input = Communicate.input("Pick Monster for tribute");
+                if (input.equals("cancel")) {
+                    System.out.println("Tribute Canceled");
+                    return;
+                }
+                int tribute = Integer.parseInt(input);
+                tribute = GameController.switchNumberForCurrent(tribute);
+                input = Communicate.input("Pick another Monster for tribute");
+                if (input.equals("cancel")) {
+                    System.out.println("Tribute Canceled");
+                    return;
+                }
+                int tribute1 = Integer.parseInt(input);
+                tribute1 = GameController.switchNumberForCurrent(tribute1);
+                if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(tribute) == null ||
+                        Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(tribute1) == null) {
+                    System.out.println("there is no monster on one of these addresses");
+                    return;
+                }
+                int command = GameController.summonMonster(tribute, tribute1);
+                if (command != -1) System.out.println("summoned successfully2");
             } else {
                 int command = GameController.summonMonster(0, 0);
                 if (command != -1) System.out.println("summoned successfully3");
             }
 
         }
-    }
-
-    private void tributeSummonoLowLevel() {
-        if (GameController.getMonsterFieldSize() == 0) {
-            System.out.println("there are not enough cards for tribute");
-            return;
-        }
-        String input = Communicate.input("Pick Monster for tribute");
-        if (input.equals("cancel")) {
-            System.out.println("Tribute Canceled");
-            return;
-        }
-        int tribute = Integer.parseInt(Communicate.input("Pick Monster for tribute"));
-        tribute = GameController.switchNumberForCurrent(tribute);
-        if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(tribute) == null) {
-            System.out.println("there are no monsters on this address");
-            return;
-        }
-        int command = GameController.summonMonster(tribute, 0);
-        if (command != -1) System.out.println("summoned successfully1");
-    }
-
-    private void tributeSummonHighLevel() {
-        System.out.println(GameController.getMonsterFieldSize());
-        if (GameController.getMonsterFieldSize() < 2) {
-            System.out.println("there are not enough cards for tribute");
-            return;
-        }
-        String input = Communicate.input("Pick Monster for tribute");
-        if (input.equals("cancel")) {
-            System.out.println("Tribute Canceled");
-            return;
-        }
-        int tribute = Integer.parseInt(input);
-        tribute = GameController.switchNumberForCurrent(tribute);
-        input = Communicate.input("Pick another Monster for tribute");
-        if (input.equals("cancel")) {
-            System.out.println("Tribute Canceled");
-            return;
-        }
-        int tribute1 = Integer.parseInt(input);
-        tribute1 = GameController.switchNumberForCurrent(tribute1);
-        if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(tribute) == null ||
-                Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(tribute1) == null) {
-            System.out.println("there is no monster on one of these addresses");
-            return;
-        }
-        int command = GameController.summonMonster(tribute, tribute1);
-        if (command != -1) System.out.println("summoned successfully2");
     }
 
     private void flipSummon(Matcher matcher) {
@@ -258,28 +236,11 @@ public class GameMenu {
             else if (!GameController.selectedCard.getCardStatus().equals(CardStatus.SET) ||
                     GameController.selectedCard.isSummoned())
                 System.out.println("you can’t flip summon this card");
-            else if (GameController.selectedCard.getLevel() > 4 && GameController.selectedCard.getLevel() < 7) {
-                tributeSummonoLowLevel();
-            } else if (GameController.selectedCard.getLevel() > 6 && GameController.selectedCard.getLevel() < 9) {
-                tributeSummonHighLevel();
-            } else {
+            else {
                 System.out.println("flip summoned successfully");
                 GameController.flipSummon();
             }
         }
-    }
-
-    private void summonBarbaros() {
-        String input = Communicate.input("choose your number of tribute between 0,2 and 3");
-        if (input.equals("0")) {
-            GameController.selectedCard.setAttack(1900);
-            GameController.summonMonster(0, 0);
-            System.out.println("summoned successfully3");
-        } else if (input.equals("2")) {
-            tributeSummonHighLevel();
-        } else if (input.equals("3")) {
-            GameController.specialSummon();
-        } else System.out.println("invalid input");
     }
 
     private void setCard(Matcher matcher) {
@@ -301,9 +262,7 @@ public class GameMenu {
                     GameController.setMonster();
                     System.out.println("set successfully1");
                 }
-            } else if (GameController.selectedCard.getCardName().equals("The Tricky"))
-                System.out.println("you should activate its effect");
-            else {
+            } else {
                 if (GameController.isSpellTrapFieldFull()) System.out.println("spell card zone is full");
                 else {
                     GameController.setSpell();
@@ -350,9 +309,6 @@ public class GameMenu {
                 System.out.println("you can’t attack with this card");
             else if (!Player.currentPlayer.getPhase().equals(Phase.BATTLE))
                 System.out.println("you can’t do this action in this phase");
-            else if(GameController.isThreeLightActive && Player.currentPlayer.equals(GameController.getLightPlayer) ||
-                    (GameController.is1500Active && GameController.selectedCard.getAttack() > 1500))
-                System.out.println("you can't attack because of enemy spell");
             else if (GameController.selectedCard.isAttacked())
                 System.out.println("this card already attacked");
             else if (Player.opponent.getBoard().getFieldCardsForMonsters().get(enemyMonsterIndex) == null)
@@ -368,15 +324,14 @@ public class GameMenu {
                 " opponent receives " + damage + " battle damage");
         else if (key == 2) System.out.println("both you and your opponent monster cards are destroyed and no\n" +
                 "one receives damage");
-        else if (key == 3) System.out.println("Your monster card is destroyed and you received " +
-                +damage + " battle damage");
+        else if (key == 3) System.out.println("Your monster card is destroyed and you received" +
+                " opponent receives " + damage + " battle damage");
         else if (key == 4) System.out.println("the defense position monster is destroyed");
         else if (key == 5) System.out.println("no card is destroyed");
         else if (key == 6) System.out.println("no card is destroyed and you received " + damage + " battle damage");
         else if (key == 7) System.out.println("opponent’s monster card was " +
                 Player.opponent.getBoard().getFieldCardsForMonsters().get(enemyMonsterIndex).getCardName() +
                 " and the defense position monster is destroyed");
-
         else if (key == 8) System.out.println("opponent’s monster card was " +
                 Player.opponent.getBoard().getFieldCardsForMonsters().get(enemyMonsterIndex).getCardName() +
                 " and no card is destroyed");
@@ -389,10 +344,6 @@ public class GameMenu {
     private void attackDirect(Matcher matcher) {
         if (!MainMenu.checked && matcher.matches()) {
             MainMenu.checked = true;
-            System.out.println(GameController.isThreeLightActive);
-            System.out.println(Player.currentPlayer.getNickname());
-            System.out.println(GameController.getLightPlayer.getNickname());
-            System.out.println(GameController.isThreeLightActive);
             if (Player.currentPlayer.isInOpponentPhase())
                 System.out.println("it’s not your turn to play this kind of moves");
             else if (GameController.selectedCard == null) System.out.println("no card is selected yet");
@@ -402,9 +353,6 @@ public class GameMenu {
                 System.out.println("you can’t do this action in this phase");
             else if (GameController.selectedCard.isAttacked())
                 System.out.println("this card already attacked");
-            else if(GameController.isThreeLightActive && Player.currentPlayer.equals(GameController.getLightPlayer) ||
-                    (GameController.is1500Active && GameController.selectedCard.getAttack() > 1500))
-                System.out.println("you can't attack because of enemy spell");
             else if (!GameController.isEnemyMonsterFieldEmpty())
                 System.out.println("you can’t attack the opponent directly");
             else {
@@ -473,34 +421,7 @@ public class GameMenu {
             MainMenu.checked = true;
             if (matcher.group(1).equals(Player.currentPlayer.getNickname())) {
                 Player.opponent.setLifePoint(0);
-            } else if (matcher.group(1).equals(Player.opponent.getNickname())) {
-                Player.currentPlayer.setLifePoint(0);
-            } else System.out.println("invalid name");
-        }
-    }
-
-    private void selectCardForce(Matcher matcher) {
-        if (!MainMenu.checked && matcher.matches()) {
-            MainMenu.checked = true;
-            Card card = Card.getCardByName(matcher.group(1));
-            if (!Card.getCards().contains(card)) System.out.println("invalid card name");
-            else GameController.selectedCard = card;
-        }
-    }
-
-    private void summonCardForce(Matcher matcher) {
-        if (!MainMenu.checked && matcher.matches()) {
-            MainMenu.checked = true;
-            GameController.selectedCard.setCardStatus(CardStatus.ATTACK);
-            GameController.putMonsterOnField();
-        }
-    }
-
-    private void putOnGraveyard(Matcher matcher) {
-        if (!MainMenu.checked && matcher.matches()) {
-            MainMenu.checked = true;
-
-            Player.currentPlayer.getBoard().getGraveyard().add(GameController.selectedCard);
+            }
         }
     }
 
