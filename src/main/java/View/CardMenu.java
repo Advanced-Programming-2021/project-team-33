@@ -7,16 +7,29 @@ import Model.Card;
 import Model.CardCategory;
 import Model.CardStatus;
 import Model.CardType;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.regex.Matcher;
 
 public class CardMenu {
 
 
-    public static void printCardMassage(String cardName) {
-        if(cardName.equals("Command Knight")) System.out.println("You can't attack this monster now");
-        if(cardName.equals("Mind Crush1")) System.out.println("Nice Guess!");
-        if(cardName.equals("Mind Crush2")) System.out.println("Wrong Guess!");
+    public ImageView leftButton;
+    public ImageView rightButton;
+
+    public void start() throws IOException {
+        Stage primaryStage = ProgramController.getStage();
+        Parent root = FXMLLoader.load(getClass().getResource("shopMenu.fxml"));
+        primaryStage.setTitle("Yu-Gi-Oh");
+        primaryStage.setScene(new Scene(root, 1280, 720));
+
+        primaryStage.show();
     }
 
     public static void showCard(Matcher matcher) {
@@ -66,6 +79,16 @@ public class CardMenu {
         System.out.println("Type: " + card.getCardTypes().toString().replace("[", "")
                 .replace("]", "").replace("", ""));
         System.out.println("Description: " + card.getDescription());
+    }
+
+    public static void printCardMassage(String cardName) {
+        if(cardName.equals("Command Knight")) System.out.println("You can't attack this monster now");
+        if(cardName.equals("Mind Crush1")) System.out.println("Nice Guess!");
+        if(cardName.equals("Mind Crush2")) System.out.println("Wrong Guess!");
+    }
+
+    public void back(MouseEvent event) throws Exception {
+        new MainMenu().start();
     }
 
 
