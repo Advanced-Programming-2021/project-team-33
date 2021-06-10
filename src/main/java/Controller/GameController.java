@@ -167,11 +167,11 @@ public class GameController {
         Player.getDeckByName(deckName).setDeckActive(true);
     }
 
-    public static void addCardToDeck(String deckName, String cardName, boolean isSide) {
+    public static void addCardToDeck(String deckName, String cardName, boolean isSide) throws CloneNotSupportedException {
         if (!isSide) {
-            Player.getDeckByName(deckName).addToMainDeck(Card.getCardByName(cardName));
+            Player.getDeckByName(deckName).addToMainDeck((Card) Card.getCardByName(cardName).clone());
         } else {
-            Player.getDeckByName(deckName).addToSideDeck(Card.getCardByName(cardName));
+            Player.getDeckByName(deckName).addToSideDeck((Card) Card.getCardByName(cardName).clone());
         }
         Player.thePlayer.removeFromCardList(cardName);
     }

@@ -67,7 +67,13 @@ public class MainMenu {
         Button button = getButton(name);
         switch (name) {
             case "Duel Menu" -> button.setOnMouseClicked(event -> System.out.println("Yes"));
-            case "Deck Menu" -> button.setOnMouseClicked(event -> new DeckMenu().start());
+            case "Deck Menu" -> button.setOnMouseClicked(event -> {
+                try {
+                    new DeckMenu().start();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
             case "Scoreboard Menu" -> button.setOnMouseClicked(event -> {
                 try {
                     new ScoreboardMenu().start();

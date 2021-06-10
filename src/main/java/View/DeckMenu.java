@@ -7,19 +7,32 @@ import Model.Card;
 import Model.CardCategory;
 import Model.Deck;
 import Model.Player;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.regex.Matcher;
 
 public class DeckMenu {
 
-    public void start(){
 
+    public DeckMenu() {
+    }
+
+    public void start() throws IOException {
+        Stage primaryStage = ProgramController.getStage();
+        Parent root = FXMLLoader.load(getClass().getResource("deckMenu.fxml"));
+        primaryStage.setTitle("Yu-Gi-Oh");
+        primaryStage.setScene(new Scene(root, 1280, 720));
+        primaryStage.show();
     }
 
 
-    public void run(String input) {
+    public void run(String input) throws CloneNotSupportedException {
         MainMenu.checked = false;
         MainMenu.showCurrentMenu(Util.getCommand(input, "menu show-current"));
         createDeck(Util.getCommand(input, "deck create (\\S+)"));
@@ -73,7 +86,7 @@ public class DeckMenu {
         }
     }
 
-    private void addCardToDeck(Matcher matcher) {
+    private void addCardToDeck(Matcher matcher) throws CloneNotSupportedException {
         if (!MainMenu.checked && matcher.matches()) {
             MainMenu.checked = true;
             String cardName = matcher.group(1);

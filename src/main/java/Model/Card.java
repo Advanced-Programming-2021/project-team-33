@@ -5,7 +5,7 @@ import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
 
-public class Card {
+public class Card implements Cloneable{
     static int id = 0;
     static ArrayList<Card> cards = new ArrayList<>();
     ArrayList<Effect> effects = new ArrayList<>();
@@ -166,5 +166,10 @@ public class Card {
             if (card.cardName.equals(name)) return card;
         }
         return null;
+    }
+
+    public Object clone() throws CloneNotSupportedException
+    {
+        return super.clone();
     }
 }
