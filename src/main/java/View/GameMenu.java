@@ -217,7 +217,6 @@ public class GameMenu {
         showGraveyard(Util.getCommand(input, "show graveyard"));
         deSelectCard(Util.getCommand(input, "select -d"));
         activeSpell(Util.getCommand(input, "activate effect"));
-        summonMonster(Util.getCommand(input, "summon"));
         flipSummon(Util.getCommand(input, "flip-summon"));
         setCard(Util.getCommand(input, "set"));
         setPosition(Util.getCommand(input, "set --position ((attack)|(defence))"));

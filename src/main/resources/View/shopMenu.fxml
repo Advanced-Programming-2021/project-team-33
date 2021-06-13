@@ -55,7 +55,7 @@
             <Image url="@../PNG/Buy.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="92.0" fitWidth="183.0" layoutX="867.0" layoutY="574.0" onMouseClicked="#back" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="92.0" fitWidth="183.0" layoutX="867.0" layoutY="574.0" onMouseClicked="#back" pickOnBounds="true" preserveRatio="true" style="border-radius: 20px;" styleClass="back">
          <image>
             <Image url="@../PNG/Back.png" />
          </image>

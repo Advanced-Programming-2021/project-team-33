@@ -7,11 +7,21 @@ import Model.Card;
 import Model.CardCategory;
 import Model.Deck;
 import Model.Player;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -19,6 +29,10 @@ import java.util.regex.Matcher;
 
 public class DeckMenu {
 
+    public static Card selectedCard;
+    public GridPane deckGrid;
+    public ListView deckListOfCards;
+    public ImageView cardShow;
 
     public DeckMenu() {
     }
@@ -32,13 +46,55 @@ public class DeckMenu {
     }
 
 
+    @FXML
+    public void initialize() throws FileNotFoundException {
+        deckListOfCards.getSelectionModel().selectedItemProperty().addListener(event -> {
+            ObservableList selectedIndices = deckListOfCards.getSelectionModel().getSelectedIndices();
+            System.out.println(selectedIndices.get(0));
+            cardShow.setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" +
+                    Card.getCards().get(Integer.parseInt(selectedIndices.get(0).toString()))
+                            .getCardName().replaceAll("\\s+", "") + ".jpg")));
+        });
+        deckGrid.setHgap(-50);
+        ImageView imageView2 = null;
+        int a = 0;
+        for (Card card : Card.getCards()) {
+            a++;
+            if (a < 70) {
+                Image image = new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" +
+                        card.getCardName().replaceAll("\\s+", "") + ".jpg"));
+                ImageView imageView = new ImageView(image);
+                imageView.setFitHeight(124);
+                imageView.setFitWidth(75);
+                imageView2 = imageView;
+                deckListOfCards.getItems().add(imageView);
+            }
+        }
+
+
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 4; j++) {
+                Image image = new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/Unknown.jpg"));
+                ImageView imageView = new ImageView(image);
+                imageView.setFitHeight(124);
+                imageView.setFitWidth(75);
+                deckGrid.add(imageView, i, j);
+                imageView.setOnMouseClicked(event -> {
+//            selectedCard = card;
+                    System.out.println("x xxxxxxxxx");
+                });
+            }
+        }
+    }
+
+
     public void run(String input) throws CloneNotSupportedException {
         MainMenu.checked = false;
         MainMenu.showCurrentMenu(Util.getCommand(input, "menu show-current"));
         createDeck(Util.getCommand(input, "deck create (\\S+)"));
         deleteDeck(Util.getCommand(input, "deck delete (\\S+)"));
         activateDeck(Util.getCommand(input, "deck set-activate (\\S+)"));
-        addCardToDeck(Util.getCommand(input, "deck add-card --card (.+?) --deck (\\S+)( --side)?"));
+//        addCardToDeck(Util.getCommand(input, "deck add-card --card (.+?) --deck (\\S+)( --side)?"));
         removeCardFromDeck(Util.getCommand(input, "deck rm-card --card (.+?) --deck (\\S+)( --side)?"));
         showAllDecks(Util.getCommand(input, "deck show --all"));
         showDeck(Util.getCommand(input, "deck show --deck-name (\\S+)( --side)?"));
@@ -86,30 +142,28 @@ public class DeckMenu {
         }
     }
 
-    private void addCardToDeck(Matcher matcher) throws CloneNotSupportedException {
-        if (!MainMenu.checked && matcher.matches()) {
+    private void addCardToDeck() throws CloneNotSupportedException {
             MainMenu.checked = true;
-            String cardName = matcher.group(1);
-            String deckName = matcher.group(2);
+            String cardName;
+            String deckName;
             boolean isSide = false;
-            if (matcher.group(3) != null) isSide = true;
-            if (!ProgramController.isDeckExist(deckName))
-                System.out.println("deck with name " + deckName + " does not exist");
-            else if (!ProgramController.isCardExist(cardName) ||
-                    !Player.thePlayer.listOfCards.contains(Card.getCardByName(cardName)))
-                System.out.println("card with name " + cardName + " does not exist");
-            else if (Player.getDeckByName(deckName).isMainDeckFull())
-                System.out.println("main deck is full");
-            else if (Player.getDeckByName(deckName).isSideDeckFull())
-                System.out.println("side deck is full");
-            else if (Player.getDeckByName(deckName).getInvalidCard(deckName, cardName)) {
-                System.out.println("there are already three cards with name " + cardName +
-                        " in deck " + deckName + "name");
-            } else {
-                GameController.addCardToDeck(deckName, cardName, isSide);
-                System.out.println("card added to deck successfully");
-            }
-        }
+//            if (matcher.group(3) != null) isSide = true;
+//            if (!ProgramController.isDeckExist(deckName))
+//                System.out.println("deck with name " + deckName + " does not exist");
+//            else if (!ProgramController.isCardExist(cardName) ||
+//                    !Player.thePlayer.listOfCards.contains(Card.getCardByName(cardName)))
+//                System.out.println("card with name " + cardName + " does not exist");
+//            else if (Player.getDeckByName(deckName).isMainDeckFull())
+//                System.out.println("main deck is full");
+//            else if (Player.getDeckByName(deckName).isSideDeckFull())
+//                System.out.println("side deck is full");
+//            else if (Player.getDeckByName(deckName).getInvalidCard(deckName, cardName)) {
+//                System.out.println("there are already three cards with name " + cardName +
+//                        " in deck " + deckName + "name");
+//            } else {
+//                GameController.addCardToDeck(deckName, cardName, isSide);
+//                System.out.println("card added to deck successfully");
+//            }
     }
 
     private void removeCardFromDeck(Matcher matcher) {
@@ -218,4 +272,17 @@ public class DeckMenu {
     }
 
 
+    public void addToMainDeck(MouseEvent mouseEvent) {
+//        addCardToDeck();
+        ObservableList selectedIndices = deckListOfCards.getSelectionModel().getSelectedIndices();
+
+        for(Object o : selectedIndices){
+            System.out.println("o = " + o + " (" + o.getClass() + ")");
+        }
+        System.out.println(selectedIndices.toString());
+    }
+
+    public void back(MouseEvent mouseEvent) throws Exception {
+        new MainMenu().start();
+    }
 }
