@@ -46,6 +46,7 @@ public class ShopMenu {
     public Text playerName;
     public Text money;
     public Text massage;
+    public Text numberOfCards;
 
     public ShopMenu() {
 
@@ -56,7 +57,6 @@ public class ShopMenu {
         Parent root = FXMLLoader.load(getClass().getResource("shopMenu.fxml"));
         primaryStage.setTitle("Yu-Gi-Oh");
         primaryStage.setScene(new Scene(root, 1280, 720));
-
         primaryStage.show();
     }
 
@@ -110,6 +110,7 @@ public class ShopMenu {
         cardShow.setImage(card12.getImage());
         description.setText(Card.getCards().get(i).getDescription());
         price.setText(Integer.toString(Card.getCards().get(i).getPrice()));
+        numberOfCards.setText("You have already" + Integer.toString(countSameCard()) + " card from this kind");
     }
 
     private void updateShopCards(int i) {
@@ -135,12 +136,16 @@ public class ShopMenu {
             Player.thePlayer.decreaseMoney(selectedCard.getPrice());
             Player.thePlayer.addToCardList(selectedCard);
             money.setText(Integer.toString(Player.thePlayer.getMoney()));
-            massage.setText("You bought " + selectedCard.getCardName()+"!!");
+            massage.setText("You bought " + selectedCard.getCardName() + "!!");
         }
     }
 
     public void back(MouseEvent event) throws Exception {
         new MainMenu().start();
+    }
+
+    public void showCards(MouseEvent event) throws Exception {
+        new CardMenu().start();
     }
 
     private void showAllOfCardsExistInShop(Matcher matcher) {
@@ -157,6 +162,14 @@ public class ShopMenu {
                 System.out.println(card.getCardName() + ":" + card.getDescription());
             }
         }
+    }
+
+    private int countSameCard() {
+        int count = 0;
+        for (int i = 0; i < Player.thePlayer.getListOfCards().size(); i++) {
+            if (selectedCard.getCardName().equals(Player.thePlayer.getListOfCards().get(i).getCardName())) count++;
+        }
+        return count;
     }
 
 

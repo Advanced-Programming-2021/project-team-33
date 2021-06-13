@@ -11,6 +11,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.effect.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -33,6 +34,7 @@ public class MainMenu {
     public ImageView backgroundMain;
     public VBox vBox;
     public int layOutY = 1;
+    public Label duelError;
     ProgramController programController = new ProgramController();
     GameController gameController = new GameController();
 
@@ -66,7 +68,7 @@ public class MainMenu {
         hBox.setAlignment(Pos.CENTER);
         Button button = getButton(name);
         switch (name) {
-            case "Duel Menu" -> button.setOnMouseClicked(event -> System.out.println("Yes"));
+            case "Duel Menu" -> button.setOnMouseClicked(event -> startGame());
             case "Deck Menu" -> button.setOnMouseClicked(event -> {
                 try {
                     new DeckMenu().start();
@@ -116,36 +118,19 @@ public class MainMenu {
 
     public void run(String input) {
         checked = false;
-        startGame(Util.getCommand(input, "duel --new --second-player (\\S+) --rounds (\\d+)"));
         enterMenu(Util.getCommand(input, "menu enter (\\S+)"));
         showCurrentMenu(Util.getCommand(input, "menu show-current"));
         logout(Util.getCommand(input, "user logout"));
     }
 
-    private void startGame(Matcher matcher) {
-        if (!checked && matcher.matches()) {
-            checked = true;
-            String secondPlayerName = matcher.group(1);
-            int round = Integer.parseInt(matcher.group(2));
-            if (!(round == 3 || round == 1))
-                System.out.println("number of rounds is not supported");
-            else if (!secondPlayerName.equals("ai")) {
-                if (!programController.isUserExist(secondPlayerName) ||
-                        secondPlayerName.equals(Player.thePlayer.getUsername()))
-                    System.out.println("there is no player with this username");
-                else if (!gameController.isDeckActive(Player.thePlayer.getUsername()))
-                    System.out.println(Player.thePlayer.getUsername() + " has no active deck");
-                else if (!gameController.isDeckActive(secondPlayerName))
-                    System.out.println(secondPlayerName + " has no active deck");
-                else if (!gameController.isDeckValid(Player.thePlayer.getUsername()))
-                    System.out.println(Player.thePlayer.getUsername() + "'s deck is invalid");
-                else if (!gameController.isDeckValid(secondPlayerName))
-                    System.out.println(secondPlayerName + "'s deck is invalid");
-                else {
-                    GameController.initiateGame(Player.thePlayer.getUsername(), secondPlayerName, round);
-                    menu = "game";
-                }
-            } else duelWithAi();
+    private void startGame() {
+        if (Player.getPlayers().size() < 2) showError("there is no other player");
+        else {
+            try {
+                new SetGame().start();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -219,6 +204,10 @@ public class MainMenu {
             case "importExport" -> importExportMenu.run(input);
             case "Graveyard" -> graveyardMenu.run(input);
         }
+    }
+
+    private void showError(String error) {
+        duelError.setText(error);
     }
 
     public void back(MouseEvent event) throws Exception {

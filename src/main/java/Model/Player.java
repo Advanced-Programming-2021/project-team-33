@@ -40,7 +40,7 @@ public class Player {
         return listOfDecks;
     }
 
-    public ArrayList<Player> getPlayers() {
+    public static ArrayList<Player> getPlayers() {
         return players;
     }
 

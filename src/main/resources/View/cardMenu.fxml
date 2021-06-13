@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
-<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.text.*?>
+
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.CardMenu">
     <children>
         <ImageView fitHeight="757.0" fitWidth="1288.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true">
@@ -18,12 +14,12 @@
                 <Image url="@../PNG/Crypt-Best-Wallpaper-09152.jpg" />
             </image>
         </ImageView>
-        <ImageView fx:id="cardShow" fitHeight="240.0" fitWidth="156.0" layoutX="881.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="cardShow" fitHeight="234.0" fitWidth="166.0" layoutX="860.0" layoutY="124.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../PNG/Cards/Monsters/CommandKnight.jpg" />
             </image>
         </ImageView>
-        <ImageView fitHeight="308.0" fitWidth="231.0" layoutX="843.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="321.0" fitWidth="239.0" layoutX="820.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../PNG/Border.png" />
             </image>
@@ -36,18 +32,14 @@
                 <Blend />
             </effect>
         </ImageView>
-        <Label layoutX="1130.0" layoutY="105.0" text="Description" textFill="WHITE">
+        <Label layoutX="897.0" layoutY="400.0" text="Description" textFill="WHITE">
             <font>
                 <Font name="Bell MT Italic" size="20.0" />
             </font>
         </Label>
-        <Text fx:id="description" fill="#ffffffe3" layoutX="1101.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="JUSTIFY" wrappingWidth="143.13671875">
+        <Text fx:id="description" fill="#ffffffe3" layoutX="843.0" layoutY="450.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="JUSTIFY" wrappingWidth="194.13671875">
             <font>
                 <Font name="Bell MT Italic" size="16.0" />
-            </font></Text>
-        <Text fx:id="price" fill="#ffffffd9" layoutX="1189.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="JUSTIFY" wrappingWidth="39.0">
-            <font>
-                <Font name="Bell MT Italic" size="14.0" />
             </font></Text>
         <ImageView fitHeight="616.0" fitWidth="217.0" layoutX="534.0" layoutY="78.0" opacity="0.44" pickOnBounds="true" preserveRatio="true">
             <image>
@@ -55,24 +47,14 @@
             </image>
         </ImageView>
 
-        <ImageView fitHeight="92.0" fitWidth="183.0" layoutX="867.0" layoutY="574.0" onMouseClicked="#back" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="92.0" fitWidth="183.0" layoutX="860.0" layoutY="561.0" onMouseClicked="#back" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../PNG/Back.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="91.0" fitWidth="54.0" layoutX="1110.0" layoutY="282.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../PNG/Coin.png" />
-            </image>
-        </ImageView>
-        <ImageView fitHeight="92.0" fitWidth="183.0" layoutX="867.0" layoutY="471.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../PNG/showCards.png" />
-            </image>
-        </ImageView>
         <ImageView fitHeight="61.0" fitWidth="276.0" layoutX="502.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../PNG/shopMenu.png" />
+                <Image url="@../PNG/CardMenu.png" />
             </image>
         </ImageView>
         <ImageView fitHeight="554.0" fitWidth="353.0" layoutX="360.0" layoutY="103.0" opacity="0.25" pickOnBounds="true" preserveRatio="true">
@@ -80,11 +62,7 @@
                 <Image url="@../PNG/download1.jpg" />
             </image>
         </ImageView>
-        <ImageView fitHeight="117.0" fitWidth="200.0" layoutX="1073.0" layoutY="342.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../PNG/Line.png" />
-            </image>
-        </ImageView>
+
         <ImageView fitHeight="607.0" fitWidth="366.0" layoutX="73.0" layoutY="80.0" opacity="0.58" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../PNG/border1.png" />
@@ -155,17 +133,44 @@
                 <Image url="@../PNG/leftButton.png" />
             </image>
         </ImageView>
-        <Label layoutX="1087.0" layoutY="18.0" text="Player :" textFill="WHITE">
-            <font>
-                <Font name="Bell MT Italic" size="17.0" />
-            </font>
-        </Label>
-        <Label layoutX="1087.0" layoutY="43.0" text="Money :" textFill="WHITE">
-            <font>
-                <Font name="Bell MT Italic" size="17.0" />
-            </font>
-        </Label>
-
+      <ImageView fitHeight="42.0" fitWidth="42.0" layoutX="1073.0" layoutY="113.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../PNG/ItemA0010.dds.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="1070.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../PNG/shield.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="1070.0" layoutY="245.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../PNG/ItemA0007.dds.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="48.0" fitWidth="61.0" layoutX="1070.0" layoutY="319.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../PNG/Coin.png" />
+         </image></ImageView>
+      <Text fx:id="attack" fill="WHITE" layoutX="1147.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="96.13671875">
+         <font>
+            <Font name="Bell MT Italic" size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="defence" fill="WHITE" layoutX="1147.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="96.13671875">
+         <font>
+            <Font name="Bell MT Italic" size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="type" fill="WHITE" layoutX="1137.0" layoutY="273.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="128.99999999999994">
+         <font>
+            <Font name="Bell MT Italic" size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="price" fill="WHITE" layoutX="1147.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="96.13671875">
+         <font>
+            <Font name="Bell MT Italic" size="18.0" />
+         </font>
+      </Text>
     </children>
 </AnchorPane>
-

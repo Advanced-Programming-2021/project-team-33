@@ -2,6 +2,7 @@ package Controller;
 
 import Model.*;
 import View.*;
+import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -197,7 +198,6 @@ public class GameController {
     public static void initiateGame(String firstPlayer, String secondPlayer, int round) {
         RoundController.otherPlayer = Player.getUserByUsername(secondPlayer);
         RoundController.setRound(round);
-        prepareGame(firstPlayer, secondPlayer);
     }
 
     public static void setNextGame(String firstPlayer, String secondPlayer) {
@@ -207,11 +207,11 @@ public class GameController {
         ChangeCardsMenu changeCardsMenu = new ChangeCardsMenu();
         changeCardsMenu.changeDeck(firstPlayer);
         changeCardsMenu.changeDeck(secondPlayer);
-        prepareGame(firstPlayer, secondPlayer);
+        prepareGame();
     }
 
-    private static void prepareGame(String firstPlayer, String secondPlayer) {
-        RoundController.setWhoPlayFirst(firstPlayer, secondPlayer);
+    public static void prepareGame() {
+        //RoundController.setWhoPlayFirst(firstPlayer, secondPlayer);
         Board board1 = new Board(Player.currentPlayer);
         Player.currentPlayer.setBoard(board1);
         Board board2 = new Board(Player.opponent);
