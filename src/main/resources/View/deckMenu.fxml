@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="720" prefWidth="1280" stylesheets="shop.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.DeckMenu">
+<AnchorPane prefHeight="720" prefWidth="1280" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.DeckMenu">
    <children>
-      <GridPane fx:id="deckGrid" layoutX="261.0" prefHeight="489.0" prefWidth="815.0">
+       <ImageView fitHeight="757.0" fitWidth="1288.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true">
+           <image>
+               <Image url="@../PNG/Crypt-Best-Wallpaper-09152.jpg" />
+           </image>
+       </ImageView>
+      <GridPane fx:id="deckGrid" layoutX="243.0" layoutY="80.0" prefHeight="411.0" prefWidth="817.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -29,7 +35,7 @@
          <children>
          </children>
       </GridPane>
-       <ListView fx:id="deckListOfCards" layoutX="1090.0" prefHeight="720.0" prefWidth="197.0">
+       <ListView fx:id="deckListOfCards" layoutX="1077.0" layoutY="14.0" prefHeight="700.0" prefWidth="198.0" styleClass="list-view">
 
        </ListView>
       <ImageView fx:id="cardShow" fitHeight="272.0" fitWidth="214.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
@@ -42,9 +48,34 @@
             <Font name="Bell MT" size="12.0" />
          </font>
       </Text>
-      <Button layoutX="14.0" layoutY="500" mnemonicParsing="false" onMouseClicked="#addToMainDeck" prefHeight="26.0" prefWidth="187.0" text="Add to Main Deck" />
-      <Button layoutX="14.0" layoutY="540" mnemonicParsing="false" prefHeight="26.0" prefWidth="187.0" text="Add to Side Deck" />
-      <Button layoutX="14.0" layoutY="580" mnemonicParsing="false" prefHeight="26.0" prefWidth="187.0" text="Remove" />
-       <Button layoutX="14.0" layoutY="620" mnemonicParsing="false" onMouseClicked="#back" prefHeight="26.0" prefWidth="187.0" style="-fx-background-color: red;-fx-border-color: white;" styleClass="back" text="Back" />
+      <Button layoutX="14.0" layoutY="500" mnemonicParsing="false" onMouseClicked="#addToMainDeck" prefHeight="26.0" prefWidth="187.0" styleClass="myButton" text="Add to Main Deck" />
+      <Button layoutX="14.0" layoutY="540" mnemonicParsing="false" onMouseClicked="#addToSideDeck" prefHeight="26.0" prefWidth="187.0" styleClass="myButton" text="Add to Side Deck" />
+      <Button layoutX="14.0" layoutY="580" mnemonicParsing="false" onMouseClicked="#removeCardFromMainDeck" prefHeight="26.0" prefWidth="187.0" styleClass="myButton" text="Remove From Main Deck" />
+       <Button layoutX="14.0" layoutY="671.0" mnemonicParsing="false" onMouseClicked="#back" prefHeight="26.0" prefWidth="187.0" styleClass="back" text="Back" />
+      <ListView fx:id="deckList" layoutX="14.0" layoutY="308.0" prefHeight="172.0" prefWidth="187.0" />
+      <Button layoutX="243.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#createDeck" prefHeight="38.0" prefWidth="267.0" styleClass="myButton" text="Create New Deck" />
+      <Button layoutX="14.0" layoutY="622.0" mnemonicParsing="false" onMouseClicked="#removeCardFromSideDeck" prefHeight="26.0" prefWidth="187.0" styleClass="myButton" text="Remove From Side Deck" />
+      <GridPane fx:id="sideDeckGrid" layoutX="243.0" layoutY="570.0" prefHeight="88.0" prefWidth="818.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+      </GridPane>
+      <Button layoutX="526.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#activateDeck" prefHeight="38.0" prefWidth="267.0" styleClass="myButton" text="Activate This Deck" />
+      <Button layoutX="809.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#deleteDeck" prefHeight="38.0" prefWidth="252.0" styleClass="myButton" text="Delete This Deck" />
    </children>
+    <stylesheets>
+        <URL value="@../css/deckMenu.css" />
+    </stylesheets>
 </AnchorPane>

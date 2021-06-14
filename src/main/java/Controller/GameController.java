@@ -146,16 +146,16 @@ public class GameController {
         selectedCard = null;
     }
 
-    public static String createDeck(String deckName) {
+    public static Deck createDeck(String deckName) {
 
         if (ProgramController.isDeckExist(deckName))
-            return "deck with name " + deckName + " already exists";
+            return null;
         else {
             Deck deck = new Deck(deckName);
             Player.thePlayer.addToDeckList(deck);
             Player.deActiveDecks();
             deck.setDeckActive(true);
-            return "deck created successfully!";
+            return deck;
         }
     }
 
@@ -174,16 +174,16 @@ public class GameController {
         } else {
             Player.getDeckByName(deckName).addToSideDeck((Card) Card.getCardByName(cardName).clone());
         }
-        Player.thePlayer.removeFromCardList(cardName);
+//        Player.thePlayer.removeFromCardList(cardName);
     }
 
     public static void removeCardFromDeck(String deckName, String cardName, boolean isSide) {
         if (!isSide) {
-            Player.getDeckByName(deckName).removeFromMainDeck(Card.getCardByName(cardName));
+            Player.getDeckByName(deckName).removeFromMainDeck(cardName);
         } else {
-            Player.getDeckByName(deckName).removeFromSideDeck(Card.getCardByName(cardName));
+            Player.getDeckByName(deckName).removeFromSideDeck(cardName);
         }
-        Player.thePlayer.addToCardList(Card.getCardByName(cardName));
+//        Player.thePlayer.addToCardList(Card.getCardByName(cardName));
     }
 
 

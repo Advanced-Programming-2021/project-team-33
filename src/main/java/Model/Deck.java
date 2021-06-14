@@ -43,15 +43,21 @@ public class Deck {
         sideDeck.add(card);
     }
 
-    public void removeFromMainDeck(Card card) {
+    public void removeFromMainDeck(String cardName) {
         for (int i = 0; i < mainDeck.size(); i++) {
-            if (mainDeck.get(i).cardName.equals(card.cardName)) mainDeck.remove(card);
+            if (mainDeck.get(i).cardName.equals(cardName)) {
+                mainDeck.remove(i);
+                break;
+            }
         }
     }
 
-    public void removeFromSideDeck(Card card) {
+    public void removeFromSideDeck(String cardName) {
         for (int i = 0; i < sideDeck.size(); i++) {
-            if (sideDeck.get(i).cardName.equals(card.cardName)) sideDeck.remove(card);
+            if (sideDeck.get(i).cardName.equals(cardName)) {
+                sideDeck.remove(i);
+                break;
+            }
         }
     }
 
