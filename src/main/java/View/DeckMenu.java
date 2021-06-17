@@ -74,7 +74,7 @@ public class DeckMenu {
             if (!ProgramController.isDeckExist(deckName))
                 System.out.println("deck with name " + deckName + " does not exist");
             else if (!ProgramController.isCardExist(cardName) ||
-                    !Player.thePlayer.listOfCards.contains(Card.getCardByName(cardName)))
+                    !Player.thePlayer.listOfCards.contains(Player.getCardByName(cardName)))
                 System.out.println("card with name " + cardName + " does not exist");
             else if (Player.getDeckByName(deckName).isMainDeckFull())
                 System.out.println("main deck is full");

@@ -169,9 +169,9 @@ public class GameController {
 
     public static void addCardToDeck(String deckName, String cardName, boolean isSide) {
         if (!isSide) {
-            Player.getDeckByName(deckName).addToMainDeck(Card.getCardByName(cardName));
+            Player.getDeckByName(deckName).addToMainDeck(Player.getCardByName(cardName));
         } else {
-            Player.getDeckByName(deckName).addToSideDeck(Card.getCardByName(cardName));
+            Player.getDeckByName(deckName).addToSideDeck(Player.getCardByName(cardName));
         }
         Player.thePlayer.removeFromCardList(cardName);
     }

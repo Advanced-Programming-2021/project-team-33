@@ -1,5 +1,6 @@
 package Model;
 
+import Controller.CardController;
 import Model.Effects.IncreaseAttack;
 import View.Phase;
 
@@ -25,6 +26,8 @@ public class Player {
         this.password = password;
         this.nickname = nickname;
         listOfCards.addAll(Card.cards);
+        Card.cards.clear();
+        CardController.initialCards();
         players.add(this);
     }
 

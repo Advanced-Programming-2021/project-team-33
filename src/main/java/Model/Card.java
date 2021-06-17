@@ -15,11 +15,12 @@ public class Card {
     CardCategory cardCategory;
     int cardId, limit, price, level;
     CardStatus cardStatus;
+    Attribute attribute;
     int attack, defence;
 
     public Card(String cardName, String description, int price, ArrayList<CardType> cardTypes,
                 CardCategory cardCategory, int limit, int level, ArrayList<Effect> effects,
-                int attack, int defence) {
+                int attack, int defence, Attribute attribute) {
         this.cardName = cardName;
         this.description = description;
         this.price = price;
@@ -156,6 +157,7 @@ public class Card {
     }
 
     public static Card getCardByName(String name) {
+
         for (Card card : cards) {
             if (card.cardName.equals(name)) return card;
         }

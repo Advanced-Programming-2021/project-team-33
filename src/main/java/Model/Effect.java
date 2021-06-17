@@ -4,7 +4,6 @@ import Controller.EffectController;
 
 public interface Effect {
     public void enableEffect(Card card);
-
     public void disableEffect(Card card);
 
     public String getEffectName();

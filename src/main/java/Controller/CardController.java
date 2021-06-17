@@ -1,10 +1,7 @@
 package Controller;
 
-import Model.Card;
-import Model.CardCategory;
-import Model.CardType;
+import Model.*;
 import Model.Effects.*;
-import Model.Player;
 
 
 import java.util.ArrayList;
@@ -175,39 +172,41 @@ public class CardController {
                 " if you control another monster, monsters your opponent " +
                 "controls cannot target this card for an attack", 2100,
                 new ArrayList<>(List.of(CardType.WARRIOR, CardType.EFFECT)), CardCategory.MONSTEREFFECT,
-                3, 4, new ArrayList<>(List.of(new IncreaseAttack())), 1000, 1000);
+                3, 4, new ArrayList<>(List.of(new IncreaseAttack())), 1000, 1000, Attribute.EARTH);
 
         Card battleOx = new Card("Battle Ox",
                 "A monster with tremendous power, it destroys enemies with a swing of its axe.", 2900,
                 new ArrayList<>(List.of(CardType.BEASTWARRIOR)), CardCategory.MONSTER,
-                3, 4, null, 1700, 1000);
+                3, 4, null, 1700, 1000, Attribute.EARTH);
 
         Card axeRaider = new Card("Axe Raider",
                 "An axe-wielding monster of tremendous strength and agility.", 3100,
                 new ArrayList<>(List.of(CardType.WARRIOR)), CardCategory.MONSTER,
-                3, 4, null, 1700, 1150);
+                3, 4, null, 1700, 1150, Attribute.WATER);
 
         Card hornImp = new Card("Horn Imp",
                 "A small fiend that dwells in the dark, its single horn makes it a formidable opponent.", 2500,
                 new ArrayList<>(List.of(CardType.FIEND)), CardCategory.MONSTER,
-                3, 4, null, 1300, 1000);
+                3, 4, null, 1300, 1000,Attribute.DARK);
 
-        Card yomiShip = new Card("Yomi Ship", "nothing", 1,
+        Card yomiShip = new Card("Yomi Ship",
+                "If this card is destroyed by battle and sent to the GY: Destroy the monster that destroyed this card.", 1700,
                 new ArrayList<>(List.of(CardType.AQUA, CardType.EFFECT)), CardCategory.MONSTEREFFECT,
-                3, 3, null, 800, 1400);
+                3, 3, null, 800, 1400,Attribute.WATER);
 
         Card silverFang = new Card("Silver Fang",
                 "A snow wolf that's beautiful to the eye, but absolutely vicious in battle.", 1700,
                 new ArrayList<>(List.of(CardType.BEAST)), CardCategory.MONSTER,
-                3, 3, null, 1200, 800);
+                3, 3, null, 1200, 800,Attribute.EARTH);
 
-        Card suijin = new Card("Suijin", "nothing", 1,
+        Card suijin = new Card("Suijin", "During damage calculation in your opponent's turn, if this card" +
+                " is being attacked: You can target the attacking monster.", 8700,
                 new ArrayList<>(List.of(CardType.AQUA, CardType.EFFECT)), CardCategory.MONSTEREFFECT,
-                3, 7, null, 2500, 2400);
+                3, 7, null, 2500, 2400,Attribute.WATER);
 
-        Card fireyarou = new Card("Fireyarou", "nothing", 1,
+        Card fireyarou = new Card("Fireyarou", "A malevolent creature wrapped in flames that attacks enemies with intense fire.", 2500,
                 new ArrayList<>(List.of(CardType.PYRO)), CardCategory.MONSTER,
-                3, 4, null, 1300, 1000);
+                3, 4, null, 1300, 1000,Attribute.FIRE);
 
         Card curtainOfDarkOnes = new Card("Curtain of Dark Ones", "nothing", 1,
                 new ArrayList<>(List.of(CardType.SPELLCASTER)), CardCategory.MONSTER,
