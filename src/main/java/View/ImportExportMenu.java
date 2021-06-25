@@ -2,10 +2,7 @@ package View;
 
 import Controller.EffectController;
 import Controller.Util;
-import Model.Card;
-import Model.CardCategory;
-import Model.CardType;
-import Model.Effect;
+import Model.*;
 import com.google.gson.*;
 
 import java.io.FileWriter;
@@ -94,7 +91,7 @@ public class ImportExportMenu {
                 String deffence = card.get("deffence").getAsString();
 
                 Card newCard = new Card(name, description, Integer.parseInt(price), cardTypes, category, Integer.parseInt(limit),
-                        Integer.parseInt(level), effects, Integer.parseInt(attack), Integer.parseInt(deffence));
+                        Integer.parseInt(level), effects, Integer.parseInt(attack), Integer.parseInt(deffence), Attribute.FIRE);
             } catch (IOException e) {
                 System.out.println("no json file with this name found");
             }

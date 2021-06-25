@@ -28,17 +28,15 @@ public class ShopMenu {
     private void buy(Matcher matcher) {
         if (!MainMenu.checked && matcher.matches()) {
             MainMenu.checked = true;
-            if (!ProgramController.isCardExist(matcher.group(1))) System.out.println("there is no card with this name");
+            if (!ProgramController.isCardExist(matcher.group(1))) Communicate.output("there is no card with this name");
             else {
                 Card card = Card.getCardByName(matcher.group(1));
-
-
                 if (card.getPrice() > Player.thePlayer.getMoney()) {
-                    System.out.println("not enough money");
+                    Communicate.output("not enough money");
                 } else {
                     Player.thePlayer.decreaseMoney(card.getPrice());
                     Player.thePlayer.addToCardList(card);
-                    System.out.println("You bought " + card.getCardName());
+                    Communicate.output("You bought " + card.getCardName());
                 }
 
 
@@ -49,7 +47,7 @@ public class ShopMenu {
     private void showAllOfCardsExistInShop(Matcher matcher) {
         if (!MainMenu.checked && matcher.matches()) {
             MainMenu.checked = true;
-            ArrayList<Card> cards = Card.getCards();
+            ArrayList<Card> cards = Player.thePlayer.getListOfCards();
             String[] cardName = new String[cards.size()];
             for (int i = 0; i < cards.size(); i++) {
                 cardName[i] = cards.get(i).getCardName();
@@ -57,7 +55,7 @@ public class ShopMenu {
             Arrays.sort(cardName);
             for (int i = 0; i < cards.size(); i++) {
                 Card card = Card.getCardByName(cardName[i]);
-                System.out.println(card.getCardName() + ":" + card.getDescription());
+                Communicate.output(card.getCardName() + ":" + card.getDescription());
             }
         }
     }

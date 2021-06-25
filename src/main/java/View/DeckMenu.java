@@ -34,7 +34,7 @@ public class DeckMenu {
         if (!MainMenu.checked && matcher.matches()) {
             MainMenu.checked = true;
             String deckName = matcher.group(1);
-            System.out.println(GameController.createDeck(deckName));
+            Communicate.output(GameController.createDeck(deckName));
         }
     }
 
@@ -43,10 +43,10 @@ public class DeckMenu {
             MainMenu.checked = true;
             String deckName = matcher.group(1);
             if (!ProgramController.isDeckExist(deckName))
-                System.out.println("deck with name " + deckName + " does not exist");
+                Communicate.output("deck with name " + deckName + " does not exist");
             else {
                 GameController.deleteDeck(deckName);
-                System.out.println("deck deleted successfully!");
+                Communicate.output("deck deleted successfully!");
             }
         }
     }
@@ -56,10 +56,10 @@ public class DeckMenu {
             MainMenu.checked = true;
             String deckName = matcher.group(1);
             if (!ProgramController.isDeckExist(deckName))
-                System.out.println("deck with name " + deckName + " does not exist");
+                Communicate.output("deck with name " + deckName + " does not exist");
             else {
                 GameController.activateDeck(deckName);
-                System.out.println("deck activated successfully");
+                Communicate.output("deck activated successfully");
             }
         }
     }
@@ -72,20 +72,20 @@ public class DeckMenu {
             boolean isSide = false;
             if (matcher.group(3) != null) isSide = true;
             if (!ProgramController.isDeckExist(deckName))
-                System.out.println("deck with name " + deckName + " does not exist");
+                Communicate.output("deck with name " + deckName + " does not exist");
             else if (!ProgramController.isCardExist(cardName) ||
                     !Player.thePlayer.listOfCards.contains(Player.getCardByName(cardName)))
-                System.out.println("card with name " + cardName + " does not exist");
+                Communicate.output("card with name " + cardName + " does not exist");
             else if (Player.getDeckByName(deckName).isMainDeckFull())
-                System.out.println("main deck is full");
+                Communicate.output("main deck is full");
             else if (Player.getDeckByName(deckName).isSideDeckFull())
-                System.out.println("side deck is full");
+                Communicate.output("side deck is full");
             else if (Player.getDeckByName(deckName).getInvalidCard(deckName, cardName)) {
-                System.out.println("there are already three cards with name " + cardName +
+                Communicate.output("there are already three cards with name " + cardName +
                         " in deck " + deckName + "name");
             } else {
                 GameController.addCardToDeck(deckName, cardName, isSide);
-                System.out.println("card added to deck successfully");
+                Communicate.output("card added to deck successfully");
             }
         }
     }
@@ -98,14 +98,14 @@ public class DeckMenu {
             boolean isSide = false;
             if (matcher.group(3) != null) isSide = true;
             if (!ProgramController.isDeckExist(deckName))
-                System.out.println("deck with name " + deckName + " does not exist");
+                Communicate.output("deck with name " + deckName + " does not exist");
             else if (!ProgramController.isCardExistInMainDeck(cardName, deckName))
-                System.out.println("card with name " + cardName + " does not exist in main deck");
+                Communicate.output("card with name " + cardName + " does not exist in main deck");
             else if (!ProgramController.isCardExistInMainDeck(cardName, deckName))
-                System.out.println("card with name " + cardName + " does not exist in side deck");
+                Communicate.output("card with name " + cardName + " does not exist in side deck");
             else {
                 GameController.removeCardFromDeck(deckName, cardName, isSide);
-                System.out.println("card removed form deck successfully");
+                Communicate.output("card removed form deck successfully");
             }
         }
     }
@@ -118,35 +118,35 @@ public class DeckMenu {
             boolean isSide = false;
             if (matcher.group(2) != null) isSide = true;
             if (!ProgramController.isDeckExist(deckName))
-                System.out.println("deck with name " + deckName + " does not exist");
+                Communicate.output("deck with name " + deckName + " does not exist");
             else if (!isSide) {
-                System.out.println("Deck: " + deckName + "\nMain Deck:\n\nMonsters:");
+                Communicate.output("Deck: " + deckName + "\nMain Deck:\n\nMonsters:");
                 for (int i = 0; i < Player.getDeckByName(deckName).getMainDeck().size(); i++) {
                     if (Player.getDeckByName(deckName).getMainDeck().get(i).getCardCategory().equals(CardCategory.MONSTER) ||
                             Player.getDeckByName(deckName).getMainDeck().get(i).getCardCategory().equals(CardCategory.MONSTEREFFECT))
-                        System.out.println(Player.getDeckByName(deckName).getMainDeck().get(i).getCardName() + ": " +
+                        Communicate.output(Player.getDeckByName(deckName).getMainDeck().get(i).getCardName() + ": " +
                                 Player.getDeckByName(deckName).getMainDeck().get(i).getDescription());
                 }
-                System.out.println("\nSpell and Traps:");
+                Communicate.output("\nSpell and Traps:");
                 for (int i = 0; i < Player.getDeckByName(deckName).getMainDeck().size(); i++) {
                     if (Player.getDeckByName(deckName).getMainDeck().get(i).getCardCategory().equals(CardCategory.SPELL) ||
                             Player.getDeckByName(deckName).getMainDeck().get(i).getCardCategory().equals(CardCategory.TRAP))
-                        System.out.println(Player.getDeckByName(deckName).getMainDeck().get(i).getCardName() + ": " +
+                        Communicate.output(Player.getDeckByName(deckName).getMainDeck().get(i).getCardName() + ": " +
                                 Player.getDeckByName(deckName).getMainDeck().get(i).getDescription());
                 }
             } else {
-                System.out.println("Deck: " + deckName + "\nSide Deck:\n\nMonsters:");
+                Communicate.output("Deck: " + deckName + "\nSide Deck:\n\nMonsters:");
                 for (int i = 0; i < Player.getDeckByName(deckName).getSideDeck().size(); i++) {
                     if (Player.getDeckByName(deckName).getSideDeck().get(i).getCardCategory().equals(CardCategory.MONSTER) ||
                             Player.getDeckByName(deckName).getSideDeck().get(i).getCardCategory().equals(CardCategory.MONSTEREFFECT))
-                        System.out.println(Player.getDeckByName(deckName).getSideDeck().get(i).getCardName() + ": " +
+                        Communicate.output(Player.getDeckByName(deckName).getSideDeck().get(i).getCardName() + ": " +
                                 Player.getDeckByName(deckName).getSideDeck().get(i).getDescription());
                 }
-                System.out.println("\nSpell and Traps:");
+                Communicate.output("\nSpell and Traps:");
                 for (int i = 0; i < Player.getDeckByName(deckName).getSideDeck().size(); i++) {
                     if (Player.getDeckByName(deckName).getSideDeck().get(i).getCardCategory().equals(CardCategory.SPELL) ||
                             Player.getDeckByName(deckName).getSideDeck().get(i).getCardCategory().equals(CardCategory.TRAP))
-                        System.out.println(Player.getDeckByName(deckName).getSideDeck().get(i).getCardName() + ": " +
+                        Communicate.output(Player.getDeckByName(deckName).getSideDeck().get(i).getCardName() + ": " +
                                 Player.getDeckByName(deckName).getSideDeck().get(i).getDescription());
                 }
             }
@@ -158,20 +158,20 @@ public class DeckMenu {
         if (!MainMenu.checked && matcher.matches()) {
             MainMenu.checked = true;
             String valid = "invalid";
-            System.out.println("Decks:\nActive deck:");
+            Communicate.output("Decks:\nActive deck:");
             if (Player.thePlayer.getActiveDeck() != null) {
                 Deck activeDeck = Player.thePlayer.getActiveDeck();
                 if (activeDeck.isDeckValid(activeDeck)) valid = "valid";
-                System.out.println(activeDeck.getDeckName() + ": main deck " +
+                Communicate.output(activeDeck.getDeckName() + ": main deck " +
                         activeDeck.getMainDeck().size() + ", side deck " +
                         activeDeck.getSideDeck().size() + ", " + valid);
             }
-            System.out.println("Other decks:");
+            Communicate.output("Other decks:");
             for (int i = 0; i < Player.thePlayer.listOfDecks.size(); i++) {
                 if (!Player.thePlayer.listOfDecks.get(i).isDeckActive()) {
                     Deck otherDeck = Player.thePlayer.listOfDecks.get(i);
                     if (otherDeck.isDeckValid(otherDeck)) valid = "valid";
-                    System.out.println(otherDeck.getDeckName() + ": main deck " +
+                    Communicate.output(otherDeck.getDeckName() + ": main deck " +
                             otherDeck.getMainDeck().size() + ", side deck " +
                             otherDeck.getSideDeck().size() + ", " + valid);
                 }
@@ -189,7 +189,7 @@ public class DeckMenu {
             }
             cardNameList.sort(Comparator.naturalOrder());
             for (int i = 0; i < cardNameList.size(); i++) {
-                System.out.println(cardNameList.get(i));
+                Communicate.output(cardNameList.get(i));
             }
         }
 

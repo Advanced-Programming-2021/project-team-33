@@ -67,10 +67,10 @@ public class MainMenu {
         if (!checked && matcher.matches()) {
             checked = true;
             String menuName = matcher.group(1);
-            if (menuName.equals("game")) System.out.println("you have to set you opponent to enter this menu");
+            if (menuName.equals("game")) Communicate.output("you have to set you opponent to enter this menu");
             else if (ProgramController.isNavigationPossible(menuName))
                 menu = menuName;
-            else System.out.println("no such menu!");
+            else Communicate.output("no such menu!");
         }
     }
 
@@ -78,15 +78,15 @@ public class MainMenu {
         if (!checked && matcher.matches()) {
             checked = true;
             switch (menu) {
-                case "login" -> System.out.println("Login Menu");
-                case "main" -> System.out.println("Main Menu");
-                case "game" -> System.out.println("Game Menu");
-                case "deck" -> System.out.println("Deck Menu");
-                case "shop" -> System.out.println("Shop Menu");
-                case "scoreboard" -> System.out.println("Scoreboard Menu");
-                case "profile" -> System.out.println("Profile Menu");
-                case "importExport" -> System.out.println("ImportExport Menu");
-                case "Graveyard" -> System.out.println("Graveyard Menu");
+                case "login" -> Communicate.output("Login Menu");
+                case "main" -> Communicate.output("Main Menu");
+                case "game" -> Communicate.output("Game Menu");
+                case "deck" -> Communicate.output("Deck Menu");
+                case "shop" -> Communicate.output("Shop Menu");
+                case "scoreboard" -> Communicate.output("Scoreboard Menu");
+                case "profile" -> Communicate.output("Profile Menu");
+                case "importExport" -> Communicate.output("ImportExport Menu");
+                case "Graveyard" -> Communicate.output("Graveyard Menu");
             }
         }
     }
@@ -123,7 +123,7 @@ public class MainMenu {
                 case "importExport" -> importExportMenu.run(input);
                 case "Graveyard" -> graveyardMenu.run(input);
             }
-            if(!checked) System.out.println("invalid command!");
+            if(!checked) Communicate.output("invalid command!");
         }
     }
 

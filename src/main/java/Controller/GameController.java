@@ -244,13 +244,13 @@ public class GameController {
     }
 
     public static void showBoard() {
-        System.out.println(Player.opponent.getNickname() + ":" + Player.opponent.getLifePoint());
+        Communicate.output(Player.opponent.getNickname() + ":" + Player.opponent.getLifePoint());
         System.out.print("\t");
         for (int i = 0; i < Player.opponent.getBoard().getHand().size(); i++) {
             System.out.print("c\t");
         }
-        System.out.println();
-        System.out.println(Player.opponent.board.deck.size());
+        System.out.print("\n");
+        System.out.print(Player.opponent.board.deck.size() + "\n");
         System.out.print("\t");
         for (int i = 4; i >= 0; i--) {
             Card card = Player.opponent.getBoard().getFieldCardsForSpellTraps().get(i);
@@ -262,7 +262,7 @@ public class GameController {
                 System.out.print("O\t");
             }
         }
-        System.out.println();
+        System.out.print("\n");
         System.out.print("\t");
         for (int i = 4; i >= 0; i--) {
             Card card = Player.opponent.getBoard().getFieldCardsForMonsters().get(i);
@@ -276,12 +276,12 @@ public class GameController {
                 System.out.print("OO\t");
             }
         }
-        System.out.println();
+        System.out.print("\n");
         System.out.print(Player.opponent.board.graveyard.size());
         Util.printNCharacter(6, "\t");
-        if (Player.opponent.getBoard().getFieldZone().get(0) == null) System.out.println("E");
-        else System.out.println("O");
-        System.out.println();
+        if (Player.opponent.getBoard().getFieldZone().get(0) == null) System.out.print("E\n");
+        else System.out.print("O\n");
+        System.out.print("\n");
         Util.printNCharacter(26, "-");
         Util.printNCharacter(2, "\n");
 
@@ -290,7 +290,7 @@ public class GameController {
         if (Player.currentPlayer.getBoard().getFieldZone().get(0) == null) System.out.print("E");
         else System.out.print("O");
         Util.printNCharacter(6, "\t");
-        System.out.println(Player.currentPlayer.board.graveyard.size());
+        System.out.print(Player.currentPlayer.board.graveyard.size()+"\n");
         System.out.print("\t");
         for (Card card : Player.currentPlayer.board.fieldCardsForMonsters) {
             if (card == null) {
@@ -303,7 +303,7 @@ public class GameController {
                 System.out.print("OO\t");
             }
         }
-        System.out.println();
+        System.out.print("\n");
         System.out.print("\t");
         for (Card card : Player.currentPlayer.board.fieldCardsForSpellTraps) {
             if (card == null) {
@@ -314,14 +314,14 @@ public class GameController {
                 System.out.print("O\t");
             }
         }
-        System.out.println();
+        System.out.print("\n");
         Util.printNCharacter(6, "\t");
-        System.out.println(Player.currentPlayer.board.deck.size());
+        System.out.print(Player.currentPlayer.board.deck.size() + "\n");
         for (int i = 0; i < Player.currentPlayer.board.hand.size(); i++) {
             System.out.print("c\t");
         }
-        System.out.println();
-        System.out.println(Player.currentPlayer.getNickname() + ":" + Player.currentPlayer.getLifePoint());
+        System.out.print("\n");
+        System.out.print(Player.currentPlayer.getNickname() + ":" + Player.currentPlayer.getLifePoint()+"\n");
     }
 
     public static void printGraveyardCards() {

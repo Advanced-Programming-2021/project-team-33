@@ -26,7 +26,6 @@ public class GameMenu {
         goToNextPhase(Util.getCommand(input, "next phase"));
         showBoard(Util.getCommand(input, "showBoard"));
         surrender(Util.getCommand(input, "surrender"));
-        cancel(Util.getCommand(input, "cancel"));
         increaseMoney(Util.getCommand(input, "increase --money (\\d+)"));
         increaseLifePoint(Util.getCommand(input, "increase --LP (\\d+)"));
         winTheGame(Util.getCommand(input, "duel set-winner (\\S+)"));
@@ -44,20 +43,20 @@ public class GameMenu {
             else if (Player.currentPlayer.getPhase().equals(Phase.BATTLE)) RoundController.mainPhase2();
             else if (Player.currentPlayer.getPhase().equals(Phase.MAIN2)) {
                 RoundController.endPhase();
-                System.out.println("It's " + Player.currentPlayer.getUsername() + "'s turn");
+                Communicate.output("It's " + Player.currentPlayer.getUsername() + "'s turn");
             }
         }
     }
 
     public void endPhaseMassage() {
-        System.out.println("It's " + Player.currentPlayer.getUsername() + "'s turn");
+        Communicate.output("It's " + Player.currentPlayer.getUsername() + "'s turn");
     }
 
     private void showGraveyard(Matcher matcher) {
         if (!MainMenu.checked && matcher.matches()) {
             MainMenu.checked = true;
             if (Player.currentPlayer.getBoard().getGraveyard().get(0) == null)
-                System.out.println("graveyard empty");
+                Communicate.output("graveyard empty");
             else {
                 GameController.printGraveyardCards();
                 MainMenu.menu = "Graveyard";
@@ -74,13 +73,13 @@ public class GameMenu {
 
 
     public void rollDice(int first, int second, String currentPlayer, String firstPlayer, String secondPlayer) {
-        System.out.println(firstPlayer + " get " + first);
-        System.out.println(secondPlayer + " get " + second);
-        System.out.println(currentPlayer + "'s turn\n\n");
+        Communicate.output(firstPlayer + " get " + first);
+        Communicate.output(secondPlayer + " get " + second);
+        Communicate.output(currentPlayer + "'s turn\n\n");
     }
 
     public void printMiddleChange() {
-        System.out.println("now it will be " + Player.opponent.getUsername() + "’s turn");
+        Communicate.output("now it will be " + Player.opponent.getUsername() + "’s turn");
     }
 
     public String changePhaseInMiddle() {
@@ -88,50 +87,49 @@ public class GameMenu {
     }
 
     public void informEndOfGame(Player winner, int score) {
-        System.out.println(winner.getUsername() + " won the whole match with score: " + score + " - 0\n\n");
+        Communicate.output(winner.getUsername() + " won the whole match with score: " + score + " - 0\n\n");
     }
 
     public void informEndOfRound(Player winner, int score, int remainingRounds) {
-        System.out.println("Round " + remainingRounds + " ended");
-        System.out.println(winner.getUsername() + " won the game with score: " + score + " - 0");
+        Communicate.output("Round " + remainingRounds + " ended");
+        Communicate.output(winner.getUsername() + " won the game with score: " + score + " - 0");
         remainingRounds--;
         if (remainingRounds != 1)
-            System.out.println("Now is time for round " + remainingRounds + "\n\n");
+            Communicate.output("Now is time for round " + remainingRounds + "\n\n");
     }
 
 
     public void informPhase(Phase phase) {
         switch (phase) {
-            case DRAW -> System.out.println("phase: Draw Phase");
-            case STANDBY -> System.out.println("phase: Standby Phase");
-            case MAIN1 -> System.out.println("phase: Main Phase 1");
-            case BATTLE -> System.out.println("phase: Battle Phase");
-            case MAIN2 -> System.out.println("phase: Main Phase 2");
-            case END -> System.out.println("phase: End Phase");
+            case DRAW -> Communicate.output("phase: Draw Phase");
+            case STANDBY -> Communicate.output("phase: Standby Phase");
+            case MAIN1 -> Communicate.output("phase: Main Phase 1");
+            case BATTLE -> Communicate.output("phase: Battle Phase");
+            case MAIN2 -> Communicate.output("phase: Main Phase 2");
+            case END -> Communicate.output("phase: End Phase");
         }
     }
 
     public void drawCard(Card card) {
-        System.out.println("new card added to the hand : " + card.getCardName());
+        Communicate.output("new card added to the hand : " + card.getCardName());
     }
 
 
     private void activeSpell(Matcher matcher) {
         if (!MainMenu.checked && matcher.matches()) {
             MainMenu.checked = true;
-            if (GameController.selectedCard == null) System.out.println("no card is selected yet");
+            if (GameController.selectedCard == null) Communicate.output("no card is selected yet");
             else if (Player.currentPlayer.isInOpponentPhase()) {
                 if (!GameController.selectedCard.getCardCategory().equals(CardCategory.SPELL) &&
                         !GameController.selectedCard.getCardCategory().equals(CardCategory.TRAP))
-                    System.out.println("activate effect is only for spell cards.");
-                    //other things needed for if blow
+                    Communicate.output("activate effect is only for spell cards.");
                 else if (!GameController.selectedCard.getCardStatus().equals(CardStatus.BACK) &&
                         !GameController.selectedCard.getCardStatus().equals(CardStatus.HAND))
-                    System.out.println("you can't active this card");
+                    Communicate.output("you can't active this card");
                 else {
                     if (GameController.selectedCard.getCardCategory().equals(CardCategory.TRAP))
-                        System.out.println("trap activated");
-                    else System.out.println("spell activated");
+                        Communicate.output("trap activated");
+                    else Communicate.output("spell activated");
                     GameController.activeSpell();
                     GameController.getBackFromMiddleChange();
                 }
@@ -141,18 +139,15 @@ public class GameMenu {
                     GameController.activeSpell();
                 } else if (!GameController.selectedCard.getCardCategory().equals(CardCategory.SPELL) &&
                         !GameController.selectedCard.getCardCategory().equals(CardCategory.TRAP))
-                    System.out.println("activate effect is only for spell cards.");
+                    Communicate.output("activate effect is only for spell cards.");
                 else if (!Player.currentPlayer.getPhase().equals(Phase.MAIN1) &&
                         !Player.currentPlayer.getPhase().equals(Phase.MAIN2))
-                    System.out.println("you can’t activate an effect on this turn");
+                    Communicate.output("you can’t activate an effect on this turn");
                 else if (GameController.selectedCard.isActivated())
-                    System.out.println("you have already activated this card");
-                else if (GameController.isSpellTrapFieldFull() //&& !isForFieldZone
-                ) System.out.println("spell card zone is full");
-
-                    //else if( !isActivable) System.out.println("preparations of this spell are not done yet");
+                    Communicate.output("you have already activated this card");
+                else if (GameController.isSpellTrapFieldFull()) Communicate.output("spell card zone is full");
                 else {
-                    System.out.println("spell activated");
+                    Communicate.output("spell activated");
                     GameController.activeSpell();
                 }
             }
@@ -165,29 +160,29 @@ public class GameMenu {
         if (!MainMenu.checked && matcher.matches()) {
             MainMenu.checked = true;
             if (Player.currentPlayer.isInOpponentPhase())
-                System.out.println("it’s not your turn to play this kind of moves");
-            else if (GameController.selectedCard == null) System.out.println("no card is selected yet");
+                Communicate.output("it’s not your turn to play this kind of moves");
+            else if (GameController.selectedCard == null) Communicate.output("no card is selected yet");
             else if (!GameController.selectedCard.getCardStatus().equals(CardStatus.HAND) ||
                     (!GameController.selectedCard.getCardCategory().equals(CardCategory.MONSTER) &&
                             !GameController.selectedCard.getCardCategory().equals(CardCategory.MONSTEREFFECT)) ||
                     GameController.selectedCard.getCardTypes().contains(CardType.RITUAL))
-                System.out.println("you can’t summon this card");
+                Communicate.output("you can’t summon this card");
             else if (!Player.currentPlayer.getPhase().equals(Phase.MAIN1) &&
                     !Player.currentPlayer.getPhase().equals(Phase.MAIN2))
-                System.out.println("action not allowed in this phase");
-            else if (GameController.isMonsterFieldFull()) System.out.println("monster card zone is full");
-            else if (RoundController.isSummoned) System.out.println("you already summoned/set on this turn");
+                Communicate.output("action not allowed in this phase");
+            else if (GameController.isMonsterFieldFull()) Communicate.output("monster card zone is full");
+            else if (RoundController.isSummoned) Communicate.output("you already summoned/set on this turn");
             else if (GameController.selectedCard.getCardName().equals("Gate Guardian")) GameController.specialSummon();
             else if (GameController.selectedCard.getCardName().equals("Beast King Barbaros")) summonBarbaros();
             else if (GameController.selectedCard.getCardName().equals("The Tricky"))
-                System.out.println("you should activate its effect");
+                Communicate.output("you should activate its effect");
             else if (GameController.selectedCard.getLevel() > 4 && GameController.selectedCard.getLevel() < 7) {
                 tributeSummonoLowLevel();
             } else if (GameController.selectedCard.getLevel() > 6 && GameController.selectedCard.getLevel() < 9) {
                 tributeSummonHighLevel();
             } else {
                 int command = GameController.summonMonster(0, 0);
-                if (command != -1) System.out.println("summoned successfully3");
+                if (command != -1) Communicate.output("summoned successfully3");
             }
 
         }
@@ -195,75 +190,74 @@ public class GameMenu {
 
     private void tributeSummonoLowLevel() {
         if (GameController.getMonsterFieldSize() == 0) {
-            System.out.println("there are not enough cards for tribute");
+            Communicate.output("there are not enough cards for tribute");
             return;
         }
         String input = Communicate.input("Pick Monster for tribute");
         if (input.equals("cancel")) {
-            System.out.println("Tribute Canceled");
+            Communicate.output("Tribute Canceled");
             return;
         }
         int tribute = Integer.parseInt(Communicate.input("Pick Monster for tribute"));
         tribute = GameController.switchNumberForCurrent(tribute);
         if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(tribute) == null) {
-            System.out.println("there are no monsters on this address");
+            Communicate.output("there are no monsters on this address");
             return;
         }
         int command = GameController.summonMonster(tribute, 0);
-        if (command != -1) System.out.println("summoned successfully1");
+        if (command != -1) Communicate.output("summoned successfully1");
     }
 
     private void tributeSummonHighLevel() {
-        System.out.println(GameController.getMonsterFieldSize());
         if (GameController.getMonsterFieldSize() < 2) {
-            System.out.println("there are not enough cards for tribute");
+            Communicate.output("there are not enough cards for tribute");
             return;
         }
         String input = Communicate.input("Pick Monster for tribute");
         if (input.equals("cancel")) {
-            System.out.println("Tribute Canceled");
+            Communicate.output("Tribute Canceled");
             return;
         }
         int tribute = Integer.parseInt(input);
         tribute = GameController.switchNumberForCurrent(tribute);
         input = Communicate.input("Pick another Monster for tribute");
         if (input.equals("cancel")) {
-            System.out.println("Tribute Canceled");
+            Communicate.output("Tribute Canceled");
             return;
         }
         int tribute1 = Integer.parseInt(input);
         tribute1 = GameController.switchNumberForCurrent(tribute1);
         if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(tribute) == null ||
                 Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(tribute1) == null) {
-            System.out.println("there is no monster on one of these addresses");
+            Communicate.output("there is no monster on one of these addresses");
             return;
         }
         int command = GameController.summonMonster(tribute, tribute1);
-        if (command != -1) System.out.println("summoned successfully2");
+        if (command != -1) Communicate.output("summoned successfully2");
     }
 
     private void flipSummon(Matcher matcher) {
         if (!MainMenu.checked && matcher.matches()) {
             MainMenu.checked = true;
             if (Player.currentPlayer.isInOpponentPhase())
-                System.out.println("it’s not your turn to play this kind of moves");
-            else if (GameController.selectedCard == null) System.out.println("no card is selected yet");
+                Communicate.output("it’s not your turn to play this kind of moves");
+            else if (GameController.selectedCard == null) Communicate.output("no card is selected yet");
             else if (!GameController.selectedCard.getCardStatus().equals(CardStatus.ATTACK) &&
                     !GameController.selectedCard.getCardStatus().equals(CardStatus.DEFENCE) &&
                     !GameController.selectedCard.getCardStatus().equals(CardStatus.SET))
-                System.out.println("you can’t change this card position");
+                Communicate.output("you can’t change this card position");
             else if (!Player.currentPlayer.getPhase().equals(Phase.MAIN1) &&
                     !Player.currentPlayer.getPhase().equals(Phase.MAIN2))
-                System.out.println("action not allowed in this phase");
+                Communicate.output("action not allowed in this phase");
             else if (!GameController.selectedCard.getCardStatus().equals(CardStatus.SET) ||
                     GameController.selectedCard.isSummoned())
-                System.out.println("you can’t flip summon this card");
+                Communicate.output("you can’t flip summon this card");
             else if (GameController.selectedCard.getLevel() > 4 && GameController.selectedCard.getLevel() < 7) {
                 tributeSummonoLowLevel();
             } else if (GameController.selectedCard.getLevel() > 6 && GameController.selectedCard.getLevel() < 9) {
                 tributeSummonHighLevel();
             } else {
-                System.out.println("flip summoned successfully");
+                Communicate.output("flip summoned successfully");
                 GameController.flipSummon();
             }
         }
@@ -274,40 +268,40 @@ public class GameMenu {
         if (input.equals("0")) {
             GameController.selectedCard.setAttack(1900);
             GameController.summonMonster(0, 0);
-            System.out.println("summoned successfully3");
+            Communicate.output("summoned successfully3");
         } else if (input.equals("2")) {
             tributeSummonHighLevel();
         } else if (input.equals("3")) {
             GameController.specialSummon();
-        } else System.out.println("invalid input");
+        } else Communicate.output("invalid input");
     }
 
     private void setCard(Matcher matcher) {
         if (!MainMenu.checked && matcher.matches()) {
             MainMenu.checked = true;
             if (Player.currentPlayer.isInOpponentPhase())
-                System.out.println("it’s not your turn to play this kind of moves");
-            else if (GameController.selectedCard == null) System.out.println("no card is selected yet");
+                Communicate.output("it’s not your turn to play this kind of moves");
+            else if (GameController.selectedCard == null) Communicate.output("no card is selected yet");
             else if (!GameController.selectedCard.getCardStatus().equals(CardStatus.HAND))
-                System.out.println("you can’t set this card");
+                Communicate.output("you can’t set this card");
             else if (!Player.currentPlayer.getPhase().equals(Phase.MAIN1) &&
                     !Player.currentPlayer.getPhase().equals(Phase.MAIN2))
-                System.out.println("action not allowed in this phase");
+                Communicate.output("action not allowed in this phase");
             else if (GameController.selectedCard.getCardCategory().equals(CardCategory.MONSTER) ||
                     GameController.selectedCard.getCardCategory().equals(CardCategory.MONSTEREFFECT)) {
-                if (GameController.isMonsterFieldFull()) System.out.println("monster card zone is full");
-                else if (RoundController.isSummoned) System.out.println("you already summoned/set on this turn");
+                if (GameController.isMonsterFieldFull()) Communicate.output("monster card zone is full");
+                else if (RoundController.isSummoned) Communicate.output("you already summoned/set on this turn");
                 else {
                     GameController.setMonster();
-                    System.out.println("set successfully1");
+                    Communicate.output("set successfully1");
                 }
             } else if (GameController.selectedCard.getCardName().equals("The Tricky"))
-                System.out.println("you should activate its effect");
+                Communicate.output("you should activate its effect");
             else {
-                if (GameController.isSpellTrapFieldFull()) System.out.println("spell card zone is full");
+                if (GameController.isSpellTrapFieldFull())Communicate.output("spell card zone is full");
                 else {
                     GameController.setSpell();
-                    System.out.println("set successfully2");
+                    Communicate.output("set successfully2");
                 }
             }
         }
@@ -318,23 +312,23 @@ public class GameMenu {
             MainMenu.checked = true;
             String position = matcher.group(1);
             if (Player.currentPlayer.isInOpponentPhase())
-                System.out.println("it’s not your turn to play this kind of moves");
-            else if (GameController.selectedCard == null) System.out.println("no card is selected yet");
+                Communicate.output("it’s not your turn to play this kind of moves");
+            else if (GameController.selectedCard == null) Communicate.output("no card is selected yet");
             else if (!GameController.selectedCard.getCardStatus().equals(CardStatus.ATTACK) &&
                     !GameController.selectedCard.getCardStatus().equals(CardStatus.DEFENCE))
-                System.out.println("you can’t change this card position");
+                Communicate.output("you can’t change this card position");
             else if (!Player.currentPlayer.getPhase().equals(Phase.MAIN1) &&
                     !Player.currentPlayer.getPhase().equals(Phase.MAIN2))
-                System.out.println("action not allowed in this phase");
+                Communicate.output("action not allowed in this phase");
             else if (GameController.selectedCard.getCardStatus().equals(CardStatus.ATTACK) && position.equals("attack"))
-                System.out.println("this card is already in the wanted position");
+                Communicate.output("this card is already in the wanted position");
             else if (GameController.selectedCard.getCardStatus().equals(CardStatus.DEFENCE) && position.equals("defence"))
-                System.out.println("this card is already in the wanted position");
+                Communicate.output("this card is already in the wanted position");
             else if (GameController.selectedCard.isChanged())
-                System.out.println("you already changed this card position in this turn");
+                Communicate.output("you already changed this card position in this turn");
             else {
                 GameController.changeCardPosition(position);
-                System.out.println("monster card position changed successfully");
+                Communicate.output("monster card position changed successfully");
             }
         }
     }
@@ -344,19 +338,19 @@ public class GameMenu {
             MainMenu.checked = true;
             int enemyMonsterIndex = GameController.switchNumberForCurrent(Integer.parseInt(matcher.group(1)));
             if (Player.currentPlayer.isInOpponentPhase())
-                System.out.println("it’s not your turn to play this kind of moves");
-            else if (GameController.selectedCard == null) System.out.println("no card is selected yet");
+                Communicate.output("it’s not your turn to play this kind of moves");
+            else if (GameController.selectedCard == null) Communicate.output("no card is selected yet");
             else if (!GameController.selectedCard.getCardStatus().equals(CardStatus.ATTACK))
-                System.out.println("you can’t attack with this card");
+                Communicate.output("you can’t attack with this card");
             else if (!Player.currentPlayer.getPhase().equals(Phase.BATTLE))
-                System.out.println("you can’t do this action in this phase");
+                Communicate.output("you can’t do this action in this phase");
             else if(GameController.isThreeLightActive && Player.currentPlayer.equals(GameController.getLightPlayer) ||
                     (GameController.is1500Active && GameController.selectedCard.getAttack() > 1500))
-                System.out.println("you can't attack because of enemy spell");
+                Communicate.output("you can't attack because of enemy spell");
             else if (GameController.selectedCard.isAttacked())
-                System.out.println("this card already attacked");
+                Communicate.output("this card already attacked");
             else if (Player.opponent.getBoard().getFieldCardsForMonsters().get(enemyMonsterIndex) == null)
-                System.out.println("there is no card to attack here");
+                Communicate.output("there is no card to attack here");
             else {
                 GameController.attackMonster(enemyMonsterIndex);
             }
@@ -364,23 +358,23 @@ public class GameMenu {
     }
 
     public void printMonsterAttacks(int key, int damage, int enemyMonsterIndex) {
-        if (key == 1) System.out.println("your opponent’s monster is destroyed and your" +
+        if (key == 1) Communicate.output("your opponent’s monster is destroyed and your" +
                 " opponent receives " + damage + " battle damage");
-        else if (key == 2) System.out.println("both you and your opponent monster cards are destroyed and no\n" +
+        else if (key == 2) Communicate.output("both you and your opponent monster cards are destroyed and no\n" +
                 "one receives damage");
-        else if (key == 3) System.out.println("Your monster card is destroyed and you received " +
+        else if (key == 3) Communicate.output("Your monster card is destroyed and you received " +
                 +damage + " battle damage");
-        else if (key == 4) System.out.println("the defense position monster is destroyed");
-        else if (key == 5) System.out.println("no card is destroyed");
-        else if (key == 6) System.out.println("no card is destroyed and you received " + damage + " battle damage");
-        else if (key == 7) System.out.println("opponent’s monster card was " +
+        else if (key == 4) Communicate.output("the defense position monster is destroyed");
+        else if (key == 5) Communicate.output("no card is destroyed");
+        else if (key == 6) Communicate.output("no card is destroyed and you received " + damage + " battle damage");
+        else if (key == 7) Communicate.output("opponent’s monster card was " +
                 Player.opponent.getBoard().getFieldCardsForMonsters().get(enemyMonsterIndex).getCardName() +
                 " and the defense position monster is destroyed");
 
-        else if (key == 8) System.out.println("opponent’s monster card was " +
+        else if (key == 8) Communicate.output("opponent’s monster card was " +
                 Player.opponent.getBoard().getFieldCardsForMonsters().get(enemyMonsterIndex).getCardName() +
                 " and no card is destroyed");
-        else if (key == 9) System.out.println("opponent’s monster card was " +
+        else if (key == 9) Communicate.output("opponent’s monster card was " +
                 Player.opponent.getBoard().getFieldCardsForMonsters().get(enemyMonsterIndex).getCardName() +
                 " and no card is destroyed and you received " + damage + " battle damage");
 
@@ -389,27 +383,23 @@ public class GameMenu {
     private void attackDirect(Matcher matcher) {
         if (!MainMenu.checked && matcher.matches()) {
             MainMenu.checked = true;
-            System.out.println(GameController.isThreeLightActive);
-            System.out.println(Player.currentPlayer.getNickname());
-            System.out.println(GameController.getLightPlayer.getNickname());
-            System.out.println(GameController.isThreeLightActive);
             if (Player.currentPlayer.isInOpponentPhase())
-                System.out.println("it’s not your turn to play this kind of moves");
-            else if (GameController.selectedCard == null) System.out.println("no card is selected yet");
+                Communicate.output("it’s not your turn to play this kind of moves");
+            else if (GameController.selectedCard == null) Communicate.output("no card is selected yet");
             else if (!GameController.selectedCard.getCardStatus().equals(CardStatus.ATTACK))
-                System.out.println("you can’t attack with this card");
+                Communicate.output("you can’t attack with this card");
             else if (!Player.currentPlayer.getPhase().equals(Phase.BATTLE))
-                System.out.println("you can’t do this action in this phase");
+                Communicate.output("you can’t do this action in this phase");
             else if (GameController.selectedCard.isAttacked())
-                System.out.println("this card already attacked");
+                Communicate.output("this card already attacked");
             else if(GameController.isThreeLightActive && Player.currentPlayer.equals(GameController.getLightPlayer) ||
                     (GameController.is1500Active && GameController.selectedCard.getAttack() > 1500))
-                System.out.println("you can't attack because of enemy spell");
+                Communicate.output("you can't attack because of enemy spell");
             else if (!GameController.isEnemyMonsterFieldEmpty())
-                System.out.println("you can’t attack the opponent directly");
+                Communicate.output("you can’t attack the opponent directly");
             else {
                 int damage = GameController.attackDirect();
-                if (damage != -1) System.out.println("your opponent receives " + damage + " battle damage");
+                if (damage != -1) Communicate.output("your opponent receives " + damage + " battle damage");
             }
         }
     }
@@ -422,9 +412,9 @@ public class GameMenu {
             if (matcher.group(2) != null) opponent = matcher.group(2);
             int number = Integer.parseInt(matcher.group(3));
             int massage = GameController.selectCard(cardPosition, number, opponent);
-            if (massage == 1) System.out.println("card selected");
-            else if (massage == 0) System.out.println("no card found in the given position");
-            else System.out.println("invalid selection");
+            if (massage == 1) Communicate.output("card selected");
+            else if (massage == 0) Communicate.output("no card found in the given position");
+            else Communicate.output("invalid selection");
             if (massage == 1 && !opponent.equals("")) GameController.setIsOpponentCardSelected(true);
         }
     }
@@ -432,20 +422,14 @@ public class GameMenu {
     public void deSelectCard(Matcher matcher) {
         if (!MainMenu.checked && matcher.matches()) {
             MainMenu.checked = true;
-            if (GameController.selectedCard == null) System.out.println("no card is selected yet");
+            if (GameController.selectedCard == null) Communicate.output("no card is selected yet");
             else {
-                System.out.println("card deselected");
+                Communicate.output("card deselected");
                 GameController.deSelectCard();
             }
         }
     }
 
-    private void cancel(Matcher matcher) {
-        if (!MainMenu.checked && matcher.matches()) {
-            MainMenu.checked = true;
-
-        }
-    }
 
     private void surrender(Matcher matcher) {
         if (!MainMenu.checked && matcher.matches()) {
@@ -475,7 +459,7 @@ public class GameMenu {
                 Player.opponent.setLifePoint(0);
             } else if (matcher.group(1).equals(Player.opponent.getNickname())) {
                 Player.currentPlayer.setLifePoint(0);
-            } else System.out.println("invalid name");
+            } else Communicate.output("invalid name");
         }
     }
 
@@ -483,7 +467,7 @@ public class GameMenu {
         if (!MainMenu.checked && matcher.matches()) {
             MainMenu.checked = true;
             Card card = Card.getCardByName(matcher.group(1));
-            if (!Card.getCards().contains(card)) System.out.println("invalid card name");
+            if (!Card.getCards().contains(card)) Communicate.output("invalid card name");
             else GameController.selectedCard = card;
         }
     }

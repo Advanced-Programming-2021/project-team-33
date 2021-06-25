@@ -34,7 +34,7 @@ public class ScoreboardMenu {
                     counter++;
                     if (a == 1) rank++;
                 }
-                System.out.println(rank + "- " + en.getKey() + ": " + en.getValue());
+                Communicate.output(rank + "- " + en.getKey() + ": " + en.getValue());
                 equal = en.getValue();
             }
         }

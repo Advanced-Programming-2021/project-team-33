@@ -26,9 +26,9 @@ public class ProfileMenu {
             MainMenu.checked = true;
             Player player = Player.getUserByNickname(matcher.group(1));
             if (player != null) {
-                System.out.println("user with nickname " + matcher.group(1) + " already exists");
+                Communicate.output("user with nickname " + matcher.group(1) + " already exists");
             } else {
-                System.out.println("nickname changed successfully!");
+                Communicate.output("nickname changed successfully!");
                 ProgramController.changePlayerNickname(matcher.group(1));
             }
         }
@@ -39,9 +39,9 @@ public class ProfileMenu {
             MainMenu.checked=true;
             Player player = Player.getUserByUsername(matcher.group(1));
             if (player != null) {
-                System.out.println("user with username " + matcher.group(1) + " already exists");
+                Communicate.output("user with username " + matcher.group(1) + " already exists");
             } else {
-                System.out.println("username changed successfully!");
+                Communicate.output("username changed successfully!");
                 ProgramController.changePlayerUserName(matcher.group(1));
             }
         }
@@ -52,13 +52,13 @@ public class ProfileMenu {
             MainMenu.checked = true;
             if (ProgramController.isPasswordTrue(matcher.group(1))) {
                 if (ProgramController.isPasswordEqual(matcher.group(2))) {
-                    System.out.println("please enter a new password");
+                    Communicate.output("please enter a new password");
                 } else {
-                    System.out.println("password changed successfully!");
+                    Communicate.output("password changed successfully!");
                     ProgramController.changePlayerPassword(matcher.group(2));
                 }
             } else {
-                System.out.println("current password is invalid");
+                Communicate.output("current password is invalid");
             }
         }
     }
