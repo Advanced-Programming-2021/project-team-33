@@ -74,7 +74,7 @@ public class DeckMenu {
             if (!ProgramController.isDeckExist(deckName))
                 Communicate.output("deck with name " + deckName + " does not exist");
             else if (!ProgramController.isCardExist(cardName) ||
-                    !Player.thePlayer.listOfCards.contains(Player.getCardByName(cardName)))
+                    !Player.thePlayer.getListOfCards().contains(Player.getCardByName(cardName)))
                 Communicate.output("card with name " + cardName + " does not exist");
             else if (Player.getDeckByName(deckName).isMainDeckFull())
                 Communicate.output("main deck is full");
@@ -167,9 +167,9 @@ public class DeckMenu {
                         activeDeck.getSideDeck().size() + ", " + valid);
             }
             Communicate.output("Other decks:");
-            for (int i = 0; i < Player.thePlayer.listOfDecks.size(); i++) {
-                if (!Player.thePlayer.listOfDecks.get(i).isDeckActive()) {
-                    Deck otherDeck = Player.thePlayer.listOfDecks.get(i);
+            for (int i = 0; i < Player.thePlayer.getListOfDecks().size(); i++) {
+                if (!Player.thePlayer.getListOfDecks().get(i).isDeckActive()) {
+                    Deck otherDeck = Player.thePlayer.getListOfDecks().get(i);
                     if (otherDeck.isDeckValid(otherDeck)) valid = "valid";
                     Communicate.output(otherDeck.getDeckName() + ": main deck " +
                             otherDeck.getMainDeck().size() + ", side deck " +
@@ -183,9 +183,9 @@ public class DeckMenu {
         if (!MainMenu.checked && matcher.matches()) {
             MainMenu.checked = true;
             ArrayList<String> cardNameList = new ArrayList<>();
-            for (int i = 0; i < Player.thePlayer.listOfCards.size(); i++) {
-                cardNameList.add(Player.thePlayer.listOfCards.get(i).getCardName()
-                        + ": " + Player.thePlayer.listOfCards.get(i).getDescription());
+            for (int i = 0; i < Player.thePlayer.getListOfCards().size(); i++) {
+                cardNameList.add(Player.thePlayer.getListOfCards().get(i).getCardName()
+                        + ": " + Player.thePlayer.getListOfCards().get(i).getDescription());
             }
             cardNameList.sort(Comparator.naturalOrder());
             for (int i = 0; i < cardNameList.size(); i++) {

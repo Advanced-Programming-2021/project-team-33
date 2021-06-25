@@ -250,7 +250,7 @@ public class GameController {
             System.out.print("c\t");
         }
         System.out.print("\n");
-        System.out.print(Player.opponent.board.deck.size() + "\n");
+        System.out.print(Player.opponent.getBoard().getDeck().size() + "\n");
         System.out.print("\t");
         for (int i = 4; i >= 0; i--) {
             Card card = Player.opponent.getBoard().getFieldCardsForSpellTraps().get(i);
@@ -277,7 +277,7 @@ public class GameController {
             }
         }
         System.out.print("\n");
-        System.out.print(Player.opponent.board.graveyard.size());
+        System.out.print(Player.opponent.getBoard().getGraveyard().size());
         Util.printNCharacter(6, "\t");
         if (Player.opponent.getBoard().getFieldZone().get(0) == null) System.out.print("E\n");
         else System.out.print("O\n");
@@ -290,9 +290,9 @@ public class GameController {
         if (Player.currentPlayer.getBoard().getFieldZone().get(0) == null) System.out.print("E");
         else System.out.print("O");
         Util.printNCharacter(6, "\t");
-        System.out.print(Player.currentPlayer.board.graveyard.size()+"\n");
+        System.out.print(Player.currentPlayer.getBoard().getGraveyard().size()+"\n");
         System.out.print("\t");
-        for (Card card : Player.currentPlayer.board.fieldCardsForMonsters) {
+        for (Card card : Player.currentPlayer.getBoard().getFieldCardsForMonsters()) {
             if (card == null) {
                 System.out.print("E\t");
             } else if (card.getCardStatus() == CardStatus.DEFENCE) {
@@ -305,7 +305,7 @@ public class GameController {
         }
         System.out.print("\n");
         System.out.print("\t");
-        for (Card card : Player.currentPlayer.board.fieldCardsForSpellTraps) {
+        for (Card card : Player.currentPlayer.getBoard().getFieldCardsForSpellTraps()) {
             if (card == null) {
                 System.out.print("E\t");
             } else if (card.getCardStatus() == CardStatus.BACK) {
@@ -316,8 +316,8 @@ public class GameController {
         }
         System.out.print("\n");
         Util.printNCharacter(6, "\t");
-        System.out.print(Player.currentPlayer.board.deck.size() + "\n");
-        for (int i = 0; i < Player.currentPlayer.board.hand.size(); i++) {
+        System.out.print(Player.currentPlayer.getBoard().getDeck().size() + "\n");
+        for (int i = 0; i < Player.currentPlayer.getBoard().getHand().size(); i++) {
             System.out.print("c\t");
         }
         System.out.print("\n");
@@ -326,7 +326,7 @@ public class GameController {
 
     public static void printGraveyardCards() {
         for (int i = 0; i < Player.currentPlayer.getBoard().getGraveyard().size(); i++) {
-            System.out.println(Player.currentPlayer.getBoard().getGraveyard().get(i).getCardName() + ": " +
+            Communicate.output(Player.currentPlayer.getBoard().getGraveyard().get(i).getCardName() + ": " +
                     Player.currentPlayer.getBoard().getGraveyard().get(i).getDescription());
         }
     }
@@ -456,7 +456,6 @@ public class GameController {
     }
 
     public static void specialSummon() {
-        GameMenu gameMenu = new GameMenu();
         if (selectedCard.getCardName().equals("Gate Guardian")) {
             summonGateGuardian();
         } else if (selectedCard.getCardName().equals("Beast King Barbaros")) {
@@ -465,7 +464,7 @@ public class GameController {
         }
     }
 
-    private static void summonBarbaros() {
+    public static void summonBarbaros() {
         if (getMonsterFieldSize() < 3) {
             System.out.println("there are not enough cards for tribute");
             return;
@@ -510,7 +509,7 @@ public class GameController {
         summonMonster(0, 0);
     }
 
-    private static void summonGateGuardian() {
+    public static void summonGateGuardian() {
         if (getMonsterFieldSize() < 2) {
             System.out.println("there are not enough cards for tribute");
             return;
@@ -571,7 +570,6 @@ public class GameController {
         Card enemyCard = Player.opponent.getBoard().getFieldCardsForMonsters().get(enemyMonsterIndex);
         if (isAttackTrap()) return;
         if (enemyCard.getCardStatus().equals(CardStatus.ATTACK)) {
-
             if (checkEffects(enemyCard)) return;
             if (isMonsterChain(enemyCard, enemyMonsterIndex)) return;
             if (enemyCard.getAttack() < selectedCard.getAttack()) {
@@ -619,25 +617,6 @@ public class GameController {
         return selectedCard.getAttack();
     }
 
-    public static boolean canDestroyMonster(Card enemyCard) {
-        if (enemyCard.getCardStatus().equals(CardStatus.ATTACK)) {
-            if (enemyCard.getAttack() < selectedCard.getAttack()) {
-                return true;
-            } else if (enemyCard.getAttack() == selectedCard.getAttack()) {
-                return true;
-            } else if (enemyCard.getAttack() > selectedCard.getAttack()) {
-                return false;
-            } else return false;
-        } else {
-            if (enemyCard.getDefence() < selectedCard.getAttack()) {
-                return true;
-            } else if (enemyCard.getDefence() == selectedCard.getAttack()) {
-                return false;
-            } else if (enemyCard.getDefence() > selectedCard.getAttack()) {
-                return false;
-            } else return false;
-        }
-    }
 
     public static boolean isMonsterChain(Card enemyCard, int enemyMonsterIndex) {
         GameMenu gameMenu = new GameMenu();
@@ -787,11 +766,6 @@ public class GameController {
         return false;
     }
 
-    private static void callTrapEffect(Card card) {
-        for (Effect effect : card.getEffects()) {
-            effect.enableEffect(null);
-        }
-    }
 
     public static void putMonsterOnGraveYard(Card card, Player player) {
         player.getBoard().getGraveyard().add(card);
@@ -821,7 +795,7 @@ public class GameController {
         if (isChecked) isChangedTurnInMiddle();
     }
 
-    private static boolean isChangedTurnInMiddle() {
+    public static boolean isChangedTurnInMiddle() {
         GameMenu gameMenu = new GameMenu();
         gameMenu.printMiddleChange();
         RoundController.changeTurn();
@@ -870,5 +844,4 @@ public class GameController {
         }
         return numberOfMonsters;
     }
-
 }

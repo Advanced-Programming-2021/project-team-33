@@ -10,7 +10,7 @@ public class ChangeCardsMenu {
 
     private void run() {
         String input = "";
-        Communicate.output("find your command in with help.");
+        Communicate.output("find your command with help.");
         while (!input.equals("done")) {
             input = Util.scanner.nextLine();
             if (input.equals("help")) help();
@@ -19,15 +19,15 @@ public class ChangeCardsMenu {
         }
     }
 
-    private void help() {
-        System.out.println("deck show (-activeDeck)( --side)?");
-        System.out.println("done");
-        System.out.println("deck switch --mainCard (.+?) with --sideCard (.+?)");
+    public void help() {
+        Communicate.output("deck show (-activeDeck)( --side)?");
+        Communicate.output("done");
+        Communicate.output("deck switch --mainCard (.+?) with --sideCard (.+?)");
     }
 
     public void changeDeck(String playerName) {
         Player.currentPlayer = Player.getUserByUsername(playerName);
-        System.out.println(playerName + "'s turn to change card between decks");
+        Communicate.output(playerName + "'s turn to change card between decks");
         String answer = Communicate.input("Do you want to change your cards? (yes/no)");
         if (answer.equals("yes")) run();
     }

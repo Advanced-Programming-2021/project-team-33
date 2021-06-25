@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 public class Board {
     Player player;
-    public ArrayList<Card> fieldCardsForMonsters = new ArrayList<>();
-    public ArrayList<Card> fieldCardsForSpellTraps = new ArrayList<>();
-    public ArrayList<Card> graveyard = new ArrayList<>();
-    public ArrayList<Card> deck;
-    public ArrayList<Card> hand = new ArrayList<>();
-    public ArrayList<Card> fieldZone = new ArrayList<>();
+    private ArrayList<Card> fieldCardsForMonsters = new ArrayList<>();
+    private ArrayList<Card> fieldCardsForSpellTraps = new ArrayList<>();
+    private ArrayList<Card> graveyard = new ArrayList<>();
+    private ArrayList<Card> deck;
+    private ArrayList<Card> hand = new ArrayList<>();
+    private ArrayList<Card> fieldZone = new ArrayList<>();
 
     public Board(Player player) {
         deck = new ArrayList<>();

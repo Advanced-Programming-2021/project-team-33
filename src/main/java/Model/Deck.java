@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Deck {
-    static ArrayList<Deck> decks = new ArrayList<>();
-    ArrayList<Card> mainDeck = new ArrayList<>();
-    ArrayList<Card> sideDeck = new ArrayList<>();
-    String deckName;
-    boolean isDeckActive = false;
+    private static ArrayList<Deck> decks = new ArrayList<>();
+    private ArrayList<Card> mainDeck = new ArrayList<>();
+    private  ArrayList<Card> sideDeck = new ArrayList<>();
+    private String deckName;
+    private boolean isDeckActive = false;
 
     public Deck(String deckName) {
         this.deckName = deckName;
@@ -45,13 +45,13 @@ public class Deck {
 
     public void removeFromMainDeck(Card card) {
         for (int i = 0; i < mainDeck.size(); i++) {
-            if (mainDeck.get(i).cardName.equals(card.cardName)) mainDeck.remove(card);
+            if (mainDeck.get(i).getCardName().equals(card.getCardName())) mainDeck.remove(card);
         }
     }
 
     public void removeFromSideDeck(Card card) {
         for (int i = 0; i < sideDeck.size(); i++) {
-            if (sideDeck.get(i).cardName.equals(card.cardName)) sideDeck.remove(card);
+            if (sideDeck.get(i).getCardName().equals(card.getCardName())) sideDeck.remove(card);
         }
     }
 

@@ -1,5 +1,6 @@
 import Controller.CardController;
 import Controller.GameController;
+import Model.Card;
 import Model.Player;
 import View.*;
 import org.junit.jupiter.api.*;
@@ -288,5 +289,84 @@ public class mainTest {
                 """,outputText);
     }
 
+    @Test
+    @Order(12)
+    public void cardMenu() {
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        outContent.reset();
+        CardController.initialCards();
+        new CardMenu().printCardMassage("Mind Crush2");
+        new DeckMenu().run("card show Mind Crush");
+        new DeckMenu().run("card show Battle Ox");
+        String outputText = outContent.toString();
+        Assertions.assertEquals("""
+                Wrong Guess!
+                Mind Crush
+                Name: Mind Crush
+                TRAP
+                Type: NORMAL
+                Description: Declare 1 card name; if that card is in your opponent's hand, they must discard all copies of it, otherwise you discard 1 random card
+                Battle Ox
+                Name: Battle Ox
+                Level: 4
+                Type: BEASTWARRIOR
+                ATK: 1700
+                DEF: 1000
+                Description: A monster with tremendous power, it destroys enemies with a swing of its axe.
+                OUT
+                 """,outputText);
+    }
+
+    @Test
+    @Order(13)
+    public void importExport() {
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        outContent.reset();
+        CardController.initialCards();
+        new ImportExportMenu().run("export card Mind Crush");
+        new ImportExportMenu().run("import card Mind Crush");
+
+        String outputText = outContent.toString();
+        Assertions.assertEquals("""
+                Export Done
+                Import Done
+                 """,outputText);
+    }
+
+    @Test
+    @Order(14)
+    public void menu() {
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        outContent.reset();
+        CardController.initialCards();
+        MainMenu.menu = "login";
+        new MainMenu().run("menu show-current");
+        MainMenu.menu = "main";
+        new MainMenu().run("menu show-current");
+        MainMenu.menu = "shop";
+        new MainMenu().run("menu show-current");
+        MainMenu.menu = "game";
+        new MainMenu().run("menu show-current");
+        MainMenu.menu = "scoreboard";
+        new MainMenu().run("menu show-current");
+        MainMenu.menu = "importExport";
+        new MainMenu().run("menu show-current");
+        MainMenu.menu = "Graveyard";
+        new MainMenu().run("menu show-current");
+
+        String outputText = outContent.toString();
+        Assertions.assertEquals("""
+                Login Menu
+                Main Menu
+                Shop Menu
+                Game Menu
+                Scoreboard Menu
+                ImportExport Menu
+                Graveyard Menu
+                 """,outputText);
+    }
 
 }

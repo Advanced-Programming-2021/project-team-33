@@ -1,8 +1,13 @@
 import Controller.CardController;
+import Controller.EffectController;
 import Controller.GameController;
 import Controller.ProgramController;
+import Model.Card;
+import Model.Effect;
 import Model.Player;
+import View.ChangeCardsMenu;
 import View.GameMenu;
+import View.MainMenu;
 import org.junit.jupiter.api.*;
 
 import java.io.ByteArrayInputStream;
@@ -24,6 +29,7 @@ public class GameTest {
         Player.thePlayer = Player.getUserByUsername("reza");
         GameController.createDeck("rezaDeck");
         addCards("rezaDeck");
+        new MainMenu().run("duel --new --second-player ali --rounds 3");
         GameController.initiateGame("ali", "reza", 3);
     }
 
@@ -211,6 +217,60 @@ public class GameTest {
                 "monster card position changed successfully\n", outputText);
     }
 
+    @Test
+    @Order(8)
+    public void trivial() {
+        GameController.getBackFromMiddleChange();
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        outContent.reset();
+        new ChangeCardsMenu().help();
+        GameController.selectedCard = Card.getCardByName("Battle Ox");
+        GameController.setSpell();
+        GameController.selectedCard = Card.getCardByName("Battle Ox");
+        GameController.summonMonster(1,1);
+        GameController.getMonsterFieldSize();
+        GameController.isSpellTrap();
+        String outputText = outContent.toString();
+        Assertions.assertEquals("""
+                deck show (-activeDeck)( --side)?
+                done
+                deck switch --mainCard (.+?) with --sideCard (.+?)
+                """, outputText);
+    }
 
+    @Test
+    @Order(9)
+    public void winner() {
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        outContent.reset();
+        GameController.setWinner(2300,Player.getUserByUsername("ali"),Player.getUserByUsername("reza"));
+
+        String outputText = outContent.toString();
+        Assertions.assertEquals("""
+                ali won the whole match with score: 3000 - 0
+                
+                
+                """, outputText);
+    }
+
+    @Test
+    @Order(10)
+    public void checkEffect() {
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        outContent.reset();
+        GameController.checkEffects(Card.getCardByName("Command Knight"));
+        GameController.checkEffects(Card.getCardByName("Exploder Dragon"));
+        GameController.activeThreeLight();
+        EffectController.spellAbsorption();
+
+
+        String outputText = outContent.toString();
+        Assertions.assertEquals("""
+                You can't attack this monster now 
+                """, outputText);
+    }
 
 }

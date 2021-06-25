@@ -14,9 +14,9 @@ public class CardMenu {
 
 
     public static void printCardMassage(String cardName) {
-        if(cardName.equals("Command Knight")) System.out.println("You can't attack this monster now");
-        if(cardName.equals("Mind Crush1")) System.out.println("Nice Guess!");
-        if(cardName.equals("Mind Crush2")) System.out.println("Wrong Guess!");
+        if(cardName.equals("Command Knight")) Communicate.output("You can't attack this monster now");
+        if(cardName.equals("Mind Crush1")) Communicate.output("Nice Guess!");
+        if(cardName.equals("Mind Crush2")) Communicate.output("Wrong Guess!");
     }
 
     public static void showCard(Matcher matcher) {
@@ -24,13 +24,13 @@ public class CardMenu {
             MainMenu.checked = true;
             String cardName = matcher.group(1);
             if (ProgramController.isCardExist(cardName)) {
-                System.out.println(cardName);
+                Communicate.output(cardName);
                 Card card = Card.getCardByName(cardName);
                 if (card.getCardCategory().equals(CardCategory.MONSTER) ||
                         card.getCardCategory().equals(CardCategory.MONSTEREFFECT)) {
                     printMonsterCard(card);
                 } else printSpellTrapCard(card);
-            } else System.out.println("This card does not exist");
+            } else Communicate.output("This card does not exist");
         }
     }
 
@@ -40,7 +40,7 @@ public class CardMenu {
             if (GameController.selectedCard == null) System.out.println("no card is selected yet");
             else if (GameController.isOpponentCardSelected && (GameController.selectedCard.getCardStatus().equals(CardStatus.SET) ||
                     GameController.selectedCard.getCardStatus().equals(CardStatus.BACK)))
-                System.out.println("card is not visible");
+                Communicate.output("card is not visible");
             else if (GameController.selectedCard.getCardCategory().equals(CardCategory.MONSTER) ||
                     GameController.selectedCard.getCardCategory().equals(CardCategory.MONSTEREFFECT)) {
                 printMonsterCard(GameController.selectedCard);
@@ -50,22 +50,22 @@ public class CardMenu {
 
 
     private static void printMonsterCard(Card card) {
-        System.out.println("Name: " + card.getCardName());
-        System.out.println("Level: " + card.getLevel());
-        System.out.println("Type: " + card.getCardTypes().toString().replace("[", "")
+        Communicate.output("Name: " + card.getCardName());
+        Communicate.output("Level: " + card.getLevel());
+        Communicate.output("Type: " + card.getCardTypes().toString().replace("[", "")
                 .replace("]", "").replace("", ""));
-        System.out.println("ATK: " + card.getAttack());
-        System.out.println("DEF: " + card.getDefence());
-        System.out.println("Description: " + card.getDescription());
-        System.out.println(card.getCardStatus().toString());
+        Communicate.output("ATK: " + card.getAttack());
+        Communicate.output("DEF: " + card.getDefence());
+        Communicate.output("Description: " + card.getDescription());
+        Communicate.output(card.getCardStatus().toString());
     }
 
     private static void printSpellTrapCard(Card card) {
-        System.out.println("Name: " + card.getCardName());
-        System.out.println(card.getCardCategory());
-        System.out.println("Type: " + card.getCardTypes().toString().replace("[", "")
+        Communicate.output("Name: " + card.getCardName());
+        Communicate.output(card.getCardCategory().toString());
+        Communicate.output("Type: " + card.getCardTypes().toString().replace("[", "")
                 .replace("]", "").replace("", ""));
-        System.out.println("Description: " + card.getDescription());
+        Communicate.output("Description: " + card.getDescription());
     }
 
 

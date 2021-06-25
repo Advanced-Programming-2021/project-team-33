@@ -9,15 +9,15 @@ import java.util.List;
 
 public class Player {
     static ArrayList<Player> players = new ArrayList<>();
-    public ArrayList<Deck> listOfDecks = new ArrayList<>();
-    public ArrayList<Card> listOfCards = new ArrayList<>();
-    public Phase phase;
-    public Board board;
     public static Player thePlayer, theAi;
     public static Player currentPlayer, opponent;
-    boolean isInOpponentPhase;
-    String username, password, nickname;
-    int money = 10000, score, lifePoint = 8000;
+    private ArrayList<Deck> listOfDecks = new ArrayList<>();
+    private ArrayList<Card> listOfCards = new ArrayList<>();
+    private Phase phase;
+    private Board board;
+    private boolean isInOpponentPhase;
+    private String username, password, nickname;
+    private int money = 10000, score, lifePoint = 8000;
     Deck activeDeck;
 
 
@@ -25,8 +25,8 @@ public class Player {
         this.username = username;
         this.password = password;
         this.nickname = nickname;
-        listOfCards.addAll(Card.cards);
-        Card.cards.clear();
+        listOfCards.addAll(Card.getCards());
+        Card.getCards().clear();
         CardController.initialCards();
         players.add(this);
     }
@@ -183,7 +183,7 @@ public class Player {
 
     public static Deck getDeckByName(String deckName) {
         for (Deck deck : thePlayer.listOfDecks) {
-            if (deck.deckName.equals(deckName)) return deck;
+            if (deck.getDeckName().equals(deckName)) return deck;
         }
         return null;
     }
@@ -191,7 +191,7 @@ public class Player {
 
     public static Card getCardByName(String name) {
         for (Card card : thePlayer.listOfCards) {
-            if (card.cardName.equals(name)) return card;
+            if (card.getCardName().equals(name)) return card;
         }
         return null;
     }

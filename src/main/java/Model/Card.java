@@ -3,20 +3,20 @@ package Model;
 import java.util.ArrayList;
 
 public class Card {
-    static int id = 0;
-    static ArrayList<Card> cards = new ArrayList<>();
-    ArrayList<Effect> effects = new ArrayList<>();
+    private static int id = 0;
+    private static ArrayList<Card> cards = new ArrayList<>();
+    private ArrayList<Effect> effects = new ArrayList<>();
     boolean isSelected = false, isChanged = false, isSummoned = false,
             isAttacked = false, isActivated = false, destroyed = false,
             isBuffed = false;
 
-    String cardName, description;
-    ArrayList<CardType> cardTypes = new ArrayList<>();
-    CardCategory cardCategory;
-    int cardId, limit, price, level;
-    CardStatus cardStatus;
-    Attribute attribute;
-    int attack, defence;
+    private String cardName, description;
+    private ArrayList<CardType> cardTypes = new ArrayList<>();
+    private CardCategory cardCategory;
+    private int cardId, limit, price, level;
+    private CardStatus cardStatus;
+    private Attribute attribute;
+    private int attack, defence;
 
     public Card(String cardName, String description, int price, ArrayList<CardType> cardTypes,
                 CardCategory cardCategory, int limit, int level, ArrayList<Effect> effects,

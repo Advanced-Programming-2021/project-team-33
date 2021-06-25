@@ -26,7 +26,7 @@ public class ImportExportMenu {
             MainMenu.checked = true;
             Card card = Card.getCardByName(matcher.group(1));
             if (card == null) {
-                System.out.println("no card with this name");
+                Communicate.output("no card with this name");
             } else {
                 JsonObject jsonObject = new JsonObject();
                 jsonObject.addProperty("id", card.getCardId());
@@ -51,8 +51,9 @@ public class ImportExportMenu {
                 try (FileWriter file = new FileWriter(matcher.group(1) + ".json")) {
                     file.write(jsonObject.toString());
                     file.flush();
+                    Communicate.output("Export Done");
                 } catch (IOException e) {
-                    System.out.println("Error");
+                    Communicate.output("Error");
                 }
             }
         }
@@ -89,11 +90,11 @@ public class ImportExportMenu {
                 String level = card.get("level").getAsString();
                 String attack = card.get("attack").getAsString();
                 String deffence = card.get("deffence").getAsString();
-
+                Communicate.output("Import Done");
                 Card newCard = new Card(name, description, Integer.parseInt(price), cardTypes, category, Integer.parseInt(limit),
                         Integer.parseInt(level), effects, Integer.parseInt(attack), Integer.parseInt(deffence), Attribute.FIRE);
             } catch (IOException e) {
-                System.out.println("no json file with this name found");
+               Communicate.output("no json file with this name found");
             }
         }
     }
