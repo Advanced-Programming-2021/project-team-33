@@ -19,7 +19,7 @@ public class RoundController {
     }
 
     public static void checkEndOfRound() {
-        checkBuff();
+
         GameMenu gameMenu = new GameMenu();
         if (Player.thePlayer.getLifePoint() <= 0) {
             gameMenu.informEndOfRound(otherPlayer, 1000,remainingRounds);
@@ -45,9 +45,7 @@ public class RoundController {
 
     }
 
-    private static void checkBuff(){
 
-    }
 
     public static void setWhoPlayFirst(String firstPlayer, String secondPlayer) {
         Random random = new Random();
@@ -90,17 +88,16 @@ public class RoundController {
             else{
                 Card card = GameController.drawCard(Player.currentPlayer);
                 if (card != null) gameMenu.drawCard(card);
-                standByPhase();
             }
 
         }
     }
 
-    private static void standByPhase() {
+    public static void standByPhase() {
         Player.currentPlayer.setPhase(Phase.STANDBY);
         //someCard...
         gameMenu.informPhase(Phase.STANDBY);
-        mainPhase1();
+
     }
 
     public static void mainPhase1() {

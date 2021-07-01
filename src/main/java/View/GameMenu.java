@@ -2,6 +2,7 @@ package View;
 
 import Controller.*;
 import Model.*;
+import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,12 +10,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 
 public class GameMenu {
@@ -25,8 +28,12 @@ public class GameMenu {
     public ImageView enemySpell4, enemySpell5, enemyMonster1, enemyMonster2, enemyMonster3, enemyMonster4, enemyMonster5, graveyard, enemyGraveyard;
     public Label firstPlayerName, secondPlayerName, firstPlayerLP, secondPlayerLP, attack, defence, description, turn;
     public ImageView button1, button2, button3, button4;
-    public Label massage;
+    public Text massage;
+    public ImageView phase;
     private ArrayList<ImageView> currentHand, enemyHand, currentMonster, enemyMonster, currentSpell, enemySpell;
+    boolean isHandSelected = false, isMonsterSelected = false, isSpellSelected = false, isOneTributeActive = false,
+            isTwoTributeActive = false;
+    AtomicInteger tribute = new AtomicInteger();
 
 
     public void start() throws IOException {
@@ -45,56 +52,116 @@ public class GameMenu {
         currentHand = makeHandList();
         enemyHand = makeEnemyHandList();
         currentMonster = makeMonsterList();
+        button1.setOnMouseClicked(event -> callButton1());
+        button2.setOnMouseClicked(event -> callButton2());
         updateBoard(currentHand, enemyHand, currentMonster);
+        animatePhase();
+        goToNextPhase();
         selectCard();
     }
 
+    private void animatePhase() {
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(1000));
+        fade.setFromValue(10);
+        fade.setToValue(0);
+        fade.setAutoReverse(true);
+        fade.setNode(phase);
+        fade.play();
+    }
+
+
+    private void goToNextPhase() {
+        if (Player.currentPlayer.getPhase().equals(Phase.DRAW)){
+            RoundController.mainPhase1();
+            animateNextPhase("main");
+        }
+        button4.setOnMouseClicked(event -> {
+            if (!isOneTributeActive && !isTwoTributeActive) {
+                if(Player.currentPlayer.getPhase().equals(Phase.MAIN1)){
+                    RoundController.battlePhase();
+                    phase.setImage(new Image(getClass().getResourceAsStream("/PNG/battle.png")));
+                    animatePhase();
+                }
+                else if(Player.currentPlayer.getPhase().equals(Phase.BATTLE)){
+                    RoundController.mainPhase2();
+                    phase.setImage(new Image(getClass().getResourceAsStream("/PNG/main.png")));
+                    animatePhase();
+                }
+                else if(Player.currentPlayer.getPhase().equals(Phase.MAIN2)){
+                    RoundController.endPhase();
+                    phase.setImage(new Image(getClass().getResourceAsStream("/PNG/end.png")));
+                    animatePhase();
+                    updateBoard(currentHand, enemyHand, currentMonster);
+                    animateNextPhase("draw");
+                    goToNextPhase();
+                }
+            }
+        });
+
+    }
+
+    private void animateNextPhase(String nextPhase) {
+        new java.util.Timer().schedule(
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        phase.setImage(new Image(getClass().getResourceAsStream("/PNG/" + nextPhase + ".png")));
+                        animatePhase();
+                    }
+                },
+                1000
+        );
+    }
+
     private void updateBoard(ArrayList<ImageView> currentHand, ArrayList<ImageView> enemyHand, ArrayList<ImageView> currentMonster) {
+
         if (Player.currentPlayer.getBoard().getGraveyard().size() != 0)
             graveyard.setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/Unknown.jpg")));
         else graveyard.setImage(null);
         if (Player.opponent.getBoard().getGraveyard().size() != 0)
-            graveyard.setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/Unknown.jpg")));
-        else graveyard.setImage(null);
+            enemyGraveyard.setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/Unknown.jpg")));
+        else enemyGraveyard.setImage(null);
         firstPlayerLP.setText(Integer.toString(Player.thePlayer.getLifePoint()));
         secondPlayerLP.setText(Integer.toString(RoundController.otherPlayer.getLifePoint()));
         turn.setText("Now is " + Player.currentPlayer.getNickname() + "'s turn");
-        for (int i = 0; i < Player.currentPlayer.getBoard().getHand().size(); i++) {
-            currentHand.get(i).setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/Unknown.jpg")));
+
+        for (int i = 0; i < 6; i++) {
+            currentHand.get(i).setImage(null);
+            for (int j = 0; j < Player.currentPlayer.getBoard().getHand().size(); j++) {
+                currentHand.get(j).setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/Unknown.jpg")));
+            }
         }
         for (int i = 0; i < Player.opponent.getBoard().getHand().size(); i++) {
-            enemyHand.get(i).setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/Unknown.jpg")));
+            enemyHand.get(i).setImage(null);
+            for (int j = 0; j < Player.opponent.getBoard().getHand().size(); j++) {
+                enemyHand.get(j).setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/Unknown.jpg")));
+            }
         }
         for (int i = 0; i < 5; i++) {
-            int k = 4;
-            if (i == 1) k = 2;
-            else if (i == 2) k = 1;
-            else if (i == 3) k = 3;
-            else if (i == 4) k = 5;
-            if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(i) != null)
-                currentMonster.get(k - 1).setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" +
-                        Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(0).getCardName().replaceAll("\\s+", "")
+
+
+            if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(i) != null) {
+                currentMonster.get(i).setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" +
+                        Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(i).getCardName().replaceAll("\\s+", "")
                         + ".jpg")));
-            else currentMonster.get(k - 1).setImage(null);
+            } else currentMonster.get(i).setImage(null);
             if (Player.currentPlayer.getBoard().getFieldCardsForSpellTraps().get(i) != null)
-                currentMonster.get(k - 1).setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" +
-                        Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(0).getCardName().replaceAll("\\s+", "")
+                currentSpell.get(i).setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" +
+                        Player.currentPlayer.getBoard().getFieldCardsForSpellTraps().get(i).getCardName().replaceAll("\\s+", "")
                         + ".jpg")));
-            else currentMonster.get(k - 1).setImage(null);
-            if (i == 0) k = 5;
-            if (i == 1) k = 3;
-            if (i == 3) k = 2;
-            if (i == 4) k = 4;
+            else currentSpell.get(i).setImage(null);
+
             if (Player.opponent.getBoard().getFieldCardsForMonsters().get(i) != null)
-                currentMonster.get(k - 1).setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" +
-                        Player.opponent.getBoard().getFieldCardsForMonsters().get(0).getCardName().replaceAll("\\s+", "")
+                enemyMonster.get(i).setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" +
+                        Player.opponent.getBoard().getFieldCardsForMonsters().get(i).getCardName().replaceAll("\\s+", "")
                         + ".jpg")));
-            else currentMonster.get(k - 1).setImage(null);
+            else enemyMonster.get(i).setImage(null);
             if (Player.opponent.getBoard().getFieldCardsForSpellTraps().get(i) != null)
-                currentMonster.get(k - 1).setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" +
-                        Player.opponent.getBoard().getFieldCardsForMonsters().get(0).getCardName().replaceAll("\\s+", "")
+                enemySpell.get(i).setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" +
+                        Player.opponent.getBoard().getFieldCardsForSpellTraps().get(i).getCardName().replaceAll("\\s+", "")
                         + ".jpg")));
-            else currentMonster.get(k - 1).setImage(null);
+            else enemySpell.get(i).setImage(null);
         }
     }
 
@@ -152,6 +219,16 @@ public class GameMenu {
     }
 
     private void selectCard() {
+        for (int i = 0; i < 5; i++) {
+            int finalI = i;
+            currentMonster.get(i).setOnMouseClicked(event -> {
+                tribute.set(finalI);
+                Card card = Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(finalI);
+                setViewForSelected(card);
+                if(!isOneTributeActive && !isTwoTributeActive) setButtonsForMonster();
+            });
+        }
+
         hand1.setOnMouseClicked(event -> {
             Card card = Player.currentPlayer.getBoard().getHand().get(0);
             setViewForSelected(card);
@@ -198,15 +275,38 @@ public class GameMenu {
             defence.setText("---");
         }
         description.setText(card.getDescription());
-        GameController.selectedCard = Player.currentPlayer.getBoard().getHand().get(0);
+        GameController.selectedCard = card;
     }
 
     private void setButtonsForHand() {
+        setAction("hand");
         button1.setImage(new Image(getClass().getResourceAsStream("/PNG/Summon.png")));
         button2.setImage(new Image(getClass().getResourceAsStream("/PNG/set.png")));
         button3.setImage(new Image(getClass().getResourceAsStream("/PNG/active.png")));
         button4.setImage(new Image(getClass().getResourceAsStream("/PNG/nextPhase.png")));
     }
+
+    private void setButtonsForMonster() {
+        setAction("monster");
+        button1.setImage(new Image(getClass().getResourceAsStream("/PNG/attack.png")));
+        button2.setImage(new Image(getClass().getResourceAsStream("/PNG/direct.png")));
+        button3.setImage(new Image(getClass().getResourceAsStream("/PNG/active.png")));
+        button4.setImage(new Image(getClass().getResourceAsStream("/PNG/nextPhase.png")));
+    }
+
+    private void callButton1() {
+        if (isHandSelected) summonMonster();
+        else if (isOneTributeActive) callTributeOne();
+        updateBoard(currentHand, enemyHand, currentMonster);
+    }
+
+    private void callButton2() {
+        //if(isHandSelected) summonMonster();
+        if (isOneTributeActive) cancel();
+        updateBoard(currentHand, enemyHand, currentMonster);
+    }
+
+
 
 
     public void run(String input) {
@@ -222,7 +322,7 @@ public class GameMenu {
         setPosition(Util.getCommand(input, "set --position ((attack)|(defence))"));
         attackToMonster(Util.getCommand(input, "attack (\\d+)"));
         attackDirect(Util.getCommand(input, "attack direct"));
-        goToNextPhase(Util.getCommand(input, "next phase"));
+
         showBoard(Util.getCommand(input, "showBoard"));
         surrender(Util.getCommand(input, "surrender"));
         cancel(Util.getCommand(input, "cancel"));
@@ -232,18 +332,6 @@ public class GameMenu {
         RoundController.checkEndOfRound();
     }
 
-
-    private void goToNextPhase(Matcher matcher) {
-        if (!MainMenu.checked && matcher.matches()) {
-            MainMenu.checked = true;
-            if (Player.currentPlayer.getPhase().equals(Phase.MAIN1)) RoundController.battlePhase();
-            else if (Player.currentPlayer.getPhase().equals(Phase.BATTLE)) RoundController.mainPhase2();
-            else if (Player.currentPlayer.getPhase().equals(Phase.MAIN2)) {
-                RoundController.endPhase();
-                System.out.println("It's " + Player.currentPlayer.getUsername() + "'s turn");
-            }
-        }
-    }
 
     public void endPhaseMassage() {
         System.out.println("It's " + Player.currentPlayer.getUsername() + "'s turn");
@@ -353,8 +441,6 @@ public class GameMenu {
     }
 
     private void summonMonster() {
-
-
         if (Player.currentPlayer.isInOpponentPhase())
             showError("it’s not your turn to play this kind of moves");
         else if (GameController.selectedCard == null) showError("no card is selected yet");
@@ -372,19 +458,7 @@ public class GameMenu {
                 showError("there are not enough cards for tribute");
                 return;
             }
-            String input = Communicate.input("Pick Monster for tribute");
-            if (input.equals("cancel")) {
-                showError("Tribute Canceled");
-                return;
-            }
-            int tribute = Integer.parseInt(Communicate.input("Pick Monster for tribute"));
-            tribute = GameController.switchNumberForCurrent(tribute);
-            if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(tribute) == null) {
-                showError("there are no monsters on this address");
-                return;
-            }
-            int command = GameController.summonMonster(tribute, 0);
-            if (command != -1) System.out.println("summoned successfully1");
+            tributeOne();
         } else if (GameController.selectedCard.getLevel() > 6 && GameController.selectedCard.getLevel() < 9) {
             if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().size() < 2) {
                 showError("there are not enough cards for tribute");
@@ -410,12 +484,52 @@ public class GameMenu {
                 return;
             }
             int command = GameController.summonMonster(tribute, tribute1);
-            if (command != -1) System.out.println("summoned successfully2");
+            if (command != -1) showError("summoned successfully2");
         } else {
-            int command = GameController.summonMonster(0, 0);
-            if (command != -1) System.out.println("summoned successfully3");
+            int command = GameController.summonMonster(-1, -1);
+            if (command != -1) showError("summoned successfully3");
         }
 
+    }
+
+    private void setAction(String act) {
+        isHandSelected = false;
+        isSpellSelected = false;
+        isOneTributeActive = false;
+        isTwoTributeActive = false;
+        isMonsterSelected = false;
+        if (act.equals("oneTribute")) isOneTributeActive = true;
+        if (act.equals("twoTribute")) isTwoTributeActive = true;
+        if (act.equals("hand")) isHandSelected = true;
+        if (act.equals("monster")) isMonsterSelected = true;
+        if (act.equals("spell")) isSpellSelected = true;
+
+    }
+
+    private void tributeOne() {
+        showError("Pick Monster for tribute");
+        setAction("oneTribute");
+        button1.setImage(new Image(getClass().getResourceAsStream("/PNG/tribute.png")));
+        button2.setImage(new Image(getClass().getResourceAsStream("/PNG/Cancel.png")));
+        button3.setImage(null);
+        button4.setImage(null);
+    }
+
+    private void callTributeOne() {
+        if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(tribute.get()) == null) {
+            showError("there are no monsters on this address");
+            return;
+        }
+        int command = GameController.summonMonster(tribute.get(), -1);
+        if (command != -1) showError("summoned successfully");
+        setButtonsForHand();
+        GameController.showBoard();
+    }
+
+    private void cancel() {
+        GameController.selectedCard = null;
+        showError("tribute canceled");
+        setButtonsForHand();
     }
 
 

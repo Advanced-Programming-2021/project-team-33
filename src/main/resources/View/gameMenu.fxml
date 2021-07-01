@@ -46,36 +46,36 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <ImageView fx:id="enemyMonster5" fitHeight="110.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                <ImageView fx:id="enemyMonster1" fitHeight="110.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                     <GridPane.margin>
                         <Insets />
                     </GridPane.margin>
                 </ImageView>
-                <ImageView fx:id="enemySpell3" fitHeight="110.0" fitWidth="76.0" layoutX="15.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                <ImageView fx:id="enemySpell2" fitHeight="110.0" fitWidth="76.0" layoutX="15.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
 
                 </ImageView>
-                <ImageView fx:id="enemySpell5" fitHeight="110.0" fitWidth="76.0" layoutX="15.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="enemySpell1" fitHeight="110.0" fitWidth="76.0" layoutX="15.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
 
                 </ImageView>
-                <ImageView fx:id="enemyMonster3" fitHeight="110.0" fitWidth="76.0" layoutX="127.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <ImageView fx:id="enemyMonster2" fitHeight="110.0" fitWidth="76.0" layoutX="127.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
 
                 </ImageView>
-                <ImageView fx:id="enemySpell1" fitHeight="110.0" fitWidth="76.0" layoutX="127.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                <ImageView fx:id="enemySpell3" fitHeight="110.0" fitWidth="76.0" layoutX="127.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
 
                 </ImageView>
-                <ImageView fx:id="enemyMonster1" fitHeight="110.0" fitWidth="76.0" layoutX="244.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                <ImageView fx:id="enemyMonster3" fitHeight="110.0" fitWidth="76.0" layoutX="244.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
 
                 </ImageView>
-                <ImageView fx:id="enemySpell2" fitHeight="110.0" fitWidth="76.0" layoutX="244.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+                <ImageView fx:id="enemySpell4" fitHeight="110.0" fitWidth="76.0" layoutX="244.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
 
                 </ImageView>
-                <ImageView fx:id="enemyMonster2" fitHeight="110.0" fitWidth="76.0" layoutX="361.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                <ImageView fx:id="enemyMonster4" fitHeight="110.0" fitWidth="76.0" layoutX="361.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
 
                 </ImageView>
-                <ImageView fx:id="enemySpell4" fitHeight="110.0" fitWidth="76.0" layoutX="361.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
+                <ImageView fx:id="enemySpell5" fitHeight="110.0" fitWidth="76.0" layoutX="361.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
 
                 </ImageView>
-                <ImageView fx:id="enemyMonster4" fitHeight="110.0" fitWidth="76.0" layoutX="361.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                <ImageView fx:id="enemyMonster5" fitHeight="110.0" fitWidth="76.0" layoutX="361.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
 
                 </ImageView>
             </children>
@@ -93,7 +93,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <ImageView fx:id="spell4" fitHeight="110.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                <ImageView fx:id="spell1" fitHeight="110.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
 
                     <GridPane.margin>
                         <Insets />
@@ -102,26 +102,26 @@
                 <ImageView fx:id="monster2" fitHeight="110.0" fitWidth="76.0" layoutX="15.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
 
                 </ImageView>
-                <ImageView fx:id="monster4" fitHeight="110.0" fitWidth="76.0" layoutX="129.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="monster1" fitHeight="110.0" fitWidth="76.0" layoutX="129.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
 
                 </ImageView>
-                <ImageView fx:id="spell1" fitHeight="110.0" fitWidth="76.0" layoutX="10.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                <ImageView fx:id="spell3" fitHeight="110.0" fitWidth="76.0" layoutX="10.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
 
 
                 </ImageView>
-                <ImageView fx:id="monster1" fitHeight="110.0" fitWidth="76.0" layoutX="129.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                <ImageView fx:id="monster3" fitHeight="110.0" fitWidth="76.0" layoutX="129.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
 
                 </ImageView>
                 <ImageView fx:id="spell2" fitHeight="110.0" fitWidth="76.0" layoutX="129.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
 
                 </ImageView>
-                <ImageView fx:id="monster3" fitHeight="110.0" fitWidth="76.0" layoutX="129.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+                <ImageView fx:id="monster4" fitHeight="110.0" fitWidth="76.0" layoutX="129.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
 
                 </ImageView>
                 <ImageView fx:id="monster5" fitHeight="110.0" fitWidth="76.0" layoutX="10.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
 
                 </ImageView>
-                <ImageView fx:id="spell3" fitHeight="110.0" fitWidth="76.0" layoutX="10.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                <ImageView fx:id="spell4" fitHeight="110.0" fitWidth="76.0" layoutX="10.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
 
                 </ImageView>
                 <ImageView fx:id="spell5" fitHeight="110.0" fitWidth="76.0" layoutX="10.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
@@ -287,10 +287,15 @@
             <Image url="@../PNG/Button.png" />
          </image>
       </ImageView>
-      <Label fx:id="massage"  layoutX="265.0" layoutY="414.0" prefHeight="118.0" prefWidth="118.0" text="Player">
+      <Text fx:id="massage" layoutX="268.0" layoutY="435.0" text="Player" wrappingWidth="125.4189453125">
          <font>
             <Font name="Bell MT Italic" size="14.0" />
          </font>
-      </Label>
+      </Text>
+      <ImageView fx:id="phase" fitHeight="140.0" fitWidth="837.0" layoutX="181.0" layoutY="272.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../PNG/draw.png" />
+         </image>
+      </ImageView>
     </children>
 </AnchorPane>

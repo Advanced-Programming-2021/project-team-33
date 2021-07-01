@@ -225,6 +225,7 @@ public class GameController {
             drawCard(Player.opponent);
         }
         RoundController.drawPhase();
+
     }
 
 
@@ -349,11 +350,11 @@ public class GameController {
 
     public static int summonMonster(int firstTribute, int secondTribute) {
         if (isSummonTrap()) return -1;
-        if (firstTribute != 0 && secondTribute == 0) {
+        if (firstTribute != -1 && secondTribute == -1) {
             Card tributeCard = Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(firstTribute);
             Player.currentPlayer.getBoard().getGraveyard().add(tributeCard);
             Player.currentPlayer.getBoard().getFieldCardsForMonsters().set(firstTribute, null);
-        } else if (secondTribute != 0) {
+        } else if (secondTribute != -1) {
             Card tributeCard1 = Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(firstTribute);
             Card tributeCard2 = Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(secondTribute);
             Player.currentPlayer.getBoard().getGraveyard().add(tributeCard1);
