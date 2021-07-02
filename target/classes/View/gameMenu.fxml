@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.GameMenu">
+    <children>
+        <ImageView fitHeight="720.0" fitWidth="961.0" layoutX="406.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../PNG/fie_normal.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="cardShow" fitHeight="287.0" fitWidth="179.0" layoutX="51.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../PNG/Cards/Monsters/Unknown.jpg" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="348.0" fitWidth="266.0" layoutX="9.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../PNG/Border.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="110.0" fitWidth="91.0" layoutX="36.0" layoutY="575.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../PNG/Chara001.dds6.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="110.0" fitWidth="91.0" layoutX="276.0" layoutY="575.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../PNG/Chara001.dds6.png" />
+            </image>
+        </ImageView>
+        <GridPane layoutX="567.0" layoutY="115.0" prefHeight="232.0" prefWidth="585.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <ImageView fx:id="enemyMonster1" fitHeight="110.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                    <GridPane.margin>
+                        <Insets />
+                    </GridPane.margin>
+                </ImageView>
+                <ImageView fx:id="enemySpell2" fitHeight="110.0" fitWidth="76.0" layoutX="15.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+
+                </ImageView>
+                <ImageView fx:id="enemySpell1" fitHeight="110.0" fitWidth="76.0" layoutX="15.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
+
+                </ImageView>
+                <ImageView fx:id="enemyMonster2" fitHeight="110.0" fitWidth="76.0" layoutX="127.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+
+                </ImageView>
+                <ImageView fx:id="enemySpell3" fitHeight="110.0" fitWidth="76.0" layoutX="127.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+
+                </ImageView>
+                <ImageView fx:id="enemyMonster3" fitHeight="110.0" fitWidth="76.0" layoutX="244.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+
+                </ImageView>
+                <ImageView fx:id="enemySpell4" fitHeight="110.0" fitWidth="76.0" layoutX="244.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+
+                </ImageView>
+                <ImageView fx:id="enemyMonster4" fitHeight="110.0" fitWidth="76.0" layoutX="361.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
+
+                </ImageView>
+                <ImageView fx:id="enemySpell5" fitHeight="110.0" fitWidth="76.0" layoutX="361.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
+
+                </ImageView>
+                <ImageView fx:id="enemyMonster5" fitHeight="110.0" fitWidth="76.0" layoutX="361.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
+
+                </ImageView>
+            </children>
+        </GridPane>
+        <GridPane fx:id="currentBoard" layoutX="564.0" layoutY="367.0" prefHeight="244.0" prefWidth="593.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <ImageView fx:id="spell1" fitHeight="110.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+
+                    <GridPane.margin>
+                        <Insets />
+                    </GridPane.margin>
+                </ImageView>
+                <ImageView fx:id="monster2" fitHeight="110.0" fitWidth="76.0" layoutX="15.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+
+                </ImageView>
+                <ImageView fx:id="monster1" fitHeight="110.0" fitWidth="76.0" layoutX="129.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+
+                </ImageView>
+                <ImageView fx:id="spell3" fitHeight="110.0" fitWidth="76.0" layoutX="10.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+
+
+                </ImageView>
+                <ImageView fx:id="monster3" fitHeight="110.0" fitWidth="76.0" layoutX="129.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+
+                </ImageView>
+                <ImageView fx:id="spell2" fitHeight="110.0" fitWidth="76.0" layoutX="129.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+
+                </ImageView>
+                <ImageView fx:id="monster4" fitHeight="110.0" fitWidth="76.0" layoutX="129.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+
+                </ImageView>
+                <ImageView fx:id="monster5" fitHeight="110.0" fitWidth="76.0" layoutX="10.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
+
+                </ImageView>
+                <ImageView fx:id="spell4" fitHeight="110.0" fitWidth="76.0" layoutX="10.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
+
+                </ImageView>
+                <ImageView fx:id="spell5" fitHeight="110.0" fitWidth="76.0" layoutX="10.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
+
+                </ImageView>
+            </children>
+        </GridPane>
+        <GridPane layoutX="439.0" layoutY="632.0" prefHeight="88.0" prefWidth="718.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <ImageView fx:id="hand1" fitHeight="110.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true">
+
+                </ImageView>
+                <ImageView fx:id="hand3" fitHeight="110.0" fitWidth="76.0" layoutX="10.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+
+                </ImageView>
+                <ImageView fx:id="hand2" fitHeight="110.0" fitWidth="76.0" layoutX="130.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+
+                </ImageView>
+                <ImageView fx:id="hand4" fitHeight="110.0" fitWidth="76.0" layoutX="130.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+
+                </ImageView>
+                <ImageView fx:id="hand5" fitHeight="110.0" fitWidth="76.0" layoutX="10.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
+
+                </ImageView>
+                <ImageView fx:id="hand6" fitHeight="110.0" fitWidth="76.0" layoutX="10.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5">
+
+                </ImageView>
+            </children>
+        </GridPane>
+        <GridPane layoutX="551.0" layoutY="-1.0" prefHeight="88.0" prefWidth="726.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <ImageView fx:id="enemyHand6" fitHeight="118.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+
+                </ImageView>
+                <ImageView fx:id="enemyHand5" fitHeight="118.0" fitWidth="75.0" layoutX="10.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+
+                </ImageView>
+                <ImageView fx:id="enemyHand4" fitHeight="118.0" fitWidth="75.0" layoutX="131.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+
+                </ImageView>
+                <ImageView fx:id="enemyHand3" fitHeight="118.0" fitWidth="75.0" layoutX="252.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+
+                </ImageView>
+                <ImageView fx:id="enemyHand2" fitHeight="118.0" fitWidth="75.0" layoutX="373.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
+
+                </ImageView>
+                <ImageView fx:id="enemyHand1" fitHeight="118.0" fitWidth="75.0" layoutX="373.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5">
+
+                </ImageView>
+            </children>
+        </GridPane>
+        <ImageView fx:id="enemyDeck" fitHeight="110.0" fitWidth="75.0" layoutX="450.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../PNG/Cards/Monsters/Unknown.jpg" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="enemyGraveyard" fitHeight="110.0" fitWidth="75.0" layoutX="450.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true">
+
+        </ImageView>
+        <ImageView fx:id="enemyField" fitHeight="110.0" fitWidth="75.0" layoutX="1184.0" layoutY="231.0" pickOnBounds="true" preserveRatio="true">
+
+        </ImageView>
+        <ImageView fx:id="graveyard" fitHeight="110.0" fitWidth="75.0" layoutX="1184.0" layoutY="381.0" pickOnBounds="true" preserveRatio="true">
+
+        </ImageView>
+        <ImageView fx:id="deck" fitHeight="110.0" fitWidth="75.0" layoutX="1184.0" layoutY="513.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../PNG/Cards/Monsters/Unknown.jpg" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="field" fitHeight="110.0" fitWidth="75.0" layoutX="450.0" layoutY="367.0" pickOnBounds="true" preserveRatio="true">
+
+        </ImageView>
+        <Label fx:id="secondPlayerName" layoutX="229.0" layoutY="587.0" text="Player">
+            <font>
+                <Font name="Bell MT Italic" size="14.0" />
+            </font>
+        </Label>
+        <Label fx:id="firstPlayerName" layoutX="138.0" layoutY="587.0" text="Player">
+            <font>
+                <Font name="Bell MT Italic" size="14.0" />
+            </font>
+        </Label>
+        <Label fx:id="secondPlayerLP" layoutX="229.0" layoutY="641.0" text="Player">
+            <font>
+                <Font name="Bell MT Italic" size="14.0" />
+            </font>
+        </Label>
+        <Label fx:id="firstPlayerLP" layoutX="138.0" layoutY="641.0" text="Player">
+            <font>
+                <Font name="Bell MT Italic" size="14.0" />
+            </font>
+        </Label>
+      <Label fx:id="turn" layoutX="77.0" layoutY="25.0" prefHeight="35.0" prefWidth="242.0" textAlignment="CENTER">
+         <font>
+            <Font name="Bell MT Italic" size="25.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="265.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../PNG/ItemA0010.dds.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="265.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../PNG/shield.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="attack" layoutX="322.0" layoutY="124.0" prefHeight="17.0" prefWidth="43.0" text="Player">
+         <font>
+            <Font name="Bell MT Italic" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="defence" layoutX="322.0" layoutY="195.0" prefHeight="17.0" prefWidth="43.0" text="Player">
+         <font>
+            <Font name="Bell MT Italic" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="description" layoutX="272.0" layoutY="250.0" prefHeight="118.0" prefWidth="118.0" text="Player">
+         <font>
+            <Font name="Bell MT Italic" size="14.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="button1" fitHeight="56.0" fitWidth="106.0" layoutX="24.0" layoutY="416.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../PNG/Button.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="button4" fitHeight="53.0" fitWidth="139.0" layoutX="145.0" layoutY="477.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../PNG/Button.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="button2" fitHeight="53.0" fitWidth="139.0" layoutX="145.0" layoutY="416.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../PNG/Button.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="button3" fitHeight="56.0" fitWidth="106.0" layoutX="24.0" layoutY="477.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../PNG/Button.png" />
+         </image>
+      </ImageView>
+      <Text fx:id="massage" layoutX="268.0" layoutY="435.0" text="Player" wrappingWidth="125.4189453125">
+         <font>
+            <Font name="Bell MT Italic" size="14.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="phase" fitHeight="140.0" fitWidth="837.0" layoutX="181.0" layoutY="272.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../PNG/draw.png" />
+         </image>
+      </ImageView>
+    </children>
+</AnchorPane>

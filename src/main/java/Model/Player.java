@@ -2,6 +2,7 @@ package Model;
 
 import Model.Effects.IncreaseAttack;
 import View.Phase;
+import javafx.beans.property.SimpleStringProperty;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,7 @@ public class Player {
         listOfCards.addAll(Card.cards);
         this.username = username;
     }
+
 
     public Player(String username, String password, String nickname) {
         this.username = username;

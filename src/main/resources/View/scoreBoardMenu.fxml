@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.collections.*?>
+
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.collections.FXCollections?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="View.ScoreboardMenu"
+            prefHeight="400.0" prefWidth="600.0">
+    <children>
+        <Label text="Scoreboard" style="-fx-font-size: 18" layoutX="50"/>
+        <TableView layoutX="105.0" layoutY="38.0" prefHeight="500" prefWidth="900">
+            <columns>
+                <TableColumn prefWidth="100.0" text="Rank">
+                    <cellValueFactory><PropertyValueFactory property="rank" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn prefWidth="100.0" text="UserName">
+                    <cellValueFactory><PropertyValueFactory property="userName" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn prefWidth="100.0" text="Score">
+                    <cellValueFactory><PropertyValueFactory property="score" />
+                    </cellValueFactory>
+                </TableColumn>
+            </columns>
+            <items>
+                <FXCollections fx:factory="observableArrayList" fx:id="items">
+
+                </FXCollections>
+            </items>
+        </TableView>
+    </children>
+    <HBox layoutX="3" layoutY="470">
+        <Button text="Back" onMouseClicked="#back" />
+    </HBox>
+</AnchorPane>
