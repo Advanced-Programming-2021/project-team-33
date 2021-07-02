@@ -4,15 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c344dfcf-2301-4e3d-a4d9-a1311bc30bb9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/lib2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib12.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/YoGiOh.iml" beforeDir="false" afterPath="$PROJECT_DIR$/YoGiOh.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Player.java" afterDir="false" />
+    <list default="true" id="c344dfcf-2301-4e3d-a4d9-a1311bc30bb9" name="Default Changelist" comment="ScoreboardMenu">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/MainMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/View/ScoreboardMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/ScoreboardMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Model/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/View/ScoreboardMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/ScoreboardMenu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/View/scoreBoardMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/View/scoreBoardMenu.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,19 +59,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
@@ -90,8 +74,17 @@
       <option name="presentableId" value="Default" />
       <updated>1625223553756</updated>
       <workItem from="1625223557518" duration="2263000" />
-      <workItem from="1625229461585" duration="3638000" />
+      <workItem from="1625229461585" duration="3741000" />
+      <workItem from="1625234783353" duration="1417000" />
     </task>
+    <task id="LOCAL-00001" summary="ScoreboardMenu">
+      <created>1625234598572</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1625234598572</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -108,5 +101,9 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="ScoreboardMenu" />
+    <option name="LAST_COMMIT_MESSAGE" value="ScoreboardMenu" />
   </component>
 </project>

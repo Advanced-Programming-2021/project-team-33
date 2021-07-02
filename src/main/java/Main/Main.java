@@ -44,9 +44,8 @@ public class Main extends Application {
     }
 
     public void openRegisterMenu(MouseEvent event) throws Exception {
-        new ScoreboardMenu().start();
-       /* LoginMenu.setRegister(true);
-        new LoginMenu().start();*/
+        LoginMenu.setRegister(true);
+        new LoginMenu().start();
     }
 
     public void exit(MouseEvent event) {

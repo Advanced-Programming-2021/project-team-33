@@ -199,7 +199,7 @@ public class MainMenu {
             case "game" -> gameMenu.run(input);
             case "deck" -> deckMenu.run(input);
             case "shop" -> shopMenu.run(input);
-            case "scoreboard" -> scoreboardMenu.run(input);
+           // case "scoreboard" -> scoreboardMenu.start(input);
             case "profile" -> profileMenu.run(input);
             case "importExport" -> importExportMenu.run(input);
             case "Graveyard" -> graveyardMenu.run(input);
