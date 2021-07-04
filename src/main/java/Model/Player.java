@@ -15,10 +15,12 @@ public class Player {
     public Board board;
     public static Player thePlayer, theAi = new Player("Ai");
     public static Player currentPlayer, opponent;
+    private int profileID;
+    private String profileAddress;
     boolean isInOpponentPhase;
     String username, password, nickname;
     int money = 10000, score, lifePoint = 8000;
-    private  int profileID;
+
     Deck activeDeck;
 
     public Player(String username) {
@@ -93,6 +95,14 @@ public class Player {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getProfileAddress() {
+        return profileAddress;
+    }
+
+    public void setProfileAddress(String profileAddress) {
+        this.profileAddress = profileAddress;
     }
 
     public String getPassword() {
@@ -214,6 +224,5 @@ public class Player {
         }
         return null;
     }
-
 
 }

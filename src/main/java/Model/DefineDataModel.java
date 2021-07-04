@@ -9,7 +9,7 @@ public class DefineDataModel {
 
     public DefineDataModel(String rank, String userName, String score) {
         setRank(rank);
-        setUserName(userName);
+        setNickName(userName);
         setScore(score);
     }
 
@@ -21,11 +21,11 @@ public class DefineDataModel {
         return rank.get();
     }
 
-    public void setUserName(String userName1) {
+    public void setNickName(String userName1) {
         nickName.set(userName1);
     }
 
-    public String getUserName() {
+    public String getNickName() {
         return nickName.get();
     }
 

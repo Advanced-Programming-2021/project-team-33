@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 
 public class ProfileMenu {
 
@@ -51,11 +52,7 @@ public class ProfileMenu {
 
     @FXML
     public void initialize() {
-        int ID = Player.thePlayer.getProfileID();
-        if (ID <= 50) {
-            ImagePattern backgroundProfile = new ImagePattern(new Image(getClass().getResourceAsStream("/PNG/Profile/Profile (" + ID + ").png")));
-            profile.setFill(backgroundProfile);
-        }
+        loadImageForProfile();
         background.setImage(new Image(getClass().getResourceAsStream("/PNG/backGroundForProfileMenu.jpg")));
         style = "-fx-font-size: 28;-fx-background-color: silver";
         userName.setText("Username : " + Player.thePlayer.getUsername());
@@ -98,6 +95,25 @@ public class ProfileMenu {
         vBoxInProfileMenu.getChildren().addAll(hBox, hBox1);
     }
 
+    private void loadImageForProfile() {
+        ImagePattern backgroundProfile;
+        int ID = Player.thePlayer.getProfileID();
+        if (Player.thePlayer.getProfileAddress() == null) {
+            if (ID <= 50) {
+                backgroundProfile = new ImagePattern(new Image(getClass().getResourceAsStream("/PNG/Profile/Profile (" + ID + ").png")));
+                profile.setFill(backgroundProfile);
+            }
+        } else {
+            File file = new File(Player.thePlayer.getProfileAddress());
+            try {
+                backgroundProfile = new ImagePattern(new Image(file.toURI().toURL().toExternalForm()));
+                profile.setFill(backgroundProfile);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     private void setScene(String input) {
         vBoxInProfileMenu.getChildren().remove(0, 5);
         if (input.equals("nickname")) {
@@ -126,6 +142,7 @@ public class ProfileMenu {
         Image image = new Image(selectedFile.toURI().toString());
         ImagePattern imagePattern = new ImagePattern(image);
         profile.setFill(imagePattern);
+        Player.thePlayer.setProfileAddress(selectedFile.getAbsolutePath());
     }
 
     private void changeNickName(String newNickname) {
