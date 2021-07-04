@@ -384,4 +384,12 @@ public class DeckMenu {
         updateDeckList();
         updateGrid();
     }
+
+    public void exportCard(MouseEvent mouseEvent) {
+        ImportExportMenu.exportCard(selectedCard.getCardName());
+    }
+
+    public void importCard(MouseEvent mouseEvent) throws IOException {
+        new ImportExportMenu().start();
+    }
 }

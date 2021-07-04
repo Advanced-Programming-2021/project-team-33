@@ -40,7 +40,10 @@ public class Main extends Application {
 
     public void openLoginMenu(MouseEvent mouseEvent) throws Exception {
         LoginMenu.setRegister(false);
-        new LoginMenu().start();
+        ProgramController.createUser("username", "nickname", "password");
+        ProgramController.setPlayer("username");
+        new MainMenu().start();
+//        new LoginMenu().start();
     }
 
     public void openRegisterMenu(MouseEvent event) throws Exception {

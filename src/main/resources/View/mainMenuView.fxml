@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.scene.image.ImageView?>
+<?import java.net.URL?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="View.MainMenu"
@@ -20,7 +21,10 @@
     </center>
     <bottom>
         <HBox>
-            <Button text="Back" style="-fx-background-color: red;-fx-text-fill: white;-fx-font-size: 20" onMouseClicked="#back"/>
+            <Button text="Back" onMouseClicked="#back"/>
         </HBox>
     </bottom>
+    <stylesheets>
+        <URL value="@../css/deckMenu.css" />
+    </stylesheets>
 </BorderPane>

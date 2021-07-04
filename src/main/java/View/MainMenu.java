@@ -105,8 +105,8 @@ public class MainMenu {
 
     private Button getButton(String name) {
         Button button = new Button(name);
-        button.setShape(new Circle(5));
-        button.setFont(Font.font(22));
+        button.getStyleClass().add("myButton");
+        button.setStyle("-fx-font-size: 28px; -fx-pref-width: 300px");
         button.setOnMouseEntered(event -> {
             button.setEffect(new DropShadow());
         });
@@ -201,7 +201,7 @@ public class MainMenu {
             case "shop" -> shopMenu.run(input);
            // case "scoreboard" -> scoreboardMenu.start(input);
             case "profile" -> profileMenu.run(input);
-            case "importExport" -> importExportMenu.run(input);
+//            case "importExport" -> importExportMenu.run(input);
             case "Graveyard" -> graveyardMenu.run(input);
         }
     }
