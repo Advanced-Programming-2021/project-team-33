@@ -51,6 +51,7 @@ public class ProgramController {
     }
 
     public static void createUser(String username, String nickname, String password) {
+        if (profileID >= 50) profileID = 0;
         profileID++;
         Player player = new Player(username, password, nickname);
         player.setProfileID(profileID);
