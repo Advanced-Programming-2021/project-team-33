@@ -18,6 +18,7 @@ public class Player {
     boolean isInOpponentPhase;
     String username, password, nickname;
     int money = 10000, score, lifePoint = 8000;
+    private  int profileID;
     Deck activeDeck;
 
     public Player(String username) {
@@ -52,6 +53,14 @@ public class Player {
 
     public Board getBoard() {
         return board;
+    }
+
+    public void setProfileID(int profileID) {
+        this.profileID = profileID;
+    }
+
+    public int getProfileID() {
+        return profileID;
     }
 
     public void setPhase(Phase phase) {

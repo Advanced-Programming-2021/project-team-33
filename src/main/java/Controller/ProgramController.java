@@ -2,8 +2,9 @@ package Controller;
 
 import Model.Card;
 import Model.Player;
+import javafx.scene.control.Button;
+import javafx.scene.effect.DropShadow;
 import javafx.stage.Stage;
-
 
 
 import java.util.*;
@@ -11,6 +12,7 @@ import java.util.*;
 public class ProgramController {
 
     private static Stage stage;
+    private static int profileID;
 
     public static boolean isUserExist(String user) {
         return Player.getUserByUsername(user) != null;
@@ -49,7 +51,9 @@ public class ProgramController {
     }
 
     public static void createUser(String username, String nickname, String password) {
+        profileID++;
         Player player = new Player(username, password, nickname);
+        player.setProfileID(profileID);
     }
 
     public static void setPlayer(String username) {
@@ -132,5 +136,18 @@ public class ProgramController {
 
     public static void setStage(Stage stage) {
         ProgramController.stage = stage;
+    }
+
+    public static Button getButton(String name) {
+        Button button = new Button(name);
+        button.getStyleClass().add("myButton");
+        button.setStyle("-fx-font-size: 28px; -fx-pref-width: 300px");
+        button.setOnMouseEntered(event -> {
+            button.setEffect(new DropShadow());
+        });
+        button.setOnMouseExited(event -> {
+            button.setEffect(null);
+        });
+        return button;
     }
 }

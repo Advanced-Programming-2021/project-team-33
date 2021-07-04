@@ -4,7 +4,7 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class DefineDataModel {
     private final SimpleStringProperty rank = new SimpleStringProperty("");
-    private final SimpleStringProperty userName = new SimpleStringProperty("");
+    private final SimpleStringProperty nickName = new SimpleStringProperty("");
     private final SimpleStringProperty score = new SimpleStringProperty("");
 
     public DefineDataModel(String rank, String userName, String score) {
@@ -22,11 +22,11 @@ public class DefineDataModel {
     }
 
     public void setUserName(String userName1) {
-        userName.set(userName1);
+        nickName.set(userName1);
     }
 
     public String getUserName() {
-        return userName.get();
+        return nickName.get();
     }
 
     public void setScore(String score1) {

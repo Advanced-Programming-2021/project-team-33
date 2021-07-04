@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.cell.*?>
 <?import javafx.collections.*?>
 
-<?import javafx.scene.control.cell.PropertyValueFactory?>
-<?import javafx.collections.FXCollections?>
 <?import javafx.scene.image.ImageView?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
@@ -21,17 +16,17 @@
         <Label text="Scoreboard" layoutX="600" layoutY="20" style="-fx-background-color: #0e466c;-fx-text-fill: white;-fx-font-size: 24"/>
         <TableView layoutX="105.0" layoutY="75.0" prefHeight="600" prefWidth="1100">
             <columns>
-                <TableColumn prefWidth="366.0" text="Rank">
+                <TableColumn prefWidth="366.0" text="Rank" style="-fx-alignment: center">
                     <cellValueFactory>
                         <PropertyValueFactory property="rank"/>
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn prefWidth="366.0" text="UserName">
+                <TableColumn prefWidth="366.0" text="NickName" style="-fx-alignment: center">
                     <cellValueFactory>
-                        <PropertyValueFactory property="userName"/>
+                        <PropertyValueFactory property="nickName"/>
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn prefWidth="366.0" text="Score">
+                <TableColumn prefWidth="366.0" text="Score" style="-fx-alignment: center">
                     <cellValueFactory>
                         <PropertyValueFactory property="score"/>
                     </cellValueFactory>

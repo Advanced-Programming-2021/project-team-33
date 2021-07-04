@@ -7,6 +7,26 @@
     <list default="true" id="c344dfcf-2301-4e3d-a4d9-a1311bc30bb9" name="Default Changelist" comment="ScoreboardMenu">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/YoGiOh.iml" beforeDir="false" afterPath="$PROJECT_DIR$/YoGiOh.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/ProgramController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/ProgramController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/DefineDataModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/DefineDataModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/MainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/ProfileMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/ProfileMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/ScoreboardMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/ScoreboardMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/View/scoreBoardMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/View/scoreBoardMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Controller/ProgramController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controller/ProgramController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Controller/ProgramController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controller/ProgramController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Model/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/DeckMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/DeckMenu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/ImportExportMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/ImportExportMenu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/MainMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/MainMenu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/ProfileMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/ProfileMenu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/ScoreboardMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/ScoreboardMenu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/deckMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/deckMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/mainMenuView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/mainMenuView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/scoreBoardMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/scoreBoardMenu.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,13 +36,21 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="FxmlFile" />
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="ProjectId" id="1ukxmoKFqtn1RHMemecwyYc7erU" />
   <component name="ProjectViewState">
@@ -35,7 +63,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="D:/javafx-sdk-16/lib" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
@@ -45,7 +73,7 @@
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main.Main" />
       <module name="YoGiOh" />
-      <option name="VM_PARAMETERS" value="--module-path D:\javafx-sdk-16\lib --add-modules javafx.controls,javafx.fxml" />
+      <option name="VM_PARAMETERS" value="--module-path E:\Graphic\javafx-sdk-16\lib --add-modules javafx.controls,javafx.fxml" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="Main.*" />
@@ -74,6 +102,9 @@
       <workItem from="1625229461585" duration="3741000" />
       <workItem from="1625234783353" duration="1417000" />
       <workItem from="1625383050453" duration="90000" />
+      <workItem from="1625387148386" duration="5303000" />
+      <workItem from="1625396847406" duration="5443000" />
+      <workItem from="1625404826596" duration="2515000" />
     </task>
     <task id="LOCAL-00001" summary="ScoreboardMenu">
       <created>1625234598572</created>

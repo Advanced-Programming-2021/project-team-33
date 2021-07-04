@@ -50,6 +50,7 @@ public class ScoreboardMenu {
             }
             items.add(new DefineDataModel(String.valueOf(rank), en.getKey(), String.valueOf(en.getValue())));
             equal = en.getValue();
+            if (a == 20) break;
         }
     }
 

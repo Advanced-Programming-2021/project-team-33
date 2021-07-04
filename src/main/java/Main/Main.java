@@ -3,6 +3,7 @@ import Controller.CardController;
 import Controller.ProgramController;
 import View.LoginMenu;
 import View.MainMenu;
+import View.ProfileMenu;
 import View.ScoreboardMenu;
 import javafx.application.Application;
 import javafx.fxml.FXML;
@@ -40,10 +41,10 @@ public class Main extends Application {
 
     public void openLoginMenu(MouseEvent mouseEvent) throws Exception {
         LoginMenu.setRegister(false);
-        ProgramController.createUser("username", "nickname", "password");
-        ProgramController.setPlayer("username");
-        new MainMenu().start();
-//        new LoginMenu().start();
+       // ProgramController.createUser("username", "nickname", "password");
+        //ProgramController.setPlayer("username");
+       // new MainMenu().start();
+        new LoginMenu().start();
     }
 
     public void openRegisterMenu(MouseEvent event) throws Exception {
