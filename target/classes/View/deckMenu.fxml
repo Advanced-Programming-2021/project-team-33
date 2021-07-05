@@ -38,7 +38,7 @@
        <ListView fx:id="deckListOfCards" layoutX="1077.0" layoutY="14.0" prefHeight="700.0" prefWidth="198.0" styleClass="list-view">
 
        </ListView>
-      <ImageView fx:id="cardShow" fitHeight="272.0" fitWidth="214.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="cardShow" fitHeight="323.0" fitWidth="187.0" layoutX="13.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../PNG/Cards/Monsters/BabyDragon.jpg" />
          </image>
@@ -52,7 +52,7 @@
       <Button layoutX="14.0" layoutY="540" mnemonicParsing="false" onMouseClicked="#addToSideDeck" prefHeight="26.0" prefWidth="187.0" styleClass="myButton" text="Add to Side Deck" />
       <Button layoutX="14.0" layoutY="580" mnemonicParsing="false" onMouseClicked="#removeCardFromMainDeck" prefHeight="26.0" prefWidth="187.0" styleClass="myButton" text="Remove From Main Deck" />
        <Button layoutX="14.0" layoutY="671.0" mnemonicParsing="false" onMouseClicked="#back" prefHeight="26.0" prefWidth="187.0" styleClass="back" text="Back" />
-      <ListView fx:id="deckList" layoutX="14.0" layoutY="308.0" prefHeight="172.0" prefWidth="187.0" />
+      <ListView fx:id="deckList" layoutX="14.0" layoutY="383.0" prefHeight="97.0" prefWidth="187.0" />
       <Button layoutX="243.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#createDeck" prefHeight="38.0" prefWidth="267.0" styleClass="myButton" text="Create New Deck" />
       <Button layoutX="14.0" layoutY="622.0" mnemonicParsing="false" onMouseClicked="#removeCardFromSideDeck" prefHeight="26.0" prefWidth="187.0" styleClass="myButton" text="Remove From Side Deck" />
       <GridPane fx:id="sideDeckGrid" layoutX="243.0" layoutY="570.0" prefHeight="88.0" prefWidth="818.0">
@@ -74,6 +74,8 @@
       </GridPane>
       <Button layoutX="526.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#activateDeck" prefHeight="38.0" prefWidth="267.0" styleClass="myButton" text="Activate This Deck" />
       <Button layoutX="809.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#deleteDeck" prefHeight="38.0" prefWidth="252.0" styleClass="myButton" text="Delete This Deck" />
+      <Button layoutX="14.0" layoutY="64.0" mnemonicParsing="false" onMouseClicked="#exportCard" prefHeight="26.0" prefWidth="187.0" styleClass="myButton" text="Export This Card" />
+      <Button layoutX="13.0" layoutY="17.0" mnemonicParsing="false" onMouseClicked="#importCard" prefHeight="26.0" prefWidth="187.0" styleClass="myButton" text="Import Cards" />
    </children>
     <stylesheets>
         <URL value="@../css/deckMenu.css" />

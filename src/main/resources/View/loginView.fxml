@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.LoginMenu">
+<?import javafx.scene.image.ImageView?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="View.LoginMenu"
+            prefHeight="400.0" prefWidth="600.0">
     <AnchorPane fx:id="anchorPane">
     </AnchorPane>
     <top>
@@ -17,31 +24,31 @@
     </top>
     <center>
         <VBox alignment="CENTER">
-            <HBox prefHeight="150" />
-            <HBox alignment="CENTER" maxWidth="270" style="-fx-background-color: silver">
-                <Label prefWidth="124.0" style="-fx-font-size: 20" text="User name : " />
+            <HBox prefHeight="150"/>
+            <HBox alignment="CENTER" style="-fx-background-color: silver" maxWidth="270">
+                <Label text="User name : " style="-fx-font-size: 20"/>
                 <TextField fx:id="textUserName">
                 </TextField>
             </HBox>
-            <HBox prefHeight="10" />
-            <HBox fx:id="nickNameHBox" alignment="CENTER">
+            <HBox prefHeight="10"/>
+            <HBox alignment="CENTER" fx:id="nickNameHBox">
             </HBox>
-            <HBox prefHeight="10" />
-            <HBox alignment="CENTER" maxWidth="270" style="-fx-background-color: silver">
-                <Label style="-fx-font-size: 20" text="Password :   " />
+            <HBox prefHeight="10"/>
+            <HBox alignment="CENTER" style="-fx-background-color: silver" maxWidth="270">
+                <Label text="Password :   " style="-fx-font-size: 20"/>
                 <PasswordField fx:id="textPassword">
                 </PasswordField>
             </HBox>
-            <HBox prefHeight="20" />
+            <HBox prefHeight="20"/>
             <HBox alignment="CENTER">
-                <Button fx:id="clear" style="-fx-background-color: red;-fx-text-fill: white" text="Clear" />
-                <Button fx:id="submit" style="-fx-background-color: green;-fx-text-fill: white" />
+                <Button text="Clear" style="-fx-background-color: red;-fx-text-fill: white" fx:id="clear"/>
+                <Button style="-fx-background-color: green;-fx-text-fill: white" fx:id="submit"/>
             </HBox>
         </VBox>
     </center>
     <bottom>
         <HBox>
-            <Button onMouseClicked="#back" style="-fx-background-color: red;-fx-text-fill: white;-fx-font-size: 20" text="Back" />
+            <Button text="Back" style="-fx-background-color: red;-fx-text-fill: white;-fx-font-size: 20" onMouseClicked="#back"/>
         </HBox>
     </bottom>
 </BorderPane>

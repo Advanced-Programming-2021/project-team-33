@@ -1,24 +1,24 @@
 package View;
 
 import Controller.ProgramController;
-import Controller.Util;
-import Model.Player;
+import Model.DefineDataModel;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import jdk.jfr.Frequency;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.regex.Matcher;
 
 public class ScoreboardMenu {
 
-    public ObservableList<String> items;
+    public ImageView backGround;
+    public ObservableList<DefineDataModel> items;
 
     public ScoreboardMenu() {
 
@@ -27,20 +27,15 @@ public class ScoreboardMenu {
     public void start() throws IOException {
         Stage primaryStage = ProgramController.getStage();
         Parent root = FXMLLoader.load(getClass().getResource("scoreBoardMenu.fxml"));
-        primaryStage.setTitle("Yu-Gi-Oh");
+        primaryStage.setTitle("Yu-Gi-Oh (Score Board)");
         primaryStage.setScene(new Scene(root, 1280, 720));
         primaryStage.show();
     }
 
-    public void run(String input) {
-        MainMenu.checked = false;
-        MainMenu.showCurrentMenu(Util.getCommand(input, "menu show-current"));
-        //showScoreBoard(Util.getCommand(input, "scoreboard show"));
-        MainMenu.exitMenu(Util.getCommand(input, "menu exit"));
-    }
-
     @FXML
     private void initialize() {
+        Image image = new Image(getClass().getResource("/PNG/scoreBoardBackground.jpg").toExternalForm());
+        backGround.setImage(image);
         int rank = 0, counter = 0, equal = 0, a = 0;
         Map<String, Integer> scoreBoard = ProgramController.createScoreBoard();
         for (Map.Entry<String, Integer> en : scoreBoard.entrySet()) {
@@ -53,12 +48,9 @@ public class ScoreboardMenu {
                 counter++;
                 if (a == 1) rank++;
             }
-            //System.out.println(rank + "- " + en.getKey() + ": " + en.getValue());
-            System.out.println(en.getKey());
-            Player player = Player.getUserByNickname(en.getKey());
-            String rank1 = ""+rank;
-            String score = ""+player.getScore();
+            items.add(new DefineDataModel(String.valueOf(rank), en.getKey(), String.valueOf(en.getValue())));
             equal = en.getValue();
+            if (a == 20) break;
         }
     }
 

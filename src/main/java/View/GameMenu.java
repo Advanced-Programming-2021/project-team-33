@@ -32,7 +32,7 @@ public class GameMenu {
     public ImageView phase;
     private ArrayList<ImageView> currentHand, enemyHand, currentMonster, enemyMonster, currentSpell, enemySpell;
     boolean isHandSelected = false, isMonsterSelected = false, isSpellSelected = false, isOneTributeActive = false,
-            isTwoTributeActive = false;
+            isTwoTributeActive = false, isAttackActive = false;
     AtomicInteger tribute = new AtomicInteger();
 
 
@@ -72,23 +72,21 @@ public class GameMenu {
 
 
     private void goToNextPhase() {
-        if (Player.currentPlayer.getPhase().equals(Phase.DRAW)){
+        if (Player.currentPlayer.getPhase().equals(Phase.DRAW)) {
             RoundController.mainPhase1();
             animateNextPhase("main");
         }
         button4.setOnMouseClicked(event -> {
             if (!isOneTributeActive && !isTwoTributeActive) {
-                if(Player.currentPlayer.getPhase().equals(Phase.MAIN1)){
+                if (Player.currentPlayer.getPhase().equals(Phase.MAIN1)) {
                     RoundController.battlePhase();
                     phase.setImage(new Image(getClass().getResourceAsStream("/PNG/battle.png")));
                     animatePhase();
-                }
-                else if(Player.currentPlayer.getPhase().equals(Phase.BATTLE)){
+                } else if (Player.currentPlayer.getPhase().equals(Phase.BATTLE)) {
                     RoundController.mainPhase2();
                     phase.setImage(new Image(getClass().getResourceAsStream("/PNG/main.png")));
                     animatePhase();
-                }
-                else if(Player.currentPlayer.getPhase().equals(Phase.MAIN2)){
+                } else if (Player.currentPlayer.getPhase().equals(Phase.MAIN2)) {
                     RoundController.endPhase();
                     phase.setImage(new Image(getClass().getResourceAsStream("/PNG/end.png")));
                     animatePhase();
@@ -221,11 +219,17 @@ public class GameMenu {
     private void selectCard() {
         for (int i = 0; i < 5; i++) {
             int finalI = i;
+            enemyMonster.get(i).setOnMouseClicked(event -> {
+                Card card = Player.opponent.getBoard().getFieldCardsForMonsters().get(finalI);
+                if (isAttackActive) detectEnemyToAttack(finalI);
+                else if (card != null) setViewForSelected(card);
+
+            });
             currentMonster.get(i).setOnMouseClicked(event -> {
                 tribute.set(finalI);
                 Card card = Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(finalI);
-                setViewForSelected(card);
-                if(!isOneTributeActive && !isTwoTributeActive) setButtonsForMonster();
+                if (card != null) setViewForSelected(card);
+                if (!isOneTributeActive && !isTwoTributeActive) setButtonsForMonster();
             });
         }
 
@@ -297,6 +301,7 @@ public class GameMenu {
     private void callButton1() {
         if (isHandSelected) summonMonster();
         else if (isOneTributeActive) callTributeOne();
+        else if (isMonsterSelected) attackToMonster();
         updateBoard(currentHand, enemyHand, currentMonster);
     }
 
@@ -305,8 +310,6 @@ public class GameMenu {
         if (isOneTributeActive) cancel();
         updateBoard(currentHand, enemyHand, currentMonster);
     }
-
-
 
 
     public void run(String input) {
@@ -320,7 +323,7 @@ public class GameMenu {
         flipSummon(Util.getCommand(input, "flip-summon"));
         setCard(Util.getCommand(input, "set"));
         setPosition(Util.getCommand(input, "set --position ((attack)|(defence))"));
-        attackToMonster(Util.getCommand(input, "attack (\\d+)"));
+
         attackDirect(Util.getCommand(input, "attack direct"));
 
         showBoard(Util.getCommand(input, "showBoard"));
@@ -498,11 +501,13 @@ public class GameMenu {
         isOneTributeActive = false;
         isTwoTributeActive = false;
         isMonsterSelected = false;
+        isAttackActive = false;
         if (act.equals("oneTribute")) isOneTributeActive = true;
         if (act.equals("twoTribute")) isTwoTributeActive = true;
         if (act.equals("hand")) isHandSelected = true;
         if (act.equals("monster")) isMonsterSelected = true;
         if (act.equals("spell")) isSpellSelected = true;
+        if (act.equals("attack")) isAttackActive = true;
 
     }
 
@@ -611,24 +616,31 @@ public class GameMenu {
         }
     }
 
-    private void attackToMonster(Matcher matcher) {
-        if (!MainMenu.checked && matcher.matches()) {
-            MainMenu.checked = true;
-            int enemyMonsterIndex = GameController.switchNumberForCurrent(Integer.parseInt(matcher.group(1)));
-            if (Player.currentPlayer.isInOpponentPhase())
-                System.out.println("it’s not your turn to play this kind of moves");
-            else if (GameController.selectedCard == null) System.out.println("no card is selected yet");
-            else if (!GameController.selectedCard.getCardStatus().equals(CardStatus.ATTACK))
-                System.out.println("you can’t attack with this card");
-            else if (!Player.currentPlayer.getPhase().equals(Phase.BATTLE))
-                System.out.println("you can’t do this action in this phase");
-            else if (GameController.selectedCard.isAttacked())
-                System.out.println("this card already attacked");
-            else if (Player.opponent.getBoard().getFieldCardsForMonsters().get(enemyMonsterIndex) == null)
-                System.out.println("there is no card to attack here");
-            else {
-                GameController.attackMonster(enemyMonsterIndex);
-            }
+    private void attackToMonster() {
+        if (Player.currentPlayer.isInOpponentPhase())
+            showError("it’s not your turn to play this kind of moves");
+        else if (GameController.selectedCard == null) System.out.println("no card is selected yet");
+        else if (!GameController.selectedCard.getCardStatus().equals(CardStatus.ATTACK))
+            showError("you can’t attack with this card");
+        else if (!Player.currentPlayer.getPhase().equals(Phase.BATTLE))
+            showError("you can’t do this action in this phase");
+        else if (GameController.selectedCard.isAttacked())
+            showError("this card already attacked");
+        else {
+            showError("select enemy card to attack");
+            setAction("attack");
+        }
+
+    }
+
+    private void detectEnemyToAttack(int enemyMonsterIndex) {
+
+
+        if (Player.opponent.getBoard().getFieldCardsForMonsters().get(enemyMonsterIndex) == null)
+            showError("there is no card to attack here");
+        else {
+            GameController.attackMonster(enemyMonsterIndex);
+            updateBoard(currentHand, enemyHand, currentMonster);
         }
     }
 

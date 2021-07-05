@@ -53,12 +53,10 @@ public class MainMenu {
     public void initialize() {
         backgroundMain.setImage(new Image(getClass().getResourceAsStream("/PNG/11025059.jpg")));
         vBox.setAlignment(Pos.CENTER);
-        makeButton("Duel Menu");
-        makeButton("Deck Menu");
-        makeButton("Scoreboard Menu");
-        makeButton("Profile Menu");
-        makeButton("Shop Menu");
-        makeButton("Log out");
+        String[] buttonName = {"Duel Menu", "Deck Menu", "Scoreboard Menu", "Profile Menu", "Shop Menu", "Import and Export", "Log out"};
+        for (String name : buttonName) {
+            makeButton(name);
+        }
     }
 
     private void makeButton(String name) {
@@ -66,7 +64,7 @@ public class MainMenu {
         hBox1.setMinHeight(20);
         HBox hBox = new HBox();
         hBox.setAlignment(Pos.CENTER);
-        Button button = getButton(name);
+        Button button = ProgramController.getButton(name);
         switch (name) {
             case "Duel Menu" -> button.setOnMouseClicked(event -> startGame());
             case "Deck Menu" -> button.setOnMouseClicked(event -> {
@@ -83,10 +81,24 @@ public class MainMenu {
                     e.printStackTrace();
                 }
             });
-            case "Profile Menu" -> button.setOnMouseClicked(event -> new ProfileMenu().start());
+            case "Profile Menu" -> button.setOnMouseClicked(event -> {
+                try {
+                    new ProfileMenu().start();
+                } catch (IOException e) {
+
+
+                }
+            });
             case "Shop Menu" -> button.setOnMouseClicked(event -> {
                 try {
                     new ShopMenu().start();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+            case "Import and Export" -> button.setOnMouseClicked(event -> {
+                try {
+                    new ImportExportMenu().start();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -103,18 +115,7 @@ public class MainMenu {
         vBox.getChildren().addAll(hBox, hBox1);
     }
 
-    private Button getButton(String name) {
-        Button button = new Button(name);
-        button.setShape(new Circle(5));
-        button.setFont(Font.font(22));
-        button.setOnMouseEntered(event -> {
-            button.setEffect(new DropShadow());
-        });
-        button.setOnMouseExited(event -> {
-            button.setEffect(null);
-        });
-        return button;
-    }
+
 
     public void run(String input) {
         checked = false;
@@ -199,9 +200,9 @@ public class MainMenu {
             case "game" -> gameMenu.run(input);
             case "deck" -> deckMenu.run(input);
             case "shop" -> shopMenu.run(input);
-            case "scoreboard" -> scoreboardMenu.run(input);
-            case "profile" -> profileMenu.run(input);
-            case "importExport" -> importExportMenu.run(input);
+            // case "scoreboard" -> scoreboardMenu.start(input);
+         //   case "profile" -> profileMenu.run(input);
+//            case "importExport" -> importExportMenu.run(input);
             case "Graveyard" -> graveyardMenu.run(input);
         }
     }
