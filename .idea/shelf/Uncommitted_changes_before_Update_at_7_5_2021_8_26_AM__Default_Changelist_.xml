@@ -1,0 +1,19 @@
+<changelist name="Uncommitted_changes_before_Update_at_7_5_2021_8_26_AM_[Default_Changelist]" date="1625457392456" recycled="false" toDelete="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_5_2021_8_26_AM_[Default_Changelist]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 7/5/2021 8:26 AM [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/GameMenu.class" />
+    <option name="AFTER_PATH" value="target/classes/View/GameMenu.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_5_2021_8_26_AM_[Default_Changelist]/GameMenu.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Controller/GameController.class" />
+    <option name="AFTER_PATH" value="target/classes/Controller/GameController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_5_2021_8_26_AM_[Default_Changelist]/GameController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/GameMenu$1.class" />
+    <option name="AFTER_PATH" value="target/classes/View/GameMenu$1.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_5_2021_8_26_AM_[Default_Changelist]/GameMenu$1.class" />
+  </binary>
+</changelist>

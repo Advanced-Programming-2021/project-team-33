@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.LoginMenu">
+    <AnchorPane fx:id="anchorPane">
+    </AnchorPane>
+    <top>
+        <VBox alignment="CENTER">
+            <HBox minHeight="20">
+            </HBox>
+            <HBox alignment="CENTER">
+                <Label fx:id="loginError" />
+            </HBox>
+        </VBox>
+    </top>
+    <center>
+        <VBox alignment="CENTER">
+            <HBox prefHeight="150" />
+            <HBox alignment="CENTER" maxWidth="270" style="-fx-background-color: silver">
+                <Label prefWidth="124.0" style="-fx-font-size: 20" text="User name : " />
+                <TextField fx:id="textUserName">
+                </TextField>
+            </HBox>
+            <HBox prefHeight="10" />
+            <HBox fx:id="nickNameHBox" alignment="CENTER">
+            </HBox>
+            <HBox prefHeight="10" />
+            <HBox alignment="CENTER" maxWidth="270" style="-fx-background-color: silver">
+                <Label style="-fx-font-size: 20" text="Password :   " />
+                <PasswordField fx:id="textPassword">
+                </PasswordField>
+            </HBox>
+            <HBox prefHeight="20" />
+            <HBox alignment="CENTER">
+                <Button fx:id="clear" style="-fx-background-color: red;-fx-text-fill: white" text="Clear" />
+                <Button fx:id="submit" style="-fx-background-color: green;-fx-text-fill: white" />
+            </HBox>
+        </VBox>
+    </center>
+    <bottom>
+        <HBox>
+            <Button onMouseClicked="#back" style="-fx-background-color: red;-fx-text-fill: white;-fx-font-size: 20" text="Back" />
+        </HBox>
+    </bottom>
+</BorderPane>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="Main.Main"
+            prefHeight="400.0" prefWidth="600.0">
+    <ImageView fx:id="backGround">
+    </ImageView>
+    <Button text="Login" layoutX="500" layoutY="300" scaleX="2" scaleY="2" style="-fx-font-size: 22;-fx-background-color: red;-fx-text-fill: white" onMouseClicked="#openLoginMenu">
+    </Button>
+    <Button text="Register" layoutX="500" layoutY="400" scaleX="2" scaleY="2" style="-fx-font-size: 22;-fx-background-color: red;-fx-text-fill: white" onMouseClicked="#openRegisterMenu">
+    </Button>
+    <Button text="Exit" style="-fx-background-color: red;-fx-text-fill: white;-fx-font-size: 20" layoutY="680" onMouseClicked="#exit">
+    </Button>
+</AnchorPane>
