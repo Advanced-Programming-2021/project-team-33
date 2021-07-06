@@ -4,6 +4,7 @@ import Model.Card;
 import Model.Player;
 import View.GameMenu;
 import View.Phase;
+import javafx.scene.control.Alert;
 
 import java.util.Random;
 
@@ -22,7 +23,13 @@ public class RoundController {
 
         GameMenu gameMenu = new GameMenu();
         if (Player.thePlayer.getLifePoint() <= 0) {
-            gameMenu.informEndOfRound(otherPlayer, 1000,remainingRounds);
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Round ended");
+            alert.setHeaderText("Round " + remainingRounds + " ended");
+            alert.setContentText(otherPlayer.getUsername() + " won the game with score: " + 1000 + " - 0");
+            alert.showAndWait();
+
             winnerOfFirstRound = otherPlayer;
             remainingRounds--;
             maxLp = Math.max(otherPlayer.getLifePoint(), maxLp);
@@ -32,7 +39,14 @@ public class RoundController {
             else GameController.setNextGame(Player.thePlayer.getUsername(),
                         otherPlayer.getUsername());
         } else if (otherPlayer.getLifePoint() <= 0) {
-            gameMenu.informEndOfRound(Player.thePlayer, 1000,remainingRounds);
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Round ended");
+            alert.setHeaderText("Round " + remainingRounds + " ended");
+            alert.setContentText(Player.thePlayer.getUsername() + " won the game with score: " + 1000 + " - 0");
+            alert.showAndWait();
+
+
             winnerOfFirstRound = Player.thePlayer;
             remainingRounds--;
             maxLp = Math.max(Player.thePlayer.getLifePoint(), maxLp);
@@ -44,7 +58,6 @@ public class RoundController {
         }
 
     }
-
 
 
     public static void setWhoPlayFirst(String firstPlayer, String secondPlayer) {
@@ -76,20 +89,13 @@ public class RoundController {
 
 
     public static void drawPhase() {
-        if (isRoundFreeze) {
-            isRoundFreeze = false;
-            endPhase();
+        Player.currentPlayer.setPhase(Phase.DRAW);
+        gameMenu.informPhase(Phase.DRAW);
+        if (!isDrawPossible()) {
+            Player.currentPlayer.setLifePoint(0);
         } else {
-            Player.currentPlayer.setPhase(Phase.DRAW);
-            gameMenu.informPhase(Phase.DRAW);
-            if (!isDrawPossible()) {
-                Player.currentPlayer.setLifePoint(0);
-            }
-            else{
-                Card card = GameController.drawCard(Player.currentPlayer);
-                if (card != null) gameMenu.drawCard(card);
-            }
-
+            Card card = GameController.drawCard(Player.currentPlayer);
+            if (card != null) gameMenu.drawCard(card);
         }
     }
 
@@ -97,7 +103,6 @@ public class RoundController {
         Player.currentPlayer.setPhase(Phase.STANDBY);
         //someCard...
         gameMenu.informPhase(Phase.STANDBY);
-
     }
 
     public static void mainPhase1() {

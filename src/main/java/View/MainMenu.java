@@ -19,12 +19,15 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.TriangleMesh;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.regex.Matcher;
 
@@ -35,8 +38,8 @@ public class MainMenu {
     public VBox vBox;
     public int layOutY = 1;
     public Label duelError;
-    ProgramController programController = new ProgramController();
-    GameController gameController = new GameController();
+
+
 
     public MainMenu() {
     }
@@ -45,6 +48,10 @@ public class MainMenu {
         Stage primaryStage = ProgramController.getStage();
         Parent root = FXMLLoader.load(getClass().getResource("mainMenuView.fxml"));
         primaryStage.setTitle("Yu-Gi-Oh");
+        if(menu.equals("menu")){
+            PlayMusic.stop();
+            new PlayMusic().start();
+        }
         primaryStage.setScene(new Scene(root, 1280, 720));
         primaryStage.show();
     }
@@ -66,8 +73,12 @@ public class MainMenu {
         hBox.setAlignment(Pos.CENTER);
         Button button = ProgramController.getButton(name);
         switch (name) {
-            case "Duel Menu" -> button.setOnMouseClicked(event -> startGame());
+            case "Duel Menu" -> button.setOnMouseClicked(event -> {
+                MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\click.mp3");
+                startGame();
+            });
             case "Deck Menu" -> button.setOnMouseClicked(event -> {
+                MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\click.mp3");
                 try {
                     new DeckMenu().start();
                 } catch (IOException e) {
@@ -75,6 +86,7 @@ public class MainMenu {
                 }
             });
             case "Scoreboard Menu" -> button.setOnMouseClicked(event -> {
+                MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\click.mp3");
                 try {
                     new ScoreboardMenu().start();
                 } catch (IOException e) {
@@ -82,6 +94,7 @@ public class MainMenu {
                 }
             });
             case "Profile Menu" -> button.setOnMouseClicked(event -> {
+                MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\click.mp3");
                 try {
                     new ProfileMenu().start();
                 } catch (IOException e) {
@@ -90,6 +103,7 @@ public class MainMenu {
                 }
             });
             case "Shop Menu" -> button.setOnMouseClicked(event -> {
+                MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\click.mp3");
                 try {
                     new ShopMenu().start();
                 } catch (IOException e) {
@@ -97,6 +111,7 @@ public class MainMenu {
                 }
             });
             case "Import and Export" -> button.setOnMouseClicked(event -> {
+                MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\click.mp3");
                 try {
                     new ImportExportMenu().start();
                 } catch (IOException e) {
@@ -104,6 +119,7 @@ public class MainMenu {
                 }
             });
             case "Log out" -> button.setOnMouseClicked(event -> {
+                MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\click.mp3");
                 try {
                     new Main().start(ProgramController.getStage());
                 } catch (Exception e) {
@@ -143,9 +159,7 @@ public class MainMenu {
         }
     }
 
-    private void duelWithAi() {
-        Ai.initiateGameWithAi(Player.thePlayer.getUsername(), 3);
-    }
+
 
     private void enterMenu(Matcher matcher) {
         if (!checked && matcher.matches()) {
@@ -210,6 +224,15 @@ public class MainMenu {
     private void showError(String error) {
         duelError.setText(error);
     }
+
+    public static void playSound(String s) {
+        String path = s;
+        Media media = new Media(new File(path).toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setVolume(100);
+        mediaPlayer.setAutoPlay(true);
+    }
+
 
     public void back(MouseEvent event) throws Exception {
         new Main().start(ProgramController.getStage());

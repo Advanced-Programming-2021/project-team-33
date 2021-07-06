@@ -16,10 +16,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.util.regex.Matcher;
 
 public class LoginMenu {
@@ -63,11 +66,13 @@ public class LoginMenu {
             submit.setText("Register");
         } else submit.setText("Login");
         clear.setOnMouseClicked(event -> {
+            MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\click.mp3");
             textUserName.clear();
             textPassword.clear();
             if (isRegister()) textNickName.clear();
         });
         submit.setOnMouseClicked(event -> {
+            MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\click.mp3");
             String input = "";
             if (!isRegister()) {
                 input = "user login --username " + textUserName.getText() + " --password " + textPassword.getText();
@@ -128,6 +133,7 @@ public class LoginMenu {
     }
 
     public void back(MouseEvent event) throws Exception {
+        MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\click.mp3");
         new Main().start(ProgramController.getStage());
     }
 }

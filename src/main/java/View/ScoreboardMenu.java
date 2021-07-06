@@ -28,6 +28,7 @@ public class ScoreboardMenu {
         Stage primaryStage = ProgramController.getStage();
         Parent root = FXMLLoader.load(getClass().getResource("scoreBoardMenu.fxml"));
         primaryStage.setTitle("Yu-Gi-Oh (Score Board)");
+
         primaryStage.setScene(new Scene(root, 1280, 720));
         primaryStage.show();
     }

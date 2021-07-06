@@ -1,0 +1,1 @@
+{"id":1,"name":"Command Knight","description":"Gain 400 ATK to all Warrior-Type monsters, if you control another monster, monsters your opponent controls cannot target this card for an attack","price":2100,"effects":["IncreaseAttack"],"types":["WARRIOR","EFFECT"],"category":"MONSTEREFFECT","limit":3,"level":4,"attack":1000,"deffence":1000}

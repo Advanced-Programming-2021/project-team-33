@@ -25,12 +25,13 @@ public class Ai {
         deck.setDeckActive(true);
         deck.addToMainDeck(Card.getCardByName("Battle Ox"));
         deck.addToMainDeck(Card.getCardByName("Pot of Greed"));
-        deck.addToMainDeck(Card.getCardByName("Call of the Haunted"));
+        deck.addToMainDeck(Card.getCardByName("Call Of The Haunted"));
         deck.addToMainDeck(Card.getCardByName("Axe Raider"));
-        deck.addToMainDeck(Card.getCardByName("Silver Fang"));
+        deck.addToMainDeck(Card.getCardByName("Hero of the East"));
         deck.addToMainDeck(Card.getCardByName("Horn Imp"));
         deck.addToMainDeck(Card.getCardByName("Curtain of Dark Ones"));
-        deck.addToMainDeck(Card.getCardByName("Fireyarou"));
+        deck.addToMainDeck(Card.getCardByName("Feral Imp"));
+
     }
 
 

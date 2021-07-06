@@ -164,9 +164,7 @@ public class CardMenu {
     }
 
     public static void printCardMassage(String cardName) {
-        if(cardName.equals("Command Knight")) System.out.println("You can't attack this monster now");
-        if(cardName.equals("Mind Crush1")) System.out.println("Nice Guess!");
-        if(cardName.equals("Mind Crush2")) System.out.println("Wrong Guess!");
+        if(cardName.equals("Command Knight")) new GameMenu().showError("You can't attack this monster now");
     }
 
     public void back(MouseEvent event) throws Exception {

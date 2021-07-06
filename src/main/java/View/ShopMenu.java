@@ -79,6 +79,7 @@ public class ShopMenu {
         description.setText(Card.getCards().get(0).getDescription());
         price.setText(Integer.toString(Card.getCards().get(0).getPrice()));
         leftButton.setOnMouseClicked(event -> {
+            MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\click.mp3");
             if (ref.i > 11) {
                 ref.i -= 12;
                 updateShopCards(ref.i);
@@ -86,6 +87,7 @@ public class ShopMenu {
 
         });
         rightButton.setOnMouseClicked(event -> {
+            MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\click.mp3");
             if (ref.i < 60) {
                 ref.i += 12;
                 updateShopCards(ref.i);
@@ -141,6 +143,7 @@ public class ShopMenu {
     }
 
     public void back(MouseEvent event) throws Exception {
+        MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\click.mp3");
         new MainMenu().start();
     }
 

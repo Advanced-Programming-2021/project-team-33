@@ -1,10 +1,7 @@
 package Main;
 import Controller.CardController;
 import Controller.ProgramController;
-import View.LoginMenu;
-import View.MainMenu;
-import View.ProfileMenu;
-import View.ScoreboardMenu;
+import View.*;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +10,11 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+
+import java.io.File;
 
 
 public class Main extends Application {
@@ -21,6 +22,8 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         CardController.initialCards();
+        MainMenu.menu = "start";
+        new PlayMusic().start();
         launch(args);
     }
     @FXML
@@ -40,6 +43,7 @@ public class Main extends Application {
     }
 
     public void openLoginMenu(MouseEvent mouseEvent) throws Exception {
+        MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\click.mp3");
         LoginMenu.setRegister(false);
        // ProgramController.createUser("username", "nickname", "password");
         //ProgramController.setPlayer("username");
@@ -47,12 +51,16 @@ public class Main extends Application {
         new LoginMenu().start();
     }
 
+
+
     public void openRegisterMenu(MouseEvent event) throws Exception {
+        MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\click.mp3");
         LoginMenu.setRegister(true);
         new LoginMenu().start();
     }
 
     public void exit(MouseEvent event) {
+        MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\click.mp3");
         System.exit(0);
     }
 }

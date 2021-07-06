@@ -13,7 +13,7 @@ public class Card implements Cloneable{
             isAttacked = false, isActivated = false, destroyed = false,
             isBuffed = false;
 
-
+    private Attribute attribute;
     String cardName, description;
     ArrayList<CardType> cardTypes = new ArrayList<>();
     CardCategory cardCategory;
@@ -23,7 +23,7 @@ public class Card implements Cloneable{
 
     public Card(String cardName, String description, int price, ArrayList<CardType> cardTypes,
                 CardCategory cardCategory, int limit, int level, ArrayList<Effect> effects,
-                int attack, int defence) {
+                int attack, int defence, Attribute attribute ) {
         this.cardName = cardName;
         this.description = description;
         this.price = price;

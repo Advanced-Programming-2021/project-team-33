@@ -2,10 +2,14 @@ package Controller;
 
 import Model.*;
 import View.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Optional;
 
 
 public class GameController {
@@ -22,7 +26,7 @@ public class GameController {
     public static boolean isThreeLightActive = false;
     public static boolean is1500Active = false;
     public static Player getLightPlayer = null;
-    public static int reserve = 0;
+    public static int reserve = 0,score = 0;
 
 
     public static int selectCard(String cardPosition, int number, String opponent) {
@@ -117,13 +121,13 @@ public class GameController {
         }
     }
 
-    public static void deActiveSpell()
-    {
+    public static void deActiveSpell() {
         for (Effect effect : Card.getCardByName("Change of Heart").getEffects()) {
             effect.disableEffect(null);
         }
 
     }
+
     public static void activeThreeLight() {
         for (Effect effect : Card.getCardByName("Swords of Revealing Light").getEffects()) {
             effect.enableEffect(null);
@@ -201,13 +205,18 @@ public class GameController {
     }
 
     public static void setNextGame(String firstPlayer, String secondPlayer) {
-        if(Player.currentPlayer.equals(Player.theAi) || Player.opponent.equals(Player.theAi)){
+        if (Player.currentPlayer.equals(Player.theAi) || Player.opponent.equals(Player.theAi)) {
             Ai.setNextGame();
         }
-        ChangeCardsMenu changeCardsMenu = new ChangeCardsMenu();
-        changeCardsMenu.changeDeck(firstPlayer);
-        changeCardsMenu.changeDeck(secondPlayer);
+        //ChangeCardsMenu changeCardsMenu = new ChangeCardsMenu();
+        //changeCardsMenu.changeDeck(firstPlayer);
+        //changeCardsMenu.changeDeck(secondPlayer);
         prepareGame();
+        try {
+            new GameMenu().start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void prepareGame() {
@@ -232,10 +241,16 @@ public class GameController {
     public static Card drawCard(Player player) {
         if (player.getBoard().getHand().size() < 6) {
             Card card = player.getBoard().getDeck().get(0);
-            card.setCardStatus(CardStatus.HAND);
-            player.getBoard().getHand().add(player.getBoard().getDeck().get(0));
-            player.getBoard().getDeck().remove(card);
-            return card;
+            if (card == null) {
+                System.out.println("here");
+                player.setLifePoint(0);
+            }
+            else {
+                card.setCardStatus(CardStatus.HAND);
+                player.getBoard().getHand().add(player.getBoard().getDeck().get(0));
+                player.getBoard().getDeck().remove(card);
+                return card;
+            }
         }
         return null;
     }
@@ -737,7 +752,6 @@ public class GameController {
     }
 
 
-
     public static boolean isAttackTrap() {
         if (!isTrapFrozen) {
             ArrayList<Card> trapList = Player.opponent.getBoard().getFieldCardsForSpellTraps();
@@ -828,16 +842,21 @@ public class GameController {
         RoundController.changeTurn();
         showBoard();
         if (Player.currentPlayer.equals(Player.theAi)) return true;
-        if (gameMenu.changePhaseInMiddle().equals("no")) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Trap");
+        alert.setContentText("Do you want to use your trap?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            Player.currentPlayer.setInOpponentPhase(true);
+            return true;
+        } else {
             gameMenu.printMiddleChange();
             RoundController.changeTurn();
             showBoard();
             return false;
-        } else {
-            Player.currentPlayer.setInOpponentPhase(true);
-            return true;
         }
     }
+
 
     public static void getBackFromMiddleChange() {
         GameMenu gameMenu = new GameMenu();
@@ -848,7 +867,6 @@ public class GameController {
     }
 
     public static void setWinner(int lifePoint, Player winner, Player looser) {
-        int score;
         if (lifePoint != -1) {
             score = RoundController.rounds * 1000;
             winner.increaseScore(score);
@@ -858,9 +876,13 @@ public class GameController {
             winner.increaseMoney(score);
         }
         looser.increaseMoney(RoundController.rounds * 100);
-        GameMenu gameMenu = new GameMenu();
-        gameMenu.informEndOfGame(winner, score);
-        MainMenu.menu = "main";
+        Player.currentPlayer = winner;
+        Player.opponent = looser;
+        try {
+            new SetWinner().start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static int getMonsterFieldSize() {

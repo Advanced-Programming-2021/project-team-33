@@ -28,7 +28,9 @@ public class SummonFromGraveYard implements Effect {
         if (check == 0) return;
         check = 0;
         while (check == 0) {
-            String input = Communicate.input("Choose from graveyard by index");
+            String input;
+            if(!Player.currentPlayer.getUsername().equals("Ai"))  input = Communicate.input("Choose from graveyard by index");
+            else input = "0";
             index = Integer.parseInt(input);
             if (graveyard.get(index) != null &&
                     (graveyard.get(index).getCardCategory().equals(CardCategory.MONSTEREFFECT)) ||

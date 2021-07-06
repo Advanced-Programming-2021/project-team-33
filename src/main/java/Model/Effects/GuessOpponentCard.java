@@ -6,29 +6,39 @@ import Model.Effect;
 import Model.Player;
 import View.CardMenu;
 import View.Communicate;
+import View.GameMenu;
+import javafx.scene.control.TextInputDialog;
+import javafx.scene.text.Text;
+
+import java.util.Optional;
 
 public class GuessOpponentCard implements Effect {
+
+
     @Override
     public void enableEffect(Card card) {
         Player.currentPlayer.getBoard().getGraveyard().add(GameController.selectedCard);
         Player.currentPlayer.getBoard().getHand().remove(GameController.selectedCard);
-        String input = Communicate.input("Guess a card (type card name)");
+        TextInputDialog dialog = new TextInputDialog("Guess a card");
+        dialog.setTitle("Guess");
+        dialog.setHeaderText("Guess");
+        dialog.setContentText("Guess a card from enemy hand");
+        Optional<String> input1 = dialog.showAndWait();
+        String input = input1.toString().replaceAll("Optional\\[","").replace("]","");
         boolean isExist = false;
         for (int i = 0; i < Player.opponent.getBoard().getHand().size(); i++) {
-            if (Player.opponent.getBoard().getHand().get(i).getCardName().equals(input)) {
+            if (Player.opponent.getBoard().getHand().get(i).getCardName().equals(input.toString())) {
                 Player.opponent.getBoard().getGraveyard().add(Player.opponent.getBoard().getHand().get(i));
                 Player.opponent.getBoard().getHand().remove(i);
                 isExist = true;
             }
         }
         if (!isExist) {
-            CardMenu.printCardMassage("Mind Crush2");
             Player.currentPlayer.getBoard().getGraveyard().add(Player.currentPlayer.getBoard().getHand().get(0));
             Player.currentPlayer.getBoard().getHand().remove(0);
         } else {
-            CardMenu.printCardMassage("Mind Crush1");
             for (int i = 0; i < Player.opponent.getBoard().getDeck().size(); i++) {
-                if (Player.opponent.getBoard().getDeck().get(i).getCardName().equals(input)){
+                if (Player.opponent.getBoard().getDeck().get(i).getCardName().equals(input.toString())){
                     Player.opponent.getBoard().getGraveyard().add(Player.opponent.getBoard().getDeck().get(i));
                     Player.opponent.getBoard().getDeck().remove(i);
                 }

@@ -39,6 +39,7 @@ public class FlipCoin {
         Random random = new Random();
         int number = random.nextInt(2);
         tail.setOnMouseClicked(event -> {
+            MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\coin.mp3");
             tail.setImage(null);
             head.setImage(null);
             if (number == 1) {
@@ -51,6 +52,7 @@ public class FlipCoin {
             }
         });
         head.setOnMouseClicked(event -> {
+            MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\coin.mp3");
             head.setImage(null);
             tail.setImage(null);
             if (number == 0) {
@@ -63,6 +65,7 @@ public class FlipCoin {
             }
         });
         continueButton.setOnMouseClicked(event -> {
+            MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\click.mp3");
             GameController.prepareGame();
             try {
                 new GameMenu().start();

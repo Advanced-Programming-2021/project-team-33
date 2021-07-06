@@ -4,15 +4,23 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.GameMenu">
+<AnchorPane fx:id="scene" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.GameMenu">
     <children>
         <ImageView fitHeight="720.0" fitWidth="961.0" layoutX="406.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../PNG/fie_normal.png" />
             </image>
         </ImageView>
+      <Text fx:id="pauseText" fill="#00fffc" layoutX="406.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pause" textAlignment="CENTER" wrappingWidth="348.13671875">
+         <font>
+            <Font name="Bell MT Italic" size="95.0" />
+         </font>
+      </Text>
+      <Rectangle fx:id="background" arcHeight="5.0" arcWidth="5.0" fill="#00000069" height="402.0" layoutX="265.0" layoutY="128.0" stroke="TRANSPARENT" strokeType="INSIDE" width="675.0" />
         <ImageView fx:id="cardShow" fitHeight="287.0" fitWidth="179.0" layoutX="51.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../PNG/Cards/Monsters/Unknown.jpg" />
@@ -21,16 +29,6 @@
         <ImageView fitHeight="348.0" fitWidth="266.0" layoutX="9.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../PNG/Border.png" />
-            </image>
-        </ImageView>
-        <ImageView fitHeight="110.0" fitWidth="91.0" layoutX="36.0" layoutY="575.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../PNG/Chara001.dds6.png" />
-            </image>
-        </ImageView>
-        <ImageView fitHeight="110.0" fitWidth="91.0" layoutX="276.0" layoutY="575.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../PNG/Chara001.dds6.png" />
             </image>
         </ImageView>
         <GridPane fx:id="currentBoard" layoutX="564.0" layoutY="367.0" prefHeight="244.0" prefWidth="593.0">
@@ -297,5 +295,58 @@
                 </ImageView>
             </children>
         </GridPane>
+      <ProgressBar fx:id="lp1" layoutX="25.0" layoutY="676.0" prefHeight="17.0" prefWidth="106.0" progress="0.0" />
+      <ProgressBar fx:id="lp2" layoutX="270.0" layoutY="676.0" prefHeight="17.0" prefWidth="106.0" progress="0.0" />
+      <Circle fx:id="avatar1" layoutX="77.0" layoutY="611.0" radius="53.0" stroke="#00000078" strokeType="INSIDE">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.2736000120639801" green="0.4386599361896515" blue="0.7599999904632568" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Circle>
+      <Circle fx:id="avatar2" layoutX="322.0" layoutY="611.0" radius="53.0" stroke="#00000078" strokeType="INSIDE">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.2736000120639801" green="0.4386599361896515" blue="0.7599999904632568" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Circle>
+      <ImageView fx:id="pause" fitHeight="35.0" fitWidth="35.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../PNG/pause.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="surrender" fitHeight="150.0" fitWidth="200.0" layoutX="480.0" layoutY="331.0" opacity="0.75" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../PNG/surrender.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="exclamation" fitHeight="35.0" fitWidth="35.0" layoutX="42.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../PNG/exclamation.png" />
+         </image>
+      </ImageView>
     </children>
 </AnchorPane>

@@ -3,19 +3,33 @@ package View;
 import Controller.*;
 import Model.*;
 import javafx.animation.FadeTransition;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
@@ -30,13 +44,21 @@ public class GameMenu {
     public ImageView button1, button2, button3, button4;
     public Text massage;
     public ImageView phase;
+    public ProgressBar lp1, lp2;
+    public Circle avatar1, avatar2;
+    public Rectangle background;
+    public ImageView surrender, pause;
+    public Text pauseText;
+    public AnchorPane scene;
+    public ImageView exclamation;
     private ArrayList<ImageView> currentHand, enemyHand, currentMonster, enemyMonster, currentSpell, enemySpell;
     boolean isHandSelected = false, isMonsterSelected = false, isSpellSelected = false, isOneTributeActive = false,
-            isTwoTributeActive = false, isAttackActive = false;
+            isTwoTributeActive = false, isAttackActive = false, isTrapActive = false, isPaused = false;
     AtomicInteger tribute = new AtomicInteger();
 
 
     public void start() throws IOException {
+        MainMenu.menu = "menu";
         Stage primaryStage = ProgramController.getStage();
         Parent root = FXMLLoader.load(getClass().getResource("gameMenu.fxml"));
         primaryStage.setTitle("Yu-Gi-Oh");
@@ -46,6 +68,11 @@ public class GameMenu {
 
     @FXML
     public void initialize() {
+        setPauseScene();
+        setCheat();
+        loadImageForProfile(Player.thePlayer, avatar1);
+        if (!RoundController.otherPlayer.getUsername().equals("Ai"))
+            loadImageForProfile(RoundController.otherPlayer, avatar2);
         secondPlayerName.setText(RoundController.otherPlayer.getNickname());
         firstPlayerName.setText(Player.thePlayer.getNickname());
         makeSpellList();
@@ -54,10 +81,58 @@ public class GameMenu {
         currentMonster = makeMonsterList();
         button1.setOnMouseClicked(event -> callButton1());
         button2.setOnMouseClicked(event -> callButton2());
+        button3.setOnMouseClicked(event -> callButton3());
         updateBoard(currentHand, enemyHand, currentMonster);
         animatePhase();
         goToNextPhase();
         selectCard();
+    }
+
+    private void setCheat() {
+        exclamation.setOnMouseClicked(event -> {
+            TextInputDialog dialog = new TextInputDialog("walter");
+            dialog.setTitle("Cheat Console");
+            dialog.setHeaderText("Cheat Console");
+            dialog.setContentText("Enter your cheat code:");
+            Optional<String> result = dialog.showAndWait();
+
+            if (result.get().matches("increase --money (\\d+)")) {
+
+                increaseMoney(Util.getCommand(result.get(), "increase --money (\\d+)"));
+            } else if (result.get().matches("increase --LP (\\d+)"))
+                increaseLifePoint(Util.getCommand(result.get(), "increase --LP (\\d+)"));
+            else if (result.get().matches("duel set-winner (\\S+)")) {
+                winTheGame(Util.getCommand(result.get(), "duel set-winner (\\S+)"));
+                updateBoard(currentHand, enemyHand, currentMonster);
+            }
+
+        });
+    }
+
+    private void setPauseScene() {
+        background.setFill(null);
+        surrender.setImage(null);
+        pauseText.setText(null);
+        surrender.toBack();
+        pause.setOnMouseClicked(event -> {
+            if (!isPaused) {
+                background.setFill(Color.GRAY);
+                background.setOpacity(.6);
+                pauseText.setText("Pause");
+                pause.toFront();
+                surrender.toFront();
+                surrender.setImage(new Image(getClass().getResourceAsStream("/PNG/surrender.png")));
+                isPaused = true;
+            } else {
+                background.setFill(null);
+                surrender.setImage(null);
+                surrender.toBack();
+                pause.toBack();
+                pauseText.setText(null);
+                isPaused = false;
+            }
+        });
+        surrender.setOnMouseClicked(event -> surrender());
     }
 
     private void animatePhase() {
@@ -77,6 +152,7 @@ public class GameMenu {
             animateNextPhase("main");
         }
         button4.setOnMouseClicked(event -> {
+            MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\click.mp3");
             if (!isOneTributeActive && !isTwoTributeActive) {
                 if (Player.currentPlayer.getPhase().equals(Phase.MAIN1)) {
                     RoundController.battlePhase();
@@ -97,6 +173,25 @@ public class GameMenu {
             }
         });
 
+    }
+
+    private void loadImageForProfile(Player player, Circle avatar) {
+        ImagePattern backgroundProfile;
+        int ID = player.getProfileID();
+        if (player.getProfileAddress() == null) {
+            if (ID <= 50) {
+                backgroundProfile = new ImagePattern(new Image(getClass().getResourceAsStream("/PNG/Profile/Profile (" + ID + ").png")));
+                avatar.setFill(backgroundProfile);
+            }
+        } else {
+            File file = new File(player.getProfileAddress());
+            try {
+                backgroundProfile = new ImagePattern(new Image(file.toURI().toURL().toExternalForm()));
+                avatar.setFill(backgroundProfile);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private void animateNextPhase(String nextPhase) {
@@ -120,8 +215,10 @@ public class GameMenu {
         if (Player.opponent.getBoard().getGraveyard().size() != 0)
             enemyGraveyard.setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/Unknown.jpg")));
         else enemyGraveyard.setImage(null);
-        firstPlayerLP.setText(Integer.toString(Player.thePlayer.getLifePoint()));
-        secondPlayerLP.setText(Integer.toString(RoundController.otherPlayer.getLifePoint()));
+        lp1.setProgress(Player.thePlayer.getLifePoint() / 8000.0);
+        lp2.setProgress(RoundController.otherPlayer.getLifePoint() / 8000.0);
+        firstPlayerLP.setText(Player.thePlayer.getUsername());
+        secondPlayerLP.setText(RoundController.otherPlayer.getUsername());
         turn.setText("Now is " + Player.currentPlayer.getNickname() + "'s turn");
 
         for (int i = 0; i < 6; i++) {
@@ -137,30 +234,47 @@ public class GameMenu {
             }
         }
         for (int i = 0; i < 5; i++) {
-
-
-            if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(i) != null) {
+            if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(i) == null)
+                currentMonster.get(i).setImage(null);
+            else if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(i).getCardStatus() == CardStatus.ATTACK) {
+                currentMonster.get(i).setRotate(0);
                 currentMonster.get(i).setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" +
                         Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(i).getCardName().replaceAll("\\s+", "")
                         + ".jpg")));
-            } else currentMonster.get(i).setImage(null);
-            if (Player.currentPlayer.getBoard().getFieldCardsForSpellTraps().get(i) != null)
-                currentSpell.get(i).setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" +
-                        Player.currentPlayer.getBoard().getFieldCardsForSpellTraps().get(i).getCardName().replaceAll("\\s+", "")
+            } else if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(i).getCardStatus() == CardStatus.SET) {
+                currentMonster.get(i).setRotate(90.0);
+                currentMonster.get(i).setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/Unknown.jpg")));
+            } else if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(i).getCardStatus() == CardStatus.DEFENCE) {
+                currentMonster.get(i).setRotate(90.0);
+                currentMonster.get(i).setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" +
+                        Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(i).getCardName().replaceAll("\\s+", "")
                         + ".jpg")));
+            }
+            if (Player.currentPlayer.getBoard().getFieldCardsForSpellTraps().get(i) != null)
+                currentSpell.get(i).setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/Unknown.jpg")));
             else currentSpell.get(i).setImage(null);
 
-            if (Player.opponent.getBoard().getFieldCardsForMonsters().get(i) != null)
+            if (Player.opponent.getBoard().getFieldCardsForMonsters().get(i) == null)
+                enemyMonster.get(i).setImage(null);
+            else if (Player.opponent.getBoard().getFieldCardsForMonsters().get(i).getCardStatus() == CardStatus.ATTACK) {
+                enemyMonster.get(i).setRotate(0);
                 enemyMonster.get(i).setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" +
                         Player.opponent.getBoard().getFieldCardsForMonsters().get(i).getCardName().replaceAll("\\s+", "")
                         + ".jpg")));
-            else enemyMonster.get(i).setImage(null);
-            if (Player.opponent.getBoard().getFieldCardsForSpellTraps().get(i) != null)
-                enemySpell.get(i).setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" +
-                        Player.opponent.getBoard().getFieldCardsForSpellTraps().get(i).getCardName().replaceAll("\\s+", "")
+            } else if (Player.opponent.getBoard().getFieldCardsForMonsters().get(i).getCardStatus() == CardStatus.DEFENCE) {
+                enemyMonster.get(i).setRotate(90);
+                enemyMonster.get(i).setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" +
+                        Player.opponent.getBoard().getFieldCardsForMonsters().get(i).getCardName().replaceAll("\\s+", "")
                         + ".jpg")));
+            } else if (Player.opponent.getBoard().getFieldCardsForMonsters().get(i).getCardStatus() == CardStatus.SET) {
+                enemyMonster.get(i).setRotate(90);
+                enemyMonster.get(i).setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/Unknown.jpg")));
+            }
+            if (Player.opponent.getBoard().getFieldCardsForSpellTraps().get(i) != null)
+                enemySpell.get(i).setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/Unknown.jpg")));
             else enemySpell.get(i).setImage(null);
         }
+        RoundController.checkEndOfRound();
     }
 
     private ArrayList<ImageView> makeMonsterList() {
@@ -221,6 +335,7 @@ public class GameMenu {
             int finalI = i;
             enemyMonster.get(i).setOnMouseClicked(event -> {
                 Card card = Player.opponent.getBoard().getFieldCardsForMonsters().get(finalI);
+
                 if (isAttackActive) detectEnemyToAttack(finalI);
                 else if (card != null) setViewForSelected(card);
 
@@ -228,8 +343,24 @@ public class GameMenu {
             currentMonster.get(i).setOnMouseClicked(event -> {
                 tribute.set(finalI);
                 Card card = Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(finalI);
+                if (event.getButton() == MouseButton.SECONDARY && card.getCardStatus().equals(CardStatus.SET))
+                    flipSummon();
+                else if (event.getButton() == MouseButton.SECONDARY && card.getCardStatus().equals(CardStatus.ATTACK))
+                    setPosition("defence");
+                else if (event.getButton() == MouseButton.SECONDARY && card.getCardStatus().equals(CardStatus.DEFENCE))
+                    setPosition("attack");
                 if (card != null) setViewForSelected(card);
                 if (!isOneTributeActive && !isTwoTributeActive) setButtonsForMonster();
+            });
+            currentSpell.get(i).setOnMouseClicked(event -> {
+                Card card = Player.currentPlayer.getBoard().getFieldCardsForSpellTraps().get(finalI);
+                if (card != null) setViewForSelected(card);
+                if (!isOneTributeActive && !isTwoTributeActive) setButtonsForMonster();
+            });
+            enemySpell.get(i).setOnMouseClicked(event -> {
+                Card card = Player.opponent.getBoard().getFieldCardsForSpellTraps().get(finalI);
+                if (card != null) setViewForSelected(card);
+
             });
         }
 
@@ -298,16 +429,27 @@ public class GameMenu {
         button4.setImage(new Image(getClass().getResourceAsStream("/PNG/nextPhase.png")));
     }
 
+
     private void callButton1() {
+        MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\click.mp3");
         if (isHandSelected) summonMonster();
         else if (isOneTributeActive) callTributeOne();
         else if (isMonsterSelected) attackToMonster();
+
         updateBoard(currentHand, enemyHand, currentMonster);
     }
 
     private void callButton2() {
-        //if(isHandSelected) summonMonster();
+        MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\click.mp3");
+        if (isHandSelected) setCard();
         if (isOneTributeActive) cancel();
+        else if (isMonsterSelected) attackDirect();
+        updateBoard(currentHand, enemyHand, currentMonster);
+    }
+
+    private void callButton3() {
+        MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\click.mp3");
+        if (isMonsterSelected || isHandSelected) activeSpell();
         updateBoard(currentHand, enemyHand, currentMonster);
     }
 
@@ -319,19 +461,10 @@ public class GameMenu {
         selectCard(Util.getCommand(input, "select --(\\S+)( --opponent)? (\\d+)"));
         showGraveyard(Util.getCommand(input, "show graveyard"));
         deSelectCard(Util.getCommand(input, "select -d"));
-        activeSpell(Util.getCommand(input, "activate effect"));
-        flipSummon(Util.getCommand(input, "flip-summon"));
-        setCard(Util.getCommand(input, "set"));
-        setPosition(Util.getCommand(input, "set --position ((attack)|(defence))"));
-
-        attackDirect(Util.getCommand(input, "attack direct"));
-
         showBoard(Util.getCommand(input, "showBoard"));
-        surrender(Util.getCommand(input, "surrender"));
         cancel(Util.getCommand(input, "cancel"));
-        increaseMoney(Util.getCommand(input, "increase --money (\\d+)"));
-        increaseLifePoint(Util.getCommand(input, "increase --LP (\\d+)"));
-        winTheGame(Util.getCommand(input, "duel set-winner (\\S+)"));
+
+
         RoundController.checkEndOfRound();
     }
 
@@ -370,20 +503,27 @@ public class GameMenu {
         System.out.println("now it will be " + Player.opponent.getUsername() + "’s turn");
     }
 
-    public String changePhaseInMiddle() {
-        return Communicate.input("do you want to active your spell or trap?(yes or no)");
+    public void changePhaseInMiddle() {
+        showError("do you want to active your spell or trap?(yes or no)");
+        setAction("trap");
+        button1.setImage(new Image(getClass().getResourceAsStream("/PNG/Yes.png")));
+        button2.setImage(new Image(getClass().getResourceAsStream("/PNG/No.png")));
+        button3.setImage(null);
+        button4.setImage(null);
     }
 
     public void informEndOfGame(Player winner, int score) {
-        System.out.println(winner.getUsername() + " won the whole match with score: " + score + " - 0\n\n");
+        massage = new Text();
+        showError(winner.getUsername() + " won the whole match with score: " + score + " - 0\n\n");
     }
 
     public void informEndOfRound(Player winner, int score, int remainingRounds) {
-        System.out.println("Round " + remainingRounds + " ended");
-        System.out.println(winner.getUsername() + " won the game with score: " + score + " - 0");
+        massage = new Text();
+        showError("Round " + remainingRounds + " ended");
+        showError(winner.getUsername() + " won the game with score: " + score + " - 0");
         remainingRounds--;
         if (remainingRounds != 1)
-            System.out.println("Now is time for round " + remainingRounds + "\n\n");
+            showError("Now is time for round " + remainingRounds + "\n\n");
     }
 
 
@@ -403,43 +543,39 @@ public class GameMenu {
     }
 
 
-    private void activeSpell(Matcher matcher) {
-        if (!MainMenu.checked && matcher.matches()) {
-            MainMenu.checked = true;
-            if (GameController.selectedCard == null) System.out.println("no card is selected yet");
-            else if (Player.currentPlayer.isInOpponentPhase()) {
-                if (!GameController.selectedCard.getCardCategory().equals(CardCategory.SPELL) &&
-                        !GameController.selectedCard.getCardCategory().equals(CardCategory.TRAP))
-                    System.out.println("activate effect is only for spell cards.");
-                    //other things needed for if blow
-                else if (!GameController.selectedCard.getCardStatus().equals(CardStatus.BACK) &&
-                        !GameController.selectedCard.getCardStatus().equals(CardStatus.HAND))
-                    System.out.println("you can't active this card");
-                else {
-                    if (GameController.selectedCard.getCardCategory().equals(CardCategory.TRAP))
-                        System.out.println("trap activated");
-                    else System.out.println("spell activated");
-                    GameController.activeSpell();
-                    GameController.getBackFromMiddleChange();
-                }
-            } else {
-                if (!GameController.selectedCard.getCardCategory().equals(CardCategory.SPELL) &&
-                        !GameController.selectedCard.getCardCategory().equals(CardCategory.TRAP))
-                    System.out.println("activate effect is only for spell cards.");
-                else if (!Player.currentPlayer.getPhase().equals(Phase.MAIN1) &&
-                        !Player.currentPlayer.getPhase().equals(Phase.MAIN2))
-                    System.out.println("you can’t activate an effect on this turn");
-                else if (GameController.selectedCard.isActivated())
-                    System.out.println("you have already activated this card");
-                else if (GameController.isSpellTrapFieldFull() //&& !isForFieldZone
-                ) System.out.println("spell card zone is full");
-                    //else if( !isActivable) System.out.println("preparations of this spell are not done yet");
-                else {
-                    System.out.println("spell activated");
-                    GameController.activeSpell();
-                }
+    private void activeSpell() {
+        if (GameController.selectedCard == null) showError("no card is selected yet");
+        else if (Player.currentPlayer.isInOpponentPhase()) {
+            if (!GameController.selectedCard.getCardCategory().equals(CardCategory.SPELL) &&
+                    !GameController.selectedCard.getCardCategory().equals(CardCategory.TRAP))
+                showError("activate effect is only for spell cards.");
+                //other things needed for if blow
+            else if (!GameController.selectedCard.getCardStatus().equals(CardStatus.BACK) &&
+                    !GameController.selectedCard.getCardStatus().equals(CardStatus.HAND))
+                showError("you can't active this card");
+            else {
+                if (GameController.selectedCard.getCardCategory().equals(CardCategory.TRAP))
+                    showError("trap activated");
+                showError("spell activated");
+                GameController.activeSpell();
+                GameController.getBackFromMiddleChange();
             }
-
+        } else {
+            if (!GameController.selectedCard.getCardCategory().equals(CardCategory.SPELL) &&
+                    !GameController.selectedCard.getCardCategory().equals(CardCategory.TRAP))
+                showError("activate effect is only for spell cards.");
+            else if (!Player.currentPlayer.getPhase().equals(Phase.MAIN1) &&
+                    !Player.currentPlayer.getPhase().equals(Phase.MAIN2))
+                showError("you can’t activate an effect on this turn");
+            else if (GameController.selectedCard.isActivated())
+                showError("you have already activated this card");
+            else if (GameController.isSpellTrapFieldFull() //&& !isForFieldZone
+            ) showError("spell card zone is full");
+                //else if( !isActivable) System.out.println("preparations of this spell are not done yet");
+            else {
+                showError("spell activated");
+                GameController.activeSpell();
+            }
         }
     }
 
@@ -456,7 +592,10 @@ public class GameMenu {
             showError("action not allowed in this phase");
         else if (GameController.isMonsterFieldFull()) showError("monster card zone is full");
         else if (RoundController.isSummoned) showError("you already summoned/set on this turn");
-        else if (GameController.selectedCard.getLevel() > 4 && GameController.selectedCard.getLevel() < 7) {
+        else if (RoundController.isRoundFreeze) {
+            showError("you can't summon because of time seal trap");
+            RoundController.isRoundFreeze = false;
+        } else if (GameController.selectedCard.getLevel() > 4 && GameController.selectedCard.getLevel() < 7) {
             if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().size() == 0) {
                 showError("there are not enough cards for tribute");
                 return;
@@ -487,27 +626,33 @@ public class GameMenu {
                 return;
             }
             int command = GameController.summonMonster(tribute, tribute1);
-            if (command != -1) showError("summoned successfully2");
+            if (command != -1) {
+                showError("summoned successfully2");
+                MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\summon.wav");
+            }
         } else {
             int command = GameController.summonMonster(-1, -1);
             if (command != -1) showError("summoned successfully3");
+            MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\summon.wav");
         }
 
     }
 
-    private void setAction(String act) {
+    public void setAction(String act) {
         isHandSelected = false;
         isSpellSelected = false;
         isOneTributeActive = false;
         isTwoTributeActive = false;
         isMonsterSelected = false;
         isAttackActive = false;
+        isTrapActive = false;
         if (act.equals("oneTribute")) isOneTributeActive = true;
         if (act.equals("twoTribute")) isTwoTributeActive = true;
         if (act.equals("hand")) isHandSelected = true;
         if (act.equals("monster")) isMonsterSelected = true;
         if (act.equals("spell")) isSpellSelected = true;
         if (act.equals("attack")) isAttackActive = true;
+        if (act.equals("trap")) isTrapActive = true;
 
     }
 
@@ -538,81 +683,73 @@ public class GameMenu {
     }
 
 
-    private void flipSummon(Matcher matcher) {
-        if (!MainMenu.checked && matcher.matches()) {
-            MainMenu.checked = true;
-            if (Player.currentPlayer.isInOpponentPhase())
-                System.out.println("it’s not your turn to play this kind of moves");
-            else if (GameController.selectedCard == null) System.out.println("no card is selected yet");
-            else if (!GameController.selectedCard.getCardStatus().equals(CardStatus.ATTACK) &&
-                    !GameController.selectedCard.getCardStatus().equals(CardStatus.DEFENCE) &&
-                    !GameController.selectedCard.getCardStatus().equals(CardStatus.SET))
-                System.out.println("you can’t change this card position");
-            else if (!Player.currentPlayer.getPhase().equals(Phase.MAIN1) &&
-                    !Player.currentPlayer.getPhase().equals(Phase.MAIN2))
-                System.out.println("action not allowed in this phase");
-            else if (!GameController.selectedCard.getCardStatus().equals(CardStatus.SET) ||
-                    GameController.selectedCard.isSummoned())
-                System.out.println("you can’t flip summon this card");
+    private void flipSummon() {
+
+        if (Player.currentPlayer.isInOpponentPhase())
+            showError("it’s not your turn to play this kind of moves");
+        else if (GameController.selectedCard == null) showError("no card is selected yet");
+        else if (!GameController.selectedCard.getCardStatus().equals(CardStatus.ATTACK) &&
+                !GameController.selectedCard.getCardStatus().equals(CardStatus.DEFENCE) &&
+                !GameController.selectedCard.getCardStatus().equals(CardStatus.SET))
+            showError("you can’t change this card position");
+        else if (!Player.currentPlayer.getPhase().equals(Phase.MAIN1) &&
+                !Player.currentPlayer.getPhase().equals(Phase.MAIN2))
+            showError("action not allowed in this phase");
+        else if (!GameController.selectedCard.getCardStatus().equals(CardStatus.SET) ||
+                GameController.selectedCard.isSummoned())
+            showError("you can’t flip summon this card");
+        else {
+            showError("flip summoned successfully");
+            GameController.flipSummon();
+        }
+
+    }
+
+    private void setCard() {
+        if (Player.currentPlayer.isInOpponentPhase())
+            showError("it’s not your turn to play this kind of moves");
+        else if (GameController.selectedCard == null) showError("no card is selected yet");
+        else if (!GameController.selectedCard.getCardStatus().equals(CardStatus.HAND))
+            showError("you can’t set this card");
+        else if (!Player.currentPlayer.getPhase().equals(Phase.MAIN1) &&
+                !Player.currentPlayer.getPhase().equals(Phase.MAIN2))
+            showError("action not allowed in this phase");
+        else if (GameController.selectedCard.getCardCategory().equals(CardCategory.MONSTER) ||
+                GameController.selectedCard.getCardCategory().equals(CardCategory.MONSTEREFFECT)) {
+            if (GameController.isMonsterFieldFull()) showError("monster card zone is full");
+            else if (RoundController.isSummoned) showError("you already summoned/set on this turn");
             else {
-                System.out.println("flip summoned successfully");
-                GameController.flipSummon();
+                GameController.setMonster();
+                showError("set successfully1");
+            }
+        } else {
+            if (GameController.isSpellTrapFieldFull()) showError("spell card zone is full");
+            else {
+                GameController.setSpell();
+                showError("set successfully2");
             }
         }
     }
 
-    private void setCard(Matcher matcher) {
-        if (!MainMenu.checked && matcher.matches()) {
-            MainMenu.checked = true;
-            if (Player.currentPlayer.isInOpponentPhase())
-                System.out.println("it’s not your turn to play this kind of moves");
-            else if (GameController.selectedCard == null) System.out.println("no card is selected yet");
-            else if (!GameController.selectedCard.getCardStatus().equals(CardStatus.HAND))
-                System.out.println("you can’t set this card");
-            else if (!Player.currentPlayer.getPhase().equals(Phase.MAIN1) &&
-                    !Player.currentPlayer.getPhase().equals(Phase.MAIN2))
-                System.out.println("action not allowed in this phase");
-            else if (GameController.selectedCard.getCardCategory().equals(CardCategory.MONSTER) ||
-                    GameController.selectedCard.getCardCategory().equals(CardCategory.MONSTEREFFECT)) {
-                if (GameController.isMonsterFieldFull()) System.out.println("monster card zone is full");
-                else if (RoundController.isSummoned) System.out.println("you already summoned/set on this turn");
-                else {
-                    GameController.setMonster();
-                    System.out.println("set successfully1");
-                }
-            } else {
-                if (GameController.isSpellTrapFieldFull()) System.out.println("spell card zone is full");
-                else {
-                    GameController.setSpell();
-                    System.out.println("set successfully2");
-                }
-            }
-        }
-    }
-
-    private void setPosition(Matcher matcher) {
-        if (!MainMenu.checked && matcher.matches()) {
-            MainMenu.checked = true;
-            String position = matcher.group(1);
-            if (Player.currentPlayer.isInOpponentPhase())
-                System.out.println("it’s not your turn to play this kind of moves");
-            else if (GameController.selectedCard == null) System.out.println("no card is selected yet");
-            else if (!GameController.selectedCard.getCardStatus().equals(CardStatus.ATTACK) &&
-                    !GameController.selectedCard.getCardStatus().equals(CardStatus.DEFENCE))
-                System.out.println("you can’t change this card position");
-            else if (!Player.currentPlayer.getPhase().equals(Phase.MAIN1) &&
-                    !Player.currentPlayer.getPhase().equals(Phase.MAIN2))
-                System.out.println("action not allowed in this phase");
-            else if (GameController.selectedCard.getCardStatus().equals(CardStatus.ATTACK) && position.equals("attack"))
-                System.out.println("this card is already in the wanted position");
-            else if (GameController.selectedCard.getCardStatus().equals(CardStatus.DEFENCE) && position.equals("defence"))
-                System.out.println("this card is already in the wanted position");
-            else if (GameController.selectedCard.isChanged())
-                System.out.println("you already changed this card position in this turn");
-            else {
-                GameController.changeCardPosition(position);
-                System.out.println("monster card position changed successfully");
-            }
+    private void setPosition(String position) {
+        if (Player.currentPlayer.isInOpponentPhase())
+            showError("it’s not your turn to play this kind of moves");
+        else if (GameController.selectedCard == null) System.out.println("no card is selected yet");
+        else if (!GameController.selectedCard.getCardStatus().equals(CardStatus.ATTACK) &&
+                !GameController.selectedCard.getCardStatus().equals(CardStatus.DEFENCE))
+            showError("you can’t change this card position");
+        else if (!Player.currentPlayer.getPhase().equals(Phase.MAIN1) &&
+                !Player.currentPlayer.getPhase().equals(Phase.MAIN2))
+            showError("action not allowed in this phase");
+        else if (GameController.selectedCard.getCardStatus().equals(CardStatus.ATTACK) && position.equals("attack"))
+            showError("this card is already in the wanted position");
+        else if (GameController.selectedCard.getCardStatus().equals(CardStatus.DEFENCE) && position.equals("defence"))
+            showError("this card is already in the wanted position");
+        else if (GameController.selectedCard.isChanged())
+            showError("you already changed this card position in this turn");
+        else {
+            GameController.changeCardPosition(position);
+            showError("monster card position changed successfully");
         }
     }
 
@@ -635,11 +772,11 @@ public class GameMenu {
 
     private void detectEnemyToAttack(int enemyMonsterIndex) {
 
-
         if (Player.opponent.getBoard().getFieldCardsForMonsters().get(enemyMonsterIndex) == null)
             showError("there is no card to attack here");
         else {
             GameController.attackMonster(enemyMonsterIndex);
+            MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\attack.wav");
             updateBoard(currentHand, enemyHand, currentMonster);
         }
     }
@@ -666,25 +803,25 @@ public class GameMenu {
 
     }
 
-    private void attackDirect(Matcher matcher) {
-        if (!MainMenu.checked && matcher.matches()) {
-            MainMenu.checked = true;
-            if (Player.currentPlayer.isInOpponentPhase())
-                System.out.println("it’s not your turn to play this kind of moves");
-            else if (GameController.selectedCard == null) System.out.println("no card is selected yet");
-            else if (!GameController.selectedCard.getCardStatus().equals(CardStatus.ATTACK))
-                System.out.println("you can’t attack with this card");
-            else if (!Player.currentPlayer.getPhase().equals(Phase.BATTLE))
-                System.out.println("you can’t do this action in this phase");
-            else if (GameController.selectedCard.isAttacked())
-                System.out.println("this card already attacked");
-            else if (!GameController.isEnemyMonsterFieldEmpty())
-                System.out.println("you can’t attack the opponent directly");
-            else {
-                int damage = GameController.attackDirect();
-                if (damage != -1) System.out.println("your opponent receives " + damage + " battle damage");
-            }
+    private void attackDirect() {
+
+        if (Player.currentPlayer.isInOpponentPhase())
+            showError("it’s not your turn to play this kind of moves");
+        else if (GameController.selectedCard == null) System.out.println("no card is selected yet");
+        else if (!GameController.selectedCard.getCardStatus().equals(CardStatus.ATTACK))
+            showError("you can’t attack with this card");
+        else if (!Player.currentPlayer.getPhase().equals(Phase.BATTLE))
+            showError("you can’t do this action in this phase");
+        else if (GameController.selectedCard.isAttacked())
+            showError("this card already attacked");
+        else if (!GameController.isEnemyMonsterFieldEmpty())
+            showError("you can’t attack the opponent directly");
+        else {
+            int damage = GameController.attackDirect();
+            if (damage != -1) showError("your opponent receives " + damage + " battle damage");
+            MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\attack.wav");
         }
+
     }
 
     public void selectCard(Matcher matcher) {
@@ -720,37 +857,39 @@ public class GameMenu {
         }
     }
 
-    private void surrender(Matcher matcher) {
-        if (!MainMenu.checked && matcher.matches()) {
-            MainMenu.checked = true;
-            Player.currentPlayer.setLifePoint(0);
-        }
+    private void surrender() {
+        Player.currentPlayer.setLifePoint(0);
+        System.out.println(1);
+        updateBoard(currentHand, enemyHand, currentMonster);
     }
 
     private void increaseMoney(Matcher matcher) {
-        if (!MainMenu.checked && matcher.matches()) {
+        if (matcher.matches()) {
             MainMenu.checked = true;
             Player.currentPlayer.increaseMoney(Integer.parseInt(matcher.group(1)));
         }
     }
 
     private void increaseLifePoint(Matcher matcher) {
-        if (!MainMenu.checked && matcher.matches()) {
+        if (matcher.matches()) {
             MainMenu.checked = true;
             Player.currentPlayer.increaseLifePoint(Integer.parseInt(matcher.group(1)));
         }
     }
 
     private void winTheGame(Matcher matcher) {
-        if (!MainMenu.checked && matcher.matches()) {
-            MainMenu.checked = true;
+        if (matcher.matches()) {
+
             if (matcher.group(1).equals(Player.currentPlayer.getNickname())) {
                 Player.opponent.setLifePoint(0);
-            }
+            } else if (matcher.group(1).equals(Player.opponent.getNickname())) {
+                Player.currentPlayer.setLifePoint(0);
+            } else Communicate.output("invalid name");
         }
     }
 
-    private void showError(String error) {
+
+    public void showError(String error) {
         massage.setText(error);
     }
 

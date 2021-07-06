@@ -3,10 +3,7 @@ package View;
 import Controller.EffectController;
 import Controller.ProgramController;
 import Controller.Util;
-import Model.Card;
-import Model.CardCategory;
-import Model.CardType;
-import Model.Effect;
+import Model.*;
 import com.google.gson.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -100,7 +97,7 @@ public class ImportExportMenu {
             String deffence = card.get("deffence").getAsString();
 
             Card newCard = new Card(name, description, Integer.parseInt(price), cardTypes, category, Integer.parseInt(limit),
-                    Integer.parseInt(level), effects, Integer.parseInt(attack), Integer.parseInt(deffence));
+                    Integer.parseInt(level), effects, Integer.parseInt(attack), Integer.parseInt(deffence), Attribute.FIRE);
             System.out.println(newCard.getCardName());
         } catch (IOException e) {
             System.out.println("no json file with this name found");
@@ -108,10 +105,12 @@ public class ImportExportMenu {
     }
 
     public void back(MouseEvent mouseEvent) throws IOException {
+        MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\click.mp3");
         new DeckMenu().start();
     }
 
     public void importCard(MouseEvent mouseEvent) {
+        MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\click.mp3");
         importCard(cardName.getText());
     }
 }

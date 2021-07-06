@@ -3,21 +3,20 @@ package Model.Effects;
 import Controller.GameController;
 import Model.*;
 import View.Communicate;
+import View.GameMenu;
+import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 
 public class ChooseFromGraveyardAndSpecialSummon implements Effect {
     @Override
     public void enableEffect(Card card) {
-        String opponent = Communicate.input("Choose graveyard:" + "\n" +
-                "1-My graveyard \t 2-Opponent graveyard");
-        if (opponent.equals("1")) {
-            chooseFromGraveYard("Your", Player.currentPlayer);
-        } else {
-            chooseFromGraveYard("Opponent's", Player.opponent);
-        }
-
-
+        new GameMenu().showError("Choose graveyard:");
+        new GameMenu().setAction("spell");
+        new GameMenu().button1.setImage(new Image(getClass().getResourceAsStream("/PNG/mygraveyard.png")));
+        new GameMenu().button2.setImage(new Image(getClass().getResourceAsStream("/PNG/opponentGraveyard.png")));
+        new GameMenu().button1.setOnMouseClicked(event -> chooseFromGraveYard("Your", Player.currentPlayer));
+        new GameMenu().button2.setOnMouseClicked(event -> chooseFromGraveYard("Opponent's", Player.opponent));
     }
 
     @Override
@@ -33,7 +32,7 @@ public class ChooseFromGraveyardAndSpecialSummon implements Effect {
     public void chooseFromGraveYard(String output, Player player) {
         ArrayList<Card> graveYard = player.getBoard().getGraveyard();
         if (graveYard.size() == 0) {
-            Communicate.output(output + " graveyard is empty");
+            new GameMenu().showError(output + " graveyard is empty");
             return;
         }
         ArrayList<Integer> indexes = new ArrayList<>();

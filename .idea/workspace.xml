@@ -4,48 +4,52 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c344dfcf-2301-4e3d-a4d9-a1311bc30bb9" name="Default Changelist" comment="complete ProfileMenu">
+    <list default="true" id="c344dfcf-2301-4e3d-a4d9-a1311bc30bb9" name="Default Changelist" comment="attack gameMenu">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Model/Attribute.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/View/PlayMusic.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/View/SetWinner.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/View/setWinner.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/YoGiOh.iml" beforeDir="false" afterPath="$PROJECT_DIR$/YoGiOh.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Ai.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Ai.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/CardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/CardController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/ProgramController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/ProgramController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/RoundController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/RoundController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Card.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Effects/ChooseFromGraveyardAndSpecialSummon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Effects/ChooseFromGraveyardAndSpecialSummon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Effects/GuessOpponentCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Effects/GuessOpponentCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Effects/SummonFromGraveYard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Effects/SummonFromGraveYard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/CardMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/CardMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/View/DeckMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/DeckMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/View/FlipCoin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/FlipCoin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/View/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/GameMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/View/ImportExportMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/ImportExportMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/LoginMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/LoginMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/View/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/MainMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/ProfileMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/ProfileMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/View/ScoreboardMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/ScoreboardMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/View/deckMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/View/deckMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/SetGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/SetGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/ShopMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/ShopMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/View/gameMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/View/gameMenu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/View/loginView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/View/loginView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/View/mainMenuView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/View/mainMenuView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/View/scoreBoardMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/View/scoreBoardMenu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/firstPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/firstPage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Controller/ProgramController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controller/ProgramController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Controller/ProgramController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controller/ProgramController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Controller/Ai.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controller/Ai.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Controller/CardController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controller/CardController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Controller/GameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controller/GameController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Controller/RoundController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controller/RoundController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Model/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/View/DeckMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/DeckMenu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/View/FlipCoin.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/FlipCoin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Model/Card.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Card.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Model/Effects/ChooseFromGraveyardAndSpecialSummon.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Effects/ChooseFromGraveyardAndSpecialSummon.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Model/Effects/GuessOpponentCard.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Effects/GuessOpponentCard.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Model/Effects/SummonFromGraveYard.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Effects/SummonFromGraveYard.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/CardMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/CardMenu.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/View/GameMenu$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/GameMenu$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/View/GameMenu$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/GameMenu$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/View/GameMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/GameMenu.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/View/ImportExportMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/ImportExportMenu.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/View/MainMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/MainMenu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/View/ProfileMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/ProfileMenu.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/View/ScoreboardMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/ScoreboardMenu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/View/deckMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/deckMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/SetGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/SetGame.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/View/gameMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/gameMenu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/View/loginView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/loginView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/View/mainMenuView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/mainMenuView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/View/scoreBoardMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/scoreBoardMenu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/firstPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/firstPage.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,8 +59,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -82,6 +86,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$USER_HOME$/Desktop/javafx-sdk-16/lib" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Libraries" />
@@ -93,7 +98,7 @@
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main.Main" />
       <module name="YoGiOh" />
-      <option name="VM_PARAMETERS" value="--module-path C:\Users\arsalan77x\Desktop\javafx-sdk-16\lib --add-modules javafx.controls,javafx.fxml" />
+      <option name="VM_PARAMETERS" value="--module-path C:\Users\arsalan77x\Desktop\javafx-sdk-16\lib --add-modules javafx.controls,javafx.media,javafx.fxml" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="Main.*" />
@@ -147,7 +152,21 @@
       <option name="project" value="LOCAL" />
       <updated>1625408754028</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="attack gameMenu">
+      <created>1625458805161</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1625458805161</updated>
+    </task>
+    <task id="LOCAL-00005" summary="attack gameMenu">
+      <created>1625458906320</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1625458906320</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -169,6 +188,7 @@
     <MESSAGE value="ScoreboardMenu" />
     <MESSAGE value="complete ProfileMenu and ScoreboardMenu" />
     <MESSAGE value="complete ProfileMenu" />
-    <option name="LAST_COMMIT_MESSAGE" value="complete ProfileMenu" />
+    <MESSAGE value="attack gameMenu" />
+    <option name="LAST_COMMIT_MESSAGE" value="attack gameMenu" />
   </component>
 </project>
