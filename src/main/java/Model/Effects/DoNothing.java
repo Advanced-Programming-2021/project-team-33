@@ -16,6 +16,11 @@ public class DoNothing implements Effect {
 
     @Override
     public String getEffectName() {
-        return null;
+        return "DoNothing";
+    }
+
+    @Override
+    public String getEffectDescription() {
+        return "";
     }
 }

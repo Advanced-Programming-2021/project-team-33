@@ -32,4 +32,9 @@ public class DestroySpecificSpellCard implements Effect {
     public String getEffectName() {
         return "DestroySpecificSpellCard";
     }
+
+    @Override
+    public String getEffectDescription() {
+        return "";
+    }
 }

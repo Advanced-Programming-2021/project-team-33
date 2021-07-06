@@ -55,4 +55,9 @@ public class GuessOpponentCard implements Effect {
     public String getEffectName() {
         return "GuessOpponentCard";
     }
+
+    @Override
+    public String getEffectDescription() {
+        return "";
+    }
 }

@@ -18,4 +18,9 @@ public class RitualSummon implements Effect {
     public String getEffectName() {
         return "RitualSummon";
     }
+
+    @Override
+    public String getEffectDescription() {
+        return "";
+    }
 }

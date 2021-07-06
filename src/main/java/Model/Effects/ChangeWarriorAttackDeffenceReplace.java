@@ -29,4 +29,8 @@ public class ChangeWarriorAttackDeffenceReplace implements Effect {
             }
         }
     }
+    @Override
+    public String getEffectDescription() {
+        return "";
+    }
 }

@@ -65,17 +65,15 @@ public class DeckMenu {
                 updateGrid();
             }
         });
-        int a = 0;
         for (Card card : Card.getCards()) {
-            a++;
-            if (a < 70) {
-                Image image = new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" +
-                        card.getCardName().replaceAll("\\s+", "") + ".jpg"));
-                ImageView imageView = new ImageView(image);
-                imageView.setFitHeight(124);
-                imageView.setFitWidth(75);
-                deckListOfCards.getItems().add(imageView);
-            }
+            System.out.println("/PNG/Cards/Monsters/" +
+                    card.getCardName().replaceAll("\\s+", "") + ".jpg");
+            Image image = new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" +
+                    card.getCardName().replaceAll("\\s+", "") + ".jpg"));
+            ImageView imageView = new ImageView(image);
+            imageView.setFitHeight(124);
+            imageView.setFitWidth(75);
+            deckListOfCards.getItems().add(imageView);
         }
 
         for (Deck deck : Player.thePlayer.getListOfDecks()) {

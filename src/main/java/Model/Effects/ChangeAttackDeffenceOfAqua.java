@@ -33,4 +33,9 @@ public class ChangeAttackDeffenceOfAqua implements Effect {
             }
         }
     }
+
+    @Override
+    public String getEffectDescription() {
+        return "";
+    }
 }

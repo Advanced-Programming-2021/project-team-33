@@ -24,4 +24,9 @@ public class DestroyAllOpponentSpellTrap implements Effect {
     public String getEffectName() {
         return "DestroyAllOpponentSpellTrap";
     }
+
+    @Override
+    public String getEffectDescription() {
+        return "";
+    }
 }

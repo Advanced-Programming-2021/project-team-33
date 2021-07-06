@@ -64,4 +64,9 @@ public class RemoveCardFromHandAndDestroyTwoSpellTrap implements Effect {
     public String getEffectName() {
         return "RemoveCardFromHandAndDestroyTwoSpellTrap";
     }
+
+    @Override
+    public String getEffectDescription() {
+        return "";
+    }
 }

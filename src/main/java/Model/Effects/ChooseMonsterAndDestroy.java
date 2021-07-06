@@ -34,6 +34,11 @@ public class ChooseMonsterAndDestroy implements Effect {
 
     @Override
     public String getEffectName() {
-        return null;
+        return "ChooseMonsterAndDestroy";
+    }
+
+    @Override
+    public String getEffectDescription() {
+        return "";
     }
 }

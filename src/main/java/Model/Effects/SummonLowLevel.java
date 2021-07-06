@@ -34,6 +34,11 @@ public class SummonLowLevel implements Effect {
     }
     @Override
     public String getEffectName() {
-        return null;
+        return "SummonLowLevel";
+    }
+
+    @Override
+    public String getEffectDescription() {
+        return "";
     }
 }

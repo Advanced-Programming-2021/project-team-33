@@ -30,4 +30,9 @@ public class IncreaseAttack implements Effect {
     public String getEffectName() {
         return "IncreaseAttack";
     }
+
+    @Override
+    public String getEffectDescription() {
+        return "";
+    }
 }

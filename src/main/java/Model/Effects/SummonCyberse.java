@@ -51,6 +51,11 @@ public class SummonCyberse implements Effect {
     }
     @Override
     public String getEffectName() {
-        return null;
+        return "SummonCyberse";
+    }
+
+    @Override
+    public String getEffectDescription() {
+        return "";
     }
 }

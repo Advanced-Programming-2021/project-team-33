@@ -27,4 +27,9 @@ public class AttackDirectToOpponent implements Effect {
     public String getEffectName() {
         return "AttackDirectToOpponent";
     }
+
+    @Override
+    public String getEffectDescription() {
+        return "";
+    }
 }

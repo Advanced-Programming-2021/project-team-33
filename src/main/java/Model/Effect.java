@@ -9,6 +9,8 @@ public interface Effect {
 
     public String getEffectName();
 
+    public String getEffectDescription();
+
     public static Effect getEffectByName(String name) {
         for (Effect effect : EffectController.effects) {
             if (effect.getEffectName().equals(name))

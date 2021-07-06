@@ -19,4 +19,9 @@ public class IncreaseLPForEverySpell implements Effect {
     public String getEffectName() {
         return "IncreaseLPForEverySpell";
     }
+
+    @Override
+    public String getEffectDescription() {
+        return "";
+    }
 }

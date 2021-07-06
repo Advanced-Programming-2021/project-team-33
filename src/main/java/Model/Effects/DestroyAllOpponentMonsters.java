@@ -33,4 +33,9 @@ public class DestroyAllOpponentMonsters implements Effect {
     public String getEffectName() {
         return "DestroyAllOpponentMonsters";
     }
+
+    @Override
+    public String getEffectDescription() {
+        return "";
+    }
 }

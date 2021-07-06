@@ -26,4 +26,9 @@ public class ChangeMyEquipAttackDeffence implements Effect {
             }
         }
     }
+
+    @Override
+    public String getEffectDescription() {
+        return "";
+    }
 }

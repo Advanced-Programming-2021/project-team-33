@@ -24,4 +24,9 @@ public class TakeNextRoundFromOpponent implements Effect {
     public String getEffectName() {
         return "TakeNextRoundFromOpponent";
     }
+
+    @Override
+    public String getEffectDescription() {
+        return "";
+    }
 }

@@ -37,4 +37,9 @@ public class ChangeAttackDeffenceForMonstersFieldSpellCaster implements Effect {
             }
         }
     }
+
+    @Override
+    public String getEffectDescription() {
+        return "";
+    }
 }

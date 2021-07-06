@@ -50,4 +50,9 @@ public class SummonFromGraveYard implements Effect {
     public String getEffectName() {
         return "SummonFromGraveYard";
     }
+
+    @Override
+    public String getEffectDescription() {
+        return "";
+    }
 }

@@ -37,6 +37,11 @@ public class SummonHighLevel implements Effect {
     }
     @Override
     public String getEffectName() {
-        return null;
+        return "SummonHighLevel";
+    }
+
+    @Override
+    public String getEffectDescription() {
+        return "";
     }
 }

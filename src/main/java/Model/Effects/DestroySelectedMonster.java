@@ -31,4 +31,9 @@ public class DestroySelectedMonster implements Effect {
     public String getEffectName() {
         return "DestroySelectedMonster";
     }
+
+    @Override
+    public String getEffectDescription() {
+        return "";
+    }
 }

@@ -52,4 +52,9 @@ public class AddFieldSpellToMyHand implements Effect {
     public String getEffectName() {
         return "AddFieldSpellToMyHand";
     }
+
+    @Override
+    public String getEffectDescription() {
+        return "";
+    }
 }

@@ -20,4 +20,9 @@ public class EndBattlePhaseForOpponent implements Effect {
     public String getEffectName() {
         return "EndBattlePhaseForOpponent";
     }
+
+    @Override
+    public String getEffectDescription() {
+        return "";
+    }
 }

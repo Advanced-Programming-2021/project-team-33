@@ -14,7 +14,10 @@ public class CardController {
         initialMonsters();
         initialSpells();
         initialTraps();
+        initialEffects();
     }
+
+
 
     private static void initialTraps() {
         Card magicCylinder = new Card("Magic Cylinder",
@@ -356,6 +359,43 @@ public class CardController {
                 3, 8, null, 2900, 2900,Attribute.WATER);
 
 
+    }
+
+    private static void initialEffects() {
+        EffectController.effects.add(new AttackDirectToOpponent());
+        EffectController.effects.add(new AddFieldSpellToMyHand());
+        EffectController.effects.add(new ChangeAttackDeffenceForMonstersFieldSpellCaster());
+        EffectController.effects.add(new ChangeAttackDeffenceForMonstersInsectBeast());
+        EffectController.effects.add(new ChangeAttackOfMonsterBeastForEachGraveyard());
+        EffectController.effects.add(new ChangeAttackDeffenceOfAqua());
+        EffectController.effects.add(new ChangeHeartOfEnemyMonster());
+        EffectController.effects.add(new ChangeEquipedMonstersAttackDeffence());
+        EffectController.effects.add(new ChangeAllEquipAttack());
+        EffectController.effects.add(new ChangeMyEquipAttackDeffence());
+        EffectController.effects.add(new ChangeWarriorAttackDeffenceReplace());
+        EffectController.effects.add(new ChooseFromGraveyardAndSpecialSummon());
+        EffectController.effects.add(new ChooseMonsterAndDestroy());
+        EffectController.effects.add(new DestroyAllOpponentMonsters());
+        EffectController.effects.add(new DestroyAllOpponentSpellTrap());
+        EffectController.effects.add(new DestroyAllMonsters());
+        EffectController.effects.add(new DestroySelectedMonster());
+        EffectController.effects.add(new DestroySpecificSpellCard());
+        EffectController.effects.add(new DestroyAllMonsters());
+        EffectController.effects.add(new EndBattlePhaseForOpponent());
+        EffectController.effects.add(new GuessOpponentCard());
+        EffectController.effects.add(new GiveYourLife());
+        EffectController.effects.add(new IncreaseAttack());
+        EffectController.effects.add(new IncreaseLPForEverySpell());
+        EffectController.effects.add(new PickTwoCardsFromTopOfDeck());
+        EffectController.effects.add(new RemoveCardFromHandAndDestroyTwoSpellTrap());
+        EffectController.effects.add(new RitualSummon());
+        EffectController.effects.add(new SummonFromGraveYard());
+        EffectController.effects.add(new SummonCyberse());
+        EffectController.effects.add(new SummonHighLevel());
+        EffectController.effects.add(new SummonLowLevel());
+        EffectController.effects.add(new TakeNextRoundFromOpponent());
+        EffectController.effects.add(new ThreeLightEffect());
+        EffectController.effects.add(new TrickySpecialSummon());
     }
 
 

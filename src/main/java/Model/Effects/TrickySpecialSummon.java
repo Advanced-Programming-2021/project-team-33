@@ -28,6 +28,11 @@ public class TrickySpecialSummon implements Effect {
     }
     @Override
     public String getEffectName() {
-        return null;
+        return "TrickySpecialSummon";
+    }
+
+    @Override
+    public String getEffectDescription() {
+        return "";
     }
 }

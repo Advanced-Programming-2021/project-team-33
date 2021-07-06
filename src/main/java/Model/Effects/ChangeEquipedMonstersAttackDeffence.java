@@ -34,4 +34,9 @@ public class ChangeEquipedMonstersAttackDeffence implements Effect {
             }
         }
     }
+
+    @Override
+    public String getEffectDescription() {
+        return "";
+    }
 }

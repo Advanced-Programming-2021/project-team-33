@@ -22,4 +22,9 @@ public class GiveYourLife implements Effect {
     public String getEffectName() {
         return "GiveYourLife";
     }
+
+    @Override
+    public String getEffectDescription() {
+        return "";
+    }
 }

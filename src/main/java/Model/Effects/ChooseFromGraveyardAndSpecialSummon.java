@@ -58,4 +58,9 @@ public class ChooseFromGraveyardAndSpecialSummon implements Effect {
             Communicate.output("Your input is not valid");
         }
     }
+
+    @Override
+    public String getEffectDescription() {
+        return "";
+    }
 }

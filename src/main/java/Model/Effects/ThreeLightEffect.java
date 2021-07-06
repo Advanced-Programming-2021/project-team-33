@@ -40,6 +40,11 @@ public class ThreeLightEffect implements Effect {
     }
     @Override
     public String getEffectName() {
-        return null;
+        return "ThreeLightEffect";
+    }
+
+    @Override
+    public String getEffectDescription() {
+        return "";
     }
 }

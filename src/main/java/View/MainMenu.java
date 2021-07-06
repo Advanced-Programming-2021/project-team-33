@@ -60,7 +60,7 @@ public class MainMenu {
     public void initialize() {
         backgroundMain.setImage(new Image(getClass().getResourceAsStream("/PNG/11025059.jpg")));
         vBox.setAlignment(Pos.CENTER);
-        String[] buttonName = {"Duel Menu", "Deck Menu", "Scoreboard Menu", "Profile Menu", "Shop Menu", "Import and Export", "Log out"};
+        String[] buttonName = {"Duel Menu", "Deck Menu", "Scoreboard Menu", "Profile Menu", "Shop Menu", "Import and Export", "Card Creator", "Log out"};
         for (String name : buttonName) {
             makeButton(name);
         }
@@ -114,6 +114,14 @@ public class MainMenu {
                 MainMenu.playSound("src/main/resources/music/click.mp3");
                 try {
                     new ImportExportMenu().start();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+            case "Card Creator" -> button.setOnMouseClicked(event -> {
+                MainMenu.playSound("src/main/resources/music/click.mp3");
+                try {
+                    new CardCreatorMenu().start();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

@@ -35,4 +35,9 @@ public class ChangeAttackDeffenceForMonstersInsectBeast implements Effect {
             }
         }
     }
+
+    @Override
+    public String getEffectDescription() {
+        return "";
+    }
 }
