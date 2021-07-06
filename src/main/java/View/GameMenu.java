@@ -152,7 +152,7 @@ public class GameMenu {
             animateNextPhase("main");
         }
         button4.setOnMouseClicked(event -> {
-            MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\click.mp3");
+            MainMenu.playSound("src/main/resources/music/click.mp3");
             if (!isOneTributeActive && !isTwoTributeActive) {
                 if (Player.currentPlayer.getPhase().equals(Phase.MAIN1)) {
                     RoundController.battlePhase();
@@ -431,7 +431,7 @@ public class GameMenu {
 
 
     private void callButton1() {
-        MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\click.mp3");
+        MainMenu.playSound("src/main/resources/music/click.mp3");
         if (isHandSelected) summonMonster();
         else if (isOneTributeActive) callTributeOne();
         else if (isMonsterSelected) attackToMonster();
@@ -440,7 +440,7 @@ public class GameMenu {
     }
 
     private void callButton2() {
-        MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\click.mp3");
+        MainMenu.playSound("src/main/resources/music/click.mp3");
         if (isHandSelected) setCard();
         if (isOneTributeActive) cancel();
         else if (isMonsterSelected) attackDirect();
@@ -448,7 +448,7 @@ public class GameMenu {
     }
 
     private void callButton3() {
-        MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\click.mp3");
+        MainMenu.playSound("src/main/resources/music/click.mp3");
         if (isMonsterSelected || isHandSelected) activeSpell();
         updateBoard(currentHand, enemyHand, currentMonster);
     }
@@ -628,12 +628,12 @@ public class GameMenu {
             int command = GameController.summonMonster(tribute, tribute1);
             if (command != -1) {
                 showError("summoned successfully2");
-                MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\summon.wav");
+                MainMenu.playSound("src/main/resources/music/summon.wav");
             }
         } else {
             int command = GameController.summonMonster(-1, -1);
             if (command != -1) showError("summoned successfully3");
-            MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\summon.wav");
+            MainMenu.playSound("src/main/resources/music/summon.wav");
         }
 
     }
@@ -776,7 +776,7 @@ public class GameMenu {
             showError("there is no card to attack here");
         else {
             GameController.attackMonster(enemyMonsterIndex);
-            MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\attack.wav");
+            MainMenu.playSound("src/main/resources/music/attack.wav");
             updateBoard(currentHand, enemyHand, currentMonster);
         }
     }
@@ -819,7 +819,7 @@ public class GameMenu {
         else {
             int damage = GameController.attackDirect();
             if (damage != -1) showError("your opponent receives " + damage + " battle damage");
-            MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\attack.wav");
+            MainMenu.playSound("src/main/resources/music/attack.wav");
         }
 
     }

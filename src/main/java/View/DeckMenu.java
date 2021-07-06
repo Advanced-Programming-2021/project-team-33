@@ -339,54 +339,54 @@ public class DeckMenu {
 
 
     public void addToMainDeck(MouseEvent mouseEvent) {
-        MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\click.mp3");
+        MainMenu.playSound("src/main/resources/music/click.mp3");
         if (mainDeck == null || selectedCard == null) return;
         addCardToDeck(selectedCard.getCardName(), false);
         updateGrid();
     }
 
     public void back(MouseEvent mouseEvent) throws Exception {
-        MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\click.mp3");
+        MainMenu.playSound("src/main/resources/music/click.mp3");
         new MainMenu().start();
     }
 
     public void createDeck(MouseEvent mouseEvent) {
-        MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\click.mp3");
+        MainMenu.playSound("src/main/resources/music/click.mp3");
         createDeck();
         updateGrid();
         updateDeckList();
     }
 
     public void removeCardFromMainDeck(MouseEvent mouseEvent) {
-        MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\click.mp3");
+        MainMenu.playSound("src/main/resources/music/click.mp3");
         if (mainDeck == null || selectedCard == null) return;
         removeCardFromDeck(selectedCard.getCardName(), false);
         updateGrid();
     }
 
     public void removeCardFromSideDeck(MouseEvent mouseEvent) {
-        MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\click.mp3");
+        MainMenu.playSound("src/main/resources/music/click.mp3");
         if (mainDeck == null || selectedCard == null) return;
         removeCardFromDeck(selectedCard.getCardName(), true);
         updateGrid();
     }
 
     public void addToSideDeck(MouseEvent mouseEvent) {
-        MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\click.mp3");
+        MainMenu.playSound("src/main/resources/music/click.mp3");
         if (mainDeck == null || selectedCard == null) return;
         addCardToDeck(selectedCard.getCardName(), true);
         updateGrid();
     }
 
     public void activateDeck(MouseEvent mouseEvent) {
-        MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\click.mp3");
+        MainMenu.playSound("src/main/resources/music/click.mp3");
         if (mainDeck == null) return;
         activateDeck();
         updateGrid();
     }
 
     public void deleteDeck(MouseEvent mouseEvent) {
-        MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\click.mp3");
+        MainMenu.playSound("src/main/resources/music/click.mp3");
         if (mainDeck == null) return;
         deleteDeck();
         updateDeckList();
@@ -394,12 +394,12 @@ public class DeckMenu {
     }
 
     public void exportCard(MouseEvent mouseEvent) {
-        MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\click.mp3");
+        MainMenu.playSound("src/main/resources/music/click.mp3");
         ImportExportMenu.exportCard(selectedCard.getCardName());
     }
 
     public void importCard(MouseEvent mouseEvent) throws IOException {
-        MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\click.mp3");
+        MainMenu.playSound("src/main/resources/music/click.mp3");
         new ImportExportMenu().start();
     }
 }

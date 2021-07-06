@@ -31,7 +31,7 @@ public class SetWinner {
     public void initialize() {
         massage.setText(Player.currentPlayer.getUsername() + " won the whole match with score: " + GameController.score + " - 0\n\n");
         goNext.setOnMouseClicked(event ->{
-            MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\click.mp3");
+            MainMenu.playSound("src/main/resources/music/click.mp3");
             try {
                 new MainMenu().start();
             } catch (Exception e) {

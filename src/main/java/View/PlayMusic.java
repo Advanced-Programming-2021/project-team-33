@@ -24,7 +24,7 @@ public class PlayMusic extends TimerTask {
 
     static  MediaPlayer mediaPlayer;
     public void music() {
-        String path = "C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\Main.mp3";
+        String path = "src/main/resources/music/Main.mp3";
         Media music = new Media(Paths.get(path).toUri().toString());
         mediaPlayer = new MediaPlayer(music);
         mediaPlayer.setVolume(5);
@@ -33,7 +33,7 @@ public class PlayMusic extends TimerTask {
     }
 
     public void music1() {
-        String path = "C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\Game.mp3";
+        String path = "src/main/resources/music/Game.mp3";
         Media music = new Media(Paths.get(path).toUri().toString());
         mediaPlayer = new MediaPlayer(music);
         mediaPlayer.setVolume(.2);
