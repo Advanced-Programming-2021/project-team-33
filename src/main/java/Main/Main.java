@@ -43,7 +43,7 @@ public class Main extends Application {
     }
 
     public void openLoginMenu(MouseEvent mouseEvent) throws Exception {
-        MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\click.mp3");
+        MainMenu.playSound("src/main/resources/music/click.mp3");
         LoginMenu.setRegister(false);
        // ProgramController.createUser("username", "nickname", "password");
         //ProgramController.setPlayer("username");
@@ -54,13 +54,13 @@ public class Main extends Application {
 
 
     public void openRegisterMenu(MouseEvent event) throws Exception {
-        MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\click.mp3");
+        MainMenu.playSound("src/main/resources/music/click.mp3");
         LoginMenu.setRegister(true);
         new LoginMenu().start();
     }
 
     public void exit(MouseEvent event) {
-        MainMenu.playSound("C:\\Users\\arsalan77x\\IdeaProjects\\project-team-33\\src\\main\\resources\\music\\click.mp3");
+        MainMenu.playSound("src/main/resources/music/click.mp3");
         System.exit(0);
     }
 }

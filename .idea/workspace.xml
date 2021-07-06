@@ -4,23 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c344dfcf-2301-4e3d-a4d9-a1311bc30bb9" name="Default Changelist" comment="attack gameMenu">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/DeckMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/DeckMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/FlipCoin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/FlipCoin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/GameMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/ImportExportMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/ImportExportMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/LoginMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/LoginMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/MainMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/PlayMusic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/PlayMusic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/SetGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/SetGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/SetWinner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/SetWinner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/ShopMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/ShopMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/View/DeckMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/DeckMenu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/View/FlipCoin.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/FlipCoin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/View/LoginMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/LoginMenu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/View/PlayMusic.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/PlayMusic.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/View/ShopMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/ShopMenu.class" afterDir="false" />
+    <list default="true" id="c344dfcf-2301-4e3d-a4d9-a1311bc30bb9" name="Default Changelist" comment="music">
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -144,7 +129,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625558516674</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="music">
+      <created>1625560497367</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1625560497367</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -167,6 +159,7 @@
     <MESSAGE value="complete ProfileMenu and ScoreboardMenu" />
     <MESSAGE value="complete ProfileMenu" />
     <MESSAGE value="attack gameMenu" />
-    <option name="LAST_COMMIT_MESSAGE" value="attack gameMenu" />
+    <MESSAGE value="music" />
+    <option name="LAST_COMMIT_MESSAGE" value="music" />
   </component>
 </project>
