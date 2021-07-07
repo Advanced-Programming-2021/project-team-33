@@ -2,8 +2,6 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.control.cell.*?>
-<?import javafx.collections.*?>
 
 <?import javafx.scene.image.ImageView?>
 <AnchorPane xmlns="http://javafx.com/javafx"
@@ -14,29 +12,9 @@
     </ImageView>
     <children>
         <Label text="Scoreboard" layoutX="600" layoutY="20" style="-fx-background-color: #0e466c;-fx-text-fill: white;-fx-font-size: 24"/>
-        <TableView layoutX="105.0" layoutY="75.0" prefHeight="600" prefWidth="1100">
-            <columns>
-                <TableColumn prefWidth="366.0" text="Rank" style="-fx-alignment: center">
-                    <cellValueFactory>
-                        <PropertyValueFactory property="rank"/>
-                    </cellValueFactory>
-                </TableColumn>
-                <TableColumn prefWidth="366.0" text="NickName" style="-fx-alignment: center">
-                    <cellValueFactory>
-                        <PropertyValueFactory property="nickName"/>
-                    </cellValueFactory>
-                </TableColumn>
-                <TableColumn prefWidth="366.0" text="Score" style="-fx-alignment: center">
-                    <cellValueFactory>
-                        <PropertyValueFactory property="score"/>
-                    </cellValueFactory>
-                </TableColumn>
-            </columns>
-            <items>
-                <FXCollections fx:factory="observableArrayList" fx:id="items">
-                </FXCollections>
-            </items>
-        </TableView>
+        <ListView layoutX="105.0" layoutY="75.0" prefHeight="600" prefWidth="1100" fx:id="scoreBoard">
+
+        </ListView>
     </children>
     <HBox layoutX="2" layoutY="680" >
         <Button text="Back" style="-fx-background-color: red;-fx-text-fill: white;-fx-font-size: 20" onMouseClicked="#back"/>
