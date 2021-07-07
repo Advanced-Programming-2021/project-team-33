@@ -3,6 +3,7 @@ package View;
 import Controller.GameController;
 import Controller.ProgramController;
 import Controller.RoundController;
+import Controller.Util;
 import Model.Player;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -65,7 +66,7 @@ public class FlipCoin {
             }
         });
         continueButton.setOnMouseClicked(event -> {
-            MainMenu.playSound("src/main/resources/music/click.mp3");
+            MainMenu.playSound(Util.CLICK_MUSIC);
             GameController.prepareGame();
             try {
                 new GameMenu().start();

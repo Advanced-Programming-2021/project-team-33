@@ -24,10 +24,7 @@ public class ChooseFromGraveyardAndSpecialSummon implements Effect {
 
     }
 
-    @Override
-    public String getEffectName() {
-        return "ChooseFromGraveyardAndSpecialSummon";
-    }
+
 
     public void chooseFromGraveYard(String output, Player player) {
         ArrayList<Card> graveYard = player.getBoard().getGraveyard();
@@ -60,7 +57,12 @@ public class ChooseFromGraveyardAndSpecialSummon implements Effect {
     }
 
     @Override
+    public String getEffectName() {
+        return "ChooseFromGraveyardAndSpecialSummon";
+    }
+
+    @Override
     public String getEffectDescription() {
-        return "";
+        return "Target 1 monster in either GY; Special Summon it.";
     }
 }

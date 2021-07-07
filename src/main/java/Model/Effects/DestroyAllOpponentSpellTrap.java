@@ -27,6 +27,6 @@ public class DestroyAllOpponentSpellTrap implements Effect {
 
     @Override
     public String getEffectDescription() {
-        return "";
+        return "Destroy all Spells and Traps your opponent controls.";
     }
 }

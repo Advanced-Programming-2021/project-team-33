@@ -36,6 +36,6 @@ public class DestroyAllOpponentMonsters implements Effect {
 
     @Override
     public String getEffectDescription() {
-        return "";
+        return "When an opponent's monster declares an attack: Destroy all your opponent's Attack Position monsters.";
     }
 }

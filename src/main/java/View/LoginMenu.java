@@ -66,13 +66,13 @@ public class LoginMenu {
             submit.setText("Register");
         } else submit.setText("Login");
         clear.setOnMouseClicked(event -> {
-            MainMenu.playSound("src/main/resources/music/click.mp3");
+            MainMenu.playSound(Util.CLICK_MUSIC);
             textUserName.clear();
             textPassword.clear();
             if (isRegister()) textNickName.clear();
         });
         submit.setOnMouseClicked(event -> {
-            MainMenu.playSound("src/main/resources/music/click.mp3");
+            MainMenu.playSound(Util.CLICK_MUSIC);
             String input = "";
             if (!isRegister()) {
                 input = "user login --username " + textUserName.getText() + " --password " + textPassword.getText();
@@ -133,7 +133,7 @@ public class LoginMenu {
     }
 
     public void back(MouseEvent event) throws Exception {
-        MainMenu.playSound("src/main/resources/music/click.mp3");
+        MainMenu.playSound(Util.CLICK_MUSIC);
         new Main().start(ProgramController.getStage());
     }
 }

@@ -23,6 +23,6 @@ public class EndBattlePhaseForOpponent implements Effect {
 
     @Override
     public String getEffectDescription() {
-        return "";
+        return "When an opponent's monster declares an attack: Target the attacking monster; negate the attack, then end the Battle Phase.";
     }
 }

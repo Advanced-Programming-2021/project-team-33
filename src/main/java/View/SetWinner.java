@@ -2,6 +2,7 @@ package View;
 
 import Controller.GameController;
 import Controller.ProgramController;
+import Controller.Util;
 import Model.Player;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,7 +32,7 @@ public class SetWinner {
     public void initialize() {
         massage.setText(Player.currentPlayer.getUsername() + " won the whole match with score: " + GameController.score + " - 0\n\n");
         goNext.setOnMouseClicked(event ->{
-            MainMenu.playSound("src/main/resources/music/click.mp3");
+            MainMenu.playSound(Util.CLICK_MUSIC);
             try {
                 new MainMenu().start();
             } catch (Exception e) {

@@ -53,6 +53,6 @@ public class SummonFromGraveYard implements Effect {
 
     @Override
     public String getEffectDescription() {
-        return "";
+        return "Activate this card by targeting 1 monster in your GY; Special Summon that target in Attack Position.";
     }
 }

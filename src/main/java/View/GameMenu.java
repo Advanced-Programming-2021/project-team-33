@@ -152,7 +152,7 @@ public class GameMenu {
             animateNextPhase("main");
         }
         button4.setOnMouseClicked(event -> {
-            MainMenu.playSound("src/main/resources/music/click.mp3");
+            MainMenu.playSound(Util.CLICK_MUSIC);
             if (!isOneTributeActive && !isTwoTributeActive) {
                 if (Player.currentPlayer.getPhase().equals(Phase.MAIN1)) {
                     RoundController.battlePhase();
@@ -431,7 +431,7 @@ public class GameMenu {
 
 
     private void callButton1() {
-        MainMenu.playSound("src/main/resources/music/click.mp3");
+        MainMenu.playSound(Util.CLICK_MUSIC);
         if (isHandSelected) summonMonster();
         else if (isOneTributeActive) callTributeOne();
         else if (isMonsterSelected) attackToMonster();
@@ -440,7 +440,7 @@ public class GameMenu {
     }
 
     private void callButton2() {
-        MainMenu.playSound("src/main/resources/music/click.mp3");
+        MainMenu.playSound(Util.CLICK_MUSIC);
         if (isHandSelected) setCard();
         if (isOneTributeActive) cancel();
         else if (isMonsterSelected) attackDirect();
@@ -448,7 +448,7 @@ public class GameMenu {
     }
 
     private void callButton3() {
-        MainMenu.playSound("src/main/resources/music/click.mp3");
+        MainMenu.playSound(Util.CLICK_MUSIC);
         if (isMonsterSelected || isHandSelected) activeSpell();
         updateBoard(currentHand, enemyHand, currentMonster);
     }

@@ -46,6 +46,6 @@ public class DestroyAllMonsters implements Effect {
 
     @Override
     public String getEffectDescription() {
-        return "";
+        return "Destroy all monsters on the field.";
     }
 }

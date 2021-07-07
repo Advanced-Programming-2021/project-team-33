@@ -39,6 +39,6 @@ public class ChangeAttackOfMonsterBeastForEachGraveyard implements Effect {
 
     @Override
     public String getEffectDescription() {
-        return "";
+        return "All Beast-Type monsters you control gain 100 ATK for each monster in your Graveyard.";
     }
 }

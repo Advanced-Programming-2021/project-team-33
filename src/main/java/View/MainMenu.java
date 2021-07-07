@@ -74,11 +74,11 @@ public class MainMenu {
         Button button = ProgramController.getButton(name);
         switch (name) {
             case "Duel Menu" -> button.setOnMouseClicked(event -> {
-                MainMenu.playSound("src/main/resources/music/click.mp3");
+                MainMenu.playSound(Util.CLICK_MUSIC);
                 startGame();
             });
             case "Deck Menu" -> button.setOnMouseClicked(event -> {
-                MainMenu.playSound("src/main/resources/music/click.mp3");
+                MainMenu.playSound(Util.CLICK_MUSIC);
                 try {
                     new DeckMenu().start();
                 } catch (IOException e) {
@@ -86,7 +86,7 @@ public class MainMenu {
                 }
             });
             case "Scoreboard Menu" -> button.setOnMouseClicked(event -> {
-                MainMenu.playSound("src/main/resources/music/click.mp3");
+                MainMenu.playSound(Util.CLICK_MUSIC);
                 try {
                     new ScoreboardMenu().start();
                 } catch (IOException e) {
@@ -94,7 +94,7 @@ public class MainMenu {
                 }
             });
             case "Profile Menu" -> button.setOnMouseClicked(event -> {
-                MainMenu.playSound("src/main/resources/music/click.mp3");
+                MainMenu.playSound(Util.CLICK_MUSIC);
                 try {
                     new ProfileMenu().start();
                 } catch (IOException e) {
@@ -103,7 +103,7 @@ public class MainMenu {
                 }
             });
             case "Shop Menu" -> button.setOnMouseClicked(event -> {
-                MainMenu.playSound("src/main/resources/music/click.mp3");
+                MainMenu.playSound(Util.CLICK_MUSIC);
                 try {
                     new ShopMenu().start();
                 } catch (IOException e) {
@@ -111,7 +111,7 @@ public class MainMenu {
                 }
             });
             case "Import and Export" -> button.setOnMouseClicked(event -> {
-                MainMenu.playSound("src/main/resources/music/click.mp3");
+                MainMenu.playSound(Util.CLICK_MUSIC);
                 try {
                     new ImportExportMenu().start();
                 } catch (IOException e) {
@@ -119,7 +119,7 @@ public class MainMenu {
                 }
             });
             case "Card Creator" -> button.setOnMouseClicked(event -> {
-                MainMenu.playSound("src/main/resources/music/click.mp3");
+                MainMenu.playSound(Util.CLICK_MUSIC);
                 try {
                     new CardCreatorMenu().start();
                 } catch (IOException e) {
@@ -127,7 +127,7 @@ public class MainMenu {
                 }
             });
             case "Log out" -> button.setOnMouseClicked(event -> {
-                MainMenu.playSound("src/main/resources/music/click.mp3");
+                MainMenu.playSound(Util.CLICK_MUSIC);
                 try {
                     new Main().start(ProgramController.getStage());
                 } catch (Exception e) {

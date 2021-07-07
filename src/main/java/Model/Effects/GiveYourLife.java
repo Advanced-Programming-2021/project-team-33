@@ -25,6 +25,6 @@ public class GiveYourLife implements Effect {
 
     @Override
     public String getEffectDescription() {
-        return "";
+        return "When a monster(s) would be Summoned, OR when a Spell/Trap Card, or monster ";
     }
 }

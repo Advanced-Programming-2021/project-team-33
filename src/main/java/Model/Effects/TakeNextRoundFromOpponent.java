@@ -27,6 +27,6 @@ public class TakeNextRoundFromOpponent implements Effect {
 
     @Override
     public String getEffectDescription() {
-        return "";
+        return "Skip the Draw Phase of your opponent's next turn.";
     }
 }

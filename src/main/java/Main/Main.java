@@ -1,6 +1,7 @@
 package Main;
 import Controller.CardController;
 import Controller.ProgramController;
+import Controller.Util;
 import View.*;
 import javafx.application.Application;
 import javafx.fxml.FXML;
@@ -43,24 +44,24 @@ public class Main extends Application {
     }
 
     public void openLoginMenu(MouseEvent mouseEvent) throws Exception {
-        MainMenu.playSound("src/main/resources/music/click.mp3");
-        LoginMenu.setRegister(false);
-       // ProgramController.createUser("username", "nickname", "password");
-        //ProgramController.setPlayer("username");
-       // new MainMenu().start();
-        new LoginMenu().start();
+//        MainMenu.playSound(Util.CLICK_MUSIC);
+//        LoginMenu.setRegister(false);
+        ProgramController.createUser("username", "nickname", "password");
+        ProgramController.setPlayer("username");
+        new MainMenu().start();
+//        new LoginMenu().start();
     }
 
 
 
     public void openRegisterMenu(MouseEvent event) throws Exception {
-        MainMenu.playSound("src/main/resources/music/click.mp3");
+        MainMenu.playSound(Util.CLICK_MUSIC);
         LoginMenu.setRegister(true);
         new LoginMenu().start();
     }
 
     public void exit(MouseEvent event) {
-        MainMenu.playSound("src/main/resources/music/click.mp3");
+        MainMenu.playSound(Util.CLICK_MUSIC);
         System.exit(0);
     }
 }

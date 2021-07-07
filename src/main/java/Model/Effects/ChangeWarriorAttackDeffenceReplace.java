@@ -31,6 +31,6 @@ public class ChangeWarriorAttackDeffenceReplace implements Effect {
     }
     @Override
     public String getEffectDescription() {
-        return "";
+        return "Equip only to a Warrior-Type monster. Apply this effect, depending on its battle position.";
     }
 }

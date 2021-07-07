@@ -30,6 +30,7 @@ public class AttackDirectToOpponent implements Effect {
 
     @Override
     public String getEffectDescription() {
-        return "";
+        return "When an opponent's monster declares an attack: Target the attacking monster; negate the attack," +
+                " and if you do, inflict damage to your opponent equal to its ATK.";
     }
 }

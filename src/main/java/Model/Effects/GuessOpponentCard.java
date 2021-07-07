@@ -58,6 +58,7 @@ public class GuessOpponentCard implements Effect {
 
     @Override
     public String getEffectDescription() {
-        return "";
+        return "Declare 1 card name; if that card is in your opponent's hand," +
+                " they must discard all copies of it, otherwise you discard 1 random card";
     }
 }

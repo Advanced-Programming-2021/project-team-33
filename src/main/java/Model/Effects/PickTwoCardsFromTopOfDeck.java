@@ -24,6 +24,6 @@ public class PickTwoCardsFromTopOfDeck implements Effect {
 
     @Override
     public String getEffectDescription() {
-        return "";
+        return "Draw 2 cards.";
     }
 }

@@ -21,6 +21,6 @@ public class RitualSummon implements Effect {
 
     @Override
     public String getEffectDescription() {
-        return "";
+        return "This card can be used to Ritual Summon any 1 Ritual Monster.";
     }
 }

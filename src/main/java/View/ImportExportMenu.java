@@ -105,12 +105,12 @@ public class ImportExportMenu {
     }
 
     public void back(MouseEvent mouseEvent) throws IOException {
-        MainMenu.playSound("src/main/resources/music/click.mp3");
+        MainMenu.playSound(Util.CLICK_MUSIC);
         new DeckMenu().start();
     }
 
     public void importCard(MouseEvent mouseEvent) {
-        MainMenu.playSound("src/main/resources/music/click.mp3");
+        MainMenu.playSound(Util.CLICK_MUSIC);
         importCard(cardName.getText());
     }
 }

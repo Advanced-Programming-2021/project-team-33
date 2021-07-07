@@ -35,6 +35,6 @@ public class DestroySpecificSpellCard implements Effect {
 
     @Override
     public String getEffectDescription() {
-        return "";
+        return "When a Spell Card is activated: Discard 1 card; negate the activation, and if you do, destroy it.";
     }
 }

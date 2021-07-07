@@ -33,6 +33,8 @@ public class IncreaseAttack implements Effect {
 
     @Override
     public String getEffectDescription() {
-        return "";
+        return "Gain 400 ATK to all Warrior-Type monsters," +
+                " if you control another monster, monsters your opponent " +
+                "controls cannot target this card for an attack";
     }
 }

@@ -74,7 +74,7 @@
    <Button layoutX="537.0" layoutY="517.0" mnemonicParsing="false" onMouseClicked="#createCard" prefHeight="78.0" prefWidth="213.0" styleClass="myButton" text="Create Card" />
    <Label layoutX="124.0" layoutY="372.0" styleClass="myLable" text="Card Effect" />
    <ChoiceBox fx:id="effects" layoutX="124.0" layoutY="405.0" prefWidth="250.0" />
-   <Label fx:id="effectDescription" layoutX="401.0" layoutY="381.0" prefHeight="78.0" prefWidth="762.0" styleClass="myLable" text="Label" />
+   <Label fx:id="effectDescription" layoutX="401.0" layoutY="381.0" prefHeight="78.0" prefWidth="762.0" style="-fx-text-fill: white; -fx-font-size: 15px;" wrapText="true" />
 
     <stylesheets>
         <URL value="@../css/cardCreator.css" />

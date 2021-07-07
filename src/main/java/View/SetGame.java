@@ -3,6 +3,7 @@ package View;
 import Controller.Ai;
 import Controller.GameController;
 import Controller.ProgramController;
+import Controller.Util;
 import Model.Card;
 import Model.Deck;
 import Model.Player;
@@ -48,16 +49,16 @@ public class SetGame {
         else
             opponent.setText(Player.getPlayers().get(opponentNumber.get()).getUsername());
         one.setOnMouseClicked(event -> {
-            MainMenu.playSound("src/main/resources/music/click.mp3");
+            MainMenu.playSound(Util.CLICK_MUSIC);
             round.set(1);
         });
         three.setOnMouseClicked(event -> {
-            MainMenu.playSound("src/main/resources/music/click.mp3");
+            MainMenu.playSound(Util.CLICK_MUSIC);
             round.set(3);
         });
 
         leftButton.setOnMouseClicked(event -> {
-            MainMenu.playSound("src/main/resources/music/click.mp3");
+            MainMenu.playSound(Util.CLICK_MUSIC);
             if (opponentNumber.get() != 0 &&
                     Player.getPlayers().get(opponentNumber.get() - 1).getUsername().equals(Player.thePlayer.getUsername())) {
                 opponentNumber.decrementAndGet();
@@ -67,7 +68,7 @@ public class SetGame {
 
         });
         rightButton.setOnMouseClicked(event -> {
-            MainMenu.playSound("src/main/resources/music/click.mp3");
+            MainMenu.playSound(Util.CLICK_MUSIC);
             if (opponentNumber.get() != Player.getPlayers().size() - 1 &&
                     Player.getPlayers().get(opponentNumber.get() + 1).getUsername().equals(Player.thePlayer.getUsername())) {
                 opponent.setText("Ai");
@@ -78,7 +79,7 @@ public class SetGame {
 
         });
         start.setOnMouseClicked(event -> {
-            MainMenu.playSound("src/main/resources/music/click.mp3");
+            MainMenu.playSound(Util.CLICK_MUSIC);
             if (opponent.getText().equals("Ai"))
                 duelWithAi(round.intValue());
             else

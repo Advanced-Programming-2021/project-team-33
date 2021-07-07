@@ -2,6 +2,7 @@ package View;
 
 import Controller.EffectController;
 import Controller.ProgramController;
+import Controller.Util;
 import Model.*;
 import Model.Effects.AttackDirectToOpponent;
 import Model.Effects.ChangeAllEquipAttack;
@@ -60,7 +61,6 @@ public class CardCreatorMenu {
         effects.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number number2) {
-                System.out.println(effects.getItems().get((Integer) number2));
                 selectedEffect = Effect.getEffectByName(effects.getItems().get((Integer) number2).toString());
                 effectDescription.setText(selectedEffect.getEffectDescription());
             }
@@ -91,21 +91,23 @@ public class CardCreatorMenu {
 
 
     public void back(MouseEvent mouseEvent) throws Exception {
-        MainMenu.playSound("src/main/resources/music/click.mp3");
+        MainMenu.playSound(Util.CLICK_MUSIC);
         new MainMenu().start();
     }
 
     public void createCard(MouseEvent mouseEvent) throws Exception {
         try {
+            int levelText = Integer.parseInt(level.getText());
+            int attackText = Integer.parseInt(attack.getText());
+            int defenceText = Integer.parseInt(defence.getText());
             Card newCard = new Card(cardName.getText(),
-                    description.getText(), 2000,
+                    description.getText(), (attackText + defenceText) * levelText / 2,
                     new ArrayList<>(List.of(CardType.valueOf(cardType.getValue().toString()))),
                     CardCategory.valueOf(cardCategory.getValue().toString()), Integer.parseInt(limit.getText()),
-                    Integer.parseInt(level.getText()), new ArrayList<>(List.of(selectedEffect)), Integer.parseInt(attack.getText()),
-                    Integer.parseInt(defence.getText()), Attribute.valueOf(attribute.getValue().toString()));
+                    levelText, new ArrayList<>(List.of(selectedEffect)), attackText,
+                    defenceText, Attribute.valueOf(attribute.getValue().toString()));
 
-            System.out.println(newCard.getEffects().get(0).getEffectName());
-            MainMenu.playSound("src/main/resources/music/click.mp3");
+            MainMenu.playSound(Util.CLICK_MUSIC);
             new MainMenu().start();
         } catch (Exception e) {
 

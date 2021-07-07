@@ -34,6 +34,7 @@ public class DestroySelectedMonster implements Effect {
 
     @Override
     public String getEffectDescription() {
-        return "";
+        return "When your opponent Normal or Flip Summons 1 monster with 1000 or more ATK:" +
+                " Target that monster; destroy that target.";
     }
 }

@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 
 public class Util {
     public static Scanner scanner = new Scanner(System.in);
+    public static String CLICK_MUSIC = "src/main/resources/music/click.mp3";
 
     public static Matcher getCommand(String input, String regex) {
         Pattern pattern = Pattern.compile(regex);

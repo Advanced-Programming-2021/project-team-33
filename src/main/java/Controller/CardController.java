@@ -51,26 +51,31 @@ public class CardController {
                 2000, new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.TRAP, 1, 0,
                 new ArrayList<>(List.of(new TakeNextRoundFromOpponent())), 0, 0,Attribute.FIRE);
 
-        Card negateAttack = new Card("Negate Attack", "When an opponent's monster declares an attack: Target the attacking monster; negate the attack, then end the Battle Phase.", 3000,
+        Card negateAttack = new Card("Negate Attack",
+                "When an opponent's monster declares an attack: Target the attacking monster; negate the attack, then end the Battle Phase.", 3000,
                 new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.TRAP, 3, 0,
                 new ArrayList<>(List.of(new EndBattlePhaseForOpponent())), 0, 0,Attribute.FIRE);
 
-        Card solemnWarning = new Card("Solemn Warning", "When a monster(s) would be Summoned, OR when a Spell/Trap Card, or monster ", 3000,
+        Card solemnWarning = new Card("Solemn Warning",
+                "When a monster(s) would be Summoned, OR when a Spell/Trap Card, or monster ", 3000,
                 new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.TRAP, 3, 0,
                 new ArrayList<>(List.of(new GiveYourLife())), 0, 0,Attribute.FIRE);
 
-        Card magicJammer = new Card("Magic Jammer", "When a Spell Card is activated: Discard 1 card; negate the activation, and if you do, destroy it.", 3000,
+        Card magicJammer = new Card("Magic Jammer",
+                "When a Spell Card is activated: Discard 1 card; negate the activation, and if you do, destroy it.", 3000,
                 new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.TRAP, 3, 0,
                 new ArrayList<>(List.of(new DestroySpecificSpellCard())), 0, 0,Attribute.FIRE);
 
-        Card callOfTheHaunted = new Card("Call Of The Haunted", "Activate this card by targeting 1 monster in your GY; Special Summon that target in Attack Position.", 3500,
+        Card callOfTheHaunted = new Card("Call Of The Haunted",
+                "Activate this card by targeting 1 monster in your GY; Special Summon that target in Attack Position.", 3500,
                 new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.TRAP, 3, 0,
                 new ArrayList<>(List.of(new SummonFromGraveYard())), 0, 0,Attribute.FIRE);
     }
 
     private static void initialSpells() {
 
-        Card monsterReborn = new Card("Monster Reborn", "Target 1 monster in either GY; Special Summon it.", 2500,
+        Card monsterReborn = new Card("Monster Reborn",
+                "Target 1 monster in either GY; Special Summon it.", 2500,
                 new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.SPELL, 1, 0,
                 new ArrayList<>(List.of(new ChooseFromGraveyardAndSpecialSummon())), 0, 0,Attribute.FIRE);
 
@@ -91,7 +96,8 @@ public class CardController {
                 new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.SPELL, 1, 0,
                 null, 0, 0,Attribute.FIRE);
 
-        Card harpieFeatherDuster = new Card("Harpies Feather Duster", "Destroy all Spells and Traps your opponent controls.", 2500,
+        Card harpieFeatherDuster = new Card("Harpies Feather Duster",
+                "Destroy all Spells and Traps your opponent controls.", 2500,
                 new ArrayList<>(List.of(CardType.NORMAL)), CardCategory.SPELL, 1, 0,
                 new ArrayList<>(List.of(new DestroyAllOpponentSpellTrap())), 0, 0,Attribute.FIRE);
 
@@ -130,7 +136,8 @@ public class CardController {
                 new ArrayList<>(List.of(CardType.QUICKPLAY)), CardCategory.SPELL, 3, 0,
                 null, 0, 0,Attribute.FIRE);
         // not sure
-        Card yami = new Card("Yami", "nothing", 4300,
+        Card yami = new Card("Yami",
+                "If this card is destroyed by battle and sent to the GY: Destroy the monster that destroyed this card.", 4300,
                 new ArrayList<>(List.of(CardType.FIELD)), CardCategory.SPELL, 3, 0,
                 new ArrayList<>(List.of(new ChangeAttackDeffenceForMonstersFieldSpellCaster())), 0, 0,Attribute.FIRE);
 
@@ -139,31 +146,39 @@ public class CardController {
                 new ArrayList<>(List.of(CardType.FIELD)), CardCategory.SPELL, 3, 0,
                 new ArrayList<>(List.of(new ChangeAttackDeffenceForMonstersInsectBeast())), 0, 0,Attribute.FIRE);
 
-        Card closedForest = new Card("Closed Forest", "All Beast-Type monsters you control gain 100 ATK for each monster in your Graveyard.", 4300,
+        Card closedForest = new Card("Closed Forest",
+                "All Beast-Type monsters you control gain 100 ATK for each monster in your Graveyard.", 4300,
                 new ArrayList<>(List.of(CardType.FIELD)), CardCategory.SPELL, 3, 0,
                 new ArrayList<>(List.of(new ChangeAttackOfMonsterBeastForEachGraveyard())), 0, 0,Attribute.FIRE);
 
-        Card umiiruka = new Card("UMIIRUKA", "Increase the ATK of all WATER monsters by 500 points and decrease their DEF by 400 points.", 4300,
+        Card umiiruka = new Card("UMIIRUKA",
+                "Increase the ATK of all WATER monsters by 500 points and decrease their DEF by 400 points.", 4300,
                 new ArrayList<>(List.of(CardType.FIELD)), CardCategory.SPELL, 3, 0,
                 new ArrayList<>(List.of(new ChangeAttackDeffenceOfAqua())), 0, 0,Attribute.FIRE);
 
-        Card swordOfDarkDestruction = new Card("Sword of Dark Destruction", "A DARK monster equipped with this card increases its ATK by 400 points and decreases its DEF by 200 points.", 4300,
+        Card swordOfDarkDestruction = new Card("Sword of Dark Destruction",
+                "A DARK monster equipped with this card increases its ATK by 400 points and decreases its DEF by 200 points.", 4300,
                 new ArrayList<>(List.of(CardType.EQUIP)), CardCategory.SPELL, 3, 0,
                 new ArrayList<>(List.of(new ChangeEquipedMonstersAttackDeffence())), 0, 0,Attribute.FIRE);
 
-        Card blackPendant = new Card("Black Pendant", "The equipped monster gains 500 ATK. When this card is sent from the field to the Graveyard: Inflict 500 damage to your opponent.", 4300,
+        Card blackPendant = new Card("Black Pendant",
+                "The equipped monster gains 500 ATK. When this card is sent from the field to the Graveyard: Inflict 500 damage to your opponent.",
+                4300,
                 new ArrayList<>(List.of(CardType.EQUIP)), CardCategory.SPELL, 3, 0,
                 new ArrayList<>(List.of(new ChangeAllEquipAttack())), 0, 0,Attribute.FIRE);
 
-        Card unitedWeStand = new Card("United We Stand", "The equipped monster gains 800 ATK/DEF for each face-up monster you control.", 4300,
+        Card unitedWeStand = new Card("United We Stand",
+                "The equipped monster gains 800 ATK/DEF for each face-up monster you control.", 4300,
                 new ArrayList<>(List.of(CardType.EQUIP)), CardCategory.SPELL, 3, 0,
                 new ArrayList<>(List.of(new ChangeMyEquipAttackDeffence())), 0, 0,Attribute.FIRE);
 
-        Card magnumShield = new Card("Magnum Shield", "Equip only to a Warrior-Type monster. Apply this effect, depending on its battle position.", 4300,
+        Card magnumShield = new Card("Magnum Shield",
+                "Equip only to a Warrior-Type monster. Apply this effect, depending on its battle position.", 4300,
                 new ArrayList<>(List.of(CardType.EQUIP)), CardCategory.SPELL, 3, 0,
                 new ArrayList<>(List.of(new ChangeWarriorAttackDeffenceReplace())), 0, 0,Attribute.FIRE);
 
-        Card advancedRitualArt = new Card("Advanced Ritual Art", "This card can be used to Ritual Summon any 1 Ritual Monster.", 3000,
+        Card advancedRitualArt = new Card("Advanced Ritual Art",
+                "This card can be used to Ritual Summon any 1 Ritual Monster.", 3000,
                 new ArrayList<>(List.of(CardType.RITUAL)), CardCategory.SPELL, 3, 0,
                 new ArrayList<>(List.of(new RitualSummon())), 0, 0,Attribute.FIRE);
     }
@@ -380,7 +395,6 @@ public class CardController {
         EffectController.effects.add(new DestroyAllMonsters());
         EffectController.effects.add(new DestroySelectedMonster());
         EffectController.effects.add(new DestroySpecificSpellCard());
-        EffectController.effects.add(new DestroyAllMonsters());
         EffectController.effects.add(new EndBattlePhaseForOpponent());
         EffectController.effects.add(new GuessOpponentCard());
         EffectController.effects.add(new GiveYourLife());

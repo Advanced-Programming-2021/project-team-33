@@ -36,6 +36,6 @@ public class ChangeAttackDeffenceOfAqua implements Effect {
 
     @Override
     public String getEffectDescription() {
-        return "";
+        return "Increase the ATK of all WATER monsters by 500 points and decrease their DEF by 400 points.";
     }
 }

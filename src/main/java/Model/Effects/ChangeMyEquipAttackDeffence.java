@@ -29,6 +29,6 @@ public class ChangeMyEquipAttackDeffence implements Effect {
 
     @Override
     public String getEffectDescription() {
-        return "";
+        return "The equipped monster gains 800 ATK/DEF for each face-up monster you control.";
     }
 }

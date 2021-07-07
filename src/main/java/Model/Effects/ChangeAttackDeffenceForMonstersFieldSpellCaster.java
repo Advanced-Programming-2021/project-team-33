@@ -40,6 +40,6 @@ public class ChangeAttackDeffenceForMonstersFieldSpellCaster implements Effect {
 
     @Override
     public String getEffectDescription() {
-        return "";
+        return "If this card is destroyed by battle and sent to the GY: Destroy the monster that destroyed this card.";
     }
 }

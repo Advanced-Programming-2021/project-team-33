@@ -55,6 +55,6 @@ public class AddFieldSpellToMyHand implements Effect {
 
     @Override
     public String getEffectDescription() {
-        return "";
+        return "Add 1 Field Spell from your Deck to your hand.";
     }
 }

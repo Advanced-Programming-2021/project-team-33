@@ -25,7 +25,7 @@ public class ChangeAllEquipAttack implements Effect {
 
     @Override
     public String getEffectDescription() {
-        return "";
+        return "The equipped monster gains 500 ATK. When this card is sent from the field to the Graveyard: Inflict 500 damage to your opponent.";
     }
 
     private void changeAttackDeffence(Player player, int attackAmount) {
