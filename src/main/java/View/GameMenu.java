@@ -3,6 +3,8 @@ package View;
 import Controller.*;
 import Model.*;
 import javafx.animation.FadeTransition;
+import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +19,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
@@ -51,6 +54,10 @@ public class GameMenu {
     public Text pauseText;
     public AnchorPane scene;
     public ImageView exclamation;
+    public GridPane graveyardList;
+    public Rectangle graveyardBack;
+    public ImageView exit;
+    public ImageView explosion;
     private ArrayList<ImageView> currentHand, enemyHand, currentMonster, enemyMonster, currentSpell, enemySpell;
     boolean isHandSelected = false, isMonsterSelected = false, isSpellSelected = false, isOneTributeActive = false,
             isTwoTributeActive = false, isAttackActive = false, isTrapActive = false, isPaused = false;
@@ -58,7 +65,6 @@ public class GameMenu {
 
 
     public void start() throws IOException {
-        MainMenu.menu = "menu";
         Stage primaryStage = ProgramController.getStage();
         Parent root = FXMLLoader.load(getClass().getResource("gameMenu.fxml"));
         primaryStage.setTitle("Yu-Gi-Oh");
@@ -68,6 +74,7 @@ public class GameMenu {
 
     @FXML
     public void initialize() {
+        exit.toBack();
         setPauseScene();
         setCheat();
         loadImageForProfile(Player.thePlayer, avatar1);
@@ -86,20 +93,52 @@ public class GameMenu {
         animatePhase();
         goToNextPhase();
         selectCard();
+        graveyard.setOnMouseClicked(event -> showGraveYard(Player.currentPlayer));
+        enemyGraveyard.setOnMouseClicked(event -> showGraveYard(Player.opponent));
+        exit.setOnMouseClicked(event -> {
+            exit.toBack();
+            graveyardBack.toBack();
+            graveyardList.toBack();
+        });
+    }
+
+    private void showGraveYard(Player player){
+        int count = player.getBoard().getGraveyard().size();
+        exit.toFront();
+        graveyardBack.toFront();
+        graveyardList.toFront();
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 10; j++) {
+                count--;
+                if(count < 0) return;
+                Image image = new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" +
+                        player.getBoard().getGraveyard().get(count).getCardName().replaceAll("\\s+", "")
+                        + ".jpg"));
+                ImageView imageView = new ImageView(image);
+                imageView.setFitHeight(124);
+                imageView.setFitWidth(75);
+                imageView.setId("mainDeckCard" + i + "_" + j);
+                graveyardList.add(imageView, j, i);
+                int finalCount = count;
+                imageView.setOnMouseClicked(event -> {
+                        cardShow.setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" +
+                                player.getBoard().getGraveyard().get(finalCount).getCardName().replaceAll("\\s+", "") + ".jpg")));
+                });
+            }
+        }
     }
 
     private void setCheat() {
         exclamation.setOnMouseClicked(event -> {
-            TextInputDialog dialog = new TextInputDialog("walter");
+            TextInputDialog dialog = new TextInputDialog("");
             dialog.setTitle("Cheat Console");
             dialog.setHeaderText("Cheat Console");
             dialog.setContentText("Enter your cheat code:");
             Optional<String> result = dialog.showAndWait();
 
-            if (result.get().matches("increase --money (\\d+)")) {
-
+            if (result.get().matches("increase --money (\\d+)"))
                 increaseMoney(Util.getCommand(result.get(), "increase --money (\\d+)"));
-            } else if (result.get().matches("increase --LP (\\d+)"))
+             else if (result.get().matches("increase --LP (\\d+)"))
                 increaseLifePoint(Util.getCommand(result.get(), "increase --LP (\\d+)"));
             else if (result.get().matches("duel set-winner (\\S+)")) {
                 winTheGame(Util.getCommand(result.get(), "duel set-winner (\\S+)"));
@@ -119,7 +158,7 @@ public class GameMenu {
                 background.setFill(Color.GRAY);
                 background.setOpacity(.6);
                 pauseText.setText("Pause");
-                pause.toFront();
+                pauseText.toFront();
                 surrender.toFront();
                 surrender.setImage(new Image(getClass().getResourceAsStream("/PNG/surrender.png")));
                 isPaused = true;
@@ -776,9 +815,23 @@ public class GameMenu {
             showError("there is no card to attack here");
         else {
             GameController.attackMonster(enemyMonsterIndex);
+            explosion();
             MainMenu.playSound("src/main/resources/music/attack.wav");
             updateBoard(currentHand, enemyHand, currentMonster);
         }
+    }
+
+    private void explosion() {
+        explosion.toFront();
+        ScaleTransition trans = new ScaleTransition();
+        trans.setDuration(Duration.millis(600));
+        trans.setFromX(1);
+        trans.setFromY(1);
+        trans.setToX(0);
+        trans.setToY(0);
+        trans.setAutoReverse(true);
+        trans.setNode(explosion);
+        trans.play();
     }
 
     public void printMonsterAttacks(int key, int damage, int enemyMonsterIndex) {

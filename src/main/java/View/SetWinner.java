@@ -21,6 +21,7 @@ public class SetWinner {
     public ImageView goNext;
 
     public void start() throws Exception {
+        MainMenu.menu = "menu";
         Stage primaryStage = ProgramController.getStage();
         Parent root = FXMLLoader.load(getClass().getResource("setWinner.fxml"));
         primaryStage.setTitle("Yu-Gi-Oh");

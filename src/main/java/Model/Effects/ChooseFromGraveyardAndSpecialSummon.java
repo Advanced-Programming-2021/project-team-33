@@ -4,19 +4,29 @@ import Controller.GameController;
 import Model.*;
 import View.Communicate;
 import View.GameMenu;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
+import java.util.Locale;
+import java.util.Optional;
 
 public class ChooseFromGraveyardAndSpecialSummon implements Effect {
     @Override
     public void enableEffect(Card card) {
-        new GameMenu().showError("Choose graveyard:");
-        new GameMenu().setAction("spell");
-        new GameMenu().button1.setImage(new Image(getClass().getResourceAsStream("/PNG/mygraveyard.png")));
-        new GameMenu().button2.setImage(new Image(getClass().getResourceAsStream("/PNG/opponentGraveyard.png")));
-        new GameMenu().button1.setOnMouseClicked(event -> chooseFromGraveYard("Your", Player.currentPlayer));
-        new GameMenu().button2.setOnMouseClicked(event -> chooseFromGraveYard("Opponent's", Player.opponent));
+        TextInputDialog dialog = new TextInputDialog("");
+        dialog.setTitle("Monster Reborn");
+        dialog.setHeaderText("Monster Reborn");
+        dialog.setContentText("Choose graveyard:" + "\n" +
+                "1-My graveyard \t 2-Opponent graveyard");
+        Optional<String> result = dialog.showAndWait();
+        String opponent = result.get();
+        if (opponent.equals("1")) {
+            chooseFromGraveYard("Your", Player.currentPlayer);
+        } else {
+            chooseFromGraveYard("Opponent's", Player.opponent);
+        }
     }
 
     @Override
@@ -29,7 +39,11 @@ public class ChooseFromGraveyardAndSpecialSummon implements Effect {
     public void chooseFromGraveYard(String output, Player player) {
         ArrayList<Card> graveYard = player.getBoard().getGraveyard();
         if (graveYard.size() == 0) {
-            new GameMenu().showError(output + " graveyard is empty");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Graveyard is empty!");
+            alert.showAndWait();
             return;
         }
         ArrayList<Integer> indexes = new ArrayList<>();
@@ -42,12 +56,26 @@ public class ChooseFromGraveyardAndSpecialSummon implements Effect {
                         card1.getCardName());
             }
         }
-        String input = Communicate.input("Please enter the index of card");
+        TextInputDialog dialog = new TextInputDialog("");
+        dialog.setTitle("Monster Reborn");
+        dialog.setHeaderText("Monster Reborn");
+        dialog.setContentText("Please enter the index of card:");
+        Optional<String> result = dialog.showAndWait();
+        String input = result.get();
+        System.out.println(result.get());
         try {
             int selectedCardIndex = Integer.parseInt(input) - 1;
             if (indexes.contains(selectedCardIndex)) {
-                GameController.selectCardFromGraveyard(selectedCardIndex);
-                // specialSummon(GameController.selectedCard);
+                GameController.selectedCard =  player.getBoard().getGraveyard().get(selectedCardIndex);
+                player.getBoard().getGraveyard().remove(GameController.selectedCard);
+                GameController.selectedCard.setCardStatus(CardStatus.ATTACK);
+                GameController.putMonsterOnField();
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Massage");
+                alert.setHeaderText(null);
+                alert.setContentText("Special summon done");
+                alert.showAndWait();
+                GameController.deSelectCard();
             } else {
                 Communicate.output("Your input is not valid");
             }
@@ -65,4 +93,5 @@ public class ChooseFromGraveyardAndSpecialSummon implements Effect {
     public String getEffectDescription() {
         return "Target 1 monster in either GY; Special Summon it.";
     }
+
 }

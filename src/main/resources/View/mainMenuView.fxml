@@ -20,9 +20,7 @@
         </VBox>
     </center>
     <bottom>
-        <HBox>
-            <Button text="Back" onMouseClicked="#back"/>
-        </HBox>
+
     </bottom>
     <stylesheets>
         <URL value="@../css/deckMenu.css" />

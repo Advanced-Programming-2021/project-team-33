@@ -92,7 +92,7 @@ public class SetGame {
         Player.thePlayer.addToDeckList(deck);
         deck.setDeckActive(true);
         Player.thePlayer.getActiveDeck().addToMainDeck(Card.getCardByName("Alexandrite Dragon"));
-        Player.thePlayer.getActiveDeck().addToMainDeck(Card.getCardByName("Swords of Revealing Light"));
+        Player.thePlayer.getActiveDeck().addToMainDeck(Card.getCardByName("Monster Reborn"));
         Player.thePlayer.getActiveDeck().addToMainDeck(Card.getCardByName("Beast King Barbaros"));
         Player.thePlayer.getActiveDeck().addToMainDeck(Card.getCardByName("Bitron"));
         Player.thePlayer.getActiveDeck().addToMainDeck(Card.getCardByName("Haniwa"));
@@ -121,23 +121,22 @@ public class SetGame {
             deck1.setDeckActive(true);
             secondPlayer.getActiveDeck().addToMainDeck(Card.getCardByName("Axe Raider"));
             secondPlayer.getActiveDeck().addToMainDeck(Card.getCardByName("Battle Ox"));
-            secondPlayer.getActiveDeck().addToMainDeck(Card.getCardByName("Magic Cylinder"));
+            secondPlayer.getActiveDeck().addToMainDeck(Card.getCardByName("Terraforming"));
             secondPlayer.getActiveDeck().addToMainDeck(Card.getCardByName("Monster Reborn"));
             secondPlayer.getActiveDeck().addToMainDeck(Card.getCardByName("Horn Imp"));
             secondPlayer.getActiveDeck().addToMainDeck(Card.getCardByName("Silver Fang"));
+            secondPlayer.getActiveDeck().addToMainDeck(Card.getCardByName("Magic Cylinder"));
             secondPlayer.getActiveDeck().addToMainDeck(Card.getCardByName("Fireyarou"));
-            secondPlayer.getActiveDeck().addToMainDeck(Card.getCardByName("Crawling Dragon"));
-            secondPlayer.getActiveDeck().addToMainDeck(Card.getCardByName("Baby Dragon"));
-            secondPlayer.getActiveDeck().addToMainDeck(Card.getCardByName("Wattkid"));
+
+
             Player.thePlayer.getActiveDeck().addToMainDeck(Card.getCardByName("Alexandrite Dragon"));
-            Player.thePlayer.getActiveDeck().addToMainDeck(Card.getCardByName("Swords of Revealing Light"));
             Player.thePlayer.getActiveDeck().addToMainDeck(Card.getCardByName("Beast King Barbaros"));
             Player.thePlayer.getActiveDeck().addToMainDeck(Card.getCardByName("Bitron"));
             Player.thePlayer.getActiveDeck().addToMainDeck(Card.getCardByName("Haniwa"));
             Player.thePlayer.getActiveDeck().addToMainDeck(Card.getCardByName("Wattkid"));
             Player.thePlayer.getActiveDeck().addToMainDeck(Card.getCardByName("Baby Dragon"));
-            Player.thePlayer.getActiveDeck().addToMainDeck(Card.getCardByName("Fireyarou"));
-            Player.thePlayer.getActiveDeck().addToMainDeck(Card.getCardByName("Silver Fang"));
+            Player.thePlayer.getActiveDeck().addToMainDeck(Card.getCardByName("Crawling Dragon"));
+
 
             if (!GameController.isDeckActive(Player.thePlayer.getUsername()))
                 System.out.println(Player.thePlayer.getUsername() + " has no active deck");

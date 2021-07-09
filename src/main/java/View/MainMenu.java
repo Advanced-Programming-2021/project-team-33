@@ -10,6 +10,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.*;
@@ -149,7 +150,13 @@ public class MainMenu {
     }
 
     private void startGame() {
-        if (Player.getPlayers().size() < 2) showError("there is no other player");
+        if (Player.getPlayers().size() < 2) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("there is no other player");
+            alert.showAndWait();
+        }
         else {
             try {
                 new SetGame().start();

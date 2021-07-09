@@ -13,7 +13,7 @@ public class PlayMusic extends TimerTask {
     Timer timer;
     public void start() {
         timer = new Timer();
-        timer.schedule(new PlayMusic(), 0,136000);
+        timer.schedule(new PlayMusic(), 0,110000);
 
     }
     @Override
@@ -36,7 +36,7 @@ public class PlayMusic extends TimerTask {
         String path = "src/main/resources/music/Game.mp3";
         Media music = new Media(Paths.get(path).toUri().toString());
         mediaPlayer = new MediaPlayer(music);
-        mediaPlayer.setVolume(.2);
+        mediaPlayer.setVolume(.4);
         mediaPlayer.play();
 
     }

@@ -66,8 +66,6 @@ public class DeckMenu {
             }
         });
         for (Card card : Card.getCards()) {
-            System.out.println("/PNG/Cards/Monsters/" +
-                    card.getCardName().replaceAll("\\s+", "") + ".jpg");
             Image image = new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" +
                     card.getCardName().replaceAll("\\s+", "") + ".jpg"));
             ImageView imageView = new ImageView(image);

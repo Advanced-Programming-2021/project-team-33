@@ -74,6 +74,7 @@ public class ShopMenu {
         money.setText(Integer.toString(Player.thePlayer.getMoney()));
         var ref = new Object() {
             int i = 0;
+            int page = 1;
         };
         updateShopCards(ref.i);
         description.setText(Card.getCards().get(0).getDescription());
@@ -81,16 +82,22 @@ public class ShopMenu {
         leftButton.setOnMouseClicked(event -> {
             MainMenu.playSound(Util.CLICK_MUSIC);
             if (ref.i > 11) {
+                ref.page--;
                 ref.i -= 12;
                 updateShopCards(ref.i);
             } else updateShopCards(0);
-
         });
         rightButton.setOnMouseClicked(event -> {
             MainMenu.playSound(Util.CLICK_MUSIC);
             if (ref.i < 60) {
                 ref.i += 12;
+                ref.page++;
                 updateShopCards(ref.i);
+            }
+            else if(ref.page == 6){
+                ref.i += 12;
+                ref.page++;
+                updateShopCards(-1);
             }
         });
         card11.setOnMouseClicked(event -> updateShowCard(card11, ref.i));
@@ -116,18 +123,33 @@ public class ShopMenu {
     }
 
     private void updateShopCards(int i) {
-        card11.setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" + Card.getCards().get(i).getCardName().replaceAll("\\s+", "") + ".jpg")));
-        card12.setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" + Card.getCards().get(i + 1).getCardName().replaceAll("\\s+", "") + ".jpg")));
-        card13.setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" + Card.getCards().get(i + 2).getCardName().replaceAll("\\s+", "") + ".jpg")));
-        card14.setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" + Card.getCards().get(i + 3).getCardName().replaceAll("\\s+", "") + ".jpg")));
-        card21.setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" + Card.getCards().get(i + 4).getCardName().replaceAll("\\s+", "") + ".jpg")));
-        card22.setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" + Card.getCards().get(i + 5).getCardName().replaceAll("\\s+", "") + ".jpg")));
-        card23.setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" + Card.getCards().get(i + 6).getCardName().replaceAll("\\s+", "") + ".jpg")));
-        card24.setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" + Card.getCards().get(i + 7).getCardName().replaceAll("\\s+", "") + ".jpg")));
-        card31.setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" + Card.getCards().get(i + 8).getCardName().replaceAll("\\s+", "") + ".jpg")));
-        card32.setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" + Card.getCards().get(i + 9).getCardName().replaceAll("\\s+", "") + ".jpg")));
-        card33.setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" + Card.getCards().get(i + 10).getCardName().replaceAll("\\s+", "") + ".jpg")));
-        card34.setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" + Card.getCards().get(i + 11).getCardName().replaceAll("\\s+", "") + ".jpg")));
+        int size = 0;
+        if (i == -1) {
+           size = Card.getCards().size() - 72;
+           i = 72;
+        }
+        else size = 12;
+        ArrayList<ImageView> cardList = new ArrayList<>();
+        cardList.add(card11);
+        cardList.add(card12);
+        cardList.add(card13);
+        cardList.add(card14);
+        cardList.add(card21);
+        cardList.add(card22);
+        cardList.add(card23);
+        cardList.add(card24);
+        cardList.add(card31);
+        cardList.add(card32);
+        cardList.add(card33);
+        cardList.add(card34);
+
+        for(int j =0; j < 12;j++){
+            cardList.get(j).setImage(null);
+        }
+        for(int j =0; j < size;j++){
+            cardList.get(j).setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" + Card.getCards().get(i++).getCardName().replaceAll("\\s+", "") + ".jpg")));
+        }
+
     }
 
     public void buy() {

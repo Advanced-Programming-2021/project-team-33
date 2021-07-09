@@ -1,17 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.chart.*?>
-<?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="725.0" prefWidth="658.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Main">
-    <ImageView fx:id="backGround">
-    </ImageView>
-    <Button layoutX="363.0" layoutY="320.0" onMouseClicked="#openLoginMenu" prefHeight="44.0" prefWidth="178.0" scaleX="2" scaleY="2" style="-fx-font-size: 22;-fx-background-color: red;-fx-text-fill: white" text="Login">
-    </Button>
-    <Button layoutX="363.0" layoutY="420.0" onMouseClicked="#openRegisterMenu" prefHeight="38.0" prefWidth="178.0" scaleX="2" scaleY="2" style="-fx-font-size: 22;-fx-background-color: red;-fx-text-fill: white" text="Register">
-    </Button>
-    <Button layoutY="680" onMouseClicked="#exit" style="-fx-background-color: red;-fx-text-fill: white;-fx-font-size: 20" text="Exit">
-    </Button>
+<AnchorPane prefHeight="744.0" prefWidth="1292.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Main">
+    <ImageView fx:id="backGround" fitHeight="724.0" fitWidth="1292.0">
+      <image>
+         <Image url="@PNG/black.jpg" />
+      </image></ImageView>
+   <ImageView fitHeight="582.0" fitWidth="814.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@PNG/fg.jpg" />
+      </image>
+   </ImageView>
+   <ImageView fx:id="foreGround" fitHeight="768.0" fitWidth="677.0" layoutX="646.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@PNG/bg.jpg" />
+      </image>
+   </ImageView>
+   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#030507" height="200.0" layoutX="-4.0" layoutY="568.0" stroke="BLACK" strokeType="INSIDE" width="650.0" />
+   <ImageView fx:id="title" fitHeight="213.0" fitWidth="470.0" layoutX="388.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@PNG/Title.png" />
+      </image>
+   </ImageView>
+   <Rectangle fx:id="bg2" arcHeight="5.0" arcWidth="5.0" fill="#030507" height="619.0" layoutX="-4.0" layoutY="1.0" stroke="BLACK" strokeType="INSIDE" width="373.0" />
+   <ImageView fx:id="gradiant" fitHeight="118.0" fitWidth="200.0" layoutX="530.0" layoutY="242.0" opacity="0.4" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@PNG/gradiant.jpg" />
+      </image>
+   </ImageView>
+   <Text fx:id="register" fill="#fff3af" layoutX="536.0" layoutY="313.0" onMouseClicked="#openRegisterMenu" strokeType="OUTSIDE" strokeWidth="0.0" text="Register">
+      <font>
+         <Font name="Bell MT Italic" size="61.0" />
+      </font>
+   </Text>
+   <Rectangle fx:id="bg21" arcHeight="5.0" arcWidth="5.0" fill="#030507" height="619.0" layoutX="851.0" layoutY="20.0" stroke="BLACK" strokeType="INSIDE" width="387.0" />
+   <ImageView fx:id="gradiant1" fitHeight="118.0" fitWidth="200.0" layoutX="530.0" layoutY="340.0" opacity="0.4" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@PNG/gradiant.jpg" />
+      </image>
+   </ImageView>
+   <ImageView fx:id="gradiant2" fitHeight="118.0" fitWidth="200.0" layoutX="530.0" layoutY="446.0" opacity="0.4" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@PNG/gradiant.jpg" />
+      </image>
+   </ImageView>
+   <Text fx:id="login" fill="#fff3af" layoutX="553.0" layoutY="413.0" onMouseClicked="#openLoginMenu" strokeType="OUTSIDE" strokeWidth="0.0" text="Login">
+      <font>
+         <Font name="Bell MT Italic" size="61.0" />
+      </font>
+   </Text>
+   <Text fx:id="exit" fill="#fff3af" layoutX="570.0" layoutY="519.0" onMouseClicked="#exit" strokeType="OUTSIDE" strokeWidth="0.0" text="Exit">
+      <font>
+         <Font name="Bell MT Italic" size="61.0" />
+      </font>
+   </Text>
 </AnchorPane>
