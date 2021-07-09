@@ -13,7 +13,7 @@
                <Image url="@../PNG/Crypt-Best-Wallpaper-09152.jpg" />
            </image>
        </ImageView>
-      <GridPane fx:id="deckGrid" layoutX="243.0" layoutY="80.0" prefHeight="411.0" prefWidth="817.0">
+      <GridPane hgap="5" vgap="5" fx:id="deckGrid" layoutX="243.0" layoutY="80.0" prefHeight="411.0" prefWidth="817.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
