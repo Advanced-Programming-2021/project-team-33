@@ -4,13 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c344dfcf-2301-4e3d-a4d9-a1311bc30bb9" name="Default Changelist" comment="add getimage to util">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_10_2021_11_28_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_10_2021_11_28_PM__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_11_06_AM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_11_06_AM__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM__Default_Changelist_.xml" afterDir="false" />
+    <list default="true" id="c344dfcf-2301-4e3d-a4d9-a1311bc30bb9" name="Default Changelist" comment="music">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/View/deckMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/View/deckMenu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/View/deckMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/deckMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/GameMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/firstPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/firstPage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/GameMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/GameMenu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/firstPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/firstPage.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +72,7 @@
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main.Main" />
       <module name="YoGiOh" />
-      <option name="VM_PARAMETERS" value="--module-path C:\Users\Mohammad\Desktop\javafx-sdk-16\lib --add-modules javafx.controls,javafx.media,javafx.fxml" />
+      <option name="VM_PARAMETERS" value="--module-path C:\Users\arsalan77x\Desktop\javafx-sdk-16\lib --add-modules javafx.controls,javafx.media,javafx.fxml" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="Main.*" />

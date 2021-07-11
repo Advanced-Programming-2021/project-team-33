@@ -164,7 +164,7 @@ public class GameMenu {
                 background.setFill(null);
                 surrender.setImage(null);
                 surrender.toBack();
-                pause.toBack();
+
                 pauseText.setText(null);
                 isPaused = false;
             }
