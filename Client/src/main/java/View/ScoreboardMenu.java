@@ -41,7 +41,7 @@ public class ScoreboardMenu {
     }
 
     @FXML
-    private void initialize() {
+    private void initialize() throws IOException {
         Image image = new Image(getClass().getResource("/PNG/scoreBoardBackground.jpg").toExternalForm());
         backGround.setImage(image);
         ObservableList<String> scores = FXCollections.observableArrayList(setScoreBoardList());
@@ -62,16 +62,12 @@ public class ScoreboardMenu {
         });
     }
 
-    public List<String> setScoreBoardList() {
-        Map<String, Integer> sortedScoreBoard = ProgramController.createScoreBoard();
-        ArrayList<String> listOfPlayers = new ArrayList<>();
-        int lineNumber = 1;
-        for (Map.Entry<String, Integer> en : sortedScoreBoard.entrySet()) {
-            listOfPlayers.add(lineNumber + "- " + en.getKey() + " : " + en.getValue());
-            lineNumber++;
-            if (lineNumber == 21) break;
-        }
-        return listOfPlayers;
+    public List<String> setScoreBoardList() throws IOException {
+        ProgramController.dataOutputStream.writeUTF("scoreboard");
+        ProgramController.dataOutputStream.flush();
+        String result = ProgramController.dataInputStream.readUTF();
+        String[] strings = result.split("/");
+        return Arrays.asList(strings.clone());
     }
 
     public void back(MouseEvent event) throws Exception {

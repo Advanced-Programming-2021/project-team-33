@@ -10,6 +10,8 @@ public class Util {
     public static Scanner scanner = new Scanner(System.in);
     public static String CLICK_MUSIC = "src/main/resources/music/click.mp3";
     private static Util instance = null;
+    public static String token = "";
+
 
     public static Util getInstance() {
         if (instance == null)

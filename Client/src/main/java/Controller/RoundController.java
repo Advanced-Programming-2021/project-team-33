@@ -3,7 +3,7 @@ package Controller;
 import Model.Card;
 import Model.Player;
 import View.GameMenu;
-import View.Phase;
+import Model.Phase;
 import javafx.scene.control.Alert;
 
 import java.util.Random;

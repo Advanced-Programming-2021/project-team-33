@@ -1,5 +1,8 @@
 package Main;
 
+import Controller.RegisterController;
+import Controller.ScoreboardController;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -7,6 +10,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Main {
+
     public static void main(String[] args) {
         runApp();
     }
@@ -38,4 +42,27 @@ public class Main {
         }).start();
     }
 
+    private static void getInputAndProcess(DataInputStream dataInputStream, DataOutputStream dataOutputStream) throws IOException {
+        while (true) {
+            String input = dataInputStream.readUTF();
+            String result = process(input);
+            if (result.equals("")) break;
+            dataOutputStream.writeUTF(result);
+            dataOutputStream.flush();
+        }
+    }
+
+    static String process(String command) {
+        String[] parts = command.split(" ");
+        if (command.startsWith("register")) {
+            return String.valueOf(RegisterController.register(parts[1], parts[2], parts[3]));
+        }
+        else if (command.startsWith("login")) {
+            return String.valueOf(RegisterController.login(parts[1], parts[2]));
+        }
+        else if (command.startsWith("scoreboard")) {
+            return ScoreboardController.setScoreBoardList();
+        }
+        return "";
+    }
 }

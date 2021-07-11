@@ -1,14 +1,11 @@
 package Model;
 
-import Model.Effects.IncreaseAttack;
-import View.Phase;
-import javafx.beans.property.SimpleStringProperty;
-
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 public class Player {
     static ArrayList<Player> players = new ArrayList<>();
+    public static HashMap<String, Player> loggedInPlayers;
     public ArrayList<Deck> listOfDecks = new ArrayList<>();
     public ArrayList<Card> listOfCards = new ArrayList<>();
     public Phase phase;

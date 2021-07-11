@@ -2,32 +2,12 @@ package Controller;
 
 import Model.Card;
 import Model.Player;
-import javafx.scene.control.Button;
-import javafx.scene.effect.DropShadow;
-import javafx.stage.Stage;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.net.Socket;
 import java.util.*;
 
 public class ProgramController {
 
-    private static Stage stage;
     private static int profileID;
-    public static DataInputStream dataInputStream;
-    public static DataOutputStream dataOutputStream;
-    private static Socket socket;
-    public static void initializeNetwork() {
-        try {
-            socket = new Socket("localhost", 7777);
-            dataInputStream = new DataInputStream(socket.getInputStream());
-            dataOutputStream = new DataOutputStream(socket.getOutputStream());
-        } catch (IOException x) {
-            x.printStackTrace();
-        }
-    }
 
     public static boolean isUserExist(String user) {
         return Player.getUserByUsername(user) != null;
@@ -146,24 +126,4 @@ public class ProgramController {
         return temp;
     }
 
-    public static Stage getStage() {
-        return stage;
-    }
-
-    public static void setStage(Stage stage) {
-        ProgramController.stage = stage;
-    }
-
-    public static Button getButton(String name) {
-        Button button = new Button(name);
-        button.getStyleClass().add("myButton");
-        button.setStyle("-fx-font-size: 28px; -fx-pref-width: 300px");
-        button.setOnMouseEntered(event -> {
-            button.setEffect(new DropShadow());
-        });
-        button.setOnMouseExited(event -> {
-            button.setEffect(null);
-        });
-        return button;
-    }
 }

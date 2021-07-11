@@ -33,6 +33,7 @@ public class Main extends Application {
     public ImageView gradiant,gradiant1,gradiant2;
 
     public static void main(String[] args) {
+        ProgramController.initializeNetwork();
         CardController.initialCards();
         MainMenu.menu = "start";
         new PlayMusic().start();

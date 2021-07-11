@@ -16,13 +16,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.io.File;
+import java.io.IOException;
 import java.util.regex.Matcher;
 
 public class LoginMenu {
@@ -84,24 +82,30 @@ public class LoginMenu {
             } else {
                 input = "user create --username " + textUserName.getText() + " --nickname " + textNickName.getText()
                         + " --password " + textPassword.getText();
-                register(Util.getCommand(input, "user create --username (\\S+)" +
-                        " --nickname (\\S+) --password (\\S+)"));
+                try {
+                    register(Util.getCommand(input, "user create --username (\\S+)" +
+                            " --nickname (\\S+) --password (\\S+)"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
 
-    public void register(Matcher matcher) {
+    public void register(Matcher matcher) throws IOException {
         if (matcher.matches()) {
             String username = matcher.group(1);
             String nickname = matcher.group(2);
             String password = matcher.group(3);
-            if (ProgramController.isUserExist(username))
-                showError("user with username " + username + " already exists");
-            else if (ProgramController.isNicknameExist(nickname))
-                showError("user with nickname " + nickname + " already exists");
+            ProgramController.dataOutputStream.writeUTF("register " + username + " " + nickname + " " + password);
+            ProgramController.dataOutputStream.flush();
+            String result = ProgramController.dataInputStream.readUTF();
+            if (result.startsWith("0")) {
+                showError(result.substring(2));
+            }
             else {
                 ProgramController.createUser(username, nickname, password);
-                showError("user created successfully!");
+                showError(result.substring(2));
             }
         }
     }
@@ -110,13 +114,15 @@ public class LoginMenu {
         if (matcher.matches()) {
             String username = matcher.group(1);
             String password = matcher.group(2);
-            if (!ProgramController.isUserExist(username))
-                showError("Username and password didn't match!");
-            else if (!ProgramController.isPasswordMatch(username, password))
-                showError("Username and password didn't match!");
+            ProgramController.dataOutputStream.writeUTF("login " + username + " " + password);
+            ProgramController.dataOutputStream.flush();
+            String result = ProgramController.dataInputStream.readUTF();
+            if (result.startsWith("0")) {
+                showError(result.substring(2));
+            }
             else {
                 ProgramController.setPlayer(username);
-                showError("user logged in successfully!");
+                Util.token = result.substring(2);
                 new MainMenu().start();
             }
         }
