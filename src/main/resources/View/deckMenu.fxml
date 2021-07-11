@@ -41,7 +41,7 @@
        </ListView>
       <ImageView fx:id="cardShow" fitHeight="323.0" fitWidth="187.0" layoutX="13.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../PNG/Cards/Monsters/BabyDragon.jpg" />
+            <Image url="@../PNG/Cards/Monsters/Unknown.jpg" />
          </image>
       </ImageView>
       <Text fx:id="cardDescription" layoutX="14.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="186.5016326904297">

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import java.net.URL?>
 <AnchorPane prefHeight="720" prefWidth="1280" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.DeckMenu">
    <children>
        <ImageView fitHeight="757.0" fitWidth="1288.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true">
@@ -40,7 +41,7 @@
        </ListView>
       <ImageView fx:id="cardShow" fitHeight="323.0" fitWidth="187.0" layoutX="13.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../PNG/Cards/Monsters/BabyDragon.jpg" />
+            <Image url="@../PNG/Cards/Monsters/Unknown.jpg" />
          </image>
       </ImageView>
       <Text fx:id="cardDescription" layoutX="14.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="186.5016326904297">
