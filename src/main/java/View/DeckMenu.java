@@ -10,7 +10,6 @@ import Model.Player;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
@@ -20,7 +19,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -55,8 +53,7 @@ public class DeckMenu {
         deckListOfCards.getSelectionModel().selectedItemProperty().addListener(event -> {
             ObservableList selectedIndices = deckListOfCards.getSelectionModel().getSelectedIndices();
             selectedCard = Card.getCards().get(Integer.parseInt(selectedIndices.get(0).toString()));
-            cardShow.setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" +
-                    selectedCard.getCardName().replaceAll("\\s+", "") + ".jpg")));
+            cardShow.setImage(Util.getImage(selectedCard.getCardName()));
         });
         deckList.getSelectionModel().selectedItemProperty().addListener(event -> {
             ObservableList selectedIndices = deckList.getSelectionModel().getSelectedIndices();
@@ -66,11 +63,10 @@ public class DeckMenu {
             }
         });
         for (Card card : Card.getCards()) {
-            Image image = new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" +
-                    card.getCardName().replaceAll("\\s+", "") + ".jpg"));
+            Image image = Util.getImage(card.getCardName());
             ImageView imageView = new ImageView(image);
-            imageView.setFitHeight(124);
-            imageView.setFitWidth(75);
+            imageView.setFitHeight(100);
+            imageView.setFitWidth(65);
             deckListOfCards.getItems().add(imageView);
         }
 
@@ -85,8 +81,8 @@ public class DeckMenu {
             for (int j = 0; j < 10; j++) {
                 Image image = new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/Unknown.jpg"));
                 ImageView imageView = new ImageView(image);
-                imageView.setFitHeight(124);
-                imageView.setFitWidth(75);
+                imageView.setFitHeight(100);
+                imageView.setFitWidth(65);
                 imageView.setId("mainDeckCard" + i + "_" + j);
                 deckGrid.add(imageView, j, i);
                 int finalJ = j;
@@ -94,8 +90,7 @@ public class DeckMenu {
                 imageView.setOnMouseClicked(event -> {
                     if (mainDeck != null && finalI * 10 + finalJ < mainDeck.getMainDeck().size()) {
                         selectedCard = mainDeck.getMainDeck().get(finalI * 10 + finalJ);
-                        cardShow.setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" +
-                                selectedCard.getCardName().replaceAll("\\s+", "") + ".jpg")));
+                        cardShow.setImage(Util.getImage(selectedCard.getCardName()));
                     }
                 });
             }
@@ -111,8 +106,7 @@ public class DeckMenu {
             imageView.setOnMouseClicked(event -> {
                 if (mainDeck != null && finalJ < mainDeck.getSideDeck().size()) {
                     selectedCard = mainDeck.getSideDeck().get(finalJ);
-                    cardShow.setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" +
-                            selectedCard.getCardName().replaceAll("\\s+", "") + ".jpg")));
+                    cardShow.setImage(Util.getImage(selectedCard.getCardName()));
                 }
             });
         }
@@ -157,8 +151,7 @@ public class DeckMenu {
                 if (mainDeck == null || a >= mainDeck.getMainDeck().size()) {
                     image = new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/Unknown.jpg"));
                 } else {
-                    image = new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" +
-                            mainDeck.getMainDeck().get(a).getCardName().replaceAll("\\s+", "") + ".jpg"));
+                    image = Util.getImage(mainDeck.getMainDeck().get(a).getCardName());
                 }
                 ImageView imageView = (ImageView) deckGrid.lookup("#mainDeckCard" + i + "_" + j);
                 imageView.setImage(image);
@@ -170,8 +163,7 @@ public class DeckMenu {
             if (mainDeck == null || b >= mainDeck.getSideDeck().size()) {
                 image = new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/Unknown.jpg"));
             } else {
-                image = new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" +
-                        mainDeck.getSideDeck().get(b).getCardName().replaceAll("\\s+", "") + ".jpg"));
+                image = Util.getImage(mainDeck.getSideDeck().get(b).getCardName());
             }
             ImageView imageView = (ImageView) sideDeckGrid.lookup("#sideDeckCard" + j);
             imageView.setImage(image);

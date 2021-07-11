@@ -2,15 +2,12 @@ package View;
 
 import Controller.ProgramController;
 import Controller.Util;
-import Main.Main;
 import Model.Card;
 import Model.Player;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TextArea;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
@@ -147,7 +144,7 @@ public class ShopMenu {
             cardList.get(j).setImage(null);
         }
         for(int j =0; j < size;j++){
-            cardList.get(j).setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" + Card.getCards().get(i++).getCardName().replaceAll("\\s+", "") + ".jpg")));
+            cardList.get(j).setImage(Util.getImage(Card.getCards().get(i++).getCardName()));
         }
 
     }

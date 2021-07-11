@@ -1,11 +1,15 @@
 package View;
 
-import Controller.*;
-import Model.*;
+import Controller.GameController;
+import Controller.ProgramController;
+import Controller.RoundController;
+import Controller.Util;
+import Model.Card;
+import Model.CardCategory;
+import Model.CardStatus;
+import Model.Player;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
-import javafx.animation.TranslateTransition;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,8 +19,6 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -33,7 +35,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Optional;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 
@@ -111,9 +112,7 @@ public class GameMenu {
             for (int j = 0; j < 10; j++) {
                 count--;
                 if(count < 0) return;
-                Image image = new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" +
-                        player.getBoard().getGraveyard().get(count).getCardName().replaceAll("\\s+", "")
-                        + ".jpg"));
+                Image image = Util.getImage(player.getBoard().getGraveyard().get(count).getCardName());
                 ImageView imageView = new ImageView(image);
                 imageView.setFitHeight(124);
                 imageView.setFitWidth(75);
@@ -121,8 +120,7 @@ public class GameMenu {
                 graveyardList.add(imageView, j, i);
                 int finalCount = count;
                 imageView.setOnMouseClicked(event -> {
-                        cardShow.setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" +
-                                player.getBoard().getGraveyard().get(finalCount).getCardName().replaceAll("\\s+", "") + ".jpg")));
+                        cardShow.setImage(Util.getImage(player.getBoard().getGraveyard().get(finalCount).getCardName()));
                 });
             }
         }
@@ -277,17 +275,13 @@ public class GameMenu {
                 currentMonster.get(i).setImage(null);
             else if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(i).getCardStatus() == CardStatus.ATTACK) {
                 currentMonster.get(i).setRotate(0);
-                currentMonster.get(i).setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" +
-                        Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(i).getCardName().replaceAll("\\s+", "")
-                        + ".jpg")));
+                currentMonster.get(i).setImage(Util.getImage(Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(i).getCardName()));
             } else if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(i).getCardStatus() == CardStatus.SET) {
                 currentMonster.get(i).setRotate(90.0);
                 currentMonster.get(i).setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/Unknown.jpg")));
             } else if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(i).getCardStatus() == CardStatus.DEFENCE) {
                 currentMonster.get(i).setRotate(90.0);
-                currentMonster.get(i).setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" +
-                        Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(i).getCardName().replaceAll("\\s+", "")
-                        + ".jpg")));
+                currentMonster.get(i).setImage(Util.getImage(Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(i).getCardName()));
             }
             if (Player.currentPlayer.getBoard().getFieldCardsForSpellTraps().get(i) != null)
                 currentSpell.get(i).setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/Unknown.jpg")));
@@ -297,14 +291,10 @@ public class GameMenu {
                 enemyMonster.get(i).setImage(null);
             else if (Player.opponent.getBoard().getFieldCardsForMonsters().get(i).getCardStatus() == CardStatus.ATTACK) {
                 enemyMonster.get(i).setRotate(0);
-                enemyMonster.get(i).setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" +
-                        Player.opponent.getBoard().getFieldCardsForMonsters().get(i).getCardName().replaceAll("\\s+", "")
-                        + ".jpg")));
+                enemyMonster.get(i).setImage(Util.getImage(Player.opponent.getBoard().getFieldCardsForMonsters().get(i).getCardName()));
             } else if (Player.opponent.getBoard().getFieldCardsForMonsters().get(i).getCardStatus() == CardStatus.DEFENCE) {
                 enemyMonster.get(i).setRotate(90);
-                enemyMonster.get(i).setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" +
-                        Player.opponent.getBoard().getFieldCardsForMonsters().get(i).getCardName().replaceAll("\\s+", "")
-                        + ".jpg")));
+                enemyMonster.get(i).setImage(Util.getImage(Player.opponent.getBoard().getFieldCardsForMonsters().get(i).getCardName()));
             } else if (Player.opponent.getBoard().getFieldCardsForMonsters().get(i).getCardStatus() == CardStatus.SET) {
                 enemyMonster.get(i).setRotate(90);
                 enemyMonster.get(i).setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/Unknown.jpg")));
@@ -437,9 +427,7 @@ public class GameMenu {
 
     private void setViewForSelected(Card card) {
         updateBoard(currentHand, enemyHand, currentMonster);
-        cardShow.setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/" +
-                card.getCardName().replaceAll("\\s+", "")
-                + ".jpg")));
+        cardShow.setImage(Util.getImage(card.getCardName()));
         if (card.getCardCategory().equals(CardCategory.MONSTER) ||
                 card.getCardCategory().equals(CardCategory.MONSTEREFFECT)) {
             attack.setText(Integer.toString(card.getAttack()));
