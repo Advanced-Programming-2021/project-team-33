@@ -1,7 +1,6 @@
 package Model.Effects;
 
 import Controller.GameController;
-import Model.*;
 import View.Communicate;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextInputDialog;

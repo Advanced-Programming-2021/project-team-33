@@ -1,7 +1,6 @@
 package Model.Effects;
 
 import Controller.GameController;
-import Model.*;
 import View.Communicate;
 
 import java.util.ArrayList;

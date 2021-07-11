@@ -1,10 +1,7 @@
 package View;
 
-import Controller.EffectController;
 import Controller.ProgramController;
 import Controller.Util;
-import Model.*;
-import com.google.gson.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -17,7 +14,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.regex.Matcher;
 
 public class ImportExportMenu {
 

@@ -21,7 +21,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.*;
 
 public class ScoreboardMenu {
 

@@ -1,7 +1,5 @@
 package Model.Effects;
 
-import Model.*;
-
 public class ChangeAttackOfMonsterBeastForEachGraveyard implements Effect {
     @Override
     public void enableEffect(Card card) {

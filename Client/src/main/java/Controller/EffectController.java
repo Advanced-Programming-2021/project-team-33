@@ -2,7 +2,6 @@ package Controller;
 
 import Model.Card;
 import Model.Effect;
-import Model.Effects.*;
 import Model.Player;
 
 import java.util.ArrayList;
