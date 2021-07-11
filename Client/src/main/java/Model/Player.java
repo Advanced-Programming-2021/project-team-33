@@ -1,8 +1,11 @@
 package Model;
 
+import Model.Effects.IncreaseAttack;
 import View.Phase;
+import javafx.beans.property.SimpleStringProperty;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Player {
     static ArrayList<Player> players = new ArrayList<>();

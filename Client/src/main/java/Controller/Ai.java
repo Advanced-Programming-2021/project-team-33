@@ -1,6 +1,8 @@
 package Controller;
 
+import Model.*;
 import View.ChangeCardsMenu;
+import View.Communicate;
 
 import static Model.Player.theAi;
 

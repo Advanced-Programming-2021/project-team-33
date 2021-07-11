@@ -1,6 +1,7 @@
 package Model.Effects;
 
 import Model.Card;
+import Model.CardType;
 import Model.Effect;
 import Model.Player;
 

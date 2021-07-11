@@ -1,5 +1,6 @@
 package Model.Effects;
 
+import Controller.GameController;
 import Model.Card;
 import Model.CardCategory;
 import Model.Effect;

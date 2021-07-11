@@ -1,5 +1,8 @@
 package Model;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 import java.util.ArrayList;
 
 public class Card implements Cloneable{

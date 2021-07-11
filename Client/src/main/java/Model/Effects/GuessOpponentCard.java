@@ -4,7 +4,11 @@ import Controller.GameController;
 import Model.Card;
 import Model.Effect;
 import Model.Player;
+import View.CardMenu;
+import View.Communicate;
+import View.GameMenu;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.text.Text;
 
 import java.util.Optional;
 

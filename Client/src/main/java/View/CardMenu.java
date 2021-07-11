@@ -1,7 +1,9 @@
 package View;
 
+import Controller.CardController;
 import Controller.GameController;
 import Controller.ProgramController;
+import Model.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

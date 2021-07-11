@@ -1,8 +1,10 @@
 package View;
 
+import Main.Main;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
+import java.io.File;
 import java.nio.file.Paths;
 import java.util.Timer;
 import java.util.TimerTask;

@@ -1,5 +1,7 @@
 package Model.Effects;
 
+import Model.*;
+
 public class ChangeWarriorAttackDeffenceReplace implements Effect {
     @Override
     public void enableEffect(Card card) {
