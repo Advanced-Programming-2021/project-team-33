@@ -3,6 +3,7 @@ package Controller;
 import Model.Player;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class RegisterController {
@@ -22,6 +23,9 @@ public class RegisterController {
 
     public synchronized static String login(String username, String password) {
         if (Player.loggedInPlayers == null) Player.loggedInPlayers = new HashMap<>();
+        for (Map.Entry<String, Player> playerEntry : Player.loggedInPlayers.entrySet()) {
+            if(playerEntry.getValue().getUsername().equals(username)) return Util.showError("Username and password didn't match!");
+        }
         for (Player player: Player.getPlayers()) {
             if (player.getUsername().equals(username) && player.getPassword().equals(password)) {
                 String token = UUID.randomUUID().toString();
