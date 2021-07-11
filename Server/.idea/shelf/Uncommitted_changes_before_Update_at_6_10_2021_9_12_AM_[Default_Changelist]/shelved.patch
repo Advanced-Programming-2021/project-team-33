@@ -1,0 +1,166 @@
+Index: src/main/java/View/LoginMenu.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package View;\r\n\r\nimport Controller.ProgramController;\r\nimport Controller.Util;\r\nimport Model.Player;\r\n\r\n\r\nimport java.util.regex.Matcher;\r\n\r\npublic class LoginMenu {\r\n\r\n\r\n\r\n    public void run(String input) {\r\n        MainMenu.checked = false;\r\n        MainMenu.showCurrentMenu(Util.getCommand(input, \"menu show-current\"));\r\n        register(Util.getCommand(input, \"user create --username (\\\\S+)\" +\r\n                \" --nickname (\\\\S+) --password (\\\\S+)\"));\r\n        login(Util.getCommand(input, \"user login --username (\\\\S+) --password (\\\\S+)\"));\r\n    }\r\n\r\n\r\n    public void register(Matcher matcher) {\r\n        if (!MainMenu.checked && matcher.matches()) {\r\n            MainMenu.checked = true;\r\n            String username = matcher.group(1);\r\n            String nickname = matcher.group(2);\r\n            String password = matcher.group(3);\r\n            if (ProgramController.isUserExist(username))\r\n                System.out.println(\"user with username \" + username + \" already exists\");\r\n            else if (ProgramController.isNicknameExist(nickname))\r\n                System.out.println(\"user with nickname \" + nickname + \" already exists\");\r\n            else {\r\n                ProgramController.createUser(username, nickname, password);\r\n                System.out.println(\"user created successfully!\");\r\n            }\r\n        }\r\n    }\r\n\r\n    private void login(Matcher matcher) {\r\n        if (!MainMenu.checked && matcher.matches()) {\r\n            MainMenu.checked = true;\r\n            String username = matcher.group(1);\r\n            String password = matcher.group(2);\r\n            if (!ProgramController.isUserExist(username))\r\n                System.out.println(\"Username and password didn't match!\");\r\n            else if (!ProgramController.isPasswordMatch(username,password))\r\n                System.out.println(\"Username and password didn't match!\");\r\n            else {\r\n                ProgramController.setPlayer(username);\r\n                MainMenu.menu = \"main\";\r\n                System.out.println(\"user logged in successfully!\");\r\n            }\r\n        }\r\n    }\r\n\r\n    private void exit() {\r\n        System.exit(0);\r\n    }\r\n\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/View/LoginMenu.java b/src/main/java/View/LoginMenu.java
+--- a/src/main/java/View/LoginMenu.java	
++++ b/src/main/java/View/LoginMenu.java	
+@@ -2,61 +2,133 @@
+ 
+ import Controller.ProgramController;
+ import Controller.Util;
+-import Model.Player;
+-
++import Main.Main;
++import javafx.fxml.FXML;
++import javafx.fxml.FXMLLoader;
++import javafx.scene.Parent;
++import javafx.scene.Scene;
++import javafx.scene.control.Button;
++import javafx.scene.control.Label;
++import javafx.scene.control.PasswordField;
++import javafx.scene.control.TextField;
++import javafx.scene.image.Image;
++import javafx.scene.image.ImageView;
++import javafx.scene.input.MouseEvent;
++import javafx.scene.layout.AnchorPane;
++import javafx.scene.layout.HBox;
++import javafx.scene.text.Font;
++import javafx.scene.text.Text;
++import javafx.stage.Stage;
+ 
+ import java.util.regex.Matcher;
+ 
+ public class LoginMenu {
++    private static boolean register;
++    public AnchorPane anchorPane;
++    public HBox nickNameHBox;
++    public Label loginError;
++    public TextField textUserName;
++    public PasswordField textPassword;
++    public Button submit;
++    public Button clear;
+ 
++    public static boolean isRegister() {
++        return register;
++    }
+ 
++    public static void setRegister(boolean register) {
++        LoginMenu.register = register;
++    }
+ 
+-    public void run(String input) {
+-        MainMenu.checked = false;
+-        MainMenu.showCurrentMenu(Util.getCommand(input, "menu show-current"));
+-        register(Util.getCommand(input, "user create --username (\\S+)" +
+-                " --nickname (\\S+) --password (\\S+)"));
+-        login(Util.getCommand(input, "user login --username (\\S+) --password (\\S+)"));
++    public void start() throws Exception {
++        Stage primaryStage = ProgramController.getStage();
++        Parent root = FXMLLoader.load(getClass().getResource("loginView.fxml"));
++        primaryStage.setTitle("Yu-Gi-Oh");
++        primaryStage.setScene(new Scene(root, 1280, 720));
++        primaryStage.show();
++    }
++
++    @FXML
++    public void initialize() {
++        Image image = new Image(getClass().getResource("/PNG/yu-gi-oh.jpg").toExternalForm());
++        ImageView imageView = new ImageView(image);
++        anchorPane.getChildren().addAll(imageView);
++        TextField textNickName = new TextField();
++        if (isRegister()) {
++            nickNameHBox.setMaxWidth(270);
++            nickNameHBox.setStyle("-fx-background-color: silver");
++            Text text = new Text("Nick name : ");
++            text.setFont(Font.font(20));
++            nickNameHBox.getChildren().addAll(text, textNickName);
++            submit.setText("Register");
++        } else submit.setText("Login");
++        clear.setOnMouseClicked(event -> {
++            textUserName.clear();
++            textPassword.clear();
++            if (isRegister()) textNickName.clear();
++        });
++        submit.setOnMouseClicked(event -> {
++            String input = "";
++            if (!isRegister()) {
++                input = "user login --username " + textUserName.getText() + " --password " + textPassword.getText();
++                try {
++                    login(Util.getCommand(input, "user login --username (\\S+) --password (\\S+)"));
++                } catch (Exception e) {
++                    e.printStackTrace();
++                }
++            } else {
++                input = "user create --username " + textUserName.getText() + " --nickname " + textNickName.getText()
++                        + " --password " + textPassword.getText();
++                register(Util.getCommand(input, "user create --username (\\S+)" +
++                        " --nickname (\\S+) --password (\\S+)"));
++            }
++        });
+     }
+-
+ 
+     public void register(Matcher matcher) {
+-        if (!MainMenu.checked && matcher.matches()) {
+-            MainMenu.checked = true;
++        if (matcher.matches()) {
+             String username = matcher.group(1);
+             String nickname = matcher.group(2);
+             String password = matcher.group(3);
+             if (ProgramController.isUserExist(username))
+-                System.out.println("user with username " + username + " already exists");
++                showError("user with username " + username + " already exists");
+             else if (ProgramController.isNicknameExist(nickname))
+-                System.out.println("user with nickname " + nickname + " already exists");
++                showError("user with nickname " + nickname + " already exists");
+             else {
+                 ProgramController.createUser(username, nickname, password);
+-                System.out.println("user created successfully!");
++                showError("user created successfully!");
+             }
+         }
+     }
+ 
+-    private void login(Matcher matcher) {
+-        if (!MainMenu.checked && matcher.matches()) {
+-            MainMenu.checked = true;
++    private void login(Matcher matcher) throws Exception {
++        if (matcher.matches()) {
+             String username = matcher.group(1);
+             String password = matcher.group(2);
+             if (!ProgramController.isUserExist(username))
+-                System.out.println("Username and password didn't match!");
+-            else if (!ProgramController.isPasswordMatch(username,password))
+-                System.out.println("Username and password didn't match!");
++                showError("Username and password didn't match!");
++            else if (!ProgramController.isPasswordMatch(username, password))
++                showError("Username and password didn't match!");
+             else {
+                 ProgramController.setPlayer(username);
+-                MainMenu.menu = "main";
+-                System.out.println("user logged in successfully!");
++                showError("user logged in successfully!");
++                new MainMenu().start();
+             }
+         }
+     }
++
++    private void showError(String error) {
++        loginError.setText(error);
++        loginError.setFont(Font.font(20));
++        loginError.setStyle("-fx-background-color: silver");
++    }
+ 
+     private void exit() {
+         System.exit(0);
+     }
+ 
++    public void back(MouseEvent event) throws Exception {
++        new Main().start(ProgramController.getStage());
++    }
+ }
+ 
