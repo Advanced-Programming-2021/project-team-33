@@ -9,7 +9,7 @@
     -fx-pref-width: 20px;
 }
 .list-view{
-    -fx-border-color:derive(deepskyblue,80%);
+    -fx-border-color:derive(#00bfff,80%);
 }
 .list-view .scroll-bar:horizontal ,
 .list-view  .scroll-bar:vertical{

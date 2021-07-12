@@ -30,9 +30,15 @@ public class RegisterController {
             if (player.getUsername().equals(username) && player.getPassword().equals(password)) {
                 String token = UUID.randomUUID().toString();
                 Player.loggedInPlayers.put(token, player);
-                return Util.success("token");
+                return Util.success(token);
             }
         }
         return Util.showError("Username and password didn't match!");
+    }
+
+    public static String logout(String token) {
+        Player.loggedInPlayers.remove(token);
+        System.out.println(token);
+        return Util.success("logout");
     }
 }

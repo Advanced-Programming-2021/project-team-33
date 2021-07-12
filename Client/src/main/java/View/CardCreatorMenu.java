@@ -4,8 +4,6 @@ import Controller.EffectController;
 import Controller.ProgramController;
 import Controller.Util;
 import Model.*;
-import Model.Effects.AttackDirectToOpponent;
-import Model.Effects.ChangeAllEquipAttack;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -15,7 +13,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -41,7 +38,7 @@ public class CardCreatorMenu {
 
     public void start() throws IOException {
         Stage primaryStage = ProgramController.getStage();
-        Parent root = FXMLLoader.load(getClass().getResource("cardCreatorMenu.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/cardCreatorMenu.fxml"));
         primaryStage.setTitle("Yu-Gi-Oh");
         primaryStage.setScene(new Scene(root, 1280, 720));
         primaryStage.show();

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox fx:id="hbox" prefHeight="74.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+
+          <ImageView style="-fx-border-radius: 40px" fx:id="avatar" fitHeight="73.0" fitWidth="74.0">
+
+    </ImageView>
+   <Label fx:id="messageText" prefHeight="74.0" prefWidth="478.0" />
+
+</HBox>

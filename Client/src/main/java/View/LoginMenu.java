@@ -43,7 +43,7 @@ public class LoginMenu {
 
     public void start() throws Exception {
         Stage primaryStage = ProgramController.getStage();
-        Parent root = FXMLLoader.load(getClass().getResource("loginView.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/loginView.fxml"));
         primaryStage.setTitle("Yu-Gi-Oh");
         primaryStage.setScene(new Scene(root, 1280, 720));
         primaryStage.show();

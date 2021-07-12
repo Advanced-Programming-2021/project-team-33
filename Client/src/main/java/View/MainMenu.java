@@ -1,31 +1,25 @@
 package View;
 
-import Controller.*;
+import Controller.ProgramController;
+import Controller.Util;
 import Main.Main;
-import Model.Card;
 import Model.Player;
+import View.Chatroom.ChatRoom;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.effect.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.TriangleMesh;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -47,7 +41,7 @@ public class MainMenu {
 
     public void start() throws Exception {
         Stage primaryStage = ProgramController.getStage();
-        Parent root = FXMLLoader.load(getClass().getResource("mainMenuView.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/mainMenuView.fxml"));
         primaryStage.setTitle("Yu-Gi-Oh");
         if(menu.equals("menu")){
             PlayMusic.stop();
@@ -61,7 +55,7 @@ public class MainMenu {
     public void initialize() {
         backgroundMain.setImage(new Image(getClass().getResourceAsStream("/PNG/11025059.jpg")));
         vBox.setAlignment(Pos.CENTER);
-        String[] buttonName = {"Duel Menu", "Deck Menu", "Scoreboard Menu", "Profile Menu", "Shop Menu", "Import and Export", "Card Creator", "Log out"};
+        String[] buttonName = {"Duel Menu","Chat Room", "Deck Menu", "Scoreboard Menu", "Profile Menu", "Shop Menu", "Import and Export", "Card Creator", "Log out"};
         for (String name : buttonName) {
             makeButton(name);
         }
@@ -77,6 +71,14 @@ public class MainMenu {
             case "Duel Menu" -> button.setOnMouseClicked(event -> {
                 MainMenu.playSound(Util.CLICK_MUSIC);
                 startGame();
+            });
+            case "Chat Room" -> button.setOnMouseClicked(event -> {
+                MainMenu.playSound(Util.CLICK_MUSIC);
+                try {
+                    new ChatRoom().start();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             });
             case "Deck Menu" -> button.setOnMouseClicked(event -> {
                 MainMenu.playSound(Util.CLICK_MUSIC);
@@ -130,6 +132,11 @@ public class MainMenu {
             case "Log out" -> button.setOnMouseClicked(event -> {
                 MainMenu.playSound(Util.CLICK_MUSIC);
                 try {
+                    ProgramController.dataOutputStream.writeUTF("logout " + Util.token);
+                    ProgramController.dataOutputStream.flush();
+                    String result = ProgramController.dataInputStream.readUTF();
+                    Util.token = null;
+                    Player.thePlayer = null;
                     new Main().start(ProgramController.getStage());
                 } catch (Exception e) {
                     e.printStackTrace();

@@ -5,22 +5,101 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c344dfcf-2301-4e3d-a4d9-a1311bc30bb9" name="Default Changelist" comment="phase-3">
-      <change beforePath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_6_10_2021_9_12_AM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_6_10_2021_9_12_AM__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_10_2021_11_28_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_10_2021_11_28_PM__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_11_06_AM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_11_06_AM__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_11_19_AM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_11_19_AM__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_11_19_AM__Default_Changelist_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_11_19_AM__Default_Changelist_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_5_2021_8_26_AM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_5_2021_8_26_AM__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_12_32_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_12_32_PM__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_12_44_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_12_44_PM__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_3_46_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_3_46_PM__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_3_51_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_3_51_PM__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM__Default_Changelist_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Client/src/main/java/Model/Message.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Client/src/main/java/View/Chatroom/ChatRoom.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Client/src/main/java/View/Chatroom/MessageCell.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Client/src/main/resources/PNG/profile.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Client/src/main/resources/fxml/chatroom.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Client/src/main/resources/fxml/messageCell.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Client/target/classes/Model/Message.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Client/target/classes/PNG/profile.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Client/target/classes/View/Chatroom/ChatRoom$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Client/target/classes/View/Chatroom/ChatRoom.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Client/target/classes/View/Chatroom/MessageCell.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Client/target/classes/fxml/cardCreatorMenu.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Client/target/classes/fxml/cardMenu.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Client/target/classes/fxml/chatroom.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Client/target/classes/fxml/deckMenu.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Client/target/classes/fxml/flipCoin.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Client/target/classes/fxml/gameMenu.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Client/target/classes/fxml/importView.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Client/target/classes/fxml/loginView.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Client/target/classes/fxml/mainMenuView.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Client/target/classes/fxml/messageCell.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Client/target/classes/fxml/profileMenu.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Client/target/classes/fxml/scoreBoardMenu.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Client/target/classes/fxml/setRound.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Client/target/classes/fxml/setWinner.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Client/target/classes/fxml/shopMenu.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_8_09_PM__Default_Changelist_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/ChatroomContoller.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Model/Message.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/Controller/ChatroomContoller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_6_13_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_6_13_PM__Default_Changelist_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/View/CardCreatorMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/View/CardCreatorMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/View/DeckMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/View/DeckMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/View/ImportExportMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/View/ImportExportMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/View/LoginMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/View/LoginMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/View/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/View/MainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/View/ProfileMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/View/ProfileMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/View/ScoreboardMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/View/ScoreboardMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/View/ShopMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/View/ShopMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/resources/View/cardCreatorMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/resources/fxml/cardCreatorMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/resources/View/cardMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/resources/fxml/cardMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/resources/View/deckMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/resources/fxml/deckMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/resources/View/flipCoin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/resources/fxml/flipCoin.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/resources/View/gameMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/resources/fxml/gameMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/resources/View/importView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/resources/fxml/importView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/resources/View/loginView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/resources/fxml/loginView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/resources/View/mainMenuView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/resources/fxml/mainMenuView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/resources/View/profileMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/resources/fxml/profileMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/resources/View/scoreBoardMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/resources/fxml/scoreBoardMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/resources/View/setRound.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/resources/fxml/setRound.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/resources/View/setWinner.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/resources/fxml/setWinner.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/resources/View/shopMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/resources/fxml/shopMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/resources/css/deckMenu.css" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/resources/css/deckMenu.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/target/classes/View/CardCreatorMenu$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/target/classes/View/CardCreatorMenu$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/target/classes/View/CardCreatorMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/target/classes/View/CardCreatorMenu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/target/classes/View/DeckMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/target/classes/View/DeckMenu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/target/classes/View/ImportExportMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/target/classes/View/ImportExportMenu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/target/classes/View/LoginMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/target/classes/View/LoginMenu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/target/classes/View/MainMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/target/classes/View/MainMenu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/target/classes/View/ProfileMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/target/classes/View/ProfileMenu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/target/classes/View/ScoreboardMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/target/classes/View/ScoreboardMenu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/target/classes/View/ShopMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/target/classes/View/ShopMenu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/target/classes/View/cardCreatorMenu.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/target/classes/View/cardMenu.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/target/classes/View/deckMenu.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/target/classes/View/flipCoin.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/target/classes/View/gameMenu.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/target/classes/View/importView.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/target/classes/View/loginView.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/target/classes/View/mainMenuView.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/target/classes/View/profileMenu.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/target/classes/View/scoreBoardMenu.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/target/classes/View/setRound.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/target/classes/View/setWinner.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/target/classes/View/shopMenu.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/target/classes/css/deckMenu.css" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/target/classes/css/deckMenu.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_10_2021_9_12_AM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_10_2021_9_12_AM__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_10_2021_11_28_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_10_2021_11_28_PM__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_11_06_AM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_11_06_AM__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_11_19_AM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_11_19_AM__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_11_19_AM__Default_Changelist_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_11_19_AM__Default_Changelist_1.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_1_40_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_1_40_PM__Default_Changelist_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_1_40_PM__Default_Changelist_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_1_40_PM__Default_Changelist_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_5_2021_8_26_AM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_5_2021_8_26_AM__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_12_32_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_12_32_PM__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_12_44_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_12_44_PM__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_3_46_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_3_46_PM__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_3_51_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_3_51_PM__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM__Default_Changelist_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/RegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/RegisterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Controller/RegisterController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controller/RegisterController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main/Main.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,15 +153,22 @@
     <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Mohammad\Desktop\project-team-33\Server\src\main\java\Controller" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Mohammad\Desktop\project-team-33\src\main\resources\PNG\Cards\Monsters" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="Model" />
+      <recent name="Controller" />
+      <recent name="View" />
     </key>
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main.Main" />
       <module name="YoGiOh" />
-      <option name="VM_PARAMETERS" value="--module-path C:\Users\arsalan77x\Desktop\javafx-sdk-16\lib --add-modules javafx.controls,javafx.media,javafx.fxml" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="Main.*" />
@@ -112,6 +198,11 @@
       <workItem from="1625842777946" duration="2038000" />
       <workItem from="1625845098245" duration="1085000" />
       <workItem from="1625985706588" duration="283000" />
+      <workItem from="1625994337668" duration="10707000" />
+      <workItem from="1626017889157" duration="2163000" />
+      <workItem from="1626069178887" duration="2125000" />
+      <workItem from="1626072857657" duration="4824000" />
+      <workItem from="1626084642203" duration="1113000" />
     </task>
     <task id="LOCAL-00001" summary="ScoreboardMenu">
       <created>1625234598572</created>

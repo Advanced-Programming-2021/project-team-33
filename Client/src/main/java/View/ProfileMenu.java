@@ -44,7 +44,7 @@ public class ProfileMenu {
 
     public void start() throws IOException {
         Stage primaryStage = ProgramController.getStage();
-        Parent root = FXMLLoader.load(getClass().getResource("profileMenu.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/profileMenu.fxml"));
         primaryStage.setTitle("Yu-Gi-Oh");
         primaryStage.setScene(new Scene(root, 1280, 720));
         primaryStage.show();

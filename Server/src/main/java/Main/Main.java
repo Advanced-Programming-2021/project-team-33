@@ -1,5 +1,6 @@
 package Main;
 
+import Controller.ChatroomContoller;
 import Controller.RegisterController;
 import Controller.ScoreboardController;
 
@@ -62,6 +63,15 @@ public class Main {
         }
         else if (command.startsWith("scoreboard")) {
             return ScoreboardController.setScoreBoardList();
+        }
+        else if (command.startsWith("sendMessage")) {
+            return ChatroomContoller.sendMessage(command.substring(12));
+        }
+        else if (command.startsWith("getMessages")) {
+            return ChatroomContoller.getMessages();
+        }
+        else if (command.startsWith("logout")) {
+            return RegisterController.logout(parts[1]);
         }
         return "";
     }

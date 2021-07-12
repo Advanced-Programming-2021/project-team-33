@@ -1,10 +1,12 @@
 package View;
 
-import Controller.EffectController;
 import Controller.ProgramController;
 import Controller.Util;
 import Model.*;
-import com.google.gson.*;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -17,7 +19,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.regex.Matcher;
 
 public class ImportExportMenu {
 
@@ -25,7 +26,7 @@ public class ImportExportMenu {
 
     public void start() throws IOException {
         Stage primaryStage = ProgramController.getStage();
-        Parent root = FXMLLoader.load(getClass().getResource("importView.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/importView.fxml"));
         primaryStage.setTitle("Yu-Gi-Oh");
         primaryStage.setScene(new Scene(root, 1280, 720));
         primaryStage.show();
@@ -104,9 +105,9 @@ public class ImportExportMenu {
         }
     }
 
-    public void back(MouseEvent mouseEvent) throws IOException {
+    public void back(MouseEvent mouseEvent) throws Exception {
         MainMenu.playSound(Util.CLICK_MUSIC);
-        new DeckMenu().start();
+        new MainMenu().start();
     }
 
     public void importCard(MouseEvent mouseEvent) {
