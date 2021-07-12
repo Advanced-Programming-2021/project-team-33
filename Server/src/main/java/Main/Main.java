@@ -1,6 +1,7 @@
 package Main;
 
 import Controller.ChatroomContoller;
+import Controller.GameController;
 import Controller.RegisterController;
 import Controller.ScoreboardController;
 
@@ -18,7 +19,7 @@ public class Main {
 
     private static void runApp() {
         try {
-            ServerSocket serverSocket = new ServerSocket(7777);
+            ServerSocket serverSocket = new ServerSocket(7776);
             while (true) {
                 Socket socket = serverSocket.accept();
                 startNewThread(serverSocket, socket);
@@ -72,6 +73,9 @@ public class Main {
         }
         else if (command.startsWith("logout")) {
             return RegisterController.logout(parts[1]);
+        }
+        else if (command.startsWith("multiplayer")) {
+            return GameController.setMultiPlayer(parts[1]);
         }
         return "";
     }

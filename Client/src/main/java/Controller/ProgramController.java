@@ -21,7 +21,7 @@ public class ProgramController {
     private static Socket socket;
     public static void initializeNetwork() {
         try {
-            socket = new Socket("localhost", 7777);
+            socket = new Socket("localhost", 7776);
             dataInputStream = new DataInputStream(socket.getInputStream());
             dataOutputStream = new DataOutputStream(socket.getOutputStream());
         } catch (IOException x) {

@@ -6,10 +6,8 @@ import Controller.Util;
 import Model.Player;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -23,7 +21,7 @@ public class SetWinner {
     public void start() throws Exception {
         MainMenu.menu = "menu";
         Stage primaryStage = ProgramController.getStage();
-        Parent root = FXMLLoader.load(getClass().getResource("setWinner.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/setWinner.fxml"));
         primaryStage.setTitle("Yu-Gi-Oh");
         primaryStage.setScene(new Scene(root, 1280, 720));
         primaryStage.show();

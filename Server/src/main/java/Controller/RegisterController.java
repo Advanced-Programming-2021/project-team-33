@@ -16,7 +16,6 @@ public class RegisterController {
             return Util.showError("user with nickname " + nickname + " already exists");
         else {
             ProgramController.createUser(username, nickname, password);
-            System.out.println(username);
             return Util.success("user created successfully!");
         }
     }

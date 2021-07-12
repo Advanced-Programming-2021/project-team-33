@@ -1,0 +1,590 @@
+Index: src/main/java/Main/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Main;\r\n\r\nimport Controller.RegisterController;\r\nimport Controller.ScoreboardController;\r\n\r\nimport java.io.DataInputStream;\r\nimport java.io.DataOutputStream;\r\nimport java.io.IOException;\r\nimport java.net.ServerSocket;\r\nimport java.net.Socket;\r\n\r\npublic class Main {\r\n\r\n    public static void main(String[] args) {\r\n        runApp();\r\n    }\r\n\r\n    private static void runApp() {\r\n        try {\r\n            ServerSocket serverSocket = new ServerSocket(7777);\r\n            while (true) {\r\n                Socket socket = serverSocket.accept();\r\n                startNewThread(serverSocket, socket);\r\n            }\r\n        } catch (IOException e) {\r\n            e.printStackTrace();\r\n        }\r\n    }\r\n\r\n    private static void startNewThread(ServerSocket serverSocket, Socket socket) {\r\n        new Thread(() -> {\r\n            try {\r\n                DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());\r\n                DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());\r\n                getInputAndProcess(dataInputStream, dataOutputStream);\r\n                dataInputStream.close();\r\n                socket.close();\r\n                serverSocket.close();\r\n            } catch (IOException e) {\r\n                e.printStackTrace();\r\n            }\r\n        }).start();\r\n    }\r\n\r\n    private static void getInputAndProcess(DataInputStream dataInputStream, DataOutputStream dataOutputStream) throws IOException {\r\n        while (true) {\r\n            String input = dataInputStream.readUTF();\r\n            String result = process(input);\r\n            if (result.equals(\"\")) break;\r\n            dataOutputStream.writeUTF(result);\r\n            dataOutputStream.flush();\r\n        }\r\n    }\r\n\r\n    static String process(String command) {\r\n        String[] parts = command.split(\" \");\r\n        if (command.startsWith(\"register\")) {\r\n            return String.valueOf(RegisterController.register(parts[1], parts[2], parts[3]));\r\n        }\r\n        else if (command.startsWith(\"login\")) {\r\n            return String.valueOf(RegisterController.login(parts[1], parts[2]));\r\n        }\r\n        else if (command.startsWith(\"scoreboard\")) {\r\n            return ScoreboardController.setScoreBoardList();\r\n        }\r\n        return \"\";\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Main/Main.java b/src/main/java/Main/Main.java
+--- a/src/main/java/Main/Main.java	(revision d075bbe64eb44ef3cb4b09afae762c49cb5b7923)
++++ b/src/main/java/Main/Main.java	(date 1626021514391)
+@@ -1,5 +1,6 @@
+ package Main;
+ 
++import Controller.GameController;
+ import Controller.RegisterController;
+ import Controller.ScoreboardController;
+ 
+@@ -63,6 +64,9 @@
+         else if (command.startsWith("scoreboard")) {
+             return ScoreboardController.setScoreBoardList();
+         }
++        else if (command.startsWith("startGame")) {
++            return GameController.matchPeopleInLobby(parts[1]);
++        }
+         return "";
+     }
+ }
+Index: ../Client/target/classes/View/setRound.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n\r\n<?import javafx.scene.image.*?>\r\n<?import javafx.scene.layout.*?>\r\n<?import javafx.scene.text.*?>\r\n\r\n<AnchorPane fx:id=\"anchorPane\" prefHeight=\"720.0\" prefWidth=\"1280.0\" xmlns=\"http://javafx.com/javafx/11.0.1\" xmlns:fx=\"http://javafx.com/fxml/1\" fx:controller=\"View.SetGame\">\r\n   <children>\r\n      <ImageView fitHeight=\"720.0\" fitWidth=\"1280.0\" layoutY=\"5.0\" pickOnBounds=\"true\" preserveRatio=\"true\">\r\n         <image>\r\n            <Image url=\"@../PNG/Crypt-Best-Wallpaper-09152.jpg\" />\r\n         </image>\r\n      </ImageView>\r\n      <Text fill=\"WHITE\" layoutX=\"483.0\" layoutY=\"143.0\" strokeType=\"OUTSIDE\" strokeWidth=\"0.0\" text=\"Select number of rounds\">\r\n         <font>\r\n            <Font name=\"Bell MT Italic\" size=\"37.0\" />\r\n         </font>\r\n      </Text>\r\n      <Text fill=\"WHITE\" layoutX=\"485.0\" layoutY=\"347.0\" strokeType=\"OUTSIDE\" strokeWidth=\"0.0\" text=\"Select your opponent\">\r\n         <font>\r\n            <Font name=\"Bell MT Italic\" size=\"45.0\" />\r\n         </font>\r\n      </Text>\r\n      <ImageView fx:id=\"rightButton\" fitHeight=\"69.0\" fitWidth=\"75.0\" layoutX=\"824.0\" layoutY=\"421.0\" pickOnBounds=\"true\" preserveRatio=\"true\">\r\n         <image>\r\n            <Image url=\"@../PNG/rightButton.png\" />\r\n         </image>\r\n      </ImageView>\r\n      <ImageView fx:id=\"leftButton\" fitHeight=\"69.0\" fitWidth=\"67.0\" layoutX=\"402.0\" layoutY=\"421.0\" pickOnBounds=\"true\" preserveRatio=\"true\">\r\n         <image>\r\n            <Image url=\"@../PNG/leftButton.png\" />\r\n         </image>\r\n      </ImageView>\r\n      <Text fx:id=\"opponent\" fill=\"WHITE\" layoutX=\"577.0\" layoutY=\"472.0\" strokeType=\"OUTSIDE\" strokeWidth=\"0.0\" textAlignment=\"CENTER\" wrappingWidth=\"154.0\">\r\n         <font>\r\n            <Font name=\"Bell MT Italic\" size=\"60.0\" />\r\n         </font>\r\n      </Text>\r\n      <ImageView fx:id=\"one\" fitHeight=\"58.0\" fitWidth=\"118.0\" layoutX=\"519.0\" layoutY=\"183.0\" pickOnBounds=\"true\" preserveRatio=\"true\">\r\n         <image>\r\n            <Image url=\"@../PNG/one.png\" />\r\n         </image>\r\n      </ImageView>\r\n      <ImageView fx:id=\"three\" fitHeight=\"58.0\" fitWidth=\"116.0\" layoutX=\"654.0\" layoutY=\"182.0\" pickOnBounds=\"true\" preserveRatio=\"true\">\r\n         <image>\r\n            <Image url=\"@../PNG/three.png\" />\r\n         </image>\r\n      </ImageView>\r\n      <ImageView fx:id=\"start\" fitHeight=\"150.0\" fitWidth=\"200.0\" layoutX=\"547.0\" layoutY=\"540.0\" pickOnBounds=\"true\" preserveRatio=\"true\">\r\n         <image>\r\n            <Image url=\"@../PNG/start.png\" />\r\n         </image>\r\n      </ImageView>\r\n   </children>\r\n</AnchorPane>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../Client/target/classes/View/setRound.fxml b/../Client/target/classes/View/setRound.fxml
+--- a/../Client/target/classes/View/setRound.fxml	(revision d075bbe64eb44ef3cb4b09afae762c49cb5b7923)
++++ b/../Client/target/classes/View/setRound.fxml	(date 1626021020732)
+@@ -46,9 +46,14 @@
+             <Image url="@../PNG/three.png" />
+          </image>
+       </ImageView>
+-      <ImageView fx:id="start" fitHeight="150.0" fitWidth="200.0" layoutX="547.0" layoutY="540.0" pickOnBounds="true" preserveRatio="true">
++      <ImageView fx:id="start" fitHeight="150.0" fitWidth="200.0" layoutX="435.0" layoutY="540.0" pickOnBounds="true" preserveRatio="true">
+          <image>
+             <Image url="@../PNG/start.png" />
++         </image>
++      </ImageView>
++      <ImageView fx:id="multiPlayer" fitHeight="150.0" fitWidth="200.0" layoutX="670.0" layoutY="540.0" pickOnBounds="true" preserveRatio="true">
++         <image>
++            <Image url="@../PNG/multi.png" />
+          </image>
+       </ImageView>
+    </children>
+Index: ../Client/src/main/java/View/SetGame.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package View;\r\n\r\nimport Controller.Ai;\r\nimport Controller.GameController;\r\nimport Controller.ProgramController;\r\nimport Controller.Util;\r\nimport Model.Card;\r\nimport Model.Deck;\r\nimport Model.Player;\r\nimport javafx.fxml.FXML;\r\nimport javafx.fxml.FXMLLoader;\r\nimport javafx.scene.Parent;\r\nimport javafx.scene.Scene;\r\nimport javafx.scene.image.ImageView;\r\nimport javafx.scene.text.Text;\r\nimport javafx.stage.Stage;\r\n\r\nimport java.io.IOException;\r\nimport java.util.ArrayList;\r\nimport java.util.concurrent.atomic.AtomicInteger;\r\n\r\npublic class SetGame {\r\n\r\n    public ImageView one;\r\n    public ImageView three;\r\n    public Text opponent;\r\n    public ImageView rightButton;\r\n    public ImageView leftButton;\r\n    public ImageView start;\r\n\r\n    public void start() throws IOException {\r\n        Stage primaryStage = ProgramController.getStage();\r\n        Parent root = FXMLLoader.load(getClass().getResource(\"setRound.fxml\"));\r\n        MainMenu.menu = \"game\";\r\n        PlayMusic.stop();\r\n        new PlayMusic().start();\r\n        primaryStage.setTitle(\"Yu-Gi-Oh\");\r\n        primaryStage.setScene(new Scene(root, 1280, 720));\r\n        primaryStage.show();\r\n    }\r\n\r\n    @FXML\r\n    public void initialize() {\r\n\r\n        AtomicInteger round = new AtomicInteger(1);\r\n        AtomicInteger opponentNumber = new AtomicInteger();\r\n        if (Player.getPlayers().get(opponentNumber.get()).getUsername().equals(Player.thePlayer.getUsername()))\r\n            opponent.setText(\"Ai\");\r\n        else\r\n            opponent.setText(Player.getPlayers().get(opponentNumber.get()).getUsername());\r\n        one.setOnMouseClicked(event -> {\r\n            MainMenu.playSound(Util.CLICK_MUSIC);\r\n            round.set(1);\r\n        });\r\n        three.setOnMouseClicked(event -> {\r\n            MainMenu.playSound(Util.CLICK_MUSIC);\r\n            round.set(3);\r\n        });\r\n\r\n        leftButton.setOnMouseClicked(event -> {\r\n            MainMenu.playSound(Util.CLICK_MUSIC);\r\n            if (opponentNumber.get() != 0 &&\r\n                    Player.getPlayers().get(opponentNumber.get() - 1).getUsername().equals(Player.thePlayer.getUsername())) {\r\n                opponentNumber.decrementAndGet();\r\n                opponent.setText(\"Ai\");\r\n            } else if (opponentNumber.get() != 0)\r\n                opponent.setText(Player.getPlayers().get(opponentNumber.decrementAndGet()).getUsername());\r\n\r\n        });\r\n        rightButton.setOnMouseClicked(event -> {\r\n            MainMenu.playSound(Util.CLICK_MUSIC);\r\n            if (opponentNumber.get() != Player.getPlayers().size() - 1 &&\r\n                    Player.getPlayers().get(opponentNumber.get() + 1).getUsername().equals(Player.thePlayer.getUsername())) {\r\n                opponent.setText(\"Ai\");\r\n                opponentNumber.incrementAndGet();\r\n            }\r\n            else if (opponentNumber.get() != Player.getPlayers().size() - 1)\r\n                opponent.setText(Player.getPlayers().get(opponentNumber.incrementAndGet()).getUsername());\r\n\r\n        });\r\n        start.setOnMouseClicked(event -> {\r\n            MainMenu.playSound(Util.CLICK_MUSIC);\r\n            if (opponent.getText().equals(\"Ai\"))\r\n                duelWithAi(round.intValue());\r\n            else\r\n                startGame(round.intValue(), Player.getPlayers().get(opponentNumber.get()).getUsername());\r\n        });\r\n    }\r\n\r\n    private void duelWithAi(int round) {\r\n        Deck deck = new Deck(\"deck1\");\r\n        Player.thePlayer.addToDeckList(deck);\r\n        deck.setDeckActive(true);\r\n        Player.thePlayer.getActiveDeck().addToMainDeck(Card.getCardByName(\"Alexandrite Dragon\"));\r\n        Player.thePlayer.getActiveDeck().addToMainDeck(Card.getCardByName(\"Monster Reborn\"));\r\n        Player.thePlayer.getActiveDeck().addToMainDeck(Card.getCardByName(\"Beast King Barbaros\"));\r\n        Player.thePlayer.getActiveDeck().addToMainDeck(Card.getCardByName(\"Bitron\"));\r\n        Player.thePlayer.getActiveDeck().addToMainDeck(Card.getCardByName(\"Haniwa\"));\r\n        Player.thePlayer.getActiveDeck().addToMainDeck(Card.getCardByName(\"Wattkid\"));\r\n        Player.thePlayer.getActiveDeck().addToMainDeck(Card.getCardByName(\"Baby Dragon\"));\r\n        Player.thePlayer.getActiveDeck().addToMainDeck(Card.getCardByName(\"Fireyarou\"));\r\n        Player.thePlayer.getActiveDeck().addToMainDeck(Card.getCardByName(\"Silver Fang\"));\r\n\r\n\r\n        Ai.initiateGameWithAi(Player.thePlayer.getUsername(), round);\r\n        try {\r\n            new GameMenu().start();\r\n        } catch (IOException e) {\r\n            e.printStackTrace();\r\n        }\r\n    }\r\n\r\n    private void startGame(int round, String secondPlayerName) {\r\n\r\n            Player secondPlayer = Player.getUserByUsername(secondPlayerName);\r\n            Deck deck = new Deck(\"deck1\");\r\n            Player.thePlayer.addToDeckList(deck);\r\n            deck.setDeckActive(true);\r\n            Deck deck1 = new Deck(\"deck2\");\r\n            secondPlayer.addToDeckList(deck1);\r\n            deck1.setDeckActive(true);\r\n            secondPlayer.getActiveDeck().addToMainDeck(Card.getCardByName(\"Axe Raider\"));\r\n            secondPlayer.getActiveDeck().addToMainDeck(Card.getCardByName(\"Battle Ox\"));\r\n            secondPlayer.getActiveDeck().addToMainDeck(Card.getCardByName(\"Terraforming\"));\r\n            secondPlayer.getActiveDeck().addToMainDeck(Card.getCardByName(\"Monster Reborn\"));\r\n            secondPlayer.getActiveDeck().addToMainDeck(Card.getCardByName(\"Horn Imp\"));\r\n            secondPlayer.getActiveDeck().addToMainDeck(Card.getCardByName(\"Silver Fang\"));\r\n            secondPlayer.getActiveDeck().addToMainDeck(Card.getCardByName(\"Magic Cylinder\"));\r\n            secondPlayer.getActiveDeck().addToMainDeck(Card.getCardByName(\"Fireyarou\"));\r\n\r\n\r\n            Player.thePlayer.getActiveDeck().addToMainDeck(Card.getCardByName(\"Alexandrite Dragon\"));\r\n            Player.thePlayer.getActiveDeck().addToMainDeck(Card.getCardByName(\"Beast King Barbaros\"));\r\n            Player.thePlayer.getActiveDeck().addToMainDeck(Card.getCardByName(\"Bitron\"));\r\n            Player.thePlayer.getActiveDeck().addToMainDeck(Card.getCardByName(\"Haniwa\"));\r\n            Player.thePlayer.getActiveDeck().addToMainDeck(Card.getCardByName(\"Wattkid\"));\r\n            Player.thePlayer.getActiveDeck().addToMainDeck(Card.getCardByName(\"Baby Dragon\"));\r\n            Player.thePlayer.getActiveDeck().addToMainDeck(Card.getCardByName(\"Crawling Dragon\"));\r\n\r\n\r\n            if (!GameController.isDeckActive(Player.thePlayer.getUsername()))\r\n                System.out.println(Player.thePlayer.getUsername() + \" has no active deck\");\r\n            else if (!GameController.isDeckActive(secondPlayerName))\r\n                System.out.println(secondPlayerName + \" has no active deck\");\r\n            else if (!GameController.isDeckValid(Player.thePlayer.getUsername()))\r\n                System.out.println(Player.thePlayer.getUsername() + \"'s deck is invalid\");\r\n            else if (!GameController.isDeckValid(secondPlayerName))\r\n                System.out.println(secondPlayerName + \"'s deck is invalid\");\r\n            else {\r\n                Player.currentPlayer = Player.thePlayer;\r\n                Player.opponent = secondPlayer;\r\n                GameController.initiateGame(Player.thePlayer.getUsername(), secondPlayerName, round);\r\n                try {\r\n                    new FlipCoin().start();\r\n                } catch (IOException e) {\r\n                    e.printStackTrace();\r\n                }\r\n            }\r\n        }\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../Client/src/main/java/View/SetGame.java b/../Client/src/main/java/View/SetGame.java
+--- a/../Client/src/main/java/View/SetGame.java	(revision d075bbe64eb44ef3cb4b09afae762c49cb5b7923)
++++ b/../Client/src/main/java/View/SetGame.java	(date 1626027963790)
+@@ -16,7 +16,6 @@
+ import javafx.stage.Stage;
+ 
+ import java.io.IOException;
+-import java.util.ArrayList;
+ import java.util.concurrent.atomic.AtomicInteger;
+ 
+ public class SetGame {
+@@ -27,6 +26,8 @@
+     public ImageView rightButton;
+     public ImageView leftButton;
+     public ImageView start;
++    public ImageView multiPlayer;
++    static Scene scene;
+ 
+     public void start() throws IOException {
+         Stage primaryStage = ProgramController.getStage();
+@@ -35,13 +36,13 @@
+         PlayMusic.stop();
+         new PlayMusic().start();
+         primaryStage.setTitle("Yu-Gi-Oh");
+-        primaryStage.setScene(new Scene(root, 1280, 720));
++        scene = new Scene(root, 1280, 720);
++        primaryStage.setScene(scene);
+         primaryStage.show();
+     }
+ 
+     @FXML
+     public void initialize() {
+-
+         AtomicInteger round = new AtomicInteger(1);
+         AtomicInteger opponentNumber = new AtomicInteger();
+         if (Player.getPlayers().get(opponentNumber.get()).getUsername().equals(Player.thePlayer.getUsername()))
+@@ -56,7 +57,6 @@
+             MainMenu.playSound(Util.CLICK_MUSIC);
+             round.set(3);
+         });
+-
+         leftButton.setOnMouseClicked(event -> {
+             MainMenu.playSound(Util.CLICK_MUSIC);
+             if (opponentNumber.get() != 0 &&
+@@ -85,6 +85,41 @@
+             else
+                 startGame(round.intValue(), Player.getPlayers().get(opponentNumber.get()).getUsername());
+         });
++        multiPlayer.setOnMouseClicked(event -> {
++            try {
++                setMultiPlayerGame();
++            } catch (IOException e) {
++                e.printStackTrace();
++            }
++        });
++    }
++
++    private void setMultiPlayerGame() throws IOException {
++
++
++        while(true){
++            ProgramController.dataOutputStream.writeUTF("startGame " + Player.thePlayer.getUsername());
++            ProgramController.dataOutputStream.flush();
++            String result = ProgramController.dataInputStream.readUTF();
++            System.out.println(result);
++            try {
++                Thread.sleep(2000);
++            } catch (InterruptedException e) {
++                e.printStackTrace();
++            }
++            if (!result.equals("0")) {
++                Lobby.player1 = Player.thePlayer.getUsername();
++                Lobby.player2 = result;
++                try {
++                    new Lobby().start();
++                } catch (Exception e) {
++                    e.printStackTrace();
++                }
++                break;
++            }
++
++        }
++
+     }
+ 
+     private void duelWithAi(int round) {
+@@ -128,7 +163,6 @@
+             secondPlayer.getActiveDeck().addToMainDeck(Card.getCardByName("Magic Cylinder"));
+             secondPlayer.getActiveDeck().addToMainDeck(Card.getCardByName("Fireyarou"));
+ 
+-
+             Player.thePlayer.getActiveDeck().addToMainDeck(Card.getCardByName("Alexandrite Dragon"));
+             Player.thePlayer.getActiveDeck().addToMainDeck(Card.getCardByName("Beast King Barbaros"));
+             Player.thePlayer.getActiveDeck().addToMainDeck(Card.getCardByName("Bitron"));
+Index: ../Client/src/main/java/View/Lobby.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../Client/src/main/java/View/Lobby.java b/../Client/src/main/java/View/Lobby.java
+new file mode 100644
+--- /dev/null	(date 1626025704135)
++++ b/../Client/src/main/java/View/Lobby.java	(date 1626025704135)
+@@ -0,0 +1,28 @@
++package View;
++
++import Controller.ProgramController;
++import javafx.fxml.FXML;
++import javafx.fxml.FXMLLoader;
++import javafx.scene.Parent;
++import javafx.scene.Scene;
++import javafx.scene.text.Text;
++import javafx.stage.Stage;
++
++public class Lobby {
++    public Text name1,name2,score1,score2,ready1,ready2;
++    public static String player1,player2;
++
++    public void start() throws Exception {
++        Stage primaryStage = ProgramController.getStage();
++        Parent root = FXMLLoader.load(getClass().getResource("lobby.fxml"));
++        primaryStage.setTitle("Yu-Gi-Oh");
++        primaryStage.setScene(new Scene(root, 1280, 720));
++        primaryStage.show();
++    }
++
++    @FXML
++    public void initialize() {
++        name1.setText(player1);
++        name2.setText(player2);
++    }
++}
+Index: src/main/java/Controller/GameController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Controller/GameController.java b/src/main/java/Controller/GameController.java
+new file mode 100644
+--- /dev/null	(date 1626029119693)
++++ b/src/main/java/Controller/GameController.java	(date 1626029119693)
+@@ -0,0 +1,53 @@
++package Controller;
++
++import java.util.ArrayList;
++
++public class GameController {
++
++    private static ArrayList<String> waitingUsers = new ArrayList<>();
++    private static String waitingUser = null;
++    private static String secondUser = null;
++    private static int count = 0;
++    private static boolean isSecondPlayerCame = false;
++
++
++    public static synchronized String matchPeopleInLobby(String username) {
++        /*if(waitingUser == null) waitingUser = username;
++
++         String opponent;
++        if (!waitingUser.equals(username)) {
++            opponent = waitingUser;
++            waitingUser = null;
++            secondUser = username;
++            isSecondPlayerCame = true;
++            return opponent;
++        }
++        if(isSecondPlayerCame) {
++            waitingUser = null;
++            isSecondPlayerCame = false;
++            return secondUser;
++        }
++        return "0";*/
++        boolean isCheck = true;
++        for(int i =0; i < waitingUsers.size();i++){
++            if (waitingUsers.get(i).equals(username)) {
++                isCheck = false;
++                break;
++            }
++        }
++        if(isCheck) waitingUsers.add(username);
++        String opponent;
++        if (waitingUsers.size() > 1) {
++            if (waitingUsers.get(1).equals(username))
++                opponent = waitingUsers.get(0);
++            else opponent = waitingUsers.get(1);
++            count++;
++            if(count == 2){
++                count = 0;
++                waitingUsers.clear();
++            }
++            return opponent;
++        }
++        return "0";
++    }
++}
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"c344dfcf-2301-4e3d-a4d9-a1311bc30bb9\" name=\"Default Changelist\" comment=\"phase-3\">\r\n      <change beforePath=\"$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_6_10_2021_9_12_AM__Default_Changelist_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_6_10_2021_9_12_AM__Default_Changelist_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_10_2021_11_28_PM__Default_Changelist_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_10_2021_11_28_PM__Default_Changelist_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_11_06_AM__Default_Changelist_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_11_06_AM__Default_Changelist_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_11_19_AM__Default_Changelist_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_11_19_AM__Default_Changelist_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_11_19_AM__Default_Changelist_1.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_11_19_AM__Default_Changelist_1.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_5_2021_8_26_AM__Default_Changelist_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_5_2021_8_26_AM__Default_Changelist_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_12_32_PM__Default_Changelist_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_12_32_PM__Default_Changelist_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_12_44_PM__Default_Changelist_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_12_44_PM__Default_Changelist_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_3_46_PM__Default_Changelist_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_3_46_PM__Default_Changelist_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_3_51_PM__Default_Changelist_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_3_51_PM__Default_Changelist_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM__Default_Changelist_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM__Default_Changelist_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/../Client/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/../Client/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_1_40_PM__Default_Changelist_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_1_40_PM__Default_Changelist_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_1_40_PM__Default_Changelist_1.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_1_40_PM__Default_Changelist_1.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/Controller/RegisterController.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/Controller/RegisterController.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"CodeInsightWorkspaceSettings\">\r\n    <option name=\"optimizeImportsOnTheFly\" value=\"true\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"FxmlFile\" />\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$/..\" />\r\n  </component>\r\n  <component name=\"GitSEFilterConfiguration\">\r\n    <file-type-list>\r\n      <filtered-out-file-type name=\"LOCAL_BRANCH\" />\r\n      <filtered-out-file-type name=\"REMOTE_BRANCH\" />\r\n      <filtered-out-file-type name=\"TAG\" />\r\n      <filtered-out-file-type name=\"COMMIT_BY_MESSAGE\" />\r\n    </file-type-list>\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"1ukxmoKFqtn1RHMemecwyYc7erU\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">\r\n    <property name=\"ASKED_ADD_EXTERNAL_FILES\" value=\"true\" />\r\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\r\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\r\n    <property name=\"SHARE_PROJECT_CONFIGURATION_FILES\" value=\"true\" />\r\n    <property name=\"WebServerToolWindowFactoryState\" value=\"false\" />\r\n    <property name=\"aspect.path.notification.shown\" value=\"true\" />\r\n    <property name=\"extract.method.default.visibility\" value=\"private\" />\r\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$\" />\r\n    <property name=\"nodejs_package_manager_path\" value=\"npm\" />\r\n    <property name=\"project.structure.last.edited\" value=\"Libraries\" />\r\n    <property name=\"project.structure.proportion\" value=\"0.15\" />\r\n    <property name=\"project.structure.side.proportion\" value=\"0.2\" />\r\n    <property name=\"restartRequiresConfirmation\" value=\"false\" />\r\n    <property name=\"settings.editor.selected.configurable\" value=\"org.jetbrains.plugins.github.ui.GithubSettingsConfigurable\" />\r\n  </component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\Mohammad\\Desktop\\project-team-33\\src\\main\\resources\\PNG\\Cards\\Monsters\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"Main\" type=\"Application\" factoryName=\"Application\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"Main.Main\" />\r\n      <module name=\"YoGiOh\" />\r\n      <option name=\"VM_PARAMETERS\" value=\"--module-path C:\\Users\\arsalan77x\\Desktop\\javafx-sdk-16\\lib --add-modules javafx.controls,javafx.media,javafx.fxml\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"Main.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"c344dfcf-2301-4e3d-a4d9-a1311bc30bb9\" name=\"Default Changelist\" comment=\"\" />\r\n      <created>1625223553756</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1625223553756</updated>\r\n      <workItem from=\"1625223557518\" duration=\"2263000\" />\r\n      <workItem from=\"1625229461585\" duration=\"3741000\" />\r\n      <workItem from=\"1625234783353\" duration=\"1417000\" />\r\n      <workItem from=\"1625383050453\" duration=\"90000\" />\r\n      <workItem from=\"1625387148386\" duration=\"5303000\" />\r\n      <workItem from=\"1625396847406\" duration=\"5443000\" />\r\n      <workItem from=\"1625404826596\" duration=\"3914000\" />\r\n      <workItem from=\"1625842777946\" duration=\"2038000\" />\r\n      <workItem from=\"1625845098245\" duration=\"1085000\" />\r\n      <workItem from=\"1625985706588\" duration=\"283000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"ScoreboardMenu\">\r\n      <created>1625234598572</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1625234598572</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"complete ProfileMenu and ScoreboardMenu\">\r\n      <created>1625407481454</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1625407481454</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"complete ProfileMenu\">\r\n      <created>1625408754028</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1625408754028</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"attack gameMenu\">\r\n      <created>1625458805161</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1625458805161</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"attack gameMenu\">\r\n      <created>1625458906320</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1625458906320</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"attack gameMenu\">\r\n      <created>1625558516674</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1625558516674</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"music\">\r\n      <created>1625560497367</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1625560497367</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00008\" summary=\"add getimage to util\">\r\n      <created>1625845481376</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1625845481376</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00009\" summary=\"phase 3\">\r\n      <created>1625993395125</created>\r\n      <option name=\"number\" value=\"00009\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1625993395125</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00010\" summary=\"phase-3\">\r\n      <created>1625993510221</created>\r\n      <option name=\"number\" value=\"00010\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1625993510221</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00011\" summary=\"phase-3\">\r\n      <created>1625993553187</created>\r\n      <option name=\"number\" value=\"00011\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1625993553187</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"12\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n    <option name=\"oldMeFiltersMigrated\" value=\"true\" />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <option name=\"ADD_EXTERNAL_FILES_SILENTLY\" value=\"true\" />\r\n    <MESSAGE value=\"ScoreboardMenu\" />\r\n    <MESSAGE value=\"complete ProfileMenu and ScoreboardMenu\" />\r\n    <MESSAGE value=\"complete ProfileMenu\" />\r\n    <MESSAGE value=\"attack gameMenu\" />\r\n    <MESSAGE value=\"music\" />\r\n    <MESSAGE value=\"add getimage to util\" />\r\n    <MESSAGE value=\"phase 3\" />\r\n    <MESSAGE value=\"phase-3\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"phase-3\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision d075bbe64eb44ef3cb4b09afae762c49cb5b7923)
++++ b/.idea/workspace.xml	(date 1626083173659)
+@@ -5,22 +5,25 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="c344dfcf-2301-4e3d-a4d9-a1311bc30bb9" name="Default Changelist" comment="phase-3">
+-      <change beforePath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_6_10_2021_9_12_AM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_6_10_2021_9_12_AM__Default_Changelist_.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_10_2021_11_28_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_10_2021_11_28_PM__Default_Changelist_.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_11_06_AM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_11_06_AM__Default_Changelist_.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_11_19_AM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_11_19_AM__Default_Changelist_.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_11_19_AM__Default_Changelist_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_11_19_AM__Default_Changelist_1.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_5_2021_8_26_AM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_5_2021_8_26_AM__Default_Changelist_.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_12_32_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_12_32_PM__Default_Changelist_.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_12_44_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_12_44_PM__Default_Changelist_.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_3_46_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_3_46_PM__Default_Changelist_.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_3_51_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_3_51_PM__Default_Changelist_.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/.idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM__Default_Changelist_.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/../Client/src/main/java/View/Lobby.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/../Client/src/main/resources/PNG/multi.png" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/../Client/src/main/resources/View/lobby.fxml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/GameController.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/target/classes/Controller/GameController.class" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/../Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_1_40_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_1_40_PM__Default_Changelist_.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_1_40_PM__Default_Changelist_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_1_40_PM__Default_Changelist_1.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/View/LoginMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/View/LoginMenu.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/View/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/View/MainMenu.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/../Client/src/main/java/View/SetGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/java/View/SetGame.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/../Client/src/main/resources/View/setRound.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/resources/View/setRound.fxml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/../Client/target/classes/View/LoginMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/target/classes/View/LoginMenu.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/../Client/target/classes/View/MainMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/target/classes/View/MainMenu.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/../Client/target/classes/View/SetGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/target/classes/View/SetGame.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/../Client/target/classes/View/setRound.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/target/classes/View/setRound.fxml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/RegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/RegisterController.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/Main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main/Main.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/target/classes/Controller/RegisterController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controller/RegisterController.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/target/classes/Main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main/Main.class" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -65,7 +68,7 @@
+     <property name="WebServerToolWindowFactoryState" value="false" />
+     <property name="aspect.path.notification.shown" value="true" />
+     <property name="extract.method.default.visibility" value="private" />
+-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
++    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../YoGiOh" />
+     <property name="nodejs_package_manager_path" value="npm" />
+     <property name="project.structure.last.edited" value="Libraries" />
+     <property name="project.structure.proportion" value="0.15" />
+Index: ../Client/src/main/resources/View/lobby.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../Client/src/main/resources/View/lobby.fxml b/../Client/src/main/resources/View/lobby.fxml
+new file mode 100644
+--- /dev/null	(date 1626025820396)
++++ b/../Client/src/main/resources/View/lobby.fxml	(date 1626025820396)
+@@ -0,0 +1,44 @@
++<?xml version="1.0" encoding="UTF-8"?>
++
++<?import javafx.scene.layout.*?>
++<?import javafx.scene.text.*?>
++
++<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Lobby">
++   <children>
++      <Text fx:id="name1" layoutX="200.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
++         <font>
++            <Font name="Bell MT Italic" size="50.0" />
++         </font>
++      </Text>
++      <Text fx:id="score1" layoutX="200.0" layoutY="329.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
++         <font>
++            <Font name="Bell MT Italic" size="50.0" />
++         </font>
++      </Text>
++      <Text fx:id="name2" layoutX="991.0" layoutY="242.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
++         <font>
++            <Font name="Bell MT Italic" size="50.0" />
++         </font>
++      </Text>
++      <Text fx:id="score2" layoutX="991.0" layoutY="328.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
++         <font>
++            <Font name="Bell MT Italic" size="50.0" />
++         </font>
++      </Text>
++      <Text layoutX="543.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lobby">
++         <font>
++            <Font name="Bell MT Italic" size="85.0" />
++         </font>
++      </Text>
++      <Text fx:id="ready1" layoutX="187.0" layoutY="550.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ready">
++         <font>
++            <Font name="Bell MT Italic" size="50.0" />
++         </font>
++      </Text>
++      <Text fx:id="ready2" layoutX="978.0" layoutY="549.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ready">
++         <font>
++            <Font name="Bell MT Italic" size="50.0" />
++         </font>
++      </Text>
++   </children>
++</AnchorPane>
+Index: ../Client/src/main/resources/View/setRound.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n\r\n<?import javafx.scene.image.*?>\r\n<?import javafx.scene.layout.*?>\r\n<?import javafx.scene.text.*?>\r\n\r\n<AnchorPane fx:id=\"anchorPane\" prefHeight=\"720.0\" prefWidth=\"1280.0\" xmlns=\"http://javafx.com/javafx/11.0.1\" xmlns:fx=\"http://javafx.com/fxml/1\" fx:controller=\"View.SetGame\">\r\n   <children>\r\n      <ImageView fitHeight=\"720.0\" fitWidth=\"1280.0\" layoutY=\"5.0\" pickOnBounds=\"true\" preserveRatio=\"true\">\r\n         <image>\r\n            <Image url=\"@../PNG/Crypt-Best-Wallpaper-09152.jpg\" />\r\n         </image>\r\n      </ImageView>\r\n      <Text fill=\"WHITE\" layoutX=\"483.0\" layoutY=\"143.0\" strokeType=\"OUTSIDE\" strokeWidth=\"0.0\" text=\"Select number of rounds\">\r\n         <font>\r\n            <Font name=\"Bell MT Italic\" size=\"37.0\" />\r\n         </font>\r\n      </Text>\r\n      <Text fill=\"WHITE\" layoutX=\"485.0\" layoutY=\"347.0\" strokeType=\"OUTSIDE\" strokeWidth=\"0.0\" text=\"Select your opponent\">\r\n         <font>\r\n            <Font name=\"Bell MT Italic\" size=\"45.0\" />\r\n         </font>\r\n      </Text>\r\n      <ImageView fx:id=\"rightButton\" fitHeight=\"69.0\" fitWidth=\"75.0\" layoutX=\"824.0\" layoutY=\"421.0\" pickOnBounds=\"true\" preserveRatio=\"true\">\r\n         <image>\r\n            <Image url=\"@../PNG/rightButton.png\" />\r\n         </image>\r\n      </ImageView>\r\n      <ImageView fx:id=\"leftButton\" fitHeight=\"69.0\" fitWidth=\"67.0\" layoutX=\"402.0\" layoutY=\"421.0\" pickOnBounds=\"true\" preserveRatio=\"true\">\r\n         <image>\r\n            <Image url=\"@../PNG/leftButton.png\" />\r\n         </image>\r\n      </ImageView>\r\n      <Text fx:id=\"opponent\" fill=\"WHITE\" layoutX=\"577.0\" layoutY=\"472.0\" strokeType=\"OUTSIDE\" strokeWidth=\"0.0\" textAlignment=\"CENTER\" wrappingWidth=\"154.0\">\r\n         <font>\r\n            <Font name=\"Bell MT Italic\" size=\"60.0\" />\r\n         </font>\r\n      </Text>\r\n      <ImageView fx:id=\"one\" fitHeight=\"58.0\" fitWidth=\"118.0\" layoutX=\"519.0\" layoutY=\"183.0\" pickOnBounds=\"true\" preserveRatio=\"true\">\r\n         <image>\r\n            <Image url=\"@../PNG/one.png\" />\r\n         </image>\r\n      </ImageView>\r\n      <ImageView fx:id=\"three\" fitHeight=\"58.0\" fitWidth=\"116.0\" layoutX=\"654.0\" layoutY=\"182.0\" pickOnBounds=\"true\" preserveRatio=\"true\">\r\n         <image>\r\n            <Image url=\"@../PNG/three.png\" />\r\n         </image>\r\n      </ImageView>\r\n      <ImageView fx:id=\"start\" fitHeight=\"150.0\" fitWidth=\"200.0\" layoutX=\"547.0\" layoutY=\"540.0\" pickOnBounds=\"true\" preserveRatio=\"true\">\r\n         <image>\r\n            <Image url=\"@../PNG/start.png\" />\r\n         </image>\r\n      </ImageView>\r\n   </children>\r\n</AnchorPane>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../Client/src/main/resources/View/setRound.fxml b/../Client/src/main/resources/View/setRound.fxml
+--- a/../Client/src/main/resources/View/setRound.fxml	(revision d075bbe64eb44ef3cb4b09afae762c49cb5b7923)
++++ b/../Client/src/main/resources/View/setRound.fxml	(date 1626021020732)
+@@ -46,9 +46,14 @@
+             <Image url="@../PNG/three.png" />
+          </image>
+       </ImageView>
+-      <ImageView fx:id="start" fitHeight="150.0" fitWidth="200.0" layoutX="547.0" layoutY="540.0" pickOnBounds="true" preserveRatio="true">
++      <ImageView fx:id="start" fitHeight="150.0" fitWidth="200.0" layoutX="435.0" layoutY="540.0" pickOnBounds="true" preserveRatio="true">
+          <image>
+             <Image url="@../PNG/start.png" />
++         </image>
++      </ImageView>
++      <ImageView fx:id="multiPlayer" fitHeight="150.0" fitWidth="200.0" layoutX="670.0" layoutY="540.0" pickOnBounds="true" preserveRatio="true">
++         <image>
++            <Image url="@../PNG/multi.png" />
+          </image>
+       </ImageView>
+    </children>
+Index: ../Client/src/main/java/View/LoginMenu.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package View;\r\n\r\nimport Controller.ProgramController;\r\nimport Controller.Util;\r\nimport Main.Main;\r\nimport javafx.fxml.FXML;\r\nimport javafx.fxml.FXMLLoader;\r\nimport javafx.scene.Parent;\r\nimport javafx.scene.Scene;\r\nimport javafx.scene.control.Button;\r\nimport javafx.scene.control.Label;\r\nimport javafx.scene.control.PasswordField;\r\nimport javafx.scene.control.TextField;\r\nimport javafx.scene.image.Image;\r\nimport javafx.scene.image.ImageView;\r\nimport javafx.scene.input.MouseEvent;\r\nimport javafx.scene.layout.AnchorPane;\r\nimport javafx.scene.layout.HBox;\r\nimport javafx.scene.text.Font;\r\nimport javafx.scene.text.Text;\r\nimport javafx.stage.Stage;\r\n\r\nimport java.io.IOException;\r\nimport java.util.regex.Matcher;\r\n\r\npublic class LoginMenu {\r\n    private static boolean register;\r\n    public AnchorPane anchorPane;\r\n    public HBox nickNameHBox;\r\n    public Label loginError;\r\n    public TextField textUserName;\r\n    public PasswordField textPassword;\r\n    public Button submit;\r\n    public Button clear;\r\n\r\n    public static boolean isRegister() {\r\n        return register;\r\n    }\r\n\r\n    public static void setRegister(boolean register) {\r\n        LoginMenu.register = register;\r\n    }\r\n\r\n    public void start() throws Exception {\r\n        Stage primaryStage = ProgramController.getStage();\r\n        Parent root = FXMLLoader.load(getClass().getResource(\"loginView.fxml\"));\r\n        primaryStage.setTitle(\"Yu-Gi-Oh\");\r\n        primaryStage.setScene(new Scene(root, 1280, 720));\r\n        primaryStage.show();\r\n    }\r\n\r\n    @FXML\r\n    public void initialize() {\r\n        Image image = new Image(getClass().getResource(\"/PNG/yu-gi-oh.jpg\").toExternalForm());\r\n        ImageView imageView = new ImageView(image);\r\n        anchorPane.getChildren().addAll(imageView);\r\n        TextField textNickName = new TextField();\r\n        if (isRegister()) {\r\n            nickNameHBox.setMaxWidth(270);\r\n            nickNameHBox.setStyle(\"-fx-background-color: silver\");\r\n            Text text = new Text(\"Nick name : \");\r\n            text.setFont(Font.font(20));\r\n            nickNameHBox.getChildren().addAll(text, textNickName);\r\n            submit.setText(\"Register\");\r\n        } else submit.setText(\"Login\");\r\n        clear.setOnMouseClicked(event -> {\r\n            MainMenu.playSound(Util.CLICK_MUSIC);\r\n            textUserName.clear();\r\n            textPassword.clear();\r\n            if (isRegister()) textNickName.clear();\r\n        });\r\n        submit.setOnMouseClicked(event -> {\r\n            MainMenu.playSound(Util.CLICK_MUSIC);\r\n            String input = \"\";\r\n            if (!isRegister()) {\r\n                input = \"user login --username \" + textUserName.getText() + \" --password \" + textPassword.getText();\r\n                try {\r\n                    login(Util.getCommand(input, \"user login --username (\\\\S+) --password (\\\\S+)\"));\r\n                } catch (Exception e) {\r\n                    e.printStackTrace();\r\n                }\r\n            } else {\r\n                input = \"user create --username \" + textUserName.getText() + \" --nickname \" + textNickName.getText()\r\n                        + \" --password \" + textPassword.getText();\r\n                try {\r\n                    register(Util.getCommand(input, \"user create --username (\\\\S+)\" +\r\n                            \" --nickname (\\\\S+) --password (\\\\S+)\"));\r\n                } catch (IOException e) {\r\n                    e.printStackTrace();\r\n                }\r\n            }\r\n        });\r\n    }\r\n\r\n    public void register(Matcher matcher) throws IOException {\r\n        if (matcher.matches()) {\r\n            String username = matcher.group(1);\r\n            String nickname = matcher.group(2);\r\n            String password = matcher.group(3);\r\n            ProgramController.dataOutputStream.writeUTF(\"register \" + username + \" \" + nickname + \" \" + password);\r\n            ProgramController.dataOutputStream.flush();\r\n            String result = ProgramController.dataInputStream.readUTF();\r\n            if (result.startsWith(\"0\")) {\r\n                showError(result.substring(2));\r\n            }\r\n            else {\r\n                ProgramController.createUser(username, nickname, password);\r\n                showError(result.substring(2));\r\n            }\r\n        }\r\n    }\r\n\r\n    private void login(Matcher matcher) throws Exception {\r\n        if (matcher.matches()) {\r\n            String username = matcher.group(1);\r\n            String password = matcher.group(2);\r\n            ProgramController.dataOutputStream.writeUTF(\"login \" + username + \" \" + password);\r\n            ProgramController.dataOutputStream.flush();\r\n            String result = ProgramController.dataInputStream.readUTF();\r\n            if (result.startsWith(\"0\")) {\r\n                showError(result.substring(2));\r\n            }\r\n            else {\r\n                ProgramController.setPlayer(username);\r\n                Util.token = result.substring(2);\r\n                new MainMenu().start();\r\n            }\r\n        }\r\n    }\r\n\r\n    private void showError(String error) {\r\n        loginError.setText(error);\r\n        loginError.setFont(Font.font(20));\r\n        loginError.setStyle(\"-fx-background-color: silver\");\r\n    }\r\n\r\n    private void exit() {\r\n        System.exit(0);\r\n    }\r\n\r\n    public void back(MouseEvent event) throws Exception {\r\n        MainMenu.playSound(Util.CLICK_MUSIC);\r\n        new Main().start(ProgramController.getStage());\r\n    }\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../Client/src/main/java/View/LoginMenu.java b/../Client/src/main/java/View/LoginMenu.java
+--- a/../Client/src/main/java/View/LoginMenu.java	(revision d075bbe64eb44ef3cb4b09afae762c49cb5b7923)
++++ b/../Client/src/main/java/View/LoginMenu.java	(date 1626020053202)
+@@ -100,13 +100,10 @@
+             ProgramController.dataOutputStream.writeUTF("register " + username + " " + nickname + " " + password);
+             ProgramController.dataOutputStream.flush();
+             String result = ProgramController.dataInputStream.readUTF();
+-            if (result.startsWith("0")) {
+-                showError(result.substring(2));
+-            }
+-            else {
++            if (!result.startsWith("0")) {
+                 ProgramController.createUser(username, nickname, password);
+-                showError(result.substring(2));
+-            }
++            }
++            showError(result.substring(2));
+         }
+     }
+ 
+Index: ../Client/src/main/java/View/MainMenu.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package View;\r\n\r\nimport Controller.*;\r\nimport Main.Main;\r\nimport Model.Card;\r\nimport Model.Player;\r\nimport javafx.fxml.FXML;\r\nimport javafx.fxml.FXMLLoader;\r\nimport javafx.geometry.Insets;\r\nimport javafx.geometry.Pos;\r\nimport javafx.scene.Parent;\r\nimport javafx.scene.Scene;\r\nimport javafx.scene.control.Alert;\r\nimport javafx.scene.control.Button;\r\nimport javafx.scene.control.Label;\r\nimport javafx.scene.effect.*;\r\nimport javafx.scene.image.Image;\r\nimport javafx.scene.image.ImageView;\r\nimport javafx.scene.input.MouseEvent;\r\nimport javafx.scene.layout.BorderPane;\r\nimport javafx.scene.layout.HBox;\r\nimport javafx.scene.layout.VBox;\r\nimport javafx.scene.media.Media;\r\nimport javafx.scene.media.MediaPlayer;\r\nimport javafx.scene.paint.Color;\r\nimport javafx.scene.shape.Circle;\r\nimport javafx.scene.shape.TriangleMesh;\r\nimport javafx.scene.text.Font;\r\nimport javafx.stage.Stage;\r\n\r\nimport java.io.File;\r\nimport java.io.IOException;\r\nimport java.util.regex.Matcher;\r\n\r\npublic class MainMenu {\r\n    public static String menu = \"login\";\r\n    public static boolean checked = false;\r\n    public ImageView backgroundMain;\r\n    public VBox vBox;\r\n    public int layOutY = 1;\r\n    public Label duelError;\r\n\r\n\r\n\r\n    public MainMenu() {\r\n    }\r\n\r\n    public void start() throws Exception {\r\n        Stage primaryStage = ProgramController.getStage();\r\n        Parent root = FXMLLoader.load(getClass().getResource(\"mainMenuView.fxml\"));\r\n        primaryStage.setTitle(\"Yu-Gi-Oh\");\r\n        if(menu.equals(\"menu\")){\r\n            PlayMusic.stop();\r\n            new PlayMusic().start();\r\n        }\r\n        primaryStage.setScene(new Scene(root, 1280, 720));\r\n        primaryStage.show();\r\n    }\r\n\r\n    @FXML\r\n    public void initialize() {\r\n        backgroundMain.setImage(new Image(getClass().getResourceAsStream(\"/PNG/11025059.jpg\")));\r\n        vBox.setAlignment(Pos.CENTER);\r\n        String[] buttonName = {\"Duel Menu\", \"Deck Menu\", \"Scoreboard Menu\", \"Profile Menu\", \"Shop Menu\", \"Import and Export\", \"Card Creator\", \"Log out\"};\r\n        for (String name : buttonName) {\r\n            makeButton(name);\r\n        }\r\n    }\r\n\r\n    private void makeButton(String name) {\r\n        HBox hBox1 = new HBox();\r\n        hBox1.setMinHeight(20);\r\n        HBox hBox = new HBox();\r\n        hBox.setAlignment(Pos.CENTER);\r\n        Button button = ProgramController.getButton(name);\r\n        switch (name) {\r\n            case \"Duel Menu\" -> button.setOnMouseClicked(event -> {\r\n                MainMenu.playSound(Util.CLICK_MUSIC);\r\n                startGame();\r\n            });\r\n            case \"Deck Menu\" -> button.setOnMouseClicked(event -> {\r\n                MainMenu.playSound(Util.CLICK_MUSIC);\r\n                try {\r\n                    new DeckMenu().start();\r\n                } catch (IOException e) {\r\n                    e.printStackTrace();\r\n                }\r\n            });\r\n            case \"Scoreboard Menu\" -> button.setOnMouseClicked(event -> {\r\n                MainMenu.playSound(Util.CLICK_MUSIC);\r\n                try {\r\n                    new ScoreboardMenu().start();\r\n                } catch (IOException e) {\r\n                    e.printStackTrace();\r\n                }\r\n            });\r\n            case \"Profile Menu\" -> button.setOnMouseClicked(event -> {\r\n                MainMenu.playSound(Util.CLICK_MUSIC);\r\n                try {\r\n                    new ProfileMenu().start();\r\n                } catch (IOException e) {\r\n\r\n\r\n                }\r\n            });\r\n            case \"Shop Menu\" -> button.setOnMouseClicked(event -> {\r\n                MainMenu.playSound(Util.CLICK_MUSIC);\r\n                try {\r\n                    new ShopMenu().start();\r\n                } catch (IOException e) {\r\n                    e.printStackTrace();\r\n                }\r\n            });\r\n            case \"Import and Export\" -> button.setOnMouseClicked(event -> {\r\n                MainMenu.playSound(Util.CLICK_MUSIC);\r\n                try {\r\n                    new ImportExportMenu().start();\r\n                } catch (IOException e) {\r\n                    e.printStackTrace();\r\n                }\r\n            });\r\n            case \"Card Creator\" -> button.setOnMouseClicked(event -> {\r\n                MainMenu.playSound(Util.CLICK_MUSIC);\r\n                try {\r\n                    new CardCreatorMenu().start();\r\n                } catch (IOException e) {\r\n                    e.printStackTrace();\r\n                }\r\n            });\r\n            case \"Log out\" -> button.setOnMouseClicked(event -> {\r\n                MainMenu.playSound(Util.CLICK_MUSIC);\r\n                try {\r\n                    new Main().start(ProgramController.getStage());\r\n                } catch (Exception e) {\r\n                    e.printStackTrace();\r\n                }\r\n            });\r\n        }\r\n        hBox.getChildren().add(button);\r\n        vBox.getChildren().addAll(hBox, hBox1);\r\n    }\r\n\r\n\r\n\r\n    public void run(String input) {\r\n        checked = false;\r\n        enterMenu(Util.getCommand(input, \"menu enter (\\\\S+)\"));\r\n        showCurrentMenu(Util.getCommand(input, \"menu show-current\"));\r\n        logout(Util.getCommand(input, \"user logout\"));\r\n    }\r\n\r\n    private void startGame() {\r\n        if (Player.getPlayers().size() < 2) {\r\n            Alert alert = new Alert(Alert.AlertType.INFORMATION);\r\n            alert.setTitle(\"Error\");\r\n            alert.setHeaderText(null);\r\n            alert.setContentText(\"there is no other player\");\r\n            alert.showAndWait();\r\n        }\r\n        else {\r\n            try {\r\n                new SetGame().start();\r\n            } catch (IOException e) {\r\n                e.printStackTrace();\r\n            }\r\n        }\r\n    }\r\n\r\n    private void logout(Matcher matcher) {\r\n        if (!checked && matcher.matches()) {\r\n            checked = true;\r\n            System.out.println(\"user logged out successfully!\");\r\n            menu = \"login\";\r\n        }\r\n    }\r\n\r\n\r\n\r\n    private void enterMenu(Matcher matcher) {\r\n        if (!checked && matcher.matches()) {\r\n            checked = true;\r\n            String menuName = matcher.group(1);\r\n            if (menuName.equals(\"game\")) System.out.println(\"you have to set you opponent to enter this menu\");\r\n            else if (ProgramController.isNavigationPossible(menuName))\r\n                menu = menuName;\r\n            else System.out.println(\"no such menu!\");\r\n        }\r\n    }\r\n\r\n    public static void showCurrentMenu(Matcher matcher) {\r\n        if (!checked && matcher.matches()) {\r\n            checked = true;\r\n            switch (menu) {\r\n                case \"login\" -> System.out.println(\"Login Menu\");\r\n                case \"main\" -> System.out.println(\"Main Menu\");\r\n                case \"game\" -> System.out.println(\"Game Menu\");\r\n                case \"deck\" -> System.out.println(\"Deck Menu\");\r\n                case \"shop\" -> System.out.println(\"Shop Menu\");\r\n                case \"scoreboard\" -> System.out.println(\"Scoreboard Menu\");\r\n                case \"profile\" -> System.out.println(\"Profile Menu\");\r\n                case \"importExport\" -> System.out.println(\"ImportExport Menu\");\r\n                case \"Graveyard\" -> System.out.println(\"Graveyard Menu\");\r\n            }\r\n        }\r\n    }\r\n\r\n    public static void exitMenu(Matcher matcher) {\r\n        if (!MainMenu.checked && matcher.matches()) {\r\n            MainMenu.checked = true;\r\n            MainMenu.menu = \"main\";\r\n        }\r\n    }\r\n\r\n    public void menu() throws Exception {\r\n        LoginMenu loginMenu = new LoginMenu();\r\n        DeckMenu deckMenu = new DeckMenu();\r\n        ImportExportMenu importExportMenu = new ImportExportMenu();\r\n        MainMenu mainMenu = new MainMenu();\r\n        ProfileMenu profileMenu = new ProfileMenu();\r\n        ScoreboardMenu scoreboardMenu = new ScoreboardMenu();\r\n        GraveyardMenu graveyardMenu = new GraveyardMenu();\r\n        GameMenu gameMenu = new GameMenu();\r\n        ShopMenu shopMenu = new ShopMenu();\r\n        String input = \"\";\r\n\r\n        switch (menu) {\r\n            case \"login\" -> loginMenu.start();\r\n            case \"main\" -> mainMenu.run(input);\r\n            case \"game\" -> gameMenu.run(input);\r\n            case \"deck\" -> deckMenu.run(input);\r\n            case \"shop\" -> shopMenu.run(input);\r\n            // case \"scoreboard\" -> scoreboardMenu.start(input);\r\n         //   case \"profile\" -> profileMenu.run(input);\r\n//            case \"importExport\" -> importExportMenu.run(input);\r\n            case \"Graveyard\" -> graveyardMenu.run(input);\r\n        }\r\n    }\r\n\r\n    private void showError(String error) {\r\n        duelError.setText(error);\r\n    }\r\n\r\n    public static void playSound(String s) {\r\n        String path = s;\r\n        Media media = new Media(new File(path).toURI().toString());\r\n        MediaPlayer mediaPlayer = new MediaPlayer(media);\r\n        mediaPlayer.setVolume(100);\r\n        mediaPlayer.setAutoPlay(true);\r\n    }\r\n\r\n\r\n    public void back(MouseEvent event) throws Exception {\r\n        new Main().start(ProgramController.getStage());\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../Client/src/main/java/View/MainMenu.java b/../Client/src/main/java/View/MainMenu.java
+--- a/../Client/src/main/java/View/MainMenu.java	(revision d075bbe64eb44ef3cb4b09afae762c49cb5b7923)
++++ b/../Client/src/main/java/View/MainMenu.java	(date 1626020843604)
+@@ -1,31 +1,22 @@
+ package View;
+ 
+-import Controller.*;
++import Controller.ProgramController;
++import Controller.Util;
+ import Main.Main;
+-import Model.Card;
+-import Model.Player;
+ import javafx.fxml.FXML;
+ import javafx.fxml.FXMLLoader;
+-import javafx.geometry.Insets;
+ import javafx.geometry.Pos;
+ import javafx.scene.Parent;
+ import javafx.scene.Scene;
+-import javafx.scene.control.Alert;
+ import javafx.scene.control.Button;
+ import javafx.scene.control.Label;
+-import javafx.scene.effect.*;
+ import javafx.scene.image.Image;
+ import javafx.scene.image.ImageView;
+ import javafx.scene.input.MouseEvent;
+-import javafx.scene.layout.BorderPane;
+ import javafx.scene.layout.HBox;
+ import javafx.scene.layout.VBox;
+ import javafx.scene.media.Media;
+ import javafx.scene.media.MediaPlayer;
+-import javafx.scene.paint.Color;
+-import javafx.scene.shape.Circle;
+-import javafx.scene.shape.TriangleMesh;
+-import javafx.scene.text.Font;
+ import javafx.stage.Stage;
+ 
+ import java.io.File;
+@@ -150,20 +141,12 @@
+     }
+ 
+     private void startGame() {
+-        if (Player.getPlayers().size() < 2) {
+-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+-            alert.setTitle("Error");
+-            alert.setHeaderText(null);
+-            alert.setContentText("there is no other player");
+-            alert.showAndWait();
+-        }
+-        else {
+             try {
+                 new SetGame().start();
+             } catch (IOException e) {
+                 e.printStackTrace();
+             }
+-        }
++
+     }
+ 
+     private void logout(Matcher matcher) {
+Index: ../Client/.idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"c344dfcf-2301-4e3d-a4d9-a1311bc30bb9\" name=\"Default Changelist\" comment=\"phase//3\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_10_2021_9_12_AM__Default_Changelist_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_10_2021_9_12_AM__Default_Changelist_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_10_2021_11_28_PM__Default_Changelist_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_10_2021_11_28_PM__Default_Changelist_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_11_06_AM__Default_Changelist_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_11_06_AM__Default_Changelist_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_11_19_AM__Default_Changelist_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_11_19_AM__Default_Changelist_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_11_19_AM__Default_Changelist_1.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_11_19_AM__Default_Changelist_1.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_5_2021_8_26_AM__Default_Changelist_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_5_2021_8_26_AM__Default_Changelist_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_12_32_PM__Default_Changelist_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_12_32_PM__Default_Changelist_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_12_44_PM__Default_Changelist_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_12_44_PM__Default_Changelist_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_3_46_PM__Default_Changelist_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_3_46_PM__Default_Changelist_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_3_51_PM__Default_Changelist_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_3_51_PM__Default_Changelist_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM__Default_Changelist_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM__Default_Changelist_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/../Server/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_1_40_PM__Default_Changelist_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/../Server/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_1_40_PM__Default_Changelist_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/../Server/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_1_40_PM__Default_Changelist_1.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/../Server/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_1_40_PM__Default_Changelist_1.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/../Server/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/../Server/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/../Server/src/main/java/Controller/RegisterController.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/../Server/src/main/java/Controller/RegisterController.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/../Server/target/classes/Controller/RegisterController.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/../Server/target/classes/Controller/RegisterController.class\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"CodeInsightWorkspaceSettings\">\r\n    <option name=\"optimizeImportsOnTheFly\" value=\"true\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"FxmlFile\" />\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$/..\" />\r\n  </component>\r\n  <component name=\"GitSEFilterConfiguration\">\r\n    <file-type-list>\r\n      <filtered-out-file-type name=\"LOCAL_BRANCH\" />\r\n      <filtered-out-file-type name=\"REMOTE_BRANCH\" />\r\n      <filtered-out-file-type name=\"TAG\" />\r\n      <filtered-out-file-type name=\"COMMIT_BY_MESSAGE\" />\r\n    </file-type-list>\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"1ukxmoKFqtn1RHMemecwyYc7erU\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">\r\n    <property name=\"ASKED_ADD_EXTERNAL_FILES\" value=\"true\" />\r\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\r\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\r\n    <property name=\"SHARE_PROJECT_CONFIGURATION_FILES\" value=\"true\" />\r\n    <property name=\"WebServerToolWindowFactoryState\" value=\"false\" />\r\n    <property name=\"aspect.path.notification.shown\" value=\"true\" />\r\n    <property name=\"extract.method.default.visibility\" value=\"private\" />\r\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$/../Server\" />\r\n    <property name=\"nodejs_package_manager_path\" value=\"npm\" />\r\n    <property name=\"project.structure.last.edited\" value=\"Libraries\" />\r\n    <property name=\"project.structure.proportion\" value=\"0.15\" />\r\n    <property name=\"project.structure.side.proportion\" value=\"0.2\" />\r\n    <property name=\"restartRequiresConfirmation\" value=\"false\" />\r\n    <property name=\"settings.editor.selected.configurable\" value=\"org.jetbrains.plugins.github.ui.GithubSettingsConfigurable\" />\r\n  </component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\Mohammad\\Desktop\\project-team-33\\src\\main\\resources\\PNG\\Cards\\Monsters\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"Main\" type=\"Application\" factoryName=\"Application\" singleton=\"false\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"Main.Main\" />\r\n      <module name=\"YoGiOh\" />\r\n      <option name=\"VM_PARAMETERS\" value=\"--module-path C:\\Users\\arsalan77x\\Desktop\\javafx-sdk-16\\lib --add-modules javafx.controls,javafx.media,javafx.fxml\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"Main.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"c344dfcf-2301-4e3d-a4d9-a1311bc30bb9\" name=\"Default Changelist\" comment=\"\" />\r\n      <created>1625223553756</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1625223553756</updated>\r\n      <workItem from=\"1625223557518\" duration=\"2263000\" />\r\n      <workItem from=\"1625229461585\" duration=\"3741000\" />\r\n      <workItem from=\"1625234783353\" duration=\"1417000\" />\r\n      <workItem from=\"1625383050453\" duration=\"90000\" />\r\n      <workItem from=\"1625387148386\" duration=\"5303000\" />\r\n      <workItem from=\"1625396847406\" duration=\"5443000\" />\r\n      <workItem from=\"1625404826596\" duration=\"3914000\" />\r\n      <workItem from=\"1625842777946\" duration=\"2038000\" />\r\n      <workItem from=\"1625845098245\" duration=\"1085000\" />\r\n      <workItem from=\"1625985706588\" duration=\"283000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"ScoreboardMenu\">\r\n      <created>1625234598572</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1625234598572</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"complete ProfileMenu and ScoreboardMenu\">\r\n      <created>1625407481454</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1625407481454</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"complete ProfileMenu\">\r\n      <created>1625408754028</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1625408754028</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"attack gameMenu\">\r\n      <created>1625458805161</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1625458805161</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"attack gameMenu\">\r\n      <created>1625458906320</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1625458906320</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"attack gameMenu\">\r\n      <created>1625558516674</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1625558516674</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"music\">\r\n      <created>1625560497367</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1625560497367</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00008\" summary=\"add getimage to util\">\r\n      <created>1625845481376</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1625845481376</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00009\" summary=\"phase 3\">\r\n      <created>1625993395125</created>\r\n      <option name=\"number\" value=\"00009\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1625993395125</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00010\" summary=\"phase-3\">\r\n      <created>1625993510221</created>\r\n      <option name=\"number\" value=\"00010\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1625993510221</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00011\" summary=\"phase-3\">\r\n      <created>1625993553187</created>\r\n      <option name=\"number\" value=\"00011\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1625993553187</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00012\" summary=\"phase//3\">\r\n      <created>1625993722326</created>\r\n      <option name=\"number\" value=\"00012\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00012\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1625993722326</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"13\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n    <option name=\"oldMeFiltersMigrated\" value=\"true\" />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <option name=\"ADD_EXTERNAL_FILES_SILENTLY\" value=\"true\" />\r\n    <MESSAGE value=\"ScoreboardMenu\" />\r\n    <MESSAGE value=\"complete ProfileMenu and ScoreboardMenu\" />\r\n    <MESSAGE value=\"complete ProfileMenu\" />\r\n    <MESSAGE value=\"attack gameMenu\" />\r\n    <MESSAGE value=\"music\" />\r\n    <MESSAGE value=\"add getimage to util\" />\r\n    <MESSAGE value=\"phase 3\" />\r\n    <MESSAGE value=\"phase-3\" />\r\n    <MESSAGE value=\"phase//3\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"phase//3\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../Client/.idea/workspace.xml b/../Client/.idea/workspace.xml
+--- a/../Client/.idea/workspace.xml	(revision d075bbe64eb44ef3cb4b09afae762c49cb5b7923)
++++ b/../Client/.idea/workspace.xml	(date 1626083173260)
+@@ -4,24 +4,26 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="c344dfcf-2301-4e3d-a4d9-a1311bc30bb9" name="Default Changelist" comment="phase//3">
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_10_2021_9_12_AM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_10_2021_9_12_AM__Default_Changelist_.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_10_2021_11_28_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_10_2021_11_28_PM__Default_Changelist_.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_11_06_AM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_11_06_AM__Default_Changelist_.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_11_19_AM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_11_19_AM__Default_Changelist_.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_11_19_AM__Default_Changelist_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_11_19_AM__Default_Changelist_1.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_5_2021_8_26_AM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_5_2021_8_26_AM__Default_Changelist_.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_12_32_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_12_32_PM__Default_Changelist_.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_12_44_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_12_44_PM__Default_Changelist_.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_3_46_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_3_46_PM__Default_Changelist_.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_3_51_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2021_3_51_PM__Default_Changelist_.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM__Default_Changelist_.xml" afterDir="false" />
++    <list default="true" id="c344dfcf-2301-4e3d-a4d9-a1311bc30bb9" name="Default Changelist" comment="login fixed">
++      <change afterPath="$PROJECT_DIR$/src/main/java/View/Lobby.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/src/main/resources/PNG/multi.png" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/src/main/resources/View/lobby.fxml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/../Server/src/main/java/Controller/GameController.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/../Server/target/classes/Controller/GameController.class" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/../Server/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_1_40_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_1_40_PM__Default_Changelist_.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/../Server/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_1_40_PM__Default_Changelist_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_1_40_PM__Default_Changelist_1.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/View/LoginMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/LoginMenu.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/View/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/MainMenu.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/View/SetGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/SetGame.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/resources/View/setRound.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/View/setRound.fxml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/target/classes/View/LoginMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/LoginMenu.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/target/classes/View/MainMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/MainMenu.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/target/classes/View/SetGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/SetGame.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/target/classes/View/setRound.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/setRound.fxml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/../Server/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/../Server/src/main/java/Controller/RegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/src/main/java/Controller/RegisterController.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/../Server/src/main/java/Main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/src/main/java/Main/Main.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/../Server/target/classes/Controller/RegisterController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/target/classes/Controller/RegisterController.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/../Server/target/classes/Main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/target/classes/Main/Main.class" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -66,7 +68,7 @@
+     <property name="WebServerToolWindowFactoryState" value="false" />
+     <property name="aspect.path.notification.shown" value="true" />
+     <property name="extract.method.default.visibility" value="private" />
+-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Server" />
++    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+     <property name="nodejs_package_manager_path" value="npm" />
+     <property name="project.structure.last.edited" value="Libraries" />
+     <property name="project.structure.proportion" value="0.15" />
+@@ -198,7 +200,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1625993722326</updated>
+     </task>
+-    <option name="localTasksCounter" value="13" />
++    <task id="LOCAL-00013" summary="login fixed">
++      <created>1626011846497</created>
++      <option name="number" value="00013" />
++      <option name="presentableId" value="LOCAL-00013" />
++      <option name="project" value="LOCAL" />
++      <updated>1626011846497</updated>
++    </task>
++    <option name="localTasksCounter" value="14" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -227,6 +236,7 @@
+     <MESSAGE value="phase 3" />
+     <MESSAGE value="phase-3" />
+     <MESSAGE value="phase//3" />
+-    <option name="LAST_COMMIT_MESSAGE" value="phase//3" />
++    <MESSAGE value="login fixed" />
++    <option name="LAST_COMMIT_MESSAGE" value="login fixed" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: src/main/java/Controller/RegisterController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Controller;\r\n\r\nimport Model.Player;\r\n\r\nimport java.util.HashMap;\r\nimport java.util.Map;\r\nimport java.util.UUID;\r\n\r\npublic class RegisterController {\r\n    public static synchronized String register(String username,\r\n                                  String nickname,\r\n                                  String password) {\r\n        if (ProgramController.isUserExist(username))\r\n            return Util.showError(\"user with username \" + username + \" already exists\");\r\n        else if (ProgramController.isNicknameExist(nickname))\r\n            return Util.showError(\"user with nickname \" + nickname + \" already exists\");\r\n        else {\r\n            ProgramController.createUser(username, nickname, password);\r\n            System.out.println(username);\r\n            return Util.success(\"user created successfully!\");\r\n        }\r\n    }\r\n\r\n    public synchronized static String login(String username, String password) {\r\n        if (Player.loggedInPlayers == null) Player.loggedInPlayers = new HashMap<>();\r\n        for (Map.Entry<String, Player> playerEntry : Player.loggedInPlayers.entrySet()) {\r\n            if(playerEntry.getValue().getUsername().equals(username)) return Util.showError(\"Username and password didn't match!\");\r\n        }\r\n        for (Player player: Player.getPlayers()) {\r\n            if (player.getUsername().equals(username) && player.getPassword().equals(password)) {\r\n                String token = UUID.randomUUID().toString();\r\n                Player.loggedInPlayers.put(token, player);\r\n                return Util.success(\"token\");\r\n            }\r\n        }\r\n        return Util.showError(\"Username and password didn't match!\");\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Controller/RegisterController.java b/src/main/java/Controller/RegisterController.java
+--- a/src/main/java/Controller/RegisterController.java	(revision d075bbe64eb44ef3cb4b09afae762c49cb5b7923)
++++ b/src/main/java/Controller/RegisterController.java	(date 1626026126274)
+@@ -16,7 +16,6 @@
+             return Util.showError("user with nickname " + nickname + " already exists");
+         else {
+             ProgramController.createUser(username, nickname, password);
+-            System.out.println(username);
+             return Util.success("user created successfully!");
+         }
+     }

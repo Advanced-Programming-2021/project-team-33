@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Lobby">
+   <children>
+      <Text fx:id="name1" layoutX="281.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+         <font>
+            <Font name="Bell MT Italic" size="60.0" />
+         </font>
+      </Text>
+      <Text fx:id="name2" layoutX="968.0" layoutY="256.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+         <font>
+            <Font name="Bell MT Italic" size="60.0" />
+         </font>
+      </Text>
+      <Text fx:id="score1" layoutX="281.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+         <font>
+            <Font name="Bell MT Italic" size="60.0" />
+         </font>
+      </Text>
+      <Text fx:id="score2" layoutX="968.0" layoutY="375.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+         <font>
+            <Font name="Bell MT Italic" size="60.0" />
+         </font>
+      </Text>
+      <Text fx:id="ready1" layoutX="281.0" layoutY="609.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ready">
+         <font>
+            <Font name="Bell MT Italic" size="60.0" />
+         </font>
+      </Text>
+      <Text fx:id="ready2" layoutX="968.0" layoutY="608.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ready">
+         <font>
+            <Font name="Bell MT Italic" size="60.0" />
+         </font>
+      </Text>
+      <Text layoutX="593.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lobby">
+         <font>
+            <Font name="Bell MT Italic" size="80.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
