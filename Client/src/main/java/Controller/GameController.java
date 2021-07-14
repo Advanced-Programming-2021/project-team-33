@@ -1,14 +1,15 @@
 package Controller;
 
 import Model.*;
-import View.*;
+import View.CardMenu;
+import View.Communicate;
+import View.GameMenu;
+import View.SetWinner;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.image.Image;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Optional;
 
 
@@ -26,7 +27,7 @@ public class GameController {
     public static boolean isThreeLightActive = false;
     public static boolean is1500Active = false;
     public static Player getLightPlayer = null;
-    public static int reserve = 0,score = 0;
+    public static int reserve = 0, score = 0;
 
 
     public static int selectCard(String cardPosition, int number, String opponent) {
@@ -151,10 +152,15 @@ public class GameController {
     }
 
     public static Deck createDeck(String deckName) {
-
         if (ProgramController.isDeckExist(deckName))
             return null;
         else {
+            try {
+                ProgramController.dataOutputStream.writeUTF("createDeck "+ Player.thePlayer.getUsername() + " " + deckName);
+                ProgramController.dataOutputStream.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             Deck deck = new Deck(deckName);
             Player.thePlayer.addToDeckList(deck);
             Player.deActiveDecks();
@@ -164,18 +170,42 @@ public class GameController {
     }
 
     public static void deleteDeck(String deckName) {
+        try {
+            ProgramController.dataOutputStream.writeUTF("deleteDeck "+ Player.thePlayer.getUsername() + " " + deckName);
+            ProgramController.dataOutputStream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Player.thePlayer.deleteDeck(deckName);
     }
 
     public static void activateDeck(String deckName) {
+        try {
+            ProgramController.dataOutputStream.writeUTF("activeDeck "+ Player.thePlayer.getUsername() + " " + deckName);
+            ProgramController.dataOutputStream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Player.deActiveDecks();
         Player.getDeckByName(deckName).setDeckActive(true);
     }
 
     public static void addCardToDeck(String deckName, String cardName, boolean isSide) throws CloneNotSupportedException {
         if (!isSide) {
+            try {
+                ProgramController.dataOutputStream.writeUTF("addCard "+ deckName+ " "+ cardName);
+                ProgramController.dataOutputStream.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             Player.getDeckByName(deckName).addToMainDeck((Card) Card.getCardByName(cardName).clone());
         } else {
+            try {
+                ProgramController.dataOutputStream.writeUTF("addCardSide "+ deckName+ " "+ cardName);
+                ProgramController.dataOutputStream.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             Player.getDeckByName(deckName).addToSideDeck((Card) Card.getCardByName(cardName).clone());
         }
 //        Player.thePlayer.removeFromCardList(cardName);
@@ -234,7 +264,6 @@ public class GameController {
             drawCard(Player.opponent);
         }
         RoundController.drawPhase();
-
     }
 
 
@@ -244,8 +273,7 @@ public class GameController {
             if (card == null) {
                 System.out.println("here");
                 player.setLifePoint(0);
-            }
-            else {
+            } else {
                 card.setCardStatus(CardStatus.HAND);
                 player.getBoard().getHand().add(player.getBoard().getDeck().get(0));
                 player.getBoard().getDeck().remove(card);

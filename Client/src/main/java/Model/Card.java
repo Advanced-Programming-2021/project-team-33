@@ -1,11 +1,12 @@
 package Model;
 
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Card implements Cloneable{
+public class Card implements Cloneable, Serializable {
+    @Serial
+    private static final long serialVersionUID = 6529685098267757692L;
     static int id = 0;
     static ArrayList<Card> cards = new ArrayList<>();
     ArrayList<Effect> effects = new ArrayList<>();

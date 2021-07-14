@@ -5,7 +5,12 @@ import Model.CardType;
 import Model.Effect;
 import Model.Player;
 
-public class IncreaseAttack implements Effect {
+import java.io.Serial;
+import java.io.Serializable;
+
+public class IncreaseAttack implements Effect, Serializable {
+    @Serial
+    private static final long serialVersionUID = 6529685098267757695L;
     @Override
     public void enableEffect(Card card) {
         for (Card monsterCard : Player.currentPlayer.getBoard().getFieldCardsForMonsters()) {

@@ -2,7 +2,14 @@ package Model.Effects;
 
 import Model.*;
 
-public class ChangeAttackOfMonsterBeastForEachGraveyard implements Effect {
+import java.io.Serial;
+import java.io.Serializable;
+
+
+    public class ChangeAttackOfMonsterBeastForEachGraveyard implements Effect, Serializable {
+        @Serial
+        private static final long serialVersionUID = 6529685098267757684L;
+
     @Override
     public void enableEffect(Card card) {
         changeAttackDeffence(100);

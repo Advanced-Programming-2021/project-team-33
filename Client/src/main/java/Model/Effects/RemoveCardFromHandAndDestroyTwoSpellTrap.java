@@ -6,7 +6,13 @@ import Model.Effect;
 import Model.Player;
 import View.Communicate;
 
-public class RemoveCardFromHandAndDestroyTwoSpellTrap implements Effect {
+import java.io.Serial;
+import java.io.Serializable;
+
+
+    public class RemoveCardFromHandAndDestroyTwoSpellTrap implements Effect, Serializable {
+        @Serial
+        private static final long serialVersionUID = 6529685098267757662L;
     @Override
     public void enableEffect(Card card) {
         for (Card card1 : Player.currentPlayer.getBoard().getHand()) {

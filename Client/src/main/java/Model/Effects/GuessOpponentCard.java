@@ -4,16 +4,16 @@ import Controller.GameController;
 import Model.Card;
 import Model.Effect;
 import Model.Player;
-import View.CardMenu;
-import View.Communicate;
-import View.GameMenu;
 import javafx.scene.control.TextInputDialog;
-import javafx.scene.text.Text;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Optional;
 
-public class GuessOpponentCard implements Effect {
 
+    public class GuessOpponentCard implements Effect, Serializable {
+        @Serial
+        private static final long serialVersionUID = 6529685098267757679L;
 
     @Override
     public void enableEffect(Card card) {

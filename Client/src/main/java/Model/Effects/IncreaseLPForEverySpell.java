@@ -4,7 +4,13 @@ import Model.Card;
 import Model.Effect;
 import Model.Player;
 
-public class IncreaseLPForEverySpell implements Effect {
+import java.io.Serial;
+import java.io.Serializable;
+
+
+    public class IncreaseLPForEverySpell implements Effect, Serializable {
+        @Serial
+        private static final long serialVersionUID = 6529685098267757660L;
     @Override
     public void enableEffect(Card card) {
         Player.currentPlayer.setLifePoint(Player.currentPlayer.getLifePoint() + 500);

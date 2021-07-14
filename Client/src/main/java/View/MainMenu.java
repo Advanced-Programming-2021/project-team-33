@@ -52,6 +52,7 @@ public class MainMenu {
 
     @FXML
     public void initialize() {
+
         backgroundMain.setImage(new Image(getClass().getResourceAsStream("/PNG/11025059.jpg")));
         vBox.setAlignment(Pos.CENTER);
         String[] buttonName = {"Duel Menu","Chat Room", "Deck Menu", "Scoreboard Menu", "Profile Menu", "Shop Menu", "Import and Export", "Card Creator", "Log out"};
@@ -80,6 +81,7 @@ public class MainMenu {
                 }
             });
             case "Deck Menu" -> button.setOnMouseClicked(event -> {
+
                 MainMenu.playSound(Util.CLICK_MUSIC);
                 try {
                     new DeckMenu().start();
@@ -96,12 +98,11 @@ public class MainMenu {
                 }
             });
             case "Profile Menu" -> button.setOnMouseClicked(event -> {
+
                 MainMenu.playSound(Util.CLICK_MUSIC);
                 try {
                     new ProfileMenu().start();
                 } catch (IOException e) {
-
-
                 }
             });
             case "Shop Menu" -> button.setOnMouseClicked(event -> {

@@ -3,7 +3,13 @@ package Model.Effects;
 import Model.Card;
 import Model.Effect;
 
-public class DoNothing implements Effect {
+import java.io.Serial;
+import java.io.Serializable;
+
+
+    public class DoNothing implements Effect, Serializable {
+        @Serial
+        private static final long serialVersionUID = 6529685098267757676L;
     @Override
     public void enableEffect(Card card) {
 

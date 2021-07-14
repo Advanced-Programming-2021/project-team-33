@@ -5,7 +5,12 @@ import Model.Card;
 import Model.Effect;
 import Model.Player;
 
-public class AttackDirectToOpponent implements Effect {
+import java.io.Serial;
+import java.io.Serializable;
+
+public class AttackDirectToOpponent implements Effect, Serializable {
+    @Serial
+    private static final long serialVersionUID = 6529685098267757694L;
     @Override
     public void enableEffect(Card card) {
         Player.opponent.setLifePoint(Player.opponent.getLifePoint() -

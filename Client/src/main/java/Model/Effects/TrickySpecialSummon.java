@@ -7,9 +7,14 @@ import Model.Effect;
 import Model.Player;
 import View.Communicate;
 
+import java.io.Serial;
+import java.io.Serializable;
 
 
-public class TrickySpecialSummon implements Effect {
+
+    public class TrickySpecialSummon implements Effect, Serializable {
+        @Serial
+        private static final long serialVersionUID = 6529685098267757650L;
     @Override
     public void enableEffect(Card card) {
         String input = Communicate.input("Choose one card from your hand to tribute");

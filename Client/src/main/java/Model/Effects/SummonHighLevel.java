@@ -7,7 +7,14 @@ import Model.Effect;
 import Model.Player;
 import View.Communicate;
 
-public class SummonHighLevel implements Effect {
+import java.io.Serial;
+import java.io.Serializable;
+
+
+
+    public class SummonHighLevel implements Effect, Serializable {
+        @Serial
+        private static final long serialVersionUID = 6529685098267757666L;
     @Override
     public void enableEffect(Card card) {
         boolean isCardExist = false;

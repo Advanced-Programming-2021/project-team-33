@@ -5,7 +5,13 @@ import Model.Card;
 import Model.Effect;
 import Model.Player;
 
-public class GiveYourLife implements Effect {
+import java.io.Serial;
+import java.io.Serializable;
+
+
+    public class GiveYourLife implements Effect, Serializable {
+        @Serial
+        private static final long serialVersionUID = 6529685098267757678L;
     @Override
     public void enableEffect(Card card) {
         Player.currentPlayer.setLifePoint(Player.currentPlayer.getLifePoint() - 2000);

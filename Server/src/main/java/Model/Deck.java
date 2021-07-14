@@ -1,13 +1,16 @@
 package Model;
 
-import java.lang.reflect.AnnotatedArrayType;
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Deck {
+public class Deck implements Serializable {
+@Serial
+private static final long serialVersionUID = 6529685098267757699L;
     static ArrayList<Deck> decks = new ArrayList<>();
-    ArrayList<Card> mainDeck = new ArrayList<>();
-    ArrayList<Card> sideDeck = new ArrayList<>();
+    ArrayList<String> mainDeck = new ArrayList<>();
+    ArrayList<String> sideDeck = new ArrayList<>();
     String deckName;
     boolean isDeckActive = false;
 
@@ -19,11 +22,11 @@ public class Deck {
         isDeckActive = deckActive;
     }
 
-    public ArrayList<Card> getMainDeck() {
+    public ArrayList<String> getMainDeck() {
         return mainDeck;
     }
 
-    public ArrayList<Card> getSideDeck() {
+    public ArrayList<String> getSideDeck() {
         return sideDeck;
     }
 
@@ -35,17 +38,17 @@ public class Deck {
         return deckName;
     }
 
-    public void addToMainDeck(Card card) {
+    public void addToMainDeck(String card) {
         mainDeck.add(card);
     }
 
-    public void addToSideDeck(Card card) {
+    public void addToSideDeck(String card) {
         sideDeck.add(card);
     }
 
     public void removeFromMainDeck(String cardName) {
         for (int i = 0; i < mainDeck.size(); i++) {
-            if (mainDeck.get(i).cardName.equals(cardName)) {
+            if (mainDeck.get(i).equals(cardName)) {
                 mainDeck.remove(i);
                 break;
             }
@@ -54,7 +57,7 @@ public class Deck {
 
     public void removeFromSideDeck(String cardName) {
         for (int i = 0; i < sideDeck.size(); i++) {
-            if (sideDeck.get(i).cardName.equals(cardName)) {
+            if (sideDeck.get(i).equals(cardName)) {
                 sideDeck.remove(i);
                 break;
             }
@@ -72,12 +75,9 @@ public class Deck {
     public boolean isDeckValid(Deck deck) {
         ArrayList<String> mainCardNames = new ArrayList<>();
         for(int i = 0; i < deck.mainDeck.size(); i++){
-            mainCardNames.add(deck.mainDeck.get(i).getCardName());
+            mainCardNames.add(deck.mainDeck.get(i));
         }
-        for(int i = 0; i < deck.mainDeck.size(); i++){
-            if(Collections.frequency(mainCardNames,deck.mainDeck.get(i).getCardName()) > deck.mainDeck.get(i).getLimit())
-                return false;
-        }
+
         return true;
     }
 
@@ -91,7 +91,7 @@ public class Deck {
     public boolean getInvalidCard(String deckName, String cardName) {
         ArrayList<String> cardNames = new ArrayList<>();
         for(int i = 0; i < Player.thePlayer.getDeckByName(deckName).mainDeck.size(); i++){
-            cardNames.add(Player.thePlayer.getDeckByName(deckName).mainDeck.get(i).getCardName());
+            cardNames.add(Player.thePlayer.getDeckByName(deckName).mainDeck.get(i));
         }
         return Collections.frequency(cardNames, cardName) == 3;
     }

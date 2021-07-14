@@ -6,9 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
 import javafx.stage.Stage;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.Socket;
 import java.util.*;
 
@@ -18,10 +16,14 @@ public class ProgramController {
     private static int profileID;
     public static DataInputStream dataInputStream;
     public static DataOutputStream dataOutputStream;
+    public static ObjectOutputStream objectOutputStream;
+    public static ObjectInputStream objectInputStream;
     private static Socket socket;
     public static void initializeNetwork() {
         try {
-            socket = new Socket("localhost", 7776);
+            Socket socket = new Socket("localhost", 7776);
+            objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+            objectInputStream = new ObjectInputStream(socket.getInputStream());
             dataInputStream = new DataInputStream(socket.getInputStream());
             dataOutputStream = new DataOutputStream(socket.getOutputStream());
         } catch (IOException x) {
@@ -69,7 +71,14 @@ public class ProgramController {
         if (profileID >= 50) profileID = 0;
         profileID++;
         Player player = new Player(username, password, nickname);
-        player.setProfileID(profileID);
+        try {
+            ProgramController.dataOutputStream.writeUTF("profileId " + username);
+            ProgramController.dataOutputStream.flush();
+            player.setProfileID(Integer.parseInt(ProgramController.dataInputStream.readUTF()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public static void setPlayer(String username) {

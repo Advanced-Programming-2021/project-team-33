@@ -5,7 +5,14 @@ import Model.CardType;
 import Model.Effect;
 import Model.Player;
 
-public class ChangeAttackDeffenceForMonstersInsectBeast implements Effect {
+import java.io.Serial;
+import java.io.Serializable;
+
+
+    public class ChangeAttackDeffenceForMonstersInsectBeast implements Effect, Serializable {
+        @Serial
+        private static final long serialVersionUID = 6529685098267757682L;
+
     @Override
     public void enableEffect(Card card) {
         changeAttackDeffence(Player.currentPlayer, 200);

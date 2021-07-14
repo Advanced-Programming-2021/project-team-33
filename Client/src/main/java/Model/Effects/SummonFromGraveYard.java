@@ -1,15 +1,20 @@
 package Model.Effects;
 
-import Controller.GameController;
 import Model.Card;
 import Model.CardCategory;
 import Model.Effect;
 import Model.Player;
 import View.Communicate;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class SummonFromGraveYard implements Effect {
+
+
+    public class SummonFromGraveYard implements Effect, Serializable {
+        @Serial
+        private static final long serialVersionUID = 6529685098267757665L;
     @Override
     public void enableEffect(Card card) {
         int check = 0, index = 0;

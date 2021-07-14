@@ -27,14 +27,14 @@ public class ProgramController {
 
     public static boolean isCardExistInMainDeck(String cardName, String deckName) {
         for (int i = 0; i < Player.getDeckByName(deckName).getMainDeck().size(); i++) {
-            if (Player.getDeckByName(deckName).getMainDeck().get(i).getCardName().equals(cardName)) return true;
+            if (Player.getDeckByName(deckName).getMainDeck().get(i).equals(cardName)) return true;
         }
         return false;
     }
 
     public static boolean isCardExistInSideDeck(String cardName, String deckName) {
         for (int i = 0; i < Player.getDeckByName(deckName).getSideDeck().size(); i++) {
-            if (Player.getDeckByName(deckName).getSideDeck().get(i).getCardName().equals(cardName)) return true;
+            if (Player.getDeckByName(deckName).getSideDeck().get(i).equals(cardName)) return true;
         }
         return false;
     }

@@ -60,11 +60,11 @@ public class GameMenu {
     boolean isHandSelected = false, isMonsterSelected = false, isSpellSelected = false, isOneTributeActive = false,
             isTwoTributeActive = false, isAttackActive = false, isTrapActive = false, isPaused = false;
     AtomicInteger tribute = new AtomicInteger();
-
+    static Player otherPlayer;
 
     public void start() throws IOException {
         Stage primaryStage = ProgramController.getStage();
-        Parent root = FXMLLoader.load(getClass().getResource("gameMenu.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/gameMenu.fxml"));
         primaryStage.setTitle("Yu-Gi-Oh");
         primaryStage.setScene(new Scene(root, 1280, 720));
         primaryStage.show();
@@ -72,6 +72,7 @@ public class GameMenu {
 
     @FXML
     public void initialize() {
+        getPlayer();
         exit.toBack();
         setPauseScene();
         setCheat();
@@ -100,7 +101,7 @@ public class GameMenu {
         });
     }
 
-    private void showGraveYard(Player player){
+    private void showGraveYard(Player player) {
         int count = player.getBoard().getGraveyard().size();
         exit.toFront();
         graveyardBack.toFront();
@@ -108,7 +109,7 @@ public class GameMenu {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 10; j++) {
                 count--;
-                if(count < 0) return;
+                if (count < 0) return;
                 Image image = Util.getImage(player.getBoard().getGraveyard().get(count).getCardName());
                 ImageView imageView = new ImageView(image);
                 imageView.setFitHeight(124);
@@ -117,7 +118,7 @@ public class GameMenu {
                 graveyardList.add(imageView, j, i);
                 int finalCount = count;
                 imageView.setOnMouseClicked(event -> {
-                        cardShow.setImage(Util.getImage(player.getBoard().getGraveyard().get(finalCount).getCardName()));
+                    cardShow.setImage(Util.getImage(player.getBoard().getGraveyard().get(finalCount).getCardName()));
                 });
             }
         }
@@ -133,7 +134,7 @@ public class GameMenu {
 
             if (result.get().matches("increase --money (\\d+)"))
                 increaseMoney(Util.getCommand(result.get(), "increase --money (\\d+)"));
-             else if (result.get().matches("increase --LP (\\d+)"))
+            else if (result.get().matches("increase --LP (\\d+)"))
                 increaseLifePoint(Util.getCommand(result.get(), "increase --LP (\\d+)"));
             else if (result.get().matches("duel set-winner (\\S+)")) {
                 winTheGame(Util.getCommand(result.get(), "duel set-winner (\\S+)"));
@@ -243,10 +244,10 @@ public class GameMenu {
 
     private void updateBoard(ArrayList<ImageView> currentHand, ArrayList<ImageView> enemyHand, ArrayList<ImageView> currentMonster) {
 
-        if (Player.currentPlayer.getBoard().getGraveyard().size() != 0)
+        if (Player.thePlayer.getBoard().getGraveyard().size() != 0)
             graveyard.setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/Unknown.jpg")));
         else graveyard.setImage(null);
-        if (Player.opponent.getBoard().getGraveyard().size() != 0)
+        if (otherPlayer.getBoard().getGraveyard().size() != 0)
             enemyGraveyard.setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/Unknown.jpg")));
         else enemyGraveyard.setImage(null);
         lp1.setProgress(Player.thePlayer.getLifePoint() / 8000.0);
@@ -257,46 +258,46 @@ public class GameMenu {
 
         for (int i = 0; i < 6; i++) {
             currentHand.get(i).setImage(null);
-            for (int j = 0; j < Player.currentPlayer.getBoard().getHand().size(); j++) {
+            for (int j = 0; j < Player.thePlayer.getBoard().getHand().size(); j++) {
                 currentHand.get(j).setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/Unknown.jpg")));
             }
         }
-        for (int i = 0; i < Player.opponent.getBoard().getHand().size(); i++) {
+        for (int i = 0; i < otherPlayer.getBoard().getHand().size(); i++) {
             enemyHand.get(i).setImage(null);
-            for (int j = 0; j < Player.opponent.getBoard().getHand().size(); j++) {
+            for (int j = 0; j < otherPlayer.getBoard().getHand().size(); j++) {
                 enemyHand.get(j).setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/Unknown.jpg")));
             }
         }
         for (int i = 0; i < 5; i++) {
-            if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(i) == null)
+            if (Player.thePlayer.getBoard().getFieldCardsForMonsters().get(i) == null)
                 currentMonster.get(i).setImage(null);
-            else if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(i).getCardStatus() == CardStatus.ATTACK) {
+            else if (Player.thePlayer.getBoard().getFieldCardsForMonsters().get(i).getCardStatus() == CardStatus.ATTACK) {
                 currentMonster.get(i).setRotate(0);
-                currentMonster.get(i).setImage(Util.getImage(Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(i).getCardName()));
-            } else if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(i).getCardStatus() == CardStatus.SET) {
+                currentMonster.get(i).setImage(Util.getImage(Player.thePlayer.getBoard().getFieldCardsForMonsters().get(i).getCardName()));
+            } else if (Player.thePlayer.getBoard().getFieldCardsForMonsters().get(i).getCardStatus() == CardStatus.SET) {
                 currentMonster.get(i).setRotate(90.0);
                 currentMonster.get(i).setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/Unknown.jpg")));
-            } else if (Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(i).getCardStatus() == CardStatus.DEFENCE) {
+            } else if (Player.thePlayer.getBoard().getFieldCardsForMonsters().get(i).getCardStatus() == CardStatus.DEFENCE) {
                 currentMonster.get(i).setRotate(90.0);
-                currentMonster.get(i).setImage(Util.getImage(Player.currentPlayer.getBoard().getFieldCardsForMonsters().get(i).getCardName()));
+                currentMonster.get(i).setImage(Util.getImage(Player.thePlayer.getBoard().getFieldCardsForMonsters().get(i).getCardName()));
             }
-            if (Player.currentPlayer.getBoard().getFieldCardsForSpellTraps().get(i) != null)
+            if (Player.thePlayer.getBoard().getFieldCardsForSpellTraps().get(i) != null)
                 currentSpell.get(i).setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/Unknown.jpg")));
             else currentSpell.get(i).setImage(null);
 
-            if (Player.opponent.getBoard().getFieldCardsForMonsters().get(i) == null)
+            if (otherPlayer.getBoard().getFieldCardsForMonsters().get(i) == null)
                 enemyMonster.get(i).setImage(null);
-            else if (Player.opponent.getBoard().getFieldCardsForMonsters().get(i).getCardStatus() == CardStatus.ATTACK) {
+            else if (otherPlayer.getBoard().getFieldCardsForMonsters().get(i).getCardStatus() == CardStatus.ATTACK) {
                 enemyMonster.get(i).setRotate(0);
-                enemyMonster.get(i).setImage(Util.getImage(Player.opponent.getBoard().getFieldCardsForMonsters().get(i).getCardName()));
-            } else if (Player.opponent.getBoard().getFieldCardsForMonsters().get(i).getCardStatus() == CardStatus.DEFENCE) {
+                enemyMonster.get(i).setImage(Util.getImage(otherPlayer.getBoard().getFieldCardsForMonsters().get(i).getCardName()));
+            } else if (otherPlayer.getBoard().getFieldCardsForMonsters().get(i).getCardStatus() == CardStatus.DEFENCE) {
                 enemyMonster.get(i).setRotate(90);
-                enemyMonster.get(i).setImage(Util.getImage(Player.opponent.getBoard().getFieldCardsForMonsters().get(i).getCardName()));
-            } else if (Player.opponent.getBoard().getFieldCardsForMonsters().get(i).getCardStatus() == CardStatus.SET) {
+                enemyMonster.get(i).setImage(Util.getImage(otherPlayer.getBoard().getFieldCardsForMonsters().get(i).getCardName()));
+            } else if (otherPlayer.getBoard().getFieldCardsForMonsters().get(i).getCardStatus() == CardStatus.SET) {
                 enemyMonster.get(i).setRotate(90);
                 enemyMonster.get(i).setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/Unknown.jpg")));
             }
-            if (Player.opponent.getBoard().getFieldCardsForSpellTraps().get(i) != null)
+            if (otherPlayer.getBoard().getFieldCardsForSpellTraps().get(i) != null)
                 enemySpell.get(i).setImage(new Image(getClass().getResourceAsStream("/PNG/Cards/Monsters/Unknown.jpg")));
             else enemySpell.get(i).setImage(null);
         }
@@ -929,6 +930,51 @@ public class GameMenu {
 
     public void showError(String error) {
         massage.setText(error);
+    }
+
+    public ArrayList<Card> getOtherPlayerHand(String where) {
+        String result = "";
+        ArrayList<Card> handList = new ArrayList<>();
+        try {
+            ProgramController.dataOutputStream.writeUTF(where + " " + Lobby.playerName2);
+            ProgramController.dataOutputStream.flush();
+            result = ProgramController.dataInputStream.readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String[] parts = result.split(", ");
+
+        for (int i = 0; i < parts.length; i++) {
+            String s = parts[i].replaceAll("]", "").replaceAll("\\[", "");
+            handList.add(Card.getCardByName(s));
+        }
+        return handList;
+    }
+
+    public static void sendPlayer() {
+        try {
+            ProgramController.dataOutputStream.writeUTF("sendPlayer");
+            ProgramController.objectOutputStream.writeObject(Player.thePlayer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void getPlayer() {
+        try {
+            ProgramController.dataOutputStream.writeUTF("getPlayer " + Lobby.playerName2);
+            String input = ProgramController.dataInputStream.readUTF();
+            try {
+                otherPlayer = (Player) ProgramController.objectInputStream.readObject();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

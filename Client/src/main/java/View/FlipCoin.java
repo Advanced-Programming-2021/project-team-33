@@ -4,6 +4,9 @@ import Controller.GameController;
 import Controller.ProgramController;
 import Controller.RoundController;
 import Controller.Util;
+import Model.Card;
+import Model.Deck;
+import Model.Player;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
@@ -27,6 +30,8 @@ public class FlipCoin {
     public ImageView coin;
     public ImageView continueButton;
     public Text text;
+    public static boolean autoFlip = false;
+    static String player1;
 
     public void start() throws IOException {
         Stage primaryStage = ProgramController.getStage();
@@ -37,20 +42,37 @@ public class FlipCoin {
     }
 
     @FXML
-    public void initialize() {
+    public void initialize() throws IOException {
+        if (autoFlip) {
+            int number = 1;
+            flipCoin();
+            MainMenu.playSound("src/main/resources/music/coin.mp3");
+            head.setImage(null);
+            if (number == 1) {
+                setAnimationForCoin(620);
+                ProgramController.dataOutputStream.writeUTF("player1");
+                ProgramController.dataOutputStream.flush();
+                player1 = ProgramController.dataInputStream.readUTF();
+                text.setText(player1 + " plays first");
+                setSecondPlayer();
+            } else {
+                setAnimationForCoin(620);
+                ProgramController.dataOutputStream.writeUTF("player2");
+                ProgramController.dataOutputStream.flush();
+                player1 = ProgramController.dataInputStream.readUTF();
+                text.setText(player1 + " plays first");
+                setSecondPlayer();
+            }
+            autoFlip = false;
+        }
         Random random = new Random();
         int number = random.nextInt(2);
         tail.setOnMouseClicked(event -> {
-
-
             flipCoin();
-
-
             MainMenu.playSound("src/main/resources/music/coin.mp3");
             head.setImage(null);
 
             if (number == 1) {
-
                 setAnimationForCoin(620);
                 RoundController.changeTurn();
                 text.setText("Your opponent plays first");
@@ -84,6 +106,55 @@ public class FlipCoin {
         });
     }
 
+
+    private void setSecondPlayer() throws IOException {
+        Player secondPlayer = new Player(Lobby.playerName2, Lobby.playerNick2);
+        ProgramController.dataOutputStream.writeUTF("profileId " + secondPlayer.getUsername());
+        ProgramController.dataOutputStream.flush();
+        secondPlayer.setProfileID(Integer.parseInt(ProgramController.dataInputStream.readUTF()));
+        Deck deck1 = new Deck("deck22");
+        secondPlayer.addToDeckList(deck1);
+        deck1.setDeckActive(true);
+
+        ProgramController.dataOutputStream.writeUTF("getDeck " + secondPlayer.getUsername());
+        ProgramController.dataOutputStream.flush();
+        String result = ProgramController.dataInputStream.readUTF();
+        String[] parts = result.split(", ");
+
+        for (int i = 0; i < parts.length; i++) {
+            String s = parts[i].replaceAll("]", "").replaceAll("\\[", "");
+            secondPlayer.getActiveDeck().addToMainDeck(Card.getCardByName(s));
+        }
+        Deck deck = new Deck("deck11");
+        Player.thePlayer.addToDeckList(deck);
+        deck.setDeckActive(true);
+        ProgramController.dataOutputStream.writeUTF("getDeck " + Player.thePlayer.getUsername());
+        ProgramController.dataOutputStream.flush();
+        result = ProgramController.dataInputStream.readUTF();
+        String[] parts2 = result.split(", ");
+        for (int i = 0; i < parts2.length; i++) {
+            String s = parts2[i].replaceAll("]", "").replaceAll("\\[", "");
+            System.out.println(s);
+            Player.thePlayer.getActiveDeck().addToMainDeck(Card.getCardByName(s));
+        }
+        if (player1.equals(secondPlayer.getUsername())) {
+            Player.opponent = Player.thePlayer;
+            Player.currentPlayer = secondPlayer;
+        } else {
+            Player.opponent = secondPlayer;
+            Player.currentPlayer = Player.thePlayer;
+        }
+        RoundController.otherPlayer = secondPlayer;
+        RoundController.setRound(SetGame.rounds);
+        GameController.prepareGame();
+        GameMenu.sendPlayer();
+        try {
+            new GameMenu().start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void flipCoin() {
         ScaleTransition trans = new ScaleTransition();
         trans.setDuration(Duration.millis(300));
@@ -95,13 +166,11 @@ public class FlipCoin {
     }
 
 
-
     private void setAnimationForCoin(int i) {
         new java.util.Timer().schedule(
                 new java.util.TimerTask() {
                     @Override
                     public void run() {
-
                         coin.setLayoutX(-100);
                         coin.setLayoutY(-100);
                         coin.setImage(new Image(getClass().getResourceAsStream("/PNG/Gold_1.png")));

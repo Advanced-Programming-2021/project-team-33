@@ -6,8 +6,13 @@ import Model.Card;
 import Model.Effect;
 import Model.Player;
 
-public class TakeNextRoundFromOpponent implements Effect {
+import java.io.Serial;
+import java.io.Serializable;
 
+
+    public class TakeNextRoundFromOpponent implements Effect, Serializable {
+        @Serial
+        private static final long serialVersionUID = 6529685098267757668L;
     @Override
     public void enableEffect(Card card) {
         RoundController.isRoundFreeze = true;

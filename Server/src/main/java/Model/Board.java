@@ -1,8 +1,12 @@
 package Model;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Board {
+public class Board implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 6529685098267757691L;
     Player player;
     public ArrayList<Card> fieldCardsForMonsters = new ArrayList<>();
     public ArrayList<Card> fieldCardsForSpellTraps = new ArrayList<>();
@@ -18,7 +22,7 @@ public class Board {
             fieldCardsForSpellTraps.add(null);
         }
         fieldZone.add(null);
-        deck.addAll(player.getActiveDeck().getMainDeck());
+        //deck.addAll(player.getActiveDeck().getMainDeck());
     }
 
     public Player getPlayer() {

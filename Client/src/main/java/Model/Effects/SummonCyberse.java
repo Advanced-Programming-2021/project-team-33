@@ -4,9 +4,14 @@ import Controller.GameController;
 import Model.*;
 import View.Communicate;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class SummonCyberse implements Effect {
+
+    public class SummonCyberse implements Effect, Serializable {
+        @Serial
+        private static final long serialVersionUID = 6529685098267757664L;
     @Override
     public void enableEffect(Card card) {
         if(!GameController.isCyberseActive){

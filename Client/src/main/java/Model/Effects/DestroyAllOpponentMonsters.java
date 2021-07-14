@@ -5,7 +5,13 @@ import Model.Card;
 import Model.Effect;
 import Model.Player;
 
-public class DestroyAllOpponentMonsters implements Effect {
+import java.io.Serial;
+import java.io.Serializable;
+
+
+    public class DestroyAllOpponentMonsters implements Effect, Serializable {
+        @Serial
+        private static final long serialVersionUID = 6529685098267757672L;
     @Override
     public void enableEffect(Card card) {
 

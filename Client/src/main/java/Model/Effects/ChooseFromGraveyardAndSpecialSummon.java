@@ -3,16 +3,18 @@ package Model.Effects;
 import Controller.GameController;
 import Model.*;
 import View.Communicate;
-import View.GameMenu;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextInputDialog;
-import javafx.scene.image.Image;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Optional;
 
-public class ChooseFromGraveyardAndSpecialSummon implements Effect {
+
+public class ChooseFromGraveyardAndSpecialSummon implements Effect, Serializable {
+    @Serial
+    private static final long serialVersionUID = 6529685098267757689L;
     @Override
     public void enableEffect(Card card) {
         TextInputDialog dialog = new TextInputDialog("");

@@ -6,10 +6,14 @@ import View.Communicate;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextInputDialog;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Optional;
 
-public class AddFieldSpellToMyHand implements Effect {
+public class AddFieldSpellToMyHand implements Effect, Serializable {
+    @Serial
+    private static final long serialVersionUID = 6529685098267757693L;
     @Override
     public void enableEffect(Card card) {
         ArrayList<Card> deck = Player.currentPlayer.getBoard().getDeck();

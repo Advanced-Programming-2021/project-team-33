@@ -1,8 +1,12 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 
-public class Player {
+public class Player implements Serializable {
+    private static final long serialVersionUID = 6529685098267757690L;
+    public static HashMap<String, Player> loggedInPlayers;
     static ArrayList<Player> players = new ArrayList<>();
     public ArrayList<Deck> listOfDecks = new ArrayList<>();
     public ArrayList<Card> listOfCards = new ArrayList<>();
@@ -23,6 +27,11 @@ public class Player {
         this.username = username;
     }
 
+    public Player(String username,String nickname) {
+        listOfCards.addAll(Card.cards);
+        this.username = username;
+        this.nickname = nickname;
+    }
 
     public Player(String username, String password, String nickname) {
         this.username = username;

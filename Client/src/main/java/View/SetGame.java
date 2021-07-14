@@ -27,6 +27,7 @@ public class SetGame {
     public ImageView leftButton;
     public ImageView start;
     public ImageView multiPlayer;
+    public static int rounds = 1;
 
     public void start() throws IOException {
         Stage primaryStage = ProgramController.getStage();
@@ -55,6 +56,7 @@ public class SetGame {
         three.setOnMouseClicked(event -> {
             MainMenu.playSound(Util.CLICK_MUSIC);
             round.set(3);
+            rounds = 3;
         });
 
         leftButton.setOnMouseClicked(event -> {
@@ -100,15 +102,25 @@ public class SetGame {
             ProgramController.dataOutputStream.writeUTF("multiplayer " + Player.thePlayer.getUsername());
             ProgramController.dataOutputStream.flush();
             result = ProgramController.dataInputStream.readUTF();
-            System.out.println(result);
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-           if(!result.equals("0")){
-               Lobby.player1 = Player.thePlayer.getUsername();
-               Lobby.player2 = result;
+           if(!result.equals("0 0 0 0")){
+               String[] parts = result.split(" ");
+               String username = parts[0];
+               String nickname = parts[1];
+               String score = parts[2];
+               String profileID = parts[3];
+               Lobby.playerName1 = Player.thePlayer.getUsername();
+               Lobby.playerNick1 = Player.thePlayer.getNickname();
+               Lobby.playerScore1 = String.valueOf(Player.thePlayer.getScore());
+               Lobby.playerName2 = username;
+               Lobby.playerNick2 = nickname;
+               Lobby.playerScore2 = score;
+               Lobby.profileId1 = String.valueOf(Player.thePlayer.getProfileID());
+               Lobby.profileId2 = profileID;
                try {
                    new Lobby().start();
                } catch (Exception e) {
@@ -190,5 +202,5 @@ public class SetGame {
         }
     }
 
-
 }
+

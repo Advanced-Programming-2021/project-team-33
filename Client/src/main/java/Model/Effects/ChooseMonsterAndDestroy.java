@@ -6,7 +6,12 @@ import Model.Effect;
 import Model.Player;
 import View.Communicate;
 
-public class ChooseMonsterAndDestroy implements Effect {
+import java.io.Serial;
+import java.io.Serializable;
+
+public class ChooseMonsterAndDestroy implements Effect, Serializable {
+    @Serial
+    private static final long serialVersionUID = 6529685098267757670L;
     @Override
     public void enableEffect(Card card) {
         int check = 0;

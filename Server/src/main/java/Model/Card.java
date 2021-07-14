@@ -1,10 +1,15 @@
 package Model;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Card implements Cloneable{
+public class Card implements Cloneable, Serializable {
+    @Serial
+    private static final long serialVersionUID = 6529685098267757692L;
     static int id = 0;
     static ArrayList<Card> cards = new ArrayList<>();
+    ArrayList<Effect> effects = new ArrayList<>();
     boolean isSelected = false, isChanged = false, isSummoned = false,
             isAttacked = false, isActivated = false, destroyed = false,
             isBuffed = false;
@@ -18,7 +23,8 @@ public class Card implements Cloneable{
     int attack, defence;
 
     public Card(String cardName, String description, int price, ArrayList<CardType> cardTypes,
-                CardCategory cardCategory, int limit, int level, int attack, int defence, Attribute attribute ) {
+                CardCategory cardCategory, int limit, int level, ArrayList<Effect> effects,
+                int attack, int defence, Attribute attribute ) {
         this.cardName = cardName;
         this.description = description;
         this.price = price;
@@ -28,6 +34,7 @@ public class Card implements Cloneable{
         this.cardId = ++id;
         this.limit = limit;
         this.level = level;
+        this.effects = effects;
         this.attack = attack;
         this.defence = defence;
         cards.add(this);
@@ -109,6 +116,10 @@ public class Card implements Cloneable{
 
     public int getLevel() {
         return level;
+    }
+
+    public ArrayList<Effect> getEffects() {
+        return effects;
     }
 
     public void setDestroyed(boolean destroyed) {

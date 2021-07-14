@@ -2,7 +2,12 @@ package Model.Effects;
 
 import Model.*;
 
-public class ChangeWarriorAttackDeffenceReplace implements Effect {
+import java.io.Serial;
+import java.io.Serializable;
+
+public class ChangeWarriorAttackDeffenceReplace implements Effect, Serializable {
+    @Serial
+    private static final long serialVersionUID = 6529685098267757688L;
     @Override
     public void enableEffect(Card card) {
         changeAttackDeffence(1);

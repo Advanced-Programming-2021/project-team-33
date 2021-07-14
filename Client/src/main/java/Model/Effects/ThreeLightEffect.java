@@ -6,7 +6,13 @@ import Model.CardStatus;
 import Model.Effect;
 import Model.Player;
 
-public class ThreeLightEffect implements Effect {
+import java.io.Serial;
+import java.io.Serializable;
+
+
+    public class ThreeLightEffect implements Effect, Serializable {
+        @Serial
+        private static final long serialVersionUID = 6529685098267757669L;
     int remainingRounds;
     Player user;
 

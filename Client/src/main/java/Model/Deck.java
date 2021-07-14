@@ -1,10 +1,14 @@
 package Model;
 
-import java.lang.reflect.AnnotatedArrayType;
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Deck {
+public class Deck implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 6529685098267757699L;
+
     static ArrayList<Deck> decks = new ArrayList<>();
     ArrayList<Card> mainDeck = new ArrayList<>();
     ArrayList<Card> sideDeck = new ArrayList<>();
