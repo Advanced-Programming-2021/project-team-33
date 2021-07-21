@@ -3,6 +3,7 @@ package Main;
 import Controller.CardController;
 import Controller.ProgramController;
 import Controller.Util;
+import Model.Player;
 import View.LoginMenu;
 import View.MainMenu;
 import View.PlayMusic;
@@ -20,6 +21,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import java.io.IOException;
 
 
 public class Main extends Application {
@@ -177,6 +180,28 @@ public class Main extends Application {
         primaryStage.show();
     }
 
+    @Override
+    public void stop(){
+        System.out.println("Stage is closing");
+        try {
+            if(!Util.token.equals("")){
+                ProgramController.dataOutputStream.writeUTF("logout " + Util.token);
+                ProgramController.dataOutputStream.flush();
+                ProgramController.dataInputStream.readUTF();
+                Util.token = null;
+                Player.thePlayer = null;
+            }
+            ProgramController.dataOutputStream.close();
+            ProgramController.dataInputStream.close();
+            ProgramController.socket.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
     public void openLoginMenu(MouseEvent mouseEvent) throws Exception {
         MainMenu.playSound(Util.CLICK_MUSIC);
         LoginMenu.setRegister(false);
@@ -192,6 +217,14 @@ public class Main extends Application {
 
     public void exit(MouseEvent event) {
         MainMenu.playSound(Util.CLICK_MUSIC);
+        try {
+            ProgramController.dataOutputStream.close();
+            ProgramController.dataInputStream.close();
+            ProgramController.socket.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         System.exit(0);
     }
 }

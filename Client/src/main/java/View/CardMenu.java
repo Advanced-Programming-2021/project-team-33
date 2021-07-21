@@ -1,9 +1,11 @@
 package View;
 
-import Controller.CardController;
 import Controller.GameController;
 import Controller.ProgramController;
-import Model.*;
+import Model.Card;
+import Model.CardCategory;
+import Model.CardStatus;
+import Model.Player;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -43,7 +45,7 @@ public class CardMenu {
 
     public void start() throws IOException {
         Stage primaryStage = ProgramController.getStage();
-        Parent root = FXMLLoader.load(getClass().getResource("cardMenu.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/cardMenu.fxml"));
         primaryStage.setTitle("Yu-Gi-Oh");
         primaryStage.setScene(new Scene(root, 1280, 720));
         primaryStage.show();

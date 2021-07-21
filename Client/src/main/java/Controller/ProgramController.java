@@ -16,14 +16,11 @@ public class ProgramController {
     private static int profileID;
     public static DataInputStream dataInputStream;
     public static DataOutputStream dataOutputStream;
-    public static ObjectOutputStream objectOutputStream;
-    public static ObjectInputStream objectInputStream;
-    private static Socket socket;
+    public static Socket socket;
+
     public static void initializeNetwork() {
         try {
-            Socket socket = new Socket("localhost", 7776);
-            objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-            objectInputStream = new ObjectInputStream(socket.getInputStream());
+            socket = new Socket("localhost", 7776);
             dataInputStream = new DataInputStream(socket.getInputStream());
             dataOutputStream = new DataOutputStream(socket.getOutputStream());
         } catch (IOException x) {

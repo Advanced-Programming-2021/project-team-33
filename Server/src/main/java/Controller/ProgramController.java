@@ -50,6 +50,7 @@ public class ProgramController {
         profileID++;
         Player player = new Player(username, password, nickname);
         player.setProfileID(profileID);
+        ShopController.admin = Player.getPlayers().get(0);
     }
 
     public static void setPlayer(String username) {
@@ -125,5 +126,10 @@ public class ProgramController {
         }
         return temp;
     }
+
+    public static void setScore(String score, String username) {
+        Player.getUserByUsername(username).setScore(Integer.parseInt(score));
+    }
+
 
 }

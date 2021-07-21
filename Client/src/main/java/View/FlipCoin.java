@@ -44,6 +44,7 @@ public class FlipCoin {
     @FXML
     public void initialize() throws IOException {
         if (autoFlip) {
+            RoundController.setRound(SetGame.rounds);
             int number = 1;
             flipCoin();
             MainMenu.playSound("src/main/resources/music/coin.mp3");
@@ -107,7 +108,7 @@ public class FlipCoin {
     }
 
 
-    private void setSecondPlayer() throws IOException {
+    public static void setSecondPlayer() throws IOException {
         Player secondPlayer = new Player(Lobby.playerName2, Lobby.playerNick2);
         ProgramController.dataOutputStream.writeUTF("profileId " + secondPlayer.getUsername());
         ProgramController.dataOutputStream.flush();
@@ -115,7 +116,6 @@ public class FlipCoin {
         Deck deck1 = new Deck("deck22");
         secondPlayer.addToDeckList(deck1);
         deck1.setDeckActive(true);
-
         ProgramController.dataOutputStream.writeUTF("getDeck " + secondPlayer.getUsername());
         ProgramController.dataOutputStream.flush();
         String result = ProgramController.dataInputStream.readUTF();
@@ -134,7 +134,6 @@ public class FlipCoin {
         String[] parts2 = result.split(", ");
         for (int i = 0; i < parts2.length; i++) {
             String s = parts2[i].replaceAll("]", "").replaceAll("\\[", "");
-            System.out.println(s);
             Player.thePlayer.getActiveDeck().addToMainDeck(Card.getCardByName(s));
         }
         if (player1.equals(secondPlayer.getUsername())) {
@@ -145,14 +144,14 @@ public class FlipCoin {
             Player.currentPlayer = Player.thePlayer;
         }
         RoundController.otherPlayer = secondPlayer;
-        RoundController.setRound(SetGame.rounds);
-        GameController.prepareGame();
-        GameMenu.sendPlayer();
-        try {
-            new GameMenu().start();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+       // GameController.prepareGame();
+        GameMenu.otherPlayer = secondPlayer;
+        GameMenu.otherPlayer.setLifePoint(8000);
+        Player.thePlayer.setLifePoint(8000);
+        GameMenu.sendLp();
+        ProgramController.dataOutputStream.writeUTF("resetList");
+        ProgramController.dataOutputStream.flush();
+        ProgramController.dataInputStream.readUTF();
     }
 
     private void flipCoin() {

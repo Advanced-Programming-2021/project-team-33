@@ -50,7 +50,7 @@
             <Image url="@../PNG/Untitled-removebg-preview.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="98.0" fitWidth="183.0" layoutX="867.0" layoutY="367.0" onMouseClicked="#buy" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="buyCard" fitHeight="98.0" fitWidth="183.0" layoutX="867.0" layoutY="367.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../PNG/Buy.png" />
          </image>
@@ -184,5 +184,15 @@
          <font>
             <Font name="Bell MT Italic" size="15.0" />
          </font></Text>
+      <Text fx:id="numberOfCardsInStock" fill="#e1e1e1" layoutX="1095.0" layoutY="647.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="156.0000000000001">
+         <font>
+            <Font name="Bell MT Italic" size="20.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="adminPanel" fitHeight="75.0" fitWidth="54.0" layoutX="7.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../PNG/pngtree-avatar-icon-profile-icon-member-login-vector-isolated-png-image_1978396-removebg-preview.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

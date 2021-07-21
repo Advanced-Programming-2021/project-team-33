@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
@@ -44,6 +45,10 @@ public class ShopMenu {
     public Text money;
     public Text massage;
     public Text numberOfCards;
+    public Text numberOfCardsInStock;
+    public ImageView adminPanel;
+    public ImageView buyCard;
+    static boolean isForbidden = false;
 
     public ShopMenu() {
 
@@ -67,6 +72,18 @@ public class ShopMenu {
 
     @FXML
     public void initialize() {
+        String adminCheck = "";
+        try {
+            ProgramController.dataOutputStream.writeUTF("adminCheck " + Player.thePlayer.getUsername());
+            ProgramController.dataOutputStream.flush();
+            adminCheck = ProgramController.dataInputStream.readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if(adminCheck.equals("")){
+            adminPanel.setImage(null);
+            adminPanel.toBack();
+        }
         playerName.setText(Player.thePlayer.getUsername());
         money.setText(Integer.toString(Player.thePlayer.getMoney()));
         var ref = new Object() {
@@ -76,6 +93,13 @@ public class ShopMenu {
         updateShopCards(ref.i);
         description.setText(Card.getCards().get(0).getDescription());
         price.setText(Integer.toString(Card.getCards().get(0).getPrice()));
+        adminPanel.setOnMouseClicked(event -> {
+            try {
+                new AdminPanel().start();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
         leftButton.setOnMouseClicked(event -> {
             MainMenu.playSound(Util.CLICK_MUSIC);
             if (ref.i > 11) {
@@ -97,6 +121,9 @@ public class ShopMenu {
                 updateShopCards(-1);
             }
         });
+        buyCard.setOnMouseClicked(event -> {
+            if(!isForbidden) buy();
+        });
         card11.setOnMouseClicked(event -> updateShowCard(card11, ref.i));
         card12.setOnMouseClicked(event -> updateShowCard(card12, ref.i + 1));
         card13.setOnMouseClicked(event -> updateShowCard(card13, ref.i + 2));
@@ -113,6 +140,30 @@ public class ShopMenu {
 
     private void updateShowCard(ImageView card12, int i) {
         selectedCard = Card.getCards().get(i);
+        String getForbidden = "";
+        try {
+            ProgramController.dataOutputStream.writeUTF("getForbiddenCard " + selectedCard.getCardName());
+            ProgramController.dataOutputStream.flush();
+            getForbidden = ProgramController.dataInputStream.readUTF();
+            if(getForbidden.equals("1")) {
+                buyCard.setImage(new Image(getClass().getResourceAsStream("/PNG/forbid.png")));
+                isForbidden = true;
+            } else {
+                buyCard.setImage(new Image(getClass().getResourceAsStream("/PNG/Buy.png")));
+                isForbidden = false;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String count = "";
+        try {
+            ProgramController.dataOutputStream.writeUTF("cardCount " + selectedCard.getCardName());
+            ProgramController.dataOutputStream.flush();
+            count = ProgramController.dataInputStream.readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        numberOfCardsInStock.setText(count);
         cardShow.setImage(card12.getImage());
         description.setText(Card.getCards().get(i).getDescription());
         price.setText(Integer.toString(Card.getCards().get(i).getPrice()));
@@ -154,10 +205,28 @@ public class ShopMenu {
         if (selectedCard.getPrice() > Player.thePlayer.getMoney()) {
             massage.setText("not enough money!!");
         } else {
-            Player.thePlayer.decreaseMoney(selectedCard.getPrice());
-            Player.thePlayer.addToCardList(selectedCard);
-            money.setText(Integer.toString(Player.thePlayer.getMoney()));
-            massage.setText("You bought " + selectedCard.getCardName() + "!!");
+            String count = "";
+            try {
+                ProgramController.dataOutputStream.writeUTF("cardCount " + selectedCard.getCardName());
+                ProgramController.dataOutputStream.flush();
+                count = ProgramController.dataInputStream.readUTF();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if(Integer.parseInt(count) >= 1){
+                try {
+                    ProgramController.dataOutputStream.writeUTF("reduceCard " + selectedCard.getCardName());
+                    ProgramController.dataOutputStream.flush();
+                    ProgramController.dataInputStream.readUTF();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                Player.thePlayer.decreaseMoney(selectedCard.getPrice());
+                Player.thePlayer.addToCardList(selectedCard);
+                money.setText(Integer.toString(Player.thePlayer.getMoney()));
+                massage.setText("You bought " + selectedCard.getCardName() + "!!");
+            }
+            else massage.setText("not enough card in shop!!");
         }
     }
 

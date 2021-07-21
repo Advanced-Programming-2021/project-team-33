@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 
 
 public class SetWinner {
@@ -30,6 +31,14 @@ public class SetWinner {
     @FXML
     public void initialize() {
         massage.setText(Player.currentPlayer.getUsername() + " won the whole match with score: " + GameController.score + " - 0\n\n");
+        try {
+            ProgramController.dataOutputStream.writeUTF("setScore " + Player.thePlayer.getScore() + " " +
+                    Player.thePlayer.getUsername());
+            ProgramController.dataOutputStream.flush();
+            ProgramController.dataInputStream.readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         goNext.setOnMouseClicked(event ->{
             MainMenu.playSound(Util.CLICK_MUSIC);
             try {

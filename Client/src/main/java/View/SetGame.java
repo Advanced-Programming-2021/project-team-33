@@ -7,13 +7,18 @@ import Controller.Util;
 import Model.Card;
 import Model.Deck;
 import Model.Player;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -28,6 +33,9 @@ public class SetGame {
     public ImageView start;
     public ImageView multiPlayer;
     public static int rounds = 1;
+    static boolean isMultiSelected = false;
+    static Timeline timeline;
+    public ImageView exit;
 
     public void start() throws IOException {
         Stage primaryStage = ProgramController.getStage();
@@ -81,54 +89,73 @@ public class SetGame {
         });
         start.setOnMouseClicked(event -> {
             MainMenu.playSound(Util.CLICK_MUSIC);
-            if (opponent.getText().equals("Ai"))
-                duelWithAi(round.intValue());
-            else
-                startGame(round.intValue(), Player.getPlayers().get(opponentNumber.get()).getUsername());
+            if (isMultiSelected) {
+                start.setImage(new Image(getClass().getResourceAsStream("/PNG/start.png")));
+                isMultiSelected = false;
+                timeline.stop();
+                try {
+                    ProgramController.dataOutputStream.writeUTF("cancel");
+                    ProgramController.dataOutputStream.flush();
+                    ProgramController.dataInputStream.readUTF();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                if (opponent.getText().equals("Ai"))
+                    duelWithAi(round.intValue());
+                else
+                    startGame(round.intValue(), Player.getPlayers().get(opponentNumber.get()).getUsername());
+            }
         });
-        multiPlayer.setOnMouseClicked(event -> {
+        exit.setOnMouseClicked(event -> {
             try {
-                setMultiPlayer();
-            } catch (IOException e) {
+                new MainMenu().start();
+            } catch (Exception e) {
                 e.printStackTrace();
             }
+        });
+        multiPlayer.setOnMouseClicked(event -> {
+            start.setImage(new Image(getClass().getResourceAsStream("/PNG/Cancel.png")));
+            isMultiSelected = true;
+            MainMenu.playSound(Util.CLICK_MUSIC);
+            setMultiPlayer();
         });
     }
 
-    public void setMultiPlayer() throws IOException {
-
-        String result = "0";
-        while(true){
-            ProgramController.dataOutputStream.writeUTF("multiplayer " + Player.thePlayer.getUsername());
-            ProgramController.dataOutputStream.flush();
-            result = ProgramController.dataInputStream.readUTF();
+    public void setMultiPlayer() {
+        timeline = new Timeline(new KeyFrame(Duration.seconds(1), ev -> {
+            String result = "0";
             try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
+                ProgramController.dataOutputStream.writeUTF("multiplayer " + Player.thePlayer.getUsername());
+                ProgramController.dataOutputStream.flush();
+                result = ProgramController.dataInputStream.readUTF();
+            } catch (IOException e) {
                 e.printStackTrace();
             }
-           if(!result.equals("0 0 0 0")){
-               String[] parts = result.split(" ");
-               String username = parts[0];
-               String nickname = parts[1];
-               String score = parts[2];
-               String profileID = parts[3];
-               Lobby.playerName1 = Player.thePlayer.getUsername();
-               Lobby.playerNick1 = Player.thePlayer.getNickname();
-               Lobby.playerScore1 = String.valueOf(Player.thePlayer.getScore());
-               Lobby.playerName2 = username;
-               Lobby.playerNick2 = nickname;
-               Lobby.playerScore2 = score;
-               Lobby.profileId1 = String.valueOf(Player.thePlayer.getProfileID());
-               Lobby.profileId2 = profileID;
-               try {
-                   new Lobby().start();
-               } catch (Exception e) {
-                   e.printStackTrace();
-               }
-               break;
-           }
-        }
+            if (!result.equals("0 0 0 0")) {
+                String[] parts = result.split(" ");
+                String username = parts[0];
+                String nickname = parts[1];
+                String score = parts[2];
+                String profileID = parts[3];
+                Lobby.playerName1 = Player.thePlayer.getUsername();
+                Lobby.playerNick1 = Player.thePlayer.getNickname();
+                Lobby.playerScore1 = String.valueOf(Player.thePlayer.getScore());
+                Lobby.playerName2 = username;
+                Lobby.playerNick2 = nickname;
+                Lobby.playerScore2 = score;
+                Lobby.profileId1 = String.valueOf(Player.thePlayer.getProfileID());
+                Lobby.profileId2 = profileID;
+                try {
+                    new Lobby().start();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                timeline.stop();
+            }
+        }));
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.playFrom(Duration.millis(1000));
     }
 
     private void duelWithAi(int round) {

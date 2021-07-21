@@ -1,10 +1,7 @@
 package Controller;
 
 import Model.*;
-import View.CardMenu;
-import View.Communicate;
-import View.GameMenu;
-import View.SetWinner;
+import View.*;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
@@ -241,6 +238,11 @@ public class GameController {
         //ChangeCardsMenu changeCardsMenu = new ChangeCardsMenu();
         //changeCardsMenu.changeDeck(firstPlayer);
         //changeCardsMenu.changeDeck(secondPlayer);
+        try {
+            FlipCoin.setSecondPlayer();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         prepareGame();
         try {
             new GameMenu().start();
@@ -840,6 +842,7 @@ public class GameController {
         player.getBoard().getGraveyard().add(card);
         int index = player.getBoard().getFieldCardsForMonsters().indexOf(card);
         player.getBoard().getFieldCardsForMonsters().set(index, null);
+
     }
 
     public static boolean isEnemyMonsterFieldEmpty() {

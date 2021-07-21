@@ -13,6 +13,20 @@ public class GameController {
     static int count = 0;
     static int gameId = 0;
     public static Card selectedCard = null;
+    static ArrayList<String> monsterList1 = new ArrayList<>();
+    static ArrayList<String> monsterList2 = new ArrayList<>();
+    static ArrayList<String> monsterPosition1 = new ArrayList<>();
+    static ArrayList<String> monsterPosition2 = new ArrayList<>();
+    static ArrayList<String> spellList1 = new ArrayList<>();
+    static ArrayList<String> spellList2 = new ArrayList<>();
+    static ArrayList<String> graveyardList1 = new ArrayList<>();
+    static ArrayList<String> graveyardList2 = new ArrayList<>();
+    static String phase = "", lp1 = "8000" ,lp2 = "8000";
+    static boolean isAnimated = false;
+
+    public static void cancelMultiPlayer(){
+        waitingUsers.clear();
+    }
 
     public static String setMultiPlayer(String username) {
         if (waitingUsers.size() == 0 || (!waitingUsers.get(0).equals(username) && !isSecondPlayerCame)) {
@@ -127,6 +141,8 @@ public class GameController {
         Player.getUserByUsername(username).addToDeckList(deck);
         deck.setDeckActive(true);
         Player.getUserByUsername(username).getActiveDeck().addToMainDeck("Warrior Dai Grepher");
+        Player.getUserByUsername(username).getActiveDeck().addToMainDeck("Monster Reborn");
+        Player.getUserByUsername(username).getActiveDeck().addToMainDeck("Battle Warrior");
         Player.getUserByUsername(username).getActiveDeck().addToMainDeck("Dark Blade");
         Player.getUserByUsername(username).getActiveDeck().addToMainDeck("Bitron");
         Player.getUserByUsername(username).getActiveDeck().addToMainDeck("Haniwa");
@@ -165,7 +181,7 @@ public class GameController {
     }
 
     public static void addCardToDeck(String deckName, String cardName) throws CloneNotSupportedException {
-            Player.getDeckByName(deckName).addToMainDeck(cardName);
+        Player.getDeckByName(deckName).addToMainDeck(cardName);
     }
 
     public static void addCardSideToDeck(String deckName, String cardName) throws CloneNotSupportedException {
@@ -177,5 +193,150 @@ public class GameController {
     }
 
 
+    public static void getMonster(String username, String monsterList) {
+
+        String[] parts = monsterList.split(", ");
+        if (username.equals(player1.getUsername())) {
+            for (int i = 0; i < 5; i++) {
+                String s = parts[i].replaceAll("]", "").replaceAll(".*\\[", "");
+                monsterList1.set(i, s);
+            }
+        } else if (username.equals(player2.getUsername())) {
+            for (int i = 0; i < 5; i++) {
+                String s = parts[i].replaceAll("]", "").replaceAll(".*\\[", "");
+                monsterList2.set(i, s);
+            }
+        }
+
+    }
+
+    public static void getPosition(String username, String monsterPosition) {
+        String[] parts = monsterPosition.split(", ");
+        if (username.equals(player1.getUsername())) {
+            for (int i = 0; i < 5; i++) {
+                String s = parts[i].replaceAll("]", "").replaceAll(".*\\[", "");
+                monsterPosition1.set(i, s);
+            }
+        } else if (username.equals(player2.getUsername())) {
+            for (int i = 0; i < 5; i++) {
+                String s = parts[i].replaceAll("]", "").replaceAll(".*\\[", "");
+                monsterPosition2.set(i, s);
+            }
+        }
+    }
+
+    public static String sendMonster(String username) {
+        if (username.equals(player1.getUsername())) return monsterList1.toString();
+        if (username.equals(player2.getUsername())) return monsterList2.toString();
+        return "0";
+    }
+
+    public static String sendSpell(String username) {
+        if (username.equals(player1.getUsername())) return spellList1.toString();
+        if (username.equals(player2.getUsername())) return spellList2.toString();
+        return "0";
+    }
+
+    public static String sendPosition(String username) {
+        if (username.equals(player1.getUsername())) return monsterPosition1.toString();
+        if (username.equals(player2.getUsername())) return monsterPosition2.toString();
+        return "0";
+    }
+
+    public static void getSpell(String username, String spellList) {
+        String[] parts = spellList.split(", ");
+        if (username.equals(player1.getUsername())) {
+            for (int i = 0; i < 5; i++) {
+                String s = parts[i].replaceAll("]", "").replaceAll(".*\\[", "");
+                spellList1.set(i, s);
+            }
+        } else if (username.equals(player2.getUsername())) {
+            for (int i = 0; i < 5; i++) {
+                String s = parts[i].replaceAll("]", "").replaceAll(".*\\[", "");
+                spellList2.set(i, s);
+            }
+        }
+    }
+
+    public static void getPhase(String p) {
+        phase = p;
+    }
+
+    public static String sendPhase() {
+        return phase;
+    }
+
+    public static void getLp(String lp,String username) {
+        if(username.equals(player1.getUsername())) lp1 = lp;
+        if(username.equals(player2.getUsername())) lp2 = lp;
+
+    }
+    public static String sendLp(String username) {
+        if(username.equals(player1.getUsername())) return lp1 ;
+        if(username.equals(player2.getUsername())) return lp2 ;
+        return "1";
+    }
+
+    public static String sendGraveyard(String username) {
+        if (username.equals(player1.getUsername())) return graveyardList1.toString();
+        if (username.equals(player2.getUsername())) return graveyardList2.toString();
+        return "0";
+    }
+
+    public static void getGraveyard(String username, String graveyardList) {
+        String[] parts = graveyardList.split(", ");
+        if (username.equals(player1.getUsername())) {
+            graveyardList1.clear();
+            for (int i = 0; i < parts.length; i++) {
+                String s = parts[i].replaceAll("]", "").replaceAll(".*\\[", "");
+                graveyardList1.add(s);
+            }
+        } else if (username.equals(player2.getUsername())) {
+            graveyardList2.clear();
+            for (int i = 0; i < parts.length; i++) {
+                String s = parts[i].replaceAll("]", "").replaceAll(".*\\[", "");
+                graveyardList2.add(s);
+            }
+        }
+        System.out.println(graveyardList);
+        System.out.println(graveyardList1);
+        System.out.println(graveyardList2);
+    }
+
+    public static void getAnimation(){
+        isAnimated = true;
+    }
+
+    public static String sendAnimation(){
+        if(isAnimated) {
+            isAnimated = false;
+            return "1";
+        }
+        return "0";
+    }
+
+    public static void initialLists() {
+        CardController.initialCards();
+        ShopController.initialShopStock();
+        for (int i = 0; i < 5; i++) {
+            monsterList1.add(null);
+            monsterList2.add(null);
+            monsterPosition1.add(null);
+            monsterPosition2.add(null);
+            spellList1.add(null);
+            spellList2.add(null);
+        }
+
+    }
+
+    public static void resetList() {
+        for (int i = 0; i < 5; i++) {
+            monsterList1.set(i, null);
+            monsterList2.set(i, null);
+            monsterPosition1.set(i, null);
+            monsterPosition2.set(i, null);
+        }
+
+    }
 
 }

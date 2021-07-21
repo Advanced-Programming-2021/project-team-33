@@ -1,0 +1,539 @@
+<changelist name="Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]" date="1626868281511" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 7/21/2021 4:20 PM [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" value=".idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM_[Default_Changelist]/LoginMenu.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Model/Effects/ThreeLightEffect.class" />
+    <option name="AFTER_PATH" value="target/classes/Model/Effects/ThreeLightEffect.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/ThreeLightEffect.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM_[Default_Changelist]/SetWinner.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Model/Effects/DestroySelectedMonster.class" />
+    <option name="AFTER_PATH" value="target/classes/Model/Effects/DestroySelectedMonster.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/DestroySelectedMonster.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Server/.idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM_[Default_Changelist]/ChooseFromGraveyardAndSpecialSummon.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Model/Effects/DestroyAllOpponentMonsters.class" />
+    <option name="AFTER_PATH" value="target/classes/Model/Effects/DestroyAllOpponentMonsters.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/DestroyAllOpponentMonsters.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Main/Main$2.class" />
+    <option name="AFTER_PATH" value="target/classes/Main/Main$2.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/Main$2.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Server/.idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM_[Default_Changelist]/exclamation1.png" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Model/Effects/ChangeMyEquipAttackDeffence.class" />
+    <option name="AFTER_PATH" value="target/classes/Model/Effects/ChangeMyEquipAttackDeffence.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/ChangeMyEquipAttackDeffence.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Model/Effects/DoNothing.class" />
+    <option name="AFTER_PATH" value="target/classes/Model/Effects/DoNothing.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/DoNothing.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Controller/ProgramController$1.class" />
+    <option name="AFTER_PATH" value="target/classes/Controller/ProgramController$1.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/ProgramController$1.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM_[Default_Changelist]/DeckMenu.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Model/Effects/ChangeWarriorAttackDeffenceReplace.class" />
+    <option name="AFTER_PATH" value="target/classes/Model/Effects/ChangeWarriorAttackDeffenceReplace.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/ChangeWarriorAttackDeffenceReplace.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/CardMenu$1.class" />
+    <option name="AFTER_PATH" value="target/classes/View/CardMenu$1.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/CardMenu$1.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="src/main/resources/PNG/forbid.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/forbid.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Server/target/classes/Controller/ProgramController.class" />
+    <option name="AFTER_PATH" value="../Server/target/classes/Controller/ProgramController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/ProgramController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM_[Default_Changelist]/ShopMenu.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Model/Effects/IncreaseLPForEverySpell.class" />
+    <option name="AFTER_PATH" value="target/classes/Model/Effects/IncreaseLPForEverySpell.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/IncreaseLPForEverySpell.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/FlipCoin$1.class" />
+    <option name="AFTER_PATH" value="target/classes/View/FlipCoin$1.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/FlipCoin$1.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/GameMenu$1.class" />
+    <option name="AFTER_PATH" value="target/classes/View/GameMenu$1.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/GameMenu$1.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Model/Effects/ChangeAllEquipAttack.class" />
+    <option name="AFTER_PATH" value="target/classes/Model/Effects/ChangeAllEquipAttack.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/ChangeAllEquipAttack.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Server/.idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM_[Default_Changelist]/MainMenu.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Server/.idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM_[Default_Changelist]/pause1.png" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/ShopMenu$1.class" />
+    <option name="AFTER_PATH" value="target/classes/View/ShopMenu$1.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/ShopMenu$1.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Server/.idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM_[Default_Changelist]/PlayMusic.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Server/.idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM_[Default_Changelist]/SetGame.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Model/Effects/GuessOpponentCard.class" />
+    <option name="AFTER_PATH" value="target/classes/Model/Effects/GuessOpponentCard.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/GuessOpponentCard.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Model/Effects/PickTwoCardsFromTopOfDeck.class" />
+    <option name="AFTER_PATH" value="target/classes/Model/Effects/PickTwoCardsFromTopOfDeck.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/PickTwoCardsFromTopOfDeck.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/SetWinner.class" />
+    <option name="AFTER_PATH" value="target/classes/View/SetWinner.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/SetWinner.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM_[Default_Changelist]/SetGame.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Main/Main.class" />
+    <option name="AFTER_PATH" value="target/classes/Main/Main.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/Main.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM_[Default_Changelist]/fie_normal1.png" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="../Server/target/classes/Controller/ShopController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/ShopController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM_[Default_Changelist]/exclamation1.png" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Server/.idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM_[Default_Changelist]/ShopMenu.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Model/Effects/DestroySpecificSpellCard.class" />
+    <option name="AFTER_PATH" value="target/classes/Model/Effects/DestroySpecificSpellCard.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/DestroySpecificSpellCard.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM_[Default_Changelist]/pause.png" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Server/.idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM_[Default_Changelist]/exclamation.png" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Server/target/classes/Model/Player.class" />
+    <option name="AFTER_PATH" value="../Server/target/classes/Model/Player.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/Player.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM_[Default_Changelist]/PlayMusic.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/SetGame.class" />
+    <option name="AFTER_PATH" value="target/classes/View/SetGame.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/SetGame.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Model/Effects/ChangeAttackDeffenceForMonstersInsectBeast.class" />
+    <option name="AFTER_PATH" value="target/classes/Model/Effects/ChangeAttackDeffenceForMonstersInsectBeast.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/ChangeAttackDeffenceForMonstersInsectBeast.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Server/.idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM_[Default_Changelist]/FlipCoin.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Model/Effects/TakeNextRoundFromOpponent.class" />
+    <option name="AFTER_PATH" value="target/classes/Model/Effects/TakeNextRoundFromOpponent.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/TakeNextRoundFromOpponent.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM_[Default_Changelist]/ImportExportMenu.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_11_19_AM_[Default_Changelist]1/GameMenu.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Server/.idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM_[Default_Changelist]/SetWinner.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM_[Default_Changelist]/ChooseFromGraveyardAndSpecialSummon.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Server/.idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM_[Default_Changelist]/LoginMenu.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/MainMenu.class" />
+    <option name="AFTER_PATH" value="target/classes/View/MainMenu.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/MainMenu.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Server/.idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM_[Default_Changelist]/ImportExportMenu.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Model/Effects/SummonLowLevel.class" />
+    <option name="AFTER_PATH" value="target/classes/Model/Effects/SummonLowLevel.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/SummonLowLevel.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Server/target/classes/Main/Main.class" />
+    <option name="AFTER_PATH" value="../Server/target/classes/Main/Main.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/Main1.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM_[Default_Changelist]/Main.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Server/.idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM_[Default_Changelist]/GameMenu$1.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Server/.idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM_[Default_Changelist]/DeckMenu.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Model/Effects/SummonHighLevel.class" />
+    <option name="AFTER_PATH" value="target/classes/Model/Effects/SummonHighLevel.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/SummonHighLevel.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Main/Main$4.class" />
+    <option name="AFTER_PATH" value="target/classes/Main/Main$4.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/Main$4.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Model/Effects/ChangeAttackOfMonsterBeastForEachGraveyard.class" />
+    <option name="AFTER_PATH" value="target/classes/Model/Effects/ChangeAttackOfMonsterBeastForEachGraveyard.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/ChangeAttackOfMonsterBeastForEachGraveyard.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Server/target/classes/Controller/ProgramController$1.class" />
+    <option name="AFTER_PATH" value="../Server/target/classes/Controller/ProgramController$1.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/ProgramController$11.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="src/main/resources/PNG/pngtree-avatar-icon-profile-icon-member-login-vector-isolated-png-image_1978396-removebg-preview.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/pngtree-avatar-icon-profile-icon-member-login-vector-isolated-png-image_1978396-removebg-preview.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Lobby.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Lobby.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/Lobby.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Server/.idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM_[Default_Changelist]/GameMenu.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM_[Default_Changelist]/FlipCoin.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM_[Default_Changelist]/pause1.png" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/ShopMenu.class" />
+    <option name="AFTER_PATH" value="target/classes/View/ShopMenu.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/ShopMenu.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Model/Effects/TrickySpecialSummon.class" />
+    <option name="AFTER_PATH" value="target/classes/Model/Effects/TrickySpecialSummon.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/TrickySpecialSummon.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Main/Main$1.class" />
+    <option name="AFTER_PATH" value="target/classes/Main/Main$1.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/Main$1.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Model/Effects/RitualSummon.class" />
+    <option name="AFTER_PATH" value="target/classes/Model/Effects/RitualSummon.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/RitualSummon.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/GameMenu$2.class" />
+    <option name="AFTER_PATH" value="target/classes/View/GameMenu$2.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/GameMenu$2.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM_[Default_Changelist]/GameMenu$1.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Model/Effects/ChangeHeartOfEnemyMonster.class" />
+    <option name="AFTER_PATH" value="target/classes/Model/Effects/ChangeHeartOfEnemyMonster.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/ChangeHeartOfEnemyMonster.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Model/Effects/EndBattlePhaseForOpponent.class" />
+    <option name="AFTER_PATH" value="target/classes/Model/Effects/EndBattlePhaseForOpponent.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/EndBattlePhaseForOpponent.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/FlipCoin.class" />
+    <option name="AFTER_PATH" value="target/classes/View/FlipCoin.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/FlipCoin.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="src/main/resources/PNG/music.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/music.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Server/.idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM_[Default_Changelist]/fie_normal.png" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM_[Default_Changelist]/exclamation.png" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Model/Effects/ChangeAttackDeffenceOfAqua.class" />
+    <option name="AFTER_PATH" value="target/classes/Model/Effects/ChangeAttackDeffenceOfAqua.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/ChangeAttackDeffenceOfAqua.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Model/Effects/DestroyAllMonsters.class" />
+    <option name="AFTER_PATH" value="target/classes/Model/Effects/DestroyAllMonsters.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/DestroyAllMonsters.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="src/main/resources/PNG/Buy1.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/Buy1.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Controller/ProgramController.class" />
+    <option name="AFTER_PATH" value="target/classes/Controller/ProgramController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/ProgramController1.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/GameMenu.class" />
+    <option name="AFTER_PATH" value="target/classes/View/GameMenu.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/GameMenu.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Model/Effects/RemoveCardFromHandAndDestroyTwoSpellTrap.class" />
+    <option name="AFTER_PATH" value="target/classes/Model/Effects/RemoveCardFromHandAndDestroyTwoSpellTrap.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/RemoveCardFromHandAndDestroyTwoSpellTrap.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Server/.idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM_[Default_Changelist]/Main.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Server/.idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM_[Default_Changelist]/fie_normal1.png" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Main/Main$3.class" />
+    <option name="AFTER_PATH" value="target/classes/Main/Main$3.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/Main$3.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Server/.idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM_[Default_Changelist]/GameMenu$2.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Controller/RoundController.class" />
+    <option name="AFTER_PATH" value="target/classes/Controller/RoundController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/RoundController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Model/Effects/DestroyAllOpponentSpellTrap.class" />
+    <option name="AFTER_PATH" value="target/classes/Model/Effects/DestroyAllOpponentSpellTrap.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/DestroyAllOpponentSpellTrap.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Model/Effects/ChooseMonsterAndDestroy.class" />
+    <option name="AFTER_PATH" value="target/classes/Model/Effects/ChooseMonsterAndDestroy.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/ChooseMonsterAndDestroy.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Controller/GameController.class" />
+    <option name="AFTER_PATH" value="target/classes/Controller/GameController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/GameController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Main/Main$6.class" />
+    <option name="AFTER_PATH" value="target/classes/Main/Main$6.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/Main$6.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Main/Main$5.class" />
+    <option name="AFTER_PATH" value="target/classes/Main/Main$5.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/Main$5.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM_[Default_Changelist]/GameMenu$2.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Model/Effects/ChangeAttackDeffenceForMonstersFieldSpellCaster.class" />
+    <option name="AFTER_PATH" value="target/classes/Model/Effects/ChangeAttackDeffenceForMonstersFieldSpellCaster.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/ChangeAttackDeffenceForMonstersFieldSpellCaster.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM_[Default_Changelist]/GameMenu.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Main/Main$7.class" />
+    <option name="AFTER_PATH" value="target/classes/Main/Main$7.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/Main$7.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Model/Effects/GiveYourLife.class" />
+    <option name="AFTER_PATH" value="target/classes/Model/Effects/GiveYourLife.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/GiveYourLife.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Model/Effects/ChangeEquipedMonstersAttackDeffence.class" />
+    <option name="AFTER_PATH" value="target/classes/Model/Effects/ChangeEquipedMonstersAttackDeffence.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/ChangeEquipedMonstersAttackDeffence.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Model/Effects/SummonFromGraveYard.class" />
+    <option name="AFTER_PATH" value="target/classes/Model/Effects/SummonFromGraveYard.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/SummonFromGraveYard.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Server/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_11_19_AM_[Default_Changelist]1/GameMenu.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Server/target/classes/Controller/GameController.class" />
+    <option name="AFTER_PATH" value="../Server/target/classes/Controller/GameController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/GameController1.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/CardMenu.class" />
+    <option name="AFTER_PATH" value="target/classes/View/CardMenu.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/CardMenu.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Server/.idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM_[Default_Changelist]/pause.png" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM_[Default_Changelist]/MainMenu.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".idea/shelf/Uncommitted_changes_before_Update_at_7_8_2021_7_26_PM_[Default_Changelist]/fie_normal.png" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Model/Effects/SummonCyberse.class" />
+    <option name="AFTER_PATH" value="target/classes/Model/Effects/SummonCyberse.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_21_2021_4_20_PM_[Default_Changelist]/SummonCyberse.class" />
+  </binary>
+</changelist>

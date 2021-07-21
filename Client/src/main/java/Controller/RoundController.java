@@ -21,31 +21,33 @@ public class RoundController {
 
     public static void checkEndOfRound() {
 
-        GameMenu gameMenu = new GameMenu();
         if (Player.thePlayer.getLifePoint() <= 0) {
-
+            GameMenu.timeline.stop();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Round ended");
             alert.setHeaderText("Round " + remainingRounds + " ended");
             alert.setContentText(otherPlayer.getUsername() + " won the game with score: " + 1000 + " - 0");
-            alert.showAndWait();
 
             winnerOfFirstRound = otherPlayer;
             remainingRounds--;
             maxLp = Math.max(otherPlayer.getLifePoint(), maxLp);
-            if (remainingRounds == 0) GameController.setWinner(maxLp, otherPlayer, Player.thePlayer);
+            if (remainingRounds == 0) {
+                System.out.println("X");
+                GameController.setWinner(maxLp, otherPlayer, Player.thePlayer);
+            }
             else if (remainingRounds == 1 && winnerOfFirstRound.equals(otherPlayer))
                 GameController.setWinner(maxLp, otherPlayer, Player.thePlayer);
             else GameController.setNextGame(Player.thePlayer.getUsername(),
                         otherPlayer.getUsername());
-        } else if (otherPlayer.getLifePoint() <= 0) {
+        } else if (GameMenu.otherPlayer.getLifePoint() <= 0) {
+            System.out.println("Y");
+            GameMenu.sendLp();
+            GameMenu.timeline.stop();
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Round ended");
             alert.setHeaderText("Round " + remainingRounds + " ended");
             alert.setContentText(Player.thePlayer.getUsername() + " won the game with score: " + 1000 + " - 0");
-            alert.showAndWait();
-
 
             winnerOfFirstRound = Player.thePlayer;
             remainingRounds--;
@@ -90,6 +92,7 @@ public class RoundController {
 
     public static void drawPhase() {
         Player.currentPlayer.setPhase(Phase.DRAW);
+        Player.thePlayer.setPhase(Phase.DRAW);
         gameMenu.informPhase(Phase.DRAW);
         if (!isDrawPossible()) {
             Player.currentPlayer.setLifePoint(0);
@@ -111,6 +114,7 @@ public class RoundController {
         GameController.setAllCardUnSummoned();
         isSummoned = false;
         Player.currentPlayer.setPhase(Phase.MAIN1);
+        Player.thePlayer.setPhase(Phase.MAIN1);
         gameMenu.informPhase(Phase.MAIN1);
         GameController.showBoard();
     }
@@ -119,17 +123,20 @@ public class RoundController {
         GameController.checkOpponentSpellTraps();
         GameController.setAllCardsUnAttacked();
         Player.currentPlayer.setPhase(Phase.BATTLE);
+        Player.thePlayer.setPhase(Phase.BATTLE);
         gameMenu.informPhase(Phase.BATTLE);
     }
 
     public static void mainPhase2() {
         GameController.checkOpponentSpellTraps();
         Player.currentPlayer.setPhase(Phase.MAIN2);
+        Player.thePlayer.setPhase(Phase.MAIN2);
         gameMenu.informPhase(Phase.MAIN2);
     }
 
     public static void endPhase() {
         Player.currentPlayer.setPhase(Phase.END);
+        Player.thePlayer.setPhase(Phase.END);
         gameMenu.informPhase(Phase.END);
         changeTurn();
         GameMenu gameMenu = new GameMenu();

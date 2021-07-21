@@ -1,9 +1,0 @@
-<changelist name="Uncommitted_changes_before_Update_at_7_11_2021_11_19_AM_[Default_Changelist]1" date="1625986212621" recycled="true" deleted="true">
-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_11_19_AM_[Default_Changelist]1/shelved.patch" />
-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 7/11/2021 11:19 AM [Default Changelist]" />
-  <binary>
-    <option name="BEFORE_PATH" value="target/classes/View/GameMenu.class" />
-    <option name="AFTER_PATH" value="target/classes/View/GameMenu.class" />
-    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_2021_11_19_AM_[Default_Changelist]1/GameMenu.class" />
-  </binary>
-</changelist>

@@ -42,7 +42,8 @@ public class Lobby {
     public void checkReady() throws IOException {
 
         String result = "0";
-        while (true) {
+        boolean isCheck = true;
+        while (isCheck) {
             ProgramController.dataOutputStream.writeUTF("ready " + playerName1 + " " + playerName2);
             ProgramController.dataOutputStream.flush();
             result = ProgramController.dataInputStream.readUTF();
@@ -53,10 +54,10 @@ public class Lobby {
                 e.printStackTrace();
             }
             if (result.equals("1")) {
-                FlipCoin.autoFlip = true;
-                new FlipCoin().start();
-                break;
+                isCheck = false;
             }
         }
+        FlipCoin.autoFlip = true;
+        new FlipCoin().start();
     }
 }
